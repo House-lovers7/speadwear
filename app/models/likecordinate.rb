@@ -1,0 +1,2 @@
+class Likecordinate < ApplicationRecord
+end
