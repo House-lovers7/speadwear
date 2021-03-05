@@ -1,0 +1,53 @@
+
+<h3>ユーザー詳細ページ</h3>
+
+    <section class="user_info">
+
+        <%= gravatar_for @user %>
+<ul>
+  <li> ユーザー名：<%= @user.name %></li>
+  <li> 登録日時：<%= @user.created_at %></li>
+  <li></li>
+</ul>
+    </section>
+    <section class="stats">
+      <%= render 'shared/stats' %>
+    </section>
+
+    <%= render 'follow_form' if logged_in? %>
+
+    <% unless @current_user == nil  %>
+  <% if @current_user.admin  && !@current_user == @user %>
+<li><%= link_to "delete" , @user, method: :delete, data: { confirm: "You sure?" } %></li>
+   <% end %>
+   <% end %>
+
+
+<p class= "p-profile" >アイテム一覧</p>
+<div class = "row profile-items justify-content-center">
+   <% @user.items.each do |item| %>
+   <div class= "item_each_images">
+          <%= link_to image_tag( item.picture.url), item_show_path( user_id: item.user_id, id: item.id), size: "374.14x250" unless item.picture.blank? %>
+</div>
+<% end %>
+</div>
+
+<p class= "p-profile" >コーデ一覧</p>
+<div class = "row profile-cordinates justify-content-center">
+<% @user.cordinates.each do |cordinate| %>
+<div class= "cordinate_each_images">
+   <%= link_to image_tag( cordinate.picture.url), cordinate_show_path( user_id: cordinate.user_id, id: cordinate.id), size: "374.14x250"  unless cordinate.picture.blank? %>
+</div>
+<% end %>
+</div>
+
+
+<p class= "p-profile">いいねしている投稿</p>
+<div class = "row profile-cordinates justify-content-center">
+<% @user.liked_cordinates.each do |cordinate| %>
+<div class= "cordinate_each_images">
+<% @cordinate_for_picture = Cordinate.find(cordinate.id) %>
+ <%= link_to image_tag(@cordinate_for_picture.picture.url), cordinate_show_path( user_id: @cordinate_for_picture.user_id, id:  @cordinate_for_picture.id), size: "374.14x250"  unless cordinate.picture.blank? %>
+</div>
+<% end %>
+</div>
