@@ -1,0 +1,2 @@
+module LikecordinatesHelper
+end

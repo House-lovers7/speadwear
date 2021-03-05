@@ -1,0 +1,2 @@
+class LikecordinatesController < ApplicationController
+end
