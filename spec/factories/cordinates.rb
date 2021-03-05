@@ -6,12 +6,12 @@ FactoryBot.define do
     likecordinate_id { 1 }
     season { 1 }
     tpo { 1 }
-    picture { "MyString" }
+    picture { 'MyString' }
     si_shoes { 1 }
     si_botoms { 1 }
     si_tops { 1 }
     si_outer { 1 }
-    memo { "MyText" }
+    memo { 'MyText' }
     rating { 1.5 }
   end
 end

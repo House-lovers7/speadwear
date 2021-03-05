@@ -7,8 +7,8 @@ FactoryBot.define do
     tpo { 1 }
     color { 1 }
     content { 1 }
-    memo { "MyText" }
-    picture { "MyString" }
+    memo { 'MyText' }
+    picture { 'MyString' }
     rating { 1.5 }
   end
 end

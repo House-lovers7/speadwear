@@ -5,7 +5,7 @@ FactoryBot.define do
     cordinate_id { 1 }
     comment_id { 1 }
     likecordinate_id { 1 }
-    action { "MyString" }
+    action { 'MyString' }
     checked { false }
   end
 end

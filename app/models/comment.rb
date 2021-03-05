@@ -1,2 +1,36 @@
 class Comment < ApplicationRecord
+  belongs_to :user
+  belongs_to :cordinate
+  has_many :likecomments
+  has_many :notifications, dependent: :destroy
+  # liked_usersによってがcommentが誰にいいねされているのかを簡単に取得できるようにする
+  has_many :liked_users, through: :likecomments, source: :user
+
+  has_many :liked_comment, through: :likecomment, source: :comment
+  has_many :active_likecomment, class_name: 'Likecomment',
+                                foreign_key: 'comment_id',
+                                dependent: :destroy
+  # Validationの設定
+  validates :user_id, presence: true
+  validates :cordinate_id, presence: true
+  validates :comment, presence: true,
+                      length: { maximum: 140 }
+
+  # いいね通知機能の実装
+  def create_notification_comment(current_user)
+    # すでに「いいね」されているか検索
+    temp = Notification.where(['sender_id = ? and receiver_id = ? and comment_id = ? and action = ? ',
+                               current_user.id, user_id, id, 'commentlike'])
+    # いいねされていない場合のみ、通知レコードを作成
+    if temp.blank?
+      notification = current_user.active_notifications.new(
+        comment_id: id,
+        receiver_id: user_id,
+        action: 'commentlike'
+      )
+      # 自分の投稿に対するいいねの場合は、通知済みとする
+      notification.checked = true if notification.sender_id == notification.receiver_id
+      notification.save if notification.valid?
+    end
+  end
 end
