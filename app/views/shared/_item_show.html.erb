@@ -1,0 +1,79 @@
+<% if controller.action_name == "show" %>
+
+<div class= "item_image">
+<%= image_tag @item.picture.url, size: '450x580' unless @item.picture.nil?  %>
+<%#= link_to image_tag(@item.picture.url), item_show_path( user_id: @item.user_d, id: @item.id), size: "374.14x250" unless @item.picture.blank? %>
+      <div class= "item-button flex-colum justify-content-center">  <%# 縦ならびflex-colum　中央揃え justify-content-center  %>
+    <%= link_to "削除" , item_delete_path, class: "btn btn-outline-danger btn-block" , method: :delete, data: {
+      confirm: "本当に削除しますか？" } %>
+      <%= link_to "編集する" , item_edit_path, class: "btn btn-outline-warning btn-block" , data: { confirm: "変更しますか？" } %>
+          </div>
+          </div>
+  <div class= "item_show_lists ">
+<ul>
+    <li>ユーザー: <%=link_to @item.user.name, user_show_path(id: params[:user_id])%></li>
+    <li>カテゴリー ：<%= @item.super_item %></li>
+    <li><i class="fa fa-leaf" aria-hidden="true"></i>季節： <%= @item.season %></li>
+    <li>TPO :<%= @item.tpo %></li>
+    <li>内容： <%= @item.content %></li>
+    <li>カラー： <%= @item.color %></li>
+    <li><i class="far fa-edit fa-1x"></i>メモ： <%= @item.memo %></li>
+    <!--星評価-->
+    <li>
+      <div id="star-rate-<%= @item.rating %>"><i class="fa fa-trophy" aria-hidden="true"></i>評価：</div>
+    <script>
+      $('#star-rate-<%= @item.rating %>').raty({
+        size: 36,
+        starOff: '<%= asset_path('star-off.png') %>',
+        starOn : '<%= asset_path('star-on.png') %>',
+        starHalf: '<%= asset_path('star-half.png') %>',
+        half: true,
+        readOnly: true,
+        score: <%= @item.rating %>,
+                        });
+    </script>
+    </li>
+    <li><%= link_to "アイテムのコーデをみてみる" , cordinate_show_path( user_id: @item.user_id, id: @item.cordinate_id ) unless @item.cordinate_id.blank? %></li>
+    </ul>
+  </div>
+  </div>
+
+  <% elsif controller.action_name == "user_all_item_show" ||  controller.action_name == "all_item_show"  %>
+
+    <% @items.each do |item| %>
+<div class= "item_each_images ">
+        <%# if request.path.include?("/items/allusers") %>
+        <% if controller.action_name == "all_item_show" %>
+          <%= link_to image_tag( item.picture.url), item_show_path( user_id: item.user_id, id: item.id), size: "374.14x250" unless item.picture.blank? %>
+
+              <% else %>
+                <%#= link_to image_tag(item.picture.url), user_item_path(user_id: item.user_id) , :controller=> "items",:action=> "index" unless item.picture.blank? %>
+                <%= link_to image_tag( item.picture.url), item_show_path( user_id: item.user_id, id: item.id), size: "374.14x250"  unless item.picture.blank? %>
+                  <% end %>
+
+                  <div class= "items_each_lists">
+                  <ul>
+                     <li>ID: <%= item.id %></li>
+                    <li>ユーザー：<%= link_to item.user.name , user_show_path( id: item.user.id) %></li>
+                    <li>内容: <%= item.content %></li>
+                    <li>TPO: <%= item.tpo %></li>
+                    <li><i class="fa fa-leaf" aria-hidden="true"></i>季節: <%= item.season %></li>
+                    <li><i class="fa fa-trophy" aria-hidden="true"></i>評価：<span id="star-rate-<%= item.rating %>-<%= item.rating %>"></span>
+                      <script>
+                        $('#star-rate-<%= item.rating %>-<%= item.rating %>').raty({
+                          size: 36,
+                          starOff: '<%= asset_path('star-off.png') %>',
+                          starOn : '<%= asset_path('star-on.png') %>',
+                          starHalf: '<%= asset_path('star-half.png') %>',
+                          half: true,
+                          readOnly: true,
+                          score: <%= item.rating %>,
+                         });
+                      </script>
+                    </li>
+                      <li><%= link_to "アイテムのコーデ" , cordinate_show_path( user_id: item.user_id, id: item.cordinate_id ) unless item.cordinate_id.blank? %></li>
+                    </uL>
+                  </div>
+                </div>
+      <% end %>
+      <% end %>

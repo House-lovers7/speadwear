@@ -1,0 +1,28 @@
+<% @q_item_tpo.each do |item| %>
+<div class= "item_each_images ">
+          <%= link_to image_tag( item.picture.url), item_show_path( user_id: item.user_id, id: item.id), size: "374.14x250" unless item.picture.blank? %>
+                  <div class= "items_each_lists">
+                  <ul>
+                     <li>ID: <%= item.id %></li>
+                    <li>ユーザー：<%= link_to item.user.name , user_show_path( id: item.user.id) %></li>
+                    <li>内容: <%= item.content %></li>
+                    <li>TPO: <%= item.tpo %></li>
+                    <li><i class="fa fa-leaf" aria-hidden="true"></i>季節: <%= item.season %></li>
+                    <li><i class="fa fa-trophy" aria-hidden="true"></i>評価：<span id="star-rate-<%= item.rating %>-<%= item.rating %>"></span>
+                      <script>
+                        $('#star-rate-<%= item.rating %>-<%= item.rating %>').raty({
+                          size: 36,
+                          starOff: '<%= asset_path('star-off.png') %>',
+                          starOn : '<%= asset_path('star-on.png') %>',
+                          starHalf: '<%= asset_path('star-half.png') %>',
+                          half: true,
+                          readOnly: true,
+                          score: <%= item.rating %>,
+                         });
+                      </script>
+                    </li>
+                      <li><%= link_to "アイテムのコーデ" , cordinate_show_path( user_id: item.user_id, id: item.cordinate_id ) unless item.cordinate_id.blank? %></li>
+                    </uL>
+                  </div>
+                </div>
+      <% end %>

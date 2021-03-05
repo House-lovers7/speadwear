@@ -1,0 +1,26 @@
+
+  <%= search_form_for @q do |f| %>
+      <br>
+      <%= f.label :服のカテゴリー %>
+      <%= f.radio_button :super_item_eq, '', {:checked => true} %>指定なし
+      <%= f.radio_button :super_item_eq, 0 %>アウター
+      <%= f.radio_button :super_item_eq, 1 %>トップス
+      <%= f.radio_button :super_item_eq, 2 %>ボトムス
+      <%= f.radio_button :super_item_eq, 3 %>シューズ
+      <br>
+      <%= f.label :season %>
+      <%= f.radio_button :season_eq, '', {:checked => true} %>指定なし
+      <%= f.radio_button :season_eq, 0 %>春
+      <%= f.radio_button :season_eq, 1 %>夏
+      <%= f.radio_button :season_eq, 2 %>秋
+      <%= f.radio_button :season_eq, 3 %>冬
+      <br>
+      <%= f.label :TPO %>
+      <%= f.radio_button :tpo_eq, '', {:checked => true} %>指定なし
+      <%= f.radio_button :tpo_eq, 0 %>デート
+      <%= f.radio_button :tpo_eq, 1 %>リラックス
+      <%= f.radio_button :tpo_eq, 2 %>スポーツ
+      <%= f.radio_button :tpo_eq, 3 %>街あそび
+      <%= f.radio_button :tpo_eq, 4 %>仕事
+  <%= f.submit "検索" %>
+<% end %>

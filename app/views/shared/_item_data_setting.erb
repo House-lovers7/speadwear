@@ -1,0 +1,43 @@
+
+
+  <%= i.label :season, "季節:" %><i class="fa fa-leaf" aria-hidden="true"></i>
+                    <%= i.select :season, Item.seasons.keys %>
+
+                    <%= i.label :tpo, "TPO:" %>
+                    <%= i.select :tpo, Item.tpos.keys %>
+
+                    <%= i.label :super_item, "カテゴリー：" %>
+                    <%= i.select :super_item, Item.super_items.keys %>
+
+                    <%= i.label :content, "内容" %>
+                    <%= i.select :content, Item.contents.keys %>
+
+                    <%= i.label :rating,'評価ID：' %>
+                    <%= i.hidden_field :rating, id: :review_star, disable_after_rate: false  %>
+
+
+
+                   <div id="star-rate-<%= @item.rating %>">評価：<i class="fa fa-trophy" aria-hidden="true"></div>
+
+                        <script>
+                        $('#star-rate-<%= @item.rating %>').raty({
+                          size: 36,
+                          starOff:  '<%= asset_path('star-off.png') %>',
+                          starOn : '<%= asset_path('star-on.png') %>',
+                          starHalf: '<%= asset_path('star-half.png') %>',
+                          half: true,
+                          readOnly: true,
+                          score: <%= @item.rating %>,
+                        });
+                        </script>
+
+                  <%= i.label :memo, "メモ" %><i class="far fa-edit fa-1x"></i><i class="far fa-edit fa-1x"></i>
+                  <%= i.text_field :memo %>
+
+
+
+
+               <div class="form-group row" id="star">
+                 <%= i.label :rating,'評価ID：' %>
+                 <%= i.hidden_field :rating, id: :review_star, disable_after_rate: false  %>
+               </div>

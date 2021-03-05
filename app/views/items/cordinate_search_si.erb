@@ -1,0 +1,44 @@
+    <h3>アイテム一覧</h3>
+
+     <%  @item.all.each do |item| %>
+       <div class= "cordinate_each_images kakomi-double ">
+
+                    <% unless item.picture.blank? %>
+                        <div class= "img_fit">
+                     <% if item.super_item == "アウター" %>
+                          <%= link_to image_tag( item.picture.url), items_patch_path( user_id: params[:user_id], id: params[:cordinate_id], item_id: item.id,  si_outer:   item.id ),data: {turbolinks: false} ,  method: :patch %>
+                        <% elsif item.super_item   ==   "トップス"  %>
+                          <%= link_to image_tag( item.picture.url), items_patch_path( user_id: params[:user_id], id: params[:cordinate_id], item_id: item.id,  si_tops:    item.id ), data: {turbolinks: false} ,method: :patch %>
+                        <%  elsif item.super_item  ==  "ボトムス" %>
+                          <%= link_to image_tag( item.picture.url), items_patch_path( user_id: params[:user_id], id: params[:cordinate_id], item_id: item.id,  si_bottoms: item.id ),data: {turbolinks: false} ,  method: :patch %>
+                        <%  elsif item.super_item  ==   "シューズ"  %>
+                          <%= link_to image_tag( item.picture.url), items_patch_path( user_id: params[:user_id], id: params[:cordinate_id], item_id: item.id,  si_shoes:   item.id ),data: {turbolinks: false} ,  method: :patch %>
+                      <% end %>
+                    <% end %>
+                       </div>
+                          <div class= "cordinates_each_lists">
+                          <ul>
+                      <li>ID: <%= item.id%></li>
+                      <li>User_id: <%= item.user.id%></li>
+                      <li>カテゴリー: <%= item.super_item %></li>
+                      <li>内容: <%= item.content %></li>
+                      <li><i class="fa fa-leaf" aria-hidden="true"></i>季節: <%= item.season %></li>
+                    <li>
+                    <div id="star-rate-<%= item.rating %>"><i class="fa fa-trophy" aria-hidden="true"></i>評価：</i></div>
+                   <script>
+                      $('#star-rate-<%= item.rating %>').raty({
+                        size: 36,
+                        starOff:  '<%= asset_path('star-off.png') %>',
+                        starOn : '<%= asset_path('star-on.png') %>',
+                        starHalf: '<%= asset_path('star-half.png') %>',
+                        half: true,
+                        readOnly: true,
+                        score: <%= item.rating %>,
+                      });
+                   </script>
+                  </li>
+                  </ul>
+                 </div>
+  </div>
+   <% end %>
+         </div>

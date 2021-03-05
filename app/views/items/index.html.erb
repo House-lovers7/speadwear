@@ -1,0 +1,38 @@
+<!--pathに"/"を含む時は表示させない-->
+
+<li><%#= link_to "アイテム一覧",            catalog_item_path(user_id: params[:user_id])%> </li>
+<li><%#= link_to "コーデ一覧",              catalog_cordinate_path(user_id: params[:user_id])%></li>
+<li>
+  <%#= link_to "あたらしい服を登録",      show_item_path(user_id: params[:user_id])         unless request.path.include?("/") %>
+</li>
+<li><%#= link_to "あたらしいコーデを登録",  cordinate_new_path(user_id: params[:user_id])     unless request.path.include?("/")  %>
+</li>
+
+<h3>アイテム一覧</h3>
+
+
+<% @items.sample(6).each do |item| %>
+    <div class="image_box text-center">
+      <%= link_to image_tag( item.picture.url), item_show_path( user_id: item.user_id, id: item.id) unless item.picture.blank? %>
+    </div>
+    <ul>
+      <li>ID: <%= item.id %></li>
+      <li>内容: <%= item.content %></li>
+      <li>TPO: <%= item.tpo %></li>
+      <li><i class="fa fa-leaf" aria-hidden="true"></i>季節: <%= item.season %></li>
+      <li>評価：<i class="fa fa-trophy" aria-hidden="true"></i>
+        <span id="star-rate-<%= item.id %>-<%= item.rating %>"></span>
+        <script>
+          $('#star-rate-<%= item.id %>-<%= item.rating %>').raty({
+            size: 36,
+            starOff: '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            readOnly: true,
+            score: <%= item.rating %>,
+                         });
+        </script>
+      </li>
+    </ul>
+<% end %>
+
+<%= paginate @items %>

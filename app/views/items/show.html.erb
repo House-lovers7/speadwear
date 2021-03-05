@@ -1,0 +1,13 @@
+ <%= render "shared/item_show" %>
+
+     <% if @item.super_item == "suits" %>
+       <%= link_to "コーデにスーツとして登録",    cordinate_new_path( cordinate_si_suits:   params[:id], item_id: @item.id) %>
+　　　<% elsif @item.super_item == "outer" %>
+　　　 <%= link_to "コーデにアウターとして登録",cordinate_new_path( cordinate_si_outer:   params[:id], item_id: @item.id) %>
+　　　<% elsif @item.super_item == "tops"  %>
+　　　 <%= link_to "コーデにトップスとして登録",  cordinate_new_path( cordinate_si_tops:    params[:id], item_id: @item.id) %>
+　　　<% elsif  @item.super_item == "bottoms" %>
+       <%= link_to "コーデにボトムスとして登録",  cordinate_new_path( cordinate_si_bottoms: params[:id], item_id: @item.id) %>
+      <% elsif  @item.super_item == "shoes" %>
+       <%= link_to "コーデにシューズとして登録",  cordinate_new_path( cordinate_si_shoes:   params[:id], item_id: @item.id) %>
+     <% end %>

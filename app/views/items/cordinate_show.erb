@@ -1,0 +1,43 @@
+<div class = "col-lg-2 left-box d-inline-flex  flex-column bd-highlight mb-3">
+    <% unless @item.picture.nil? %>
+        <div class="image-size">
+         <%#= image_tag @item.picture.url, size: '450x580' %>
+        </div>
+        <% end %>
+
+　<%# unless @q_tpo.nil?  %>
+
+                      <p>ID：<%= @item.id %></p>
+                      <p>User_ID：<%= @item.user.id %></p>
+                      <p>カテゴリー：<%= @item.super_item %></p>
+                      <p><i class="fa fa-leaf" aria-hidden="true"></i>季節：<%= @item.season %></p>
+                      <p>TPO:<%= @item.tpo %></p>
+                      <p>内容：<%= @item.content %></p>
+                      <p>カラー：<%= @item.color %></p>
+                      <p><i class="far fa-edit fa-1x"></i>メモ：<%= @item.memo %></p>
+
+
+                        <!--星評価-->
+                    <div id="star-rate-<%= @item.rating %>"><i class="fa fa-trophy" aria-hidden="true"></i>評価：</i></div>
+                        <script>
+                        $('#star-rate-<%= @item.rating %>').raty({
+                          size: 36,
+                          starOff:  '<%= asset_path('star-off.png') %>',
+                          starOn : '<%= asset_path('star-on.png') %>',
+                          starHalf: '<%= asset_path('star-half.png') %>',
+                          half: true,
+                          readOnly: true,
+                          score: <%= @item.rating %>,
+                        });
+                        </script>
+
+　　　 <% if @item.super_item == "outer" %>
+　　　 <% elsif @item.super_item == "tops"  %>
+　　　　  <%= link_to "コーデにアウターとして登録",  items_patch_path(item_id: @item.id, id: params[:cordinate_id], cordinate_si_outer: @item.id),data: {turbolinks: false} , method: :patch  %>
+　　　 <% elsif  @item.super_item == "bottoms" %>
+          <%= link_to "コーデにボトムスとして登録",  items_patch_path(item_id: @item.id, id: params[:cordinate_id], cordinate_si_bottoms: @item.id),data: {turbolinks: false} ,method: :patch %>
+       <% elsif  @item.super_item == "shoes" %>
+          <%= link_to "コーデにシューズとして登録",  items_patch_path(item_id: @item.id, id: params[:cordinate_id], cordinate_si_shoes: @item.id),data: {turbolinks: false} ,  method: :patch  %>
+       <% end %>
+
+</div>
