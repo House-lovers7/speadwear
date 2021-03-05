@@ -1,0 +1,506 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+ // Custom bootstrap variables must be set or imported *before* bootstrap.
+ *= require_self
+ *= require_tree .
+
+ @import "bootstrap";
+
+
+    /* typography */
+
+    h1, h2, h3, h4, h5, h6 {
+        line-height: 1;
+      }
+  
+      h1 {
+        font-size: 3em;
+        letter-spacing: -2px;
+      }
+  
+      h2 {
+        font-size: 1.2em;
+        letter-spacing: -1px;
+        font-weight: normal;
+        color: #777;
+      }
+  
+      p {
+        font-size: 1.1em;
+        line-height: 1.7em;
+      }
+  
+  
+      /* universal */
+  
+      body {
+        padding-top: 60px;
+      }
+  
+      section {
+        overflow: auto;
+      }
+  
+      textarea {
+        resize: vertical;
+      }
+  
+      .center {
+        text-align: center;
+      }
+  
+      .center h1 {
+        margin-bottom: 10px;
+      }
+  
+  // ユーザープロフィール画面編集
+  
+  .p-profile  {
+    text-align: center;
+          }
+  
+  
+      .profile-items {
+  
+  margin: 40px 80px;
+      }
+  
+  
+      .profile-cordinates {
+  
+        margin: 40px 80px;
+  
+      }
+  
+  
+  /* header-logo */
+  
+  *{
+    padding: 0;
+    margin: 0;
+  }
+  
+  hr {
+    margin-bottom: 15px;
+    }
+  
+  ul, li {
+    list-style: none;
+  }
+  
+  ul .li {
+    text-overflow: ellipsis;
+    list-style: none;
+  }
+  
+  
+  
+  // Cordinateのedit関連
+  
+  .cordinate_edit_picture {
+    float: left;
+  }
+  
+  .images {
+  
+    margin-top: 50px;
+  }
+  
+  .image-text {
+  
+  padding-left: 55px;
+  
+  }
+  
+  .item-pictures {
+  margin-top: 50px;
+  }
+  
+  // p {
+  //   font-family: 'Yu Gothic';
+  // }
+  
+  .users_profile {
+    margin-bottom: 70px;
+  }
+  
+  .cordinate_sample {
+    float: left;
+    margin-left: 5px;
+    margin-right: 0px;
+  }
+  
+  .cordinate_responses {
+    flex-direction: column;
+    margin-bottom: 50px;
+  }
+  
+  .cordinate_comments {
+    margin-top: 35px ;
+  }
+  
+  .label-form {
+    width: 100%;
+  }
+  
+  .whether-reports {
+    display: flex;
+      flex-direction: row;
+  }
+  
+  // コーデとアイテムのliのフォーマット
+  // columnは上下
+  
+  .cordinate_lists  {
+    flex-direction: column;
+    margin-left:15px;
+  }
+  
+  .item_image, .cordinate_image {
+  float: left;
+  }
+  
+  #枠のサイズは統一されたけど、写真が大きいとどうにもならない。。アップロード時点から写真のサイズを統一するべき。
+  
+  .img_fit {
+    max-width:225px;
+    max-height:300px;
+  }
+  
+  #クロス枠線
+  /* ダブル囲み枠 */
+  // .item_each_imagesが2つある謎??
+  .item_each_images,.cordinate_each_images,.item_each_images,.item_make,.cordinate_make {
+    float: left;
+    padding: 0.5em 1em;
+    border: double 5px #4ec4d3;
+    max-width: 342px;
+  }
+  
+  
+  .item_show_lists, .cordinate_show_lists, .item_make, .cordinate_make   {
+    float: left;
+    margin-top:  10px;
+    margin-left: 30px;
+    font-size:  1.3rem;
+    position: relative;
+    padding: 2.5em 1em .5em;
+    width: 35%;
+    background-color: #badcad; /* 背景色 */
+    color: #555; /* 文字色 */
+    box-shadow: 0 0 10px 10px #badcad; /* 影 */
+  }
+  
+  .comment_box {
+    position: relative;
+    background: #fff0cd;
+    box-shadow: 0px 0px 0px 5px #fff0cd;
+    border: dashed 2px white;
+    padding: 0.2em 0.5em;
+    color: #454545;
+    float: left;
+    margin-bottom: 15px;
+  }
+  .comment_box:after{
+    position: absolute;
+    content: '';
+    right: -7px;
+    top: -7px;
+    border-width: 0 15px 15px 0;
+    border-style: solid;
+    border-color: #ffdb88 #fff #ffdb88;
+    box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* メモ　クリップ　Ａ */
+  .clip-box {
+    position: relative;
+    margin: 1em auto;
+    padding: 15px 35px 15px 25px;
+    width: 90%; /* ボックス幅 */
+    background-color: #fff; /* ボックス背景色 */
+    color: #555555; /* 文章色 */
+    border: 1px solid #ccc; /* 枠線 */
+    box-shadow: 1px 1px 1px #acacac; /* 影の色 */
+    float: left;
+   }
+   .clip-box::before {
+    position: absolute;
+    content: '';
+    top: -15px;
+    right: 10px;
+    height: 55px;
+    width: 15px;
+    border: 3px solid #555555; /*クリップ色 */
+    background-color: none;
+    border-radius: 12px;
+    box-shadow: 1px 1px 2px #999;
+    transform: rotate(10deg);
+    z-index: 1;
+   }
+   .clip-box::after {
+    position: absolute;
+    content: '';
+    top: 0px;
+    width: 10px;
+    right: 20px;
+    border: solid 5px #fff; /*背景色と同じ色にする*/
+    z-index: 2;
+   }
+  
+  .cordinate_review {
+  margin-left: 30px;
+    float: left;
+   }
+  
+  .item_show_lists li {
+    margin-top:  20px;
+  }
+  
+  .items_each_lists li, .cordinates_each_lists li {
+    font-size: 1.2rem;
+    margin-top: 3px;
+  }
+  
+  
+  .cordinate_edit_form {
+    float: left;
+  }
+  
+  
+  .header-logo {
+      padding: 20px;
+    }
+  
+    .header-logo h2 {
+      font-size: 20px;
+    }
+  
+    .header-logo h2 a{
+      color: #000;
+      text-decoration: none;
+    }
+  
+    .header-logo .site-logo {
+      float: left;
+      border: none;
+      margin: -20px 0 0 0;
+    }
+  
+    .header-logo:after {
+      content:  "";
+      display: block;
+      clear: both;
+    }
+  
+  /*ページネーション自体のデザイン*/
+  .pagination>li>a {
+    border: none;     /*枠線をなくす*/
+    color: #696969;   /*文字の色を変える*/
+  }
+  
+  /* 表示しているページ番号のデザイン */
+  .pagination>.active>a {
+    background: #93c9ff;     /*背景の色を変える*/
+    border-radius: 15px;     /*角を丸くする*/
+  }
+  
+  /*ホバー時のデザイン*/
+  .pagination>li>a:hover {
+    border-radius: 15px;    /*角を丸くする*/
+  }
+  
+  
+    /* mixins, variables, etc. */
+  
+    // li {
+    //   list-style: none;
+    //   display: inline;
+    //   width:200px;
+    //   height:100px;
+    //   }
+  
+  
+  
+  
+      $gray-medium-light: #eaeaea;
+  
+      @mixin box_sizing {
+        -moz-box-sizing:    border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing:         border-box;
+      }
+  
+      /* miscellaneous */
+  
+      .debug_dump {
+        clear: both;
+        float: left;
+        width: 100%;
+        margin-top: 45px;
+        @include box_sizing;
+      }
+  
+      // ボタン幅の調整
+      .btn {
+        margin-top: 20px;
+      }
+  
+       // テキストボックス幅の調整
+      input[type="text"] {
+        margin-top: 13px;
+      }
+      /* forms */
+      textarea, select, a.uneditable-input  {
+        border: 1.5px solid #bbb;
+        width: 50%;
+        display: inline-block;
+        margin-top: 35px;
+      }
+  
+      #error_explanation {
+        color: red;
+        ul {
+          color: red;
+          margin: 0 0 30px 0;
+        }
+      }
+  
+  
+      #error_explanation {
+        color: red;
+        ul {
+          color: red;
+          margin: 0 0 30px 0;
+        }
+      }
+  
+      /* header */
+  
+      #logo {
+        float: left;
+        margin-right: 10px;
+        font-size: 1.7em;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        padding-top: 9px;
+        font-weight: bold;
+      }
+  
+      #logo:hover {
+        color: #fff;
+        text-decoration: none;
+      }
+  
+      /* footer */
+  
+      footer {
+        margin-top: 45px;
+        padding-top: 5px;
+        border-top: 1px solid #eaeaea;
+        color: #777;
+      }
+  
+      footer a {
+        color: #555;
+      }
+  
+      footer a:hover {
+        color: #222;
+      }
+  
+      footer small {
+        float: left;
+      }
+  
+      footer ul {
+        float: right;
+        list-style: none;
+      }
+  
+      footer ul li {
+        float: left;
+        margin-left: 15px;
+      }
+  
+      /* sidebar */
+  
+      aside {
+        section.user_info {
+          margin-top: 20px;
+        }
+        section {
+          padding: 10px 0;
+          margin-top: 20px;
+          &:first-child {
+            border: 0;
+            padding-top: 0;
+          }
+          span {
+            display: block;
+            margin-bottom: 3px;
+            line-height: 1;
+          }
+          h1 {
+            font-size: 1.4em;
+            text-align: left;
+            letter-spacing: -1px;
+            margin-bottom: 3px;
+            margin-top: 0px;
+          }
+        }
+      }
+  
+      .gravatar {
+        float: left;
+        margin-right: 10px;
+      }
+  
+      .gravatar_edit {
+        margin-top: 15px;
+      }
+  
+  
+      .checkbox {
+        margin-top: -10px;
+        margin-bottom: 10px;
+        span {
+          margin-left: 20px;
+          font-weight: normal;
+        }
+      }
+  
+      #session_remember_me {
+        width: auto;
+        margin-left: 0;
+      }
+  
+  
+  
+    @import "bootstrap";
+  
+  
+    /* mixins, variables, etc. */
+  
+    $grayMediumLight: #eaeaea;
+  
+    /* miscellaneous */
+  
+  
+    .wheather_container {
+      float: left;
+  
+    }
+  

@@ -1,0 +1,154 @@
+
+  // colorGuideのCSS
+
+  .colorGuide:before {
+    content: "";
+    display: block;
+    }
+
+    .colorGuide:before {
+       width: 5px;
+      height: 5px;
+      border-radius: 50%;
+       background: #FFFFFF;
+      border: solid 3px #DCDCDC;
+    }
+
+
+ .color_list li {
+    margin:  0px;
+    padding: 0px;
+}
+
+.color_list li .color-black a:before{
+  top: 10px;
+  content: '●';
+  color: #000;
+  font-size: 20px;
+  line-height: 1;
+}
+
+
+.color_list li .color-white a:before{
+  top: 10px;
+  content: '○';
+  font-size: 20px;
+  line-height: 1;
+}
+
+.color_list li .color-gray a:before{
+  top: 10px;
+  content: '●';
+  color: #808080;
+  font-size: 20px;
+  line-height: 1;
+ }
+
+.color_list li .color-red a:before{
+ top: 10px;
+ content: '●';
+ color: #FF0000;
+ font-size: 20px;
+ line-height: 1;
+}
+
+.color_list li .color-navy a:before{
+ top: 10px;
+ content: '●';
+ color: #000080;
+ font-size: 20px;
+ line-height: 1;
+}
+
+.color_list li .color-lightblue a:before{
+ top: 10px;
+ content: '●';
+ color: lightblue;
+ font-size: 20px;
+ line-height: 1;
+}
+
+.color_list li .color-yellow a:before{
+ top: 10px;
+ content: '●';
+ color: #FFFF00;
+ font-size: 20px;
+ line-height: 1;
+}
+
+.color_list li .color-green a:before{
+ top: 10px;
+ content: '●';
+color: #005500;
+ font-size: 20px;
+ line-height: 1;
+}
+
+.color_list li .color-orenge a:before{
+ top: 10px;
+ content: '●';
+ color: #FF5F17;
+ font-size: 20px;
+ line-height: 1;
+}
+
+.color_list li .color-olive a:before{
+ top: 10px;
+ content: '●';
+ color: #00DD00;
+ font-size: 20px;
+ line-height: 1;
+}
+
+.color_list li .color-neon a:before{
+ top: 10px;
+ content: '●';
+ color: 	#CCFF33;
+ font-size: 20px;
+ line-height: 1;
+}
+
+.color_list li .color-border a:before{
+ top: 10px;
+ content: '●';
+ color: #fff;
+ font-size: 20px;
+ line-height: 1;
+  background-image: linear-gradient(0deg,
+    #fff 25%, #000 25%, #000 50%, #fff 50%, #fff 75%,#000 75%, #000
+  );
+  background-size: 4px 4px;
+}
+
+.color_list li .color-patternned a:before{
+ top: 10px;
+ content: '●';
+  color: #fff;
+  margin     : auto;
+  max-width  : 20px;
+  height     : 20px;
+                                      /* ドット（水玉）模様のCSS */
+  background-color   : #ffffff;
+  background-image   : radial-gradient(#1a1aff 14%, transparent 34%),
+                      radial-gradient(#1a1aff 14%, transparent 34%);
+  background-position: 0  0, 1px 1px;
+  background-size    : 2.3px 2.3px;
+font-size: 20px;
+line-height: 1;
+}
+
+.color_list li .color-denim a:before{
+ top: 10px;
+ content: '●';
+ color: lightskyblue;
+ font-size: 20px;
+ line-height: 1;
+}
+
+.color_list li .color-indego a:before{
+ top: 10px;
+ content: '●';
+ color: #6610f2;
+ font-size: 20px;
+ line-height: 1;
+}
