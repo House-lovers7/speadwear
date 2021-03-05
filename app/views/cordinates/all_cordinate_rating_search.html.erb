@@ -1,0 +1,34 @@
+  <% @p_cordinate_rating.each do |cordinate| %>
+     <div class= "cordinate_each_images kakomi-double ">
+    <% if cordinate.picture?  %>
+      <%= link_to image_tag( cordinate.picture.url), cordinate_show_path( user_id: cordinate.user_id, id: cordinate.id), size: "374.14x250"%>
+      <% else %>
+      <%= link_to image_tag('default_cordinate.png'), cordinate_show_path( user_id: cordinate.user_id, id: cordinate.id), :size => '200x200' %>
+<% end %>
+
+
+    <div class= "cordinates_each_lists">
+        <ul>
+        <li>ID:<%= cordinate.id %></li>
+        <li>user_id:<%= cordinate.user_id %></li>
+        <li>ユーザー: <%=link_to cordinate.user.name, cordinate_show_path(id: cordinate.user.id)%></li>
+        <li><i class="fa fa-leaf" aria-hidden="true"></i>季節:<%= cordinate.season %></li>
+        <li>TPO:<%= cordinate.tpo %></li>
+        <li>
+        <div id="star-rate-<%= cordinate.rating %>"><i class="fa fa-trophy" aria-hidden="true"></i>評価：</i></div>
+        <script>
+          $('#star-rate-<%= cordinate.rating %>').raty({
+            size: 13,
+            starOff: '<%= asset_path('star-off.png') %>',
+            starOn : '<%= asset_path('star-on.png') %>',
+            starHalf: '<%= asset_path('star-half.png') %>',
+             half: false,
+            readOnly: true,
+            score: <%= cordinate.rating %>,
+                        });
+        </script>
+        </li>
+                </ul>
+                  </div>
+                </div>
+        <% end %>

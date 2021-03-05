@@ -1,0 +1,38 @@
+
+    <!--pathに"/"を含む時は表示させない-->
+        <%# <li><%= link_to "あたらしい服を登録",    show_item_path(user_id:           params[:user_id])     unless request.path.include?("/") %></li>
+
+<p>コーデ一覧</p>
+
+<div class= "cordinate_sample_frame container" >
+
+ 　<%  @cordinates.sample(6).each do |cordinate| %>
+
+<div class = "cordinate_sample fllex-column col-md-3 " >
+
+            <div class="image_box text-center">
+                    <%= link_to image_tag(cordinate.picture.url), cordinate_edit_path(user_id: cordinate.user_id, id: cordinate.id) , :controller=>"cordinates",:action=> "edit" unless cordinate.picture.blank? %>
+            </div>
+                     <p></i>評価：<i class="fa fa-trophy" aria-hidden="true"></i>
+                       <span id="star-rate-<%= cordinate.id %>-<%= cordinate.rating %>"></span>
+                       <script>
+                         $('#star-rate-<%= cordinate.id %>-<%= cordinate.rating %>').raty({
+                         size: 36,
+                         starOff:  '<%= asset_path('star-off.png') %>',
+                         starOn : '<%= asset_path('star-on.png') %>',
+                         readOnly: true,
+                         score: <%= cordinate.rating %>,
+                         });
+                       </script>
+                       </p>
+
+                      <p>ID:  <%=  cordinate.id %></p>
+                      <p>TPO:  <%= cordinate.tpo %></p>
+                      <p><i class="fa fa-leaf" aria-hidden="true"></i>季節: <%= cordinate.season %></p>
+                      <p><i class="far fa-edit fa-1x"></i>メモ: <%= cordinate.memo %></p>
+       </div>
+     <% end %>
+
+<%= paginate @cordinates %>
+
+</div>

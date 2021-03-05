@@ -1,0 +1,30 @@
+      <%# <%= image_tag @cordinate.picture.url, size: '450x580' unless @cordinate.picture.nil?  %>
+
+<div class= "cordinate_image">
+<% unless @cordinate.picture.nil?  %>
+    <%= image_tag @cordinate.picture.url, size: '450x580' %>
+<% else %>
+      <%= image_tag 'default_cordinate.png' %>
+<% end %>
+
+      <div class= "item-button flex-colum justify-content-center">  <%# 縦ならびflex-colum 中央揃え justify-content-center  %>
+         <div class = "text-center">
+         <% unless @likecordinates.find_by(user_id: current_user.id) %>
+       <%= link_to likecordinate_create_path( user_id: current_user.id , cordinate_id: @cordinate.id ), data: {turbolinks: false} ,:controller=>"likecordinates",
+        :action=> "create", :method => :post do %>
+          <i class="far fa-thumbs-up fa-1x">いいね</i> <% end %> <%# ←lik_to doのend %>
+          <% end %>
+      <%= link_to "コーデを削除する", cordinate_delete_path,  class: "btn btn-outline-danger btn-block",  method: :delete, data: { confirm: "本当に削除しますか？" } %>
+      <%= link_to "編集する" , cordinate_edit_path, class: "btn btn-outline-warning btn-block" , data: { confirm: "変更しますか？" } %>
+          </div>
+          </div>
+          </div>
+
+  <%= render 'shared/cordinate_show' %>
+            <div class= "cordinate_review">
+            <%= render 'shared/cordinate_comment' %>
+            <%= render 'shared/cordinate_like' %>
+            </div>
+
+                <%#= link_to image_tag( item.picture.url), item_show_path( user_id: item.user_id, id: item.id) unless
+                  item.picture.blank? %>

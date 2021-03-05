@@ -1,0 +1,86 @@
+
+
+<!--<ActionController::Parameters {"cordinate_si_outer"=>"3", "controller"=>"cordinates", "action"=>"new", "user_id"=>"1"} permitted: false>-->
+
+<div class="Upside Register clearfix">
+
+
+  <div class="image-size float-left">
+    <%= image_tag 'cordinate.sample.JPG' , size: '450x500' %>
+  </div>
+  <div class=" Selectlink col-md-5 float-left cordinate_make">
+
+    <h3>コーデを考える💡</h3>
+  <%#= form_for(@cordinate, url: cordinate_create_path) do |i| %>
+  <%= form_for( @cordinate, url: {controller: 'cordinates' , action: 'create' }, method: :post) do |i| %>
+   <%#= form_for(@item, url: item_create_path) do |i| %>
+
+      <div class="form-group">
+          <%= i.label :season, "季節:" %><i class="fa fa-leaf" aria-hidden="true"></i>
+          <%= i.select :season, Cordinate.seasons.keys %>
+      </div>
+
+      <div class="form-group">
+        <%= i.label :tpo, "TPO：" %>
+          <%= i.select :tpo, Cordinate.tpos.keys %>
+      </div>
+
+      <div class="form-group ">
+        <%= i.label :memo,"メモ:"%> <i class="far fa-edit fa-1x"></i>
+          <%= i.text_field :memo %>
+      </div>
+
+      <%= i.label :picture, "写真:" %><i class="far fa-image fa-1x"></i>
+        <%= i.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+
+<script type="text/javascript">
+            $('#micropost_picture').bind('change', function () {
+              var size_in_megabytes = this.files[0].size / 196 / 257;
+              if (size_in_megabytes > 5) {
+                alert('Maximum file size is 5MB. Please choose a smaller file.');
+              }
+            });
+          </script>
+
+          <%= hidden_field_tag :user_id, params[:user_id] %>
+          <%= hidden_field_tag :cordinate_id, params[:cordinate_id] %>
+          <%= hidden_field_tag :item_id, params[:item_id] %>
+        <% if params[:cordinate_si_suits] %>
+          <%= hidden_field_tag :cordinate_si_suits, params[:cordinate_si_suits] %>
+        <% elsif params[:cordinate_si_outer] %>
+          <%= hidden_field_tag :cordinate_si_outer, params[:cordinate_si_outer] %>
+        <% elsif params[:cordinate_si_tops] %>
+          <%= hidden_field_tag :cordinate_si_tpos, params[:cordinate_si_tops] %>
+        <% elsif params[:cordinate_si_bottoms] %>
+          <%= hidden_field_tag :cordinate_si_bottoms, params[:cordinate_si_bottoms] %>
+        <% else params[:cordinate_si_shoes] %>
+          <%= hidden_field_tag :cordinate_si_shoes, params[:cordinate_si_shoes] %>
+        <% end %>
+           <%= hidden_field_tag :user_id, params[:user_id] %>
+          <%= i.submit "コーディネートする服を選ぶ" ,class: "nav-link btn btn-info  btn-block " %>
+      <% end %>
+  </div>
+
+</div>
+
+<div class="item-pictures d-flex flex-row bd-highlight mb-3 col-lg-10">
+  <%= image_tag "logo-tops.png" ,size: '215x257' %>
+    <%= image_tag "outer.png" ,size: '215x257' %>
+      <%= image_tag "logo-pants.png" ,size: '215x257' %>
+        <%= image_tag "logo-shoes.png" ,size: '215x257' %>
+</div>
+
+<map name="manequien">
+  <area shape="rect" coords="36,73,289,211" href="#" alt="Tops" />
+  <area shape="rect" coords="94,210,218,384" href="#" alt="Botomms" />
+  <area shape="circle" coords="211,419,34" href="#" alt="Shoes" />
+</map>
+
+</div>
+
+
+
+
+
+
+</div>

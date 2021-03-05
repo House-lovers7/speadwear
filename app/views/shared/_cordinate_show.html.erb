@@ -1,0 +1,65 @@
+<% if controller.action_name == "show" %>
+
+ <div class= "cordinate_show_lists  ">
+<ul>
+ <li>ユーザー: <%=link_to @cordinate.user.name, user_show_path(id: params[:user_id])%></li>
+  <li>ID： <%= @cordinate.id %></li>
+  <li><i class="fa fa-leaf" aria-hidden="true"></i>季節： <%= @cordinate.season %></li>
+  <li>TPO: <%= @cordinate.tpo %></li>
+  <!--星評価-->
+
+
+  <div id="star-rate-<%= @cordinate.rating %>"><i class="fa fa-trophy" aria-hidden="true"></i>評価：</i></div>
+  <script>
+    $('#star-rate-<%= @cordinate.rating %>').raty({
+      size: 36,
+      starOff: '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+      starHalf: '<%= asset_path('star-half.png') %>',
+      half: true,
+      readOnly: true,
+      score: <%= @cordinate.rating %>,
+                        });
+  </script>
+  </ul>
+  </div>
+
+  <% elsif controller.action_name == "user_all_cordinate_show" ||  controller.action_name == "all_cordinate_show"  %>
+    <% @cordinates.each do |cordinate| %>
+
+     <div class= "cordinate_each_images kakomi-double  ">
+
+      <div class= "img_fit">
+    <% if cordinate.picture?  %>
+      <%= link_to image_tag( cordinate.picture.url), cordinate_show_path( user_id: cordinate.user_id, id: cordinate.id), size: "225x300"%>
+      <% else %>
+      <%= link_to image_tag('default_cordinate.png'), cordinate_show_path( user_id: cordinate.user_id, id: cordinate.id), :size => '200x200' %>
+<% end %>
+   </div>
+
+    <div class= "cordinates_each_lists">
+        <ul>
+        <li>ID:<%= cordinate.id %></li>
+        <li>user_id:<%= cordinate.user_id %></li>
+        <li>ユーザー: <%=link_to cordinate.user.name, cordinate_show_path(user_id: cordinate.user.id, id: cordinate.id )%></li>
+        <li><i class="fa fa-leaf" aria-hidden="true"></i>季節:<%= cordinate.season %></li>
+        <li>TPO:<%= cordinate.tpo %></li>
+
+<div id="star-rate-<%= cordinate.rating %>"><i class="fa fa-trophy" aria-hidden="true"></i>評価：</i></div>
+  <script>
+    $('#star-rate-<%= cordinate.rating %>').raty({
+      size: 36,
+      starOff: '<%= asset_path('star-off.png') %>',
+      starOn : '<%= asset_path('star-on.png') %>',
+      starHalf: '<%= asset_path('star-half.png') %>',
+      half: true,
+      readOnly: true,
+      score: <%= cordinate.rating %>,});
+  </script>
+                </ul>
+
+                  </div>
+                </div>
+
+        <% end %>
+          <% end %>

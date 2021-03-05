@@ -1,0 +1,280 @@
+<p>アイテムから探す</p>
+
+<div class="accordion" id="accordionExample">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h2 class="mb-0">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
+          aria-expanded="true" aria-controls="collapseOne">
+          季節から
+        </button>
+      </h2>
+    </div>
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body">
+        <% unless @q_item_season.nil?  %>
+        <nav class="nav flex-column">
+          <%= link_to '春',{:controller=>"items",:action=>"all_item_search", :q_season=>{:season_eq=>'0'}} %>
+          <%= link_to '夏',{:controller=>"items",:action=>"all_item_search", :q_season=>{:season_eq=>'1'}} %>
+          <%= link_to '秋',{:controller=>"items",:action=>"all_item_search", :q_season=>{:season_eq=>'2'}} %>
+          <%= link_to '冬',{:controller=>"items",:action=>"all_item_search", :q_season=>{:season_eq=>'3'}} %>
+        </nav>
+            <% end %>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
+          aria-expanded="false" aria-controls="collapseTwo">
+          TPOから
+        </button>
+      </h2>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body">
+        　<% unless @q_item_tpo.nil?  %>
+        <nav class="nav flex-column">
+          <%= link_to 'デート',    {:controller=>"items",:action=>"all_item_search",:q_tpo=>{:tpo_eq=>'0'}}   %>
+          <%= link_to 'リラックス',  {:controller=>"items",:action=>"all_item_search",:q_tpo=>{:tpo_eq=>'1'}}  %>
+          <%= link_to 'スポーツ',  {:controller=>"items",:action=>"all_item_search",:q_tpo=>{:tpo_eq=>'2'}}    %>
+          <%= link_to 'おでかけ'  ,{:controller=>"items",:action=>"all_item_search",:q_tpo=>{:tpo_eq=>'3'}}    %>
+          <%= link_to '仕事',      {:controller=>"items",:action=>"all_item_search",:q_tpo=>{:tpo_eq=>'4'}}   %>
+        </nav>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+ <%# enum super_item: %w( アウター トップス ボトムス シューズ )
+enum content: %w(Tシャツ シャツ ポロシャツ パーカー スウェット セーター パンツ デニムパンツ ジャケット コート スニーカー ローファー 革靴 ブーツ ビジネス 他のカラー)
+enum color: %w(ブラック ホワイト グレー レッド ネイビー ライトブルー イエロー グリーン オレンジ  オリーブ ネオン ボーダー 水たま デニム 他のカラー) %>
+
+
+
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
+          aria-expanded="false" aria-controls="collapseThree">
+          評価から
+        </button>
+      </h2>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+      <div class="card-body">
+
+        <% unless @q_item_rating.nil?  %>
+        <nav class="nav flex-column">
+          <%= link_to '☆',    {:controller=>"items",:action=>"all_item_search",:q_rating=>{:rating_eq=>'0'}}%>
+          <%= link_to '☆☆',   {:controller=>"items",:action=>"all_item_search",:q_rating=>{:rating_eq=>'1'}}%>
+          <%= link_to '☆☆☆',  {:controller=>"items",:action=>"all_item_search",:q_rating=>{:rating_eq=>'2'}}%>
+          <%= link_to '☆☆☆☆', {:controller=>"items",:action=>"all_item_search",:q_rating=>{:rating_eq=>'3'}}%>
+          <%= link_to '☆☆☆☆☆',{:controller=>"items",:action=>"all_item_search",:q_rating=>{:rating_eq=>'4'}}%>
+        </nav>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingFive">
+      <h2 class="mb-0">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive"
+          aria-expanded="false" aria-controls="collapseFive">
+          カラー検索
+        </button>
+      </h2>
+    </div>
+    <% unless  @q_item_color.nil?  %>
+    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+      <div class="card-body">
+        <nav class="nav flex-column">
+          <div class="color_list">
+            <ul>
+              <li>
+                <div class="color-black">
+                  <%= link_to 'Black',      {:controller=>"items",:action=>"all_item_search",:q_color=>{:color_eq=> '0'}}%>
+                </div>
+              </li>
+              <li>
+                <div class="color-white">
+                  <%= link_to 'White',      {:controller=>"items",:action=>"all_item_search",:q_color=>{:color_eq=> '1'}}%>
+                </div>
+              </li>
+              <li>
+                <div class="color-gray">
+                  <%= link_to 'Gray',       {:controller=>"items",:action=>"all_item_search",:q_color=>{:color_eq=> '2'}}%>
+                </div>
+              </li>
+              <li>
+                <div class="color-red">
+                  <%= link_to 'Red',        {:controller=>"items",:action=>"all_item_search",:q_color=>{:color_eq=> '3'}}%>
+                </div>
+              </li>
+              <li>
+                <div class="color-navy">
+                  <%= link_to 'Navy',       {:controller=>"items",:action=>"all_item_search",:q_color=>{:color_eq=> '4'}}%>
+                </div>
+              </li>
+              <li>
+                <div class="color-lightblue">
+                  <%= link_to 'Light Blue', {:controller=>"items",:action=>"all_item_search",:q_color=>{:color_eq=> '5'}}%>
+                </div>
+              </li>
+              <li>
+                <div class="color-yellow">
+                  <%= link_to 'Yellow',     {:controller=>"items",:action=>"all_item_search",:q_color=>{:color_eq=> '6'}}%>
+                </div>
+              </li>
+              <li>
+                <div class="color-green">
+                  <%= link_to 'Green',      {:controller=>"items",:action=>"all_item_search",:q_color=>{:color_eq=> '7'}}%>
+                </div>
+              </li>
+              <li>
+                <div class="color-orenge">
+                  <%= link_to 'Orenge',     {:controller=>"items",:action=>"all_item_search",:q_color=>{:color_eq=> '8'}}%>
+                </div>
+              </li>
+              <li>
+                <div class="color-olive">
+                  <%= link_to 'Olive',      {:controller=>"items",:action=>"all_item_search",:q_color=>{:color_eq=> '9'}}%>
+                </div>
+              </li>
+              <li>
+                <div class="color-neon">
+                  <%= link_to 'Neon',       {:controller=>"items",:action=>"all_item_search",:q_color=>{:color_eq=> '10'}}%>
+                </div>
+              </li>
+              <li>
+                <div class="color-border">
+                  <%= link_to 'Border',     {:controller=>"items",:action=>"all_item_search",:q_color=>{:color_eq=> '11'}}%>
+                </div>
+              </li>
+              <li>
+                <div class="color-patternned">
+                  <%= link_to 'Patternned', {:controller=>"items",:action=>"all_item_search",:q_color=>{:color_eq=> '12'}}%>
+                </div>
+              </li>
+              <li>
+                <div class="color-denim">
+                  <%= link_to 'Denim',      {:controller=>"items",:action=>"all_item_search",:q_color=>{:color_eq=> '13'}}%>
+                </div>
+              </li>
+              <div class="color-othercolor">
+                <%= link_to 'Others',      {:controller=>"items",:action=>"all_item_search",:q_color=>{:color_eq=> '14'}}%>
+              </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+        <% end%>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header" id="headingSix">
+        <h2 class="mb-0">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix"
+            aria-expanded="false" aria-controls="collapseSix">
+            カテゴリーから
+          </button>
+        </h2>
+      </div>
+      <% unless @q_item_super_item.nil?  %>
+      <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+        <div class="card-body">
+          <nav class="nav flex-column">
+            <%= link_to 'アウター', {:controller=>"items",:action=>"all_item_search",:q=>{:super_item_eq=>'0'}}%>
+            <%= link_to 'トップス', {:controller=>"items",:action=>"all_item_search",:q=>{:super_item_eq=>'1'}}%>
+            <%= link_to 'ボトムス', {:controller=>"items",:action=>"all_item_search",:q=>{:super_item_eq=>'2'}}%>
+            <%= link_to 'シューズ', {:controller=>"items",:action=>"all_item_search",:q=>{:super_item_eq=>'3'}}%>
+          </nav>
+          <% end %>
+        </div>
+      </div>
+
+
+      <!--Cordinate版-->
+
+      <p>コーデから探す</p>
+
+      <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingSeven">
+            <h2 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseSeven"
+                aria-expanded="true" aria-controls="collapseSeven">
+                季節から
+              </button>
+            </h2>
+          </div>
+          <div id="collapseSeven" class="collapse show" aria-labelledby="headingSeven" data-parent="#accordionExample">
+            <div class="card-body flex-column"">
+<% unless @q.nil?  %>
+        <nav class=" nav flex-column card-body">
+              <%= link_to '春',{:controller=>"cordinates",:action=>"all_cordinate_search", :q=>{:season_eq=>'0'}}%>
+              <%= link_to '夏',{:controller=>"cordinates",:action=>"all_cordinate_search", :q=>{:season_eq=>'1'}}%>
+              <%= link_to '秋',{:controller=>"cordinates",:action=>"all_cordinate_search", :q=>{:season_eq=>'2'}}%>
+              <%= link_to '冬',{:controller=>"cordinates",:action=>"all_cordinate_search", :q=>{:season_eq=>'3'}}%>
+              </nav>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+
+
+        <div class="card">
+          <div class="card-header" id="headingEight">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight"
+                aria-expanded="false" aria-controls="collapseEight">
+                TPOから
+              </button>
+            </h2>
+          </div>
+          <% unless @q.nil?  %>
+          <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
+            <div class="card-body">
+              <nav class="nav flex-column">
+                <%= link_to 'デート',    {:controller=>"cordinates",:action=>"all_cordinate_search",:q=>{:tpo_eq=>'0'}}%>
+                <%= link_to 'スポーツ',  {:controller=>"cordinates",:action=>"all_cordinate_search",:q=>{:tpo_eq=>'1'}}%>
+                <%= link_to '街あそび'  ,{:controller=>"cordinates",:action=>"all_cordinate_search",:q=>{:tpo_eq=>'2'}}%>
+                <%= link_to '仕事',      {:controller=>"cordinates",:action=>"all_cordinate_search",:q=>{:tpo_eq=>'3'}}%>
+                <%= link_to 'オリジナル',{:controller=>"cordinates",:action=>"all_cordinate_search",:q=>{:tpo_eq=>'4'}}%>
+              </nav>
+              <% end%>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header" id="headingNine">
+              <h2 class="mb-0">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseNine"
+                  aria-expanded="false" aria-controls="collapseNine">
+                  評価から
+                </button>
+              </h2>
+            </div>
+            <% unless @q.nil?  %>
+            <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
+              <div class="card-body">
+
+
+                <nav class="nav flex-column">
+                  <%= link_to '☆',    {:controller=>"cordinates",:action=>"all_cordinate_search",:q=>{:rating_eq=>'0'}}%>
+                  <%= link_to '☆☆',   {:controller=>"cordinates",:action=>"all_cordinate_search",:q=>{:rating_eq=>'1'}}%>
+                  <%= link_to '☆☆☆',  {:controller=>"cordinates",:action=>"all_cordinate_search",:q=>{:rating_eq=>'2'}}%>
+                  <%= link_to '☆☆☆☆', {:controller=>"cordinates",:action=>"all_cordinate_search",:q=>{:rating_eq=>'3'}}%>
+                  <%= link_to '☆☆☆☆☆',{:controller=>"cordinates",:action=>"all_cordinate_search",:q=>{:rating_eq=>'4'}}%>
+                </nav>
+
+
+        <% end%>
+
+      </div>

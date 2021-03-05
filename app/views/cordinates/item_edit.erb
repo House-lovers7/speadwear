@@ -1,0 +1,57 @@
+  <div class="flex-fill flex-grow float-left col-sm-12">
+  <div class= "cordinate_edit_picture">
+              <%= image_tag @cordinate.picture.url, id: "bigimg", size: '400x400' unless @cordinate.picture.blank? %>
+               </div>
+
+<%# cordinateの編集フォームj %>
+<div class= "cordinate_edit_form, cordinate_make">
+<%= form_for(items_patch_url) do |i| %>
+<ul>
+<li>
+ <div id=" star-rate-<%= @cordinate.rating %>"></div>
+    <script>
+      $('#star-rate-<%= @cordinate.rating %>').raty({
+        size: 36,
+        starOff: '<%= asset_path('star-off.png') %>',
+        starOn : '<%= asset_path('star-on.png') %>',
+        starHalf: '<%= asset_path('star-half.png') %>',
+        half: true,
+        readOnly: true,
+        score: <%= @cordinate.rating %>,
+                        });
+    </script>
+
+</li>
+
+<%= i.label :season, "季節:" %><i class="fa fa-leaf" aria-hidden="true"></i>
+<%= i.select :season, Cordinate.seasons.keys %>
+</li>
+<li>
+<%= i.label :tpo, "TPO:" %>
+<%= i.select :tpo, Cordinate.tpos.keys %>
+</li>
+<li>
+<%= i.label :pictyre, "写真" %><i class="far fa-image fa-1x"></i>
+<%= i.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+<script type="text/javascript">
+  $('#micropost_picture').bind('change', function () {
+    var size_in_megabytes = this.files[0].size / 1024 / 1024;
+    if (size_in_megabytes > 5) {
+      alert('Maximum file size is 5MB. Please choose a smaller file.');
+    }
+  });
+</script>
+</li>
+<li>
+<%= i.label :memo, "メモ" %><i class="far fa-edit fa-1x"></i>
+<%= i.text_field :memo %>
+</li>
+</ul>
+<% end %>
+
+<%= link_to "コーデ完成", cordinate_edit_save_path, class: "btn btn-primary btn-lg", data: { confirm: "変更しますか？" } %>
+<%= link_to "アイテムを削除する", cordinate_delete_path,  class: "btn btn-outline-danger btn-block",  method: :delete, data: { confirm: "本当に削除しますか？" } %>
+
+</div>
+</div>
+<%= render "shared/cordinate_item_images_edit" %>
