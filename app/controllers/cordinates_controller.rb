@@ -34,9 +34,7 @@ class CordinatesController < ApplicationController
   def all_cordinate_show
     cordinate_paginate
     item_cordinate_ransack_setup
-    
-    binding.pry
-    
+        
   end
 
   def user_all_cordinate_show
