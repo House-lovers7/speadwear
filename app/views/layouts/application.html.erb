@@ -1,14 +1,41 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Speadwear</title>
-    <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+<head>
+  <title>WeaerApp</title>
+  <%= csrf_meta_tags %>
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <%= stylesheet_link_tag "application", media: "all", 'data-turbolinks-track': "reload" %>
+  <%= javascript_include_tag "application", 'data-turbolinks-track': "reload" %>
+  <%= render "layouts/shim" %>
+</head>
+<body>
 
-  <body>
-    <%= yield %>
-  </body>
+  <div class= "container-fluid">
+        <%= render "layouts/header" %>
+        <div class="row">
+    <div class= "col-md-2" ><%= render "layouts/sidemenu" %></div>
+        <div class= "col-md-10"><%= yield %></div>
+</div>
+</div>
+
+<div class="row">
+    <!-- フッター -->
+        <%= render "layouts/footer" %>
+        <%= debug(params) if Rails.env.development? %>
+        <% flash.each do |message_type, message| %>
+        <%= content_tag(:div, message, class: "alert alert-#{message_type}") %>
+        <% end %>
+    </div>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script>
+</body>
+
+
 </html>
