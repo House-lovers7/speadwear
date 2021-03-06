@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_210_305_092_930) do
+ActiveRecord::Schema.define(version: 20_210_306_022_332) do
   create_table 'blocks', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.integer 'blocker_id'
     t.integer 'blocked_id'
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20_210_305_092_930) do
     t.integer 'tpo'
     t.string 'picture'
     t.integer 'si_shoes'
-    t.integer 'si_botoms'
+    t.integer 'si_bottoms'
     t.integer 'si_tops'
     t.integer 'si_outer'
     t.text 'memo'
@@ -98,5 +98,8 @@ ActiveRecord::Schema.define(version: 20_210_305_092_930) do
     t.string 'reset_digest'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.string 'activation_digest'
+    t.boolean 'activated'
+    t.datetime 'activated_at'
   end
 end
