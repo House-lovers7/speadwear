@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20210306022332) do
+ActiveRecord::Schema.define(version: 20210306052747) do
 
   create_table "blocks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "blocker_id"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20210306022332) do
     t.string "activation_digest"
     t.boolean "activated"
     t.datetime "activated_at"
+    t.boolean "friend"
   end
 
 end
