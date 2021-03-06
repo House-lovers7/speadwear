@@ -1,0 +1,17 @@
+<% sender = notification.sender %>
+<% cordinate = notification.cordinate %>
+<%#= action_user = User.find(:id, notification.sender.id) %>
+
+<div class="user-view clearfix ">
+  <%= link_to user_show_path(notification.sender) do %>
+
+ <li><%= gravatar_for @user, size: 50 %></li>
+  <%= notification_form(notification) %><span class="moderate-font"><%=" (#{time_ago_in_words(notification.created_at)} 前)" %></span>
+  <br>
+  <% if !@comment.nil? %>
+    <p class="moderate-font text-center" style="color: #C0C0C0;"><%= @comment %></p>
+  <% end %>
+    <br><br>
+    <% end %>
+     <hr>
+</div>
