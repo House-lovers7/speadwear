@@ -15,10 +15,6 @@ class CordinatesController < ApplicationController
     @comment ||= Comment.new(comment_params)
     @cordinate_comments = Comment.where(cordinate_id: params[:id])
 
-    # @likecomment  ||= Likecomment.find(params[:user_id])
-    @likecomment ||= Likecomment.new
-    @likecomment.user_id = current_user.id
-
     # 同じUserが所有するLikecordinateの配列が入る
     @likecordinates = Likecordinate.where(cordinate_id: params[:id])
     # 同じCordinateが所有するLikecordinateの配列？が入る
@@ -60,11 +56,10 @@ class CordinatesController < ApplicationController
     # return 'コーデの作成権限がありません。' if @user == current_user || @user.following.include?(current_user)
 
     @comment = Comment.new(comment_params)
-    @likecomment = Likecomment.new
     # commentの集合を入れる
     @comments = @cordinate.comments
     @comment.user_id = current_user.id
-    @likecomment.user_id = current_user.id
+
     @item = Item.where(super_item: params[:super_item])
     @cordinate.user_id = params[:user_id]
     cordinate_si_params_set
