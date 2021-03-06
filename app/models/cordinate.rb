@@ -2,7 +2,7 @@ class Cordinate < ApplicationRecord
     belongs_to :user, optional: true
     has_many :items, dependent: :destroy
     has_many :comments, dependent: :destroy
-    has_many :likecomments, through: :comments
+
     has_many :notifications, dependent: :destroy
     has_many :likecordinates, dependent: :destroy
     has_many :users, through: :likecordinates

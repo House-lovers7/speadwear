@@ -21,7 +21,6 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :items, dependent: :destroy
   has_many :likecordinates, dependent: :destroy
-  has_many :likecomments, dependent: :destroy
   has_many :blocks, dependent: :destroy
 
   # 通知機能の実装
@@ -59,15 +58,9 @@ class User < ApplicationRecord
   # likeされているcordinateを取得するから、likedcordinate
   has_many :liked_cordinates, through: :likecordinates, source: :cordinate
 
-  # commentlikeの実装
-  has_many :active_likecomments, class_name: 'Likecomment',
-                                 foreign_key: 'user_id',
-                                 dependent: :destroy
 
   # liked_commentsによってuserがどのコメントをいいねしているのかを簡単に取得できるようになります。
   # likeされているコメントを取得するから、likedcomment
-
-  has_many :liked_comments, through: :likecomments, source: :comment
 
   # 永続セッションのためにユーザーをデータベースに記憶する
   def remember
