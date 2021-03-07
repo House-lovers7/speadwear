@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class PasswordResetsController < ApplicationController
   before_action :get_user, only: %i[edit update]
   before_action :valid_user, only: %i[edit update]
-  before_action :check_expiration, only: %i[edit update]    # (1) への対応
+  before_action :check_expiration, only: %i[edit update] # (1) への対応
 
   def new; end
 
@@ -48,8 +50,8 @@ class PasswordResetsController < ApplicationController
 
   # 有効なユーザーかどうか確認する
   def valid_user
-    unless @user && @user.activated? &&
-           @user.authenticated?(:reset, params[:id])
+    unless @user&.activated? &&
+           @user&.authenticated?(:reset, params[:id])
       redirect_to request.referer
     end
   end

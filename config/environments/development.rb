@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -13,12 +15,12 @@ Rails.application.configure do
   config.consider_all_requests_local = true
 
   # Enable/disable caching. By default caching is disabled.
-  if Rails.root.join("tmp/caching-dev.txt").exist?
+  if Rails.root.join('tmp/caching-dev.txt').exist?
     config.action_controller.perform_caching = true
 
     config.cache_store = :memory_store
     config.public_file_server.headers = {
-      "Cache-Control" => "public, max-age=#{2.days.seconds.to_i}",
+      'Cache-Control' => "public, max-age=#{2.days.seconds.to_i}"
     }
   else
     config.action_controller.perform_caching = false
@@ -32,13 +34,9 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :test
   # 自分の環境に合わせて設定。
-<<<<<<< HEAD
+
   host = 'localhost:3100'
   config.action_mailer.default_url_options = { host: host, protocol: 'https' }
-=======
-  host = "localhost:3100"
-  config.action_mailer.default_url_options = { host: host, protocol: "https" }
->>>>>>> 2caddc5830f5fb1879d9cee73b7c8eea12b9832f
 
   config.action_mailer.perform_caching = false
 
@@ -64,10 +62,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   # Cloud9 への接続を許可する
-<<<<<<< HEAD
   # config.hosts.clear
-=======
-  #config.hosts.clear
-
->>>>>>> 2caddc5830f5fb1879d9cee73b7c8eea12b9832f
 end

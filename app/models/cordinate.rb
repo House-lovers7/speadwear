@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Cordinate < ApplicationRecord
   belongs_to :user, optional: true
   has_many :items, dependent: :destroy

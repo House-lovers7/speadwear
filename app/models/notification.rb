@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Notification < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
   belongs_to :cordinate, class_name: 'Cordinate', optional: true

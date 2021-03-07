@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CordinatesController < ApplicationController
   before_action :blocking?
   # before_action :logged_in_user, only: [:create, :edit, :delete, :update]

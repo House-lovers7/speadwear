@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateLikecordinates < ActiveRecord::Migration[5.1]
   def change
     create_table :likecordinates do |t|

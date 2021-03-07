@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :likecordinate1, class: Likecordinate do
     user_id { other.id }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Item < ApplicationRecord
   # ,optional: trueをつける方法もある
   belongs_to :user

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ItemsController < ApplicationController
   # before_action :logged_in_user, only: [:create, :edit, :delete, :update]
 
@@ -95,13 +97,14 @@ class ItemsController < ApplicationController
   def cordinate_search_si
     q_cordinate = Item.ransack(params[:q])
     # @items = Item.find(params[:user_id])
-    if params[:q] == { 'super_item_eq' => '0' }
+    case params[:q]
+    when { 'super_item_eq' => '0' }
       @item = Item.where(user_id: params[:user_id], super_item: 0)
-    elsif params[:q] == { 'super_item_eq' => '1' }
+    when { 'super_item_eq' => '1' }
       @item = Item.where(user_id: params[:user_id], super_item: 1)
-    elsif params[:q] == { 'super_item_eq' => '2' }
+    when { 'super_item_eq' => '2' }
       @item = Item.where(user_id: params[:user_id], super_item: 2)
-    elsif params[:q] == { 'super_item_eq' => '3' }
+    when { 'super_item_eq' => '3' }
       @item = Item.where(user_id: params[:user_id], super_item: 3)
     end
   end

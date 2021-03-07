@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LikecordinatesController < ApplicationController
   def create
     @cordinate = Cordinate.find(params[:id])

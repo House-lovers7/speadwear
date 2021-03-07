@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Block < ApplicationRecord
   validates :blocker_id, presence: true
   validates :blocked_id, presence: true

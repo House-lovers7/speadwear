@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Likecordinate < ApplicationRecord
   # has_one :user, through: :cordinate
   has_many :notifications, dependent: :destroy

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module UsersHelper
   # 引数で与えられたユーザーのGravatar画像を返す
   def gravatar_for(user, options = { size: 80 })
