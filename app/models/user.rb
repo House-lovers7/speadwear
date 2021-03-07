@@ -58,7 +58,6 @@ class User < ApplicationRecord
   # likeされているcordinateを取得するから、likedcordinate
   has_many :liked_cordinates, through: :likecordinates, source: :cordinate
 
-
   # liked_commentsによってuserがどのコメントをいいねしているのかを簡単に取得できるようになります。
   # likeされているコメントを取得するから、likedcomment
 
