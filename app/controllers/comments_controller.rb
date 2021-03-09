@@ -1,7 +1,15 @@
 class CommentsController < ApplicationController
-    def create
-      @cordinate = Cordinate.find(params[:id])
+    def create      
+      @cordinate = Cordinate.find(params[:id])      
       @comment = Comment.new(comment_params)
+      #自分にはコメントできないようにする。
+        
+      if current_user == @cordinate.user
+        flash[:danger] = '自分のコーデにはコメントはできません。'
+        redirect_back(fallback_location: cordinate_show_path)
+        return
+      end
+  
       if can? :create, @comment
       @comment.user_id = current_user.id
       @comment.cordinate_id = @cordinate.id
