@@ -1,5 +1,5 @@
 
-           <% if @cordinate.liked_users && @likecordinates !=nil %>
+           <% if @cordinate.liked_users && @likecordinates !=nil && current_user == @cordinate.user %>
                           <p><i class="far fa-thumbs-up fa-1x"></i>いいね:合計<%= @likecordinates_count %></p>
                           <% unless @cordinate.liked_users.nil? %>
 

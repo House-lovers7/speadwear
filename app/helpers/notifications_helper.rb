@@ -10,7 +10,7 @@ module NotificationsHelper
     # notification.actionがfollowかlikeかcommentか
     case notification.action
     when 'follow'
-      "#{tag.a(notification.sender.name, href: user_show_path(@sender), style: 'font-weight: bold;')}があなたをフォローしました"
+      tag.a(notification.sender.name, href: user_show_path(@sender), style: 'font-weight: bold;') + 'があなたをフォローしました'
     when 'cordinatelike'
       tag.a(notification.sender.name, href: user_show_path(@sender),
                                       style: 'font-weight: bold;') + 'が' + tag.a('あなたの投稿',

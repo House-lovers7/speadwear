@@ -50,7 +50,6 @@ class CommentsController < ApplicationController
       redirect_to request.referer if cannot? :destroy, @comment
       @comment.destroy
       redirect_back(fallback_location: cordinate_show_path)
-    end
   end
   
     private

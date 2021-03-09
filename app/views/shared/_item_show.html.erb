@@ -72,6 +72,7 @@
                       </script>
                     </li>
                       <li><%= link_to "アイテムのコーデ" , cordinate_show_path( user_id: item.user_id, id: item.cordinate_id ) unless item.cordinate_id.blank? %></li>
+                      <li><%= link_to "コーデなしアイテム" ,items_patch_path(user_id: item.user_id, id: Cordinate.last.id + 1, item_id: item.id ), method: :patch %></li>
                     </uL>
                   </div>
                 </div>
