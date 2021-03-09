@@ -21,7 +21,12 @@
                          });
                       </script>
                     </li>
-                      <li><%= link_to "アイテムのコーデ" , cordinate_show_path( user_id: item.user_id, id: item.cordinate_id ) unless item.cordinate_id.blank? %></li>
+                        </li>
+                    <% unless item.cordinate_id.blank? %>
+                      <li><%= link_to "アイテムのコーデ" , cordinate_show_path( user_id: item.user_id, id: item.cordinate_id ) %></li>
+                    <% else %>
+                     <li>コーデがないアイテム </li>                                          
+                      <% end %>
                     </uL>
                   </div>
                 </div>

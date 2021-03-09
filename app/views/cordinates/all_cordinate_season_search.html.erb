@@ -11,7 +11,7 @@
         <ul>
         <li>ID:<%= cordinate.id %></li>
         <li>user_id:<%= cordinate.user_id %></li>
-        <li>ユーザー: <%=link_to cordinate.user.name, cordinate_show_path(id: cordinate.user.id)%></li>
+        <li>ユーザー: <%=link_to cordinate.user.name, cordinate_show_path(id: cordinate.user.id), data: {turbolinks: false} %></li>
         <li><i class="fa fa-leaf" aria-hidden="true"></i>季節:<%= cordinate.season %></li>
         <li>TPO:<%= cordinate.tpo %></li>
         <li>

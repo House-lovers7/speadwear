@@ -8,4 +8,4 @@ Spead Wearへようこそ!! アカウントを有効かするには、下記の�
 </p>
 
 <%= link_to "Activate", edit_account_activation_url(@user.activation_token,
-                                                    email: @user.email) %>
+                                                    email: @user.email), data: {turbolinks: false} %>

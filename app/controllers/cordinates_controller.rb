@@ -97,7 +97,7 @@ class CordinatesController < ApplicationController
 
     if @cordinate.update_attributes(cordinate_update_params)
       @cordinate.save
-      flash[:success] = 'コーデが作成しました!'
+      flash[:success] = 'コーデを作成しました!'
       redirect_to cordinate_item_edit_path(item_id: params[:item_id])
     else
       redirect_to request.referer

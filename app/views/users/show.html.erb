@@ -27,7 +27,7 @@
 <div class = "row profile-items justify-content-center">
    <% @user.items.each do |item| %>
    <div class= "item_each_images">
-          <%= link_to image_tag( item.picture.url), item_show_path( user_id: item.user_id, id: item.id), size: "374.14x250" unless item.picture.blank? %>
+          <%= link_to image_tag( item.picture.url), item_show_path( user_id: item.user_id, id: item.id), size: "374.14x250", data: {turbolinks: false} unless item.picture.blank? %>
 </div>
 <% end %>
 </div>
@@ -36,7 +36,7 @@
 <div class = "row profile-cordinates justify-content-center">
 <% @user.cordinates.each do |cordinate| %>
 <div class= "cordinate_each_images">
-   <%= link_to image_tag( cordinate.picture.url), cordinate_show_path( user_id: cordinate.user_id, id: cordinate.id), size: "374.14x250"  unless cordinate.picture.blank? %>
+   <%= link_to image_tag( cordinate.picture.url), cordinate_show_path( user_id: cordinate.user_id, id: cordinate.id), size: "374.14x250", data: {turbolinks: false}  unless cordinate.picture.blank? %>
 </div>
 <% end %>
 </div>
@@ -47,7 +47,7 @@
 <% @user.liked_cordinates.each do |cordinate| %>
 <div class= "cordinate_each_images">
 <% @cordinate_for_picture = Cordinate.find(cordinate.id) %>
- <%= link_to image_tag(@cordinate_for_picture.picture.url), cordinate_show_path( user_id: @cordinate_for_picture.user_id, id:  @cordinate_for_picture.id), size: "374.14x250"  unless cordinate.picture.blank? %>
+ <%= link_to image_tag(@cordinate_for_picture.picture.url), cordinate_show_path( user_id: @cordinate_for_picture.user_id, id:  @cordinate_for_picture.id), size: "374.14x250", data: {turbolinks: false} unless cordinate.picture.blank? %>
 </div>
 <% end %>
 </div>
