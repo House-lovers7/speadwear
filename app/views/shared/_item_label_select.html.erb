@@ -1,7 +1,7 @@
 <% if request.path.include?("/edit") %>
 
   <div class="image-size">
-    <%= form_for(@item, url: item_edit_path) do |i| %>
+    <%= form_for(@item, url: item_update_path) do |i| %>
       <%= image_tag @item.picture.url,size: '215x257' unless @item.picture %>
   </div>
 

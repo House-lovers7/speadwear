@@ -37,6 +37,5 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: speadwear_production
+  production:
+    url: <%= ENV['DATABASE_URL'] %>

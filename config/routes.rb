@@ -80,7 +80,7 @@ Rails.application.routes.draw do
   get '/users/:user_id/items/all', to: 'items#user_all_item_show', as: 'user_item'
   get '/users/:user_id/items/new', to: 'items#new', as: 'item_new'
   get '/users/:user_id/items/:id', to: 'items#show', as: 'item_show'
-  patch '/users/:user_id/items/:id/edit', to: 'items#update', as: 'items_update'
+  patch '/users/:user_id/items/:id/edit', to: 'items#update', as: 'item_update'
 
   # Errorメッセージの対応をどうするか
   get '/users/:user_id/items/:id/edit', to: 'items#edit', as: 'item_edit'
