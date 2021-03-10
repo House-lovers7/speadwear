@@ -11,7 +11,7 @@
 <div class = "cordinate_sample fllex-column col-md-3 " >
 
             <div class="image_box text-center">
-                    <%= link_to image_tag(cordinate.picture.url), cordinate_edit_path(user_id: cordinate.user_id, id: cordinate.id) , :controller=>"cordinates",:action=> "edit" unless cordinate.picture.blank? %>
+                    <%= link_to image_tag(cordinate.picture.url), cordinate_edit_path(user_id: cordinate.user_id, id: cordinate.id) , :controller=>"cordinates",:action=> "edit", data: {turbolinks: false} unless cordinate.picture.blank? %>
             </div>
                      <p></i>評価：<i class="fa fa-trophy" aria-hidden="true"></i>
                        <span id="star-rate-<%= cordinate.id %>-<%= cordinate.rating %>"></span>

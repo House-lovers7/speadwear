@@ -1,9 +1,9 @@
  <% @p_cordinate_tpo.each do |cordinate| %>
      <div class= "cordinate_each_images kakomi-double ">
     <% if cordinate.picture?  %>
-      <%= link_to image_tag( cordinate.picture.url), cordinate_show_path( user_id: cordinate.user_id, id: cordinate.id), size: "374.14x250"%>
+      <%= link_to image_tag( cordinate.picture.url), cordinate_show_path( user_id: cordinate.user_id, id: cordinate.id), size: "374.14x250", data: {turbolinks: false}%>
       <% else %>
-      <%= link_to image_tag('default_cordinate.png'), cordinate_show_path( user_id: cordinate.user_id, id: cordinate.id), :size => '200x200' %>
+      <%= link_to image_tag('default_cordinate.png'), cordinate_show_path( user_id: cordinate.user_id, id: cordinate.id), :size => '200x200', data: {turbolinks: false} %>
 <% end %>
 
     <div class= "cordinates_each_lists">

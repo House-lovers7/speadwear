@@ -13,7 +13,7 @@
 
 <% @items.sample(6).each do |item| %>
     <div class="image_box text-center">
-      <%= link_to image_tag( item.picture.url), item_show_path( user_id: item.user_id, id: item.id) unless item.picture.blank? %>
+      <%= link_to image_tag( item.picture.url), item_show_path( user_id: item.user_id, id: item.id), data: {turbolinks: false} unless item.picture.blank? %>
     </div>
     <ul>
       <li>ID: <%= item.id %></li>

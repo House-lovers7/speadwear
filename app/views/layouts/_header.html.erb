@@ -16,8 +16,8 @@
     <div class="navbar-nav">
       <%#= link_to "TOP", root_path, class: "nav-item nav-link active" %>
         <% unless logged_in? %>
-       <%= link_to "Log in", login_path, class: "p-2 text-muted" %>
-       <%= link_to 'ゲストログイン（閲覧用）', guest_login_path, method: :post, class: "p-2 text-muted" %>
+       <%= link_to "Log in", login_path, class: "p-2 text-muted", data: {turbolinks: false} %>
+       <%= link_to 'ゲストログイン（閲覧用）', guest_login_path, method: :post, class: "p-2 text-muted", data: {turbolinks: false} %>
         <% end %>
  <%# unless request.path.include?("/signup") || request.path.include?("/login")   %>
       <%# (user_id: params[:user_id])でもいけるのか？？ %>

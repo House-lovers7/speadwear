@@ -1,7 +1,7 @@
 
     <% @q_item_rating.each do |item| %>
 <div class= "item_each_images ">
-          <%= link_to image_tag( item.picture.url), item_show_path( user_id: item.user_id, id: item.id), size: "374.14x250" unless item.picture.blank? %>
+          <%= link_to image_tag( item.picture.url), item_show_path( user_id: item.user_id, id: item.id), size: "374.14x250", data: {turbolinks: false} unless item.picture.blank? %>
                   <div class= "items_each_lists">
                   <ul>
                      <li>ID: <%= item.id %></li>
@@ -22,7 +22,12 @@
                          });
                       </script>
                     </li>
-                      <li><%= link_to "アイテムのコーデ" , cordinate_show_path( user_id: item.user_id, id: item.cordinate_id ) unless item.cordinate_id.blank? %></li>
+                     </li>
+                    <% unless item.cordinate_id.blank? %>
+                      <li><%= link_to "アイテムのコーデ" , cordinate_show_path( user_id: item.user_id, id: item.cordinate_id ), data: {turbolinks: false} %></li>
+                    <% else %>
+                     <li>コーデなしです </li>                                          
+                      <% end %>
                     </uL>
                   </div>
                 </div>
