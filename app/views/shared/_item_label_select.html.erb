@@ -19,8 +19,8 @@
               <%= i.label :content, "内容:  " , class: "col-form-label" %>
                 <%= i.select :content, Item.contents.keys %>
 
-                <%= i.label :content, "評価:  " , class: "col-form-label" %>
-                <%= i.select :content, Item.ratings.keys %>
+                <%= i.label :rating, "評価:  " , class: "col-form-label" %>
+                <%= i.select :rating, Item.ratings.keys %>
 
                   <div class="color_field">
                     <span class="color_select">カラー選択</span><br>

@@ -8,8 +8,8 @@
 <%= form_for(items_patch_url) do |i| %>
 <ul>
 <li>
-<%= i.label :season, "評価:" %><li><i class="fa fa-trophy" aria-hidden="true"></i>
-<%= i.select :season, Cordinate.ratings.keys %>
+<%= i.label :rating, "評価:" %><li><i class="fa fa-trophy" aria-hidden="true"></i>
+<%= i.select :rating, Cordinate.ratings.keys %>
 </li>
 <%= i.label :season, "季節:" %><i class="fa fa-leaf" aria-hidden="true"></i>
 <%= i.select :season, Cordinate.seasons.keys %>

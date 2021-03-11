@@ -13,7 +13,7 @@
                     <%= i.select :content, Item.contents.keys %>
 
                     <%= i.label :rating,'評価ID：' %>
-                    <%= i.select :content, Item.ratings.keys %>
+                    <%= i.select :rating, Item.ratings.keys %>
                
                   <%= i.label :memo, "メモ" %><i class="far fa-edit fa-1x"></i><i class="far fa-edit fa-1x"></i>
                   <%= i.text_field :memo %>
