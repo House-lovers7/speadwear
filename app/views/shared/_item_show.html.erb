@@ -19,20 +19,7 @@
     <li>カラー： <%= @item.color %></li>
     <li><i class="far fa-edit fa-1x"></i>メモ： <%= @item.memo %></li>
     <!--星評価-->
-    <li>
-      <div id="star-rate-<%= @item.rating %>"><i class="fa fa-trophy" aria-hidden="true"></i>評価：</div>
-    <script>
-      $('#star-rate-<%= @item.rating %>').raty({
-        size: 36,
-        starOff: '<%= asset_path('star-off.png') %>',
-        starOn : '<%= asset_path('star-on.png') %>',
-        starHalf: '<%= asset_path('star-half.png') %>',
-        half: true,
-        readOnly: true,
-        score: <%= @item.rating %>,
-                        });
-    </script>
-    </li>
+    <li><i class="fa fa-trophy" aria-hidden="true"></i>評価:<span class="star5_rating" data-rate= <%= @item.rating %> ></span></li>                     
     <li><%= link_to "アイテムのコーデをみてみる" , cordinate_show_path( user_id: @item.user_id, id: @item.cordinate_id ) , data: {turbolinks: false} unless @item.cordinate_id.blank? %></li>
     </ul>
   </div>
@@ -57,20 +44,8 @@
                     <li>ユーザー：<%= link_to item.user.name , user_show_path( id: item.user.id), data: {turbolinks: false} %></li>
                     <li>内容: <%= item.content %></li>
                     <li>TPO: <%= item.tpo %></li>
-                    <li><i class="fa fa-leaf" aria-hidden="true"></i>季節: <%= item.season %></li>
-                    <li><i class="fa fa-trophy" aria-hidden="true"></i>評価：<span id="star-rate-<%= item.rating %>-<%= item.rating %>"></span>
-                      <script>
-                        $('#star-rate-<%= item.rating %>-<%= item.rating %>').raty({
-                          size: 36,
-                          starOff: '<%= asset_path('star-off.png') %>',
-                          starOn : '<%= asset_path('star-on.png') %>',
-                          starHalf: '<%= asset_path('star-half.png') %>',
-                          half: true,
-                          readOnly: true,
-                          score: <%= item.rating %>,
-                         });
-                      </script>                      
-                    </li>
+                    <li><i class="fa fa-leaf" aria-hidden="true"></i>季節: <%= item.season %></li> 
+                    <li><i class="fa fa-trophy" aria-hidden="true"></i>評価:<span class="star5_rating" data-rate= <%= item.rating %> ></span></li>                     
                     <% unless item.cordinate_id.blank? %>
                       <li><%= link_to "アイテムのコーデ" , cordinate_show_path( user_id: item.user_id, id: item.cordinate_id ), data: {turbolinks: false} %></li>
                     <% else %>

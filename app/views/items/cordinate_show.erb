@@ -15,22 +15,7 @@
                       <p>内容：<%= @item.content %></p>
                       <p>カラー：<%= @item.color %></p>
                       <p><i class="far fa-edit fa-1x"></i>メモ：<%= @item.memo %></p>
-
-
-                        <!--星評価-->
-                    <div id="star-rate-<%= @item.rating %>"><i class="fa fa-trophy" aria-hidden="true"></i>評価：</i></div>
-                        <script>
-                        $('#star-rate-<%= @item.rating %>').raty({
-                          size: 36,
-                          starOff:  '<%= asset_path('star-off.png') %>',
-                          starOn : '<%= asset_path('star-on.png') %>',
-                          starHalf: '<%= asset_path('star-half.png') %>',
-                          half: true,
-                          readOnly: true,
-                          score: <%= @item.rating %>,
-                        });
-                        </script>
-
+                      <p><i class="fa fa-trophy" aria-hidden="true"></i>評価:<span class="star5_rating" data-rate= <%= @item.rating %> ></span></p>                      
 　　　 <% if @item.super_item == "outer" %>
 　　　 <% elsif @item.super_item == "tops"  %>
 　　　　  <%= link_to "コーデにアウターとして登録",  items_patch_path(item_id: @item.id, id: params[:cordinate_id], cordinate_si_outer: @item.id),data: {turbolinks: false} , method: :patch  %>

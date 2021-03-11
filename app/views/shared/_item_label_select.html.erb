@@ -19,22 +19,8 @@
               <%= i.label :content, "内容:  " , class: "col-form-label" %>
                 <%= i.select :content, Item.contents.keys %>
 
- <   <div class="form-group row" id="star">
-                    <%= i.label :rating,'評価:' %><i class="fa fa-trophy" aria-hidden="true"></i>
-                      <%= i.hidden_field :rating, id: :review_star, disable_after_rate: false %>
-                  </div>
-
-
-                  <!-- 評価javascript -->
-                  <script>
-                    $('#star').raty({
-                      size: 36,
-                      starOff: '<%= asset_path('star-off.png') %>',
-                      starOn : '<%= asset_path('star-on.png') %>',
-                      starHalf: '<%= asset_path('star-half.png') %>',
-                      scoreName: 'item[rating]'
-                 });
-                  </script>
+                <%= i.label :content, "評価:  " , class: "col-form-label" %>
+                <%= i.select :content, Item.ratings.keys %>
 
                   <div class="color_field">
                     <span class="color_select">カラー選択</span><br>
@@ -197,13 +183,10 @@
                                               <%= i.select :content, Item.contents.keys %>
                                                   </div>
 
-<li>
- <div id="star">
-                 <%= i.label :rating,'評価:', id: :star %><i class="fa fa-trophy" aria-hidden="true"></i>
-                 <%= i.hidden_field :rating, id: :review_star  %>
-</div>
-
-</li>
+                                                  <div class="label-form">
+                                            <%= i.label :rating, "評価:" , class: "col-form-label" %>
+                                              <%= i.select :rating, Item.ratings.keys %>
+                                                  </div>
 
                                                 <div class="field">
                                                   <span class="color_select">カラー選択</span><br>
@@ -347,11 +330,5 @@
                                                             <% end %>
 </div>
 
-                                              <script>
-                    $('#star').raty({
-                      size: 40,
-                      starOff: '<%= asset_path('star-off.png') %>',
-                      starOn : '<%= asset_path('star-on.png') %>',
-                      scoreName: 'item[rating]'
-                 });
-                  </script>
+          
+          

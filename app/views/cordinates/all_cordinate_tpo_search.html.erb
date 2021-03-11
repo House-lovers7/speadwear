@@ -12,21 +12,8 @@
         <li>user_id:<%= cordinate.user_id %></li>
         <li>ユーザー: <%=link_to cordinate.user.name, cordinate_show_path(id: cordinate.user.id)%></li>
         <li><i class="fa fa-leaf" aria-hidden="true"></i>季節:<%= cordinate.season %></li>
-        <li>TPO:<%= cordinate.tpo %></li>
-        <li>
-        <div id="star-rate-<%= cordinate.rating %>"><i class="fa fa-trophy" aria-hidden="true"></i>評価：</i></div>
-        <script>
-          $('#star-rate-<%= cordinate.rating %>').raty({
-            size: 13,
-            starOff: '<%= asset_path('star-off.png') %>',
-            starOn : '<%= asset_path('star-on.png') %>',
-            starHalf: '<%= asset_path('star-half.png') %>',
-            half: true,
-            readOnly: true,
-            score: <%= cordinate.rating %>,
-                        });
-        </script>
-        </li>
+        <li>TPO:<%= cordinate.tpo %></li>      
+        <li><i class="fa fa-trophy" aria-hidden="true"></i>評価:<span class="star5_rating" data-rate= <%= cordinate.rating %> ></span></li>                                   
                 </ul>
                   </div>
                 </div>

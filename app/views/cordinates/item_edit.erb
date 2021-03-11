@@ -8,21 +8,9 @@
 <%= form_for(items_patch_url) do |i| %>
 <ul>
 <li>
- <div id=" star-rate-<%= @cordinate.rating %>"></div>
-    <script>
-      $('#star-rate-<%= @cordinate.rating %>').raty({
-        size: 36,
-        starOff: '<%= asset_path('star-off.png') %>',
-        starOn : '<%= asset_path('star-on.png') %>',
-        starHalf: '<%= asset_path('star-half.png') %>',
-        half: true,
-        readOnly: true,
-        score: <%= @cordinate.rating %>,
-                        });
-    </script>
-
+<%= i.label :season, "評価:" %><li><i class="fa fa-trophy" aria-hidden="true"></i>
+<%= i.select :season, Cordinate.ratings.keys %>
 </li>
-
 <%= i.label :season, "季節:" %><i class="fa fa-leaf" aria-hidden="true"></i>
 <%= i.select :season, Cordinate.seasons.keys %>
 </li>
