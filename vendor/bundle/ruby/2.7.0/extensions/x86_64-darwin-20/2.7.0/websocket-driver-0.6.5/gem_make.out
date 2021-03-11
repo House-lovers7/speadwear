@@ -1,0 +1,15 @@
+current directory: /Volumes/Machintosh HD - Data/Users/taisukegoto/Desktop/development/speadwear/speadwear/vendor/bundle/ruby/2.7.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+/Users/gt/.rbenv/versions/2.7.2/bin/ruby -I /Users/gt/.rbenv/versions/2.7.2/lib/ruby/2.7.0 -r ./siteconf20210311-43984-d1v2yg.rb extconf.rb
+creating Makefile
+
+current directory: /Volumes/Machintosh HD - Data/Users/taisukegoto/Desktop/development/speadwear/speadwear/vendor/bundle/ruby/2.7.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR=" clean
+
+current directory: /Volumes/Machintosh HD - Data/Users/taisukegoto/Desktop/development/speadwear/speadwear/vendor/bundle/ruby/2.7.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR="
+compiling websocket_mask.c
+linking shared-object websocket_mask.bundle
+
+current directory: /Volumes/Machintosh HD - Data/Users/taisukegoto/Desktop/development/speadwear/speadwear/vendor/bundle/ruby/2.7.0/gems/websocket-driver-0.6.5/ext/websocket-driver
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 websocket_mask.bundle ./.gem.20210311-43984-1kg1nt2

@@ -8,23 +8,17 @@ class PictureUploader < CarrierWave::Uploader::Base
   # アップロードファイルの保存先ディレクトリは上書き可能
   # 下記はデフォルトの保存先
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"    
   end
 
 
-  if Rails.env.production?
-    CarrierWave.configure do |config|
-      config.fog_credentials = {
-        # Amazon S3用の設定
-        :provider              => 'AWS',
-        :region                => ENV['S3_REGION'],  # S3に設定したリージョン。
-        :aws_access_key_id     => ENV['S3_ACCESS_KEY'],
-        :aws_secret_access_key => ENV['S3_SECRET_KEY']
-      }
-      config.fog_directory     =  ENV['S3_BUCKET']
-    end
+  if Rails.env.development?
+    storage :file
+  elsif Rails.env.test?
+    storage :file
+  else
+    storage :fog
   end
-
 
   def default_url(*)
     model_name = model.class.name
@@ -40,4 +34,9 @@ class PictureUploader < CarrierWave::Uploader::Base
   def extension_white_list
     %w[jpg jpeg gif png]
   end
+
+  def filename
+    original_filename if original_filename
+  end
+
 end
