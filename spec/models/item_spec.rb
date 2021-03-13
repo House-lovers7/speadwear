@@ -4,12 +4,27 @@ require 'rails_helper'
 require 'cancan/matchers'
 
 RSpec.describe Item, type: :model do
+
+
+let(:admin) { FactoryBot.create(:admin) }  
+#otherをuserに変えて使用している。
   let(:user) { FactoryBot.create(:user) }
-  let(:item) { FactoryBot.create(:item) }
-  let(:cordinate) { FactoryBot.create(:cordinate) }
-  let(:likecordinate) { FactoryBot.create(:likecordinate) }
-  let(:comment) { FactoryBot.create(:comment) }
-end
+  let(:blockuser) { FactoryBot.create(:blockuser) }
+  
+  let(:cordinate1) {FactoryBot.create(:cordinate1, user_id: admin.id)}
+  let(:cordinate2) {FactoryBot.create(:cordinate2, user_id: admin.id)}
+  let(:cordinate4) {FactoryBot.create(:cordinate4, user_id: user.id)}
+  let(:cordinate5) {FactoryBot.create(:cordinate5, user_id: user.id)}
+
+  let(:item1) {FactoryBot.create(:item1, user_id: user.id, cordinate_id: cordinate4.id)}
+  let(:item2) {FactoryBot.create(:item2, user_id: user.id, cordinate_id: cordinate4.id)}
+
+  let(:comment1) { FactoryBot.create(:comment1, user_id: user.id, cordinate_id: cordinate1.id)}
+  let(:comment2) { FactoryBot.create(:comment2, user_id: user.id, cordinate_id: cordinate2.id)}
+  let(:likecordiante1){FactoryBot.create(:likecordinate1, user_id: user.id, cordinate_id: cordinate1.id)}
+  let(:likecordiante2){FactoryBot.create(:likecordinate2, user_id: user.id, cordinate_id: cordinate2.id)}
+
+  let(:bloc1){FactoryBot.create(:block1, blocker_id: admin.id, blocked_id: blockuser.id)}
 
 # 有効なファクトリを持つこと
 # it "has a valid factory" do
@@ -19,20 +34,20 @@ end
 # 存在性チェック
 describe 'test of presence' do
   # before do
-  #    @valid_item = build(:item, user_id: user_id cordinate_id: cordinate_id super_item: super_item season: season
+  #    item1 = build(:item, user_id: user_id cordinate_id: cordinate_id super_item: super_item season: season
   #                               tpo: tpo storage: storage rating: rating color: color content: content memo: memo  and picture: picture)
   # end
 
   # buildデータが有効であること
   it 'is valid with a user_id cordinate_id super_item season tpo storage rating color content memo  and picture' do
-    expect(@valid_item).to be_valid
+    expect(item1).to be_valid
   end
 
   # user_idがなければ無効な状態であること
   it 'is invalid without a user_id' do
-    @valid_item.user_id = nil
-    @valid_item.valid?
-    expect(@valid_item.errors[:user_id]).to include('を入力してください')
+    itme1.user_id = nil
+    item1.valid?
+    expect(item1.errors[:user_id]).to include('を入力してください')
   end
 
   # テストに含めていないカラム
@@ -42,44 +57,44 @@ describe 'test of presence' do
   # t.string "picture"
 
   it 'is invalid without a super_item' do
-    @valid_item.super_item = nil
-    @valid_item.valid?
-    expect(@valid_item.errors[:super_item]).to include('を入力してください')
+    item1.super_item = nil
+    item1.valid?
+    expect(item1.errors[:super_item]).to include('を入力してください')
   end
 
   # seasonがなければ無効な状態であること
   it 'is invalid without a season' do
-    @valid_item.season = nil
-    @valid_item.valid?
-    expect(@valid_item.errors[:season]).to include('を入力してください')
+    item1.season = nil
+    item1.valid?
+    expect(item1.errors[:season]).to include('を入力してください')
   end
 
   # tpoがなければ無効な状態であること
   it 'is invalid without a tpo' do
-    @valid_item.tpo = nil
-    @valid_item.valid?
-    expect(@valid_item.errors[:tpo]).to include('を入力してください')
+    item1.tpo = nil
+    item1.valid?
+    expect(item1.errors[:tpo]).to include('を入力してください')
   end
 
   # ratingがなければ無効な状態であること
   it 'is invalid without a rating' do
-    @valid_item.rating = nil
-    @valid_item.valid?
-    expect(@valid_item.errors[:rating]).to include('を入力してください')
+    item1.rating = nil
+    item1.valid?
+    expect(item1.errors[:rating]).to include('を入力してください')
   end
 
   # contentがなければ無効な状態であること
   it 'is invalid without a content' do
-    @valid_item.content = nil
-    @valid_item.valid?
-    expect(@valid_item.errors[:content]).to include('を入力してください')
+    item1.content = nil
+    item1.valid?
+    expect(item1.errors[:content]).to include('を入力してください')
   end
 
   # colorがなければ無効な状態であること
   it 'is invalid without a color' do
-    @valid_item.color = nil
-    @valid_item.valid?
-    expect(@valid_item.errors[:color]).to include('を入力してください')
+    item1.color = nil
+    item1.valid?
+    expect(item1.errors[:color]).to include('を入力してください')
   end
 end
 

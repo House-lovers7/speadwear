@@ -29,9 +29,8 @@ class ItemsController < ApplicationController
   end
 
   def create
-    
     binding.pry
-        
+
     @item = Item.new(item_params)
     @item.user_id = params[:user_id]
 
@@ -46,7 +45,6 @@ class ItemsController < ApplicationController
     # @item.save!
     flash[:success] = 'Itemを作成しました!'
 
-  
     # redirect_to item_show_path( user_id: params[:user_id], id: @item.id)
   end
 

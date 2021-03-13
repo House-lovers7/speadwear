@@ -1,25 +1,34 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-# before do
-# @user = build(:user)
-# end
 
-  let(:user) { FactoryBot.create(:testuser) }
-  let(:other) { FactoryBot.create(:other) }
+  let(:admin) { FactoryBot.create(:admin) }  
+#otherをuserに変えて使用している。
+  let(:user) { FactoryBot.create(:user) }
   let(:blockuser) { FactoryBot.create(:blockuser) }
+  
+  let(:cordinate1) {FactoryBot.create(:cordinate1, user_id: admin.id)}
+  let(:cordinate2) {FactoryBot.create(:cordinate2, user_id: admin.id)}
+  let(:cordinate4) {FactoryBot.create(:cordinate4, user_id: user.id)}
+  let(:cordinate5) {FactoryBot.create(:cordinate5, user_id: user.id)}
 
-  let(:cordinate9) {FactoryBot.create(:cordinate9, user_id: user.id)}
-  let(:cordinate10) {FactoryBot.create(:cordinate10, user_id: user.id)}
-  let(:item27) {FactoryBot.create(:item1, user_id: user.id, cordinate_id: cordinate9.id)}
+  let(:item11) {FactoryBot.create(:item11, user_id: user.id, cordinate_id: cordinate4.id)}
+  let(:item12) {FactoryBot.create(:item12, user_id: user.id, cordinate_id: cordinate4.id)}
 
-  let(:comment9) = {FactoryBot.create(:comment1, user_id: other.id, cordinate_id: cordinate9.id)}
-  let(:comment10) = {FactoryBot.create(:comment2, user_id: other.id, cordinate_id: cordinate9.id)}
+  let(:comment1) { FactoryBot.create(:comment1, user_id: user.id, cordinate_id: cordinate1.id)}
+  let(:comment2) { FactoryBot.create(:comment2, user_id: user.id, cordinate_id: cordinate2.id)}
+  let(:likecordiante1){FactoryBot.create(:likecordinate1, user_id: user.id, cordinate_id: cordinate1.id)}
+  let(:likecordiante2){FactoryBot.create(:likecordinate2, user_id: user.id, cordinate_id: cordinate2.id)}
 
+  let(:bloc1){FactoryBot.create(:block1, blocker_id: admin.id, blocked_id: blockuser.id)}
+
+
+ 
+  # 通知機能の実装
 
  # 名前、メール、パスワードがあり、有効なファクトリを持つこと
  it "has a valid factory" do
-  expect(FactoryBot.build(:testuser)).to be_valid
+  expect(user).to be_valid  
 end
 
 # create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -42,34 +51,34 @@ end
 #   t.index ["email"], name: "index_users_on_email", unique: true
 # end
 
-
-# 存在性チェック
+# Validationチェック
 describe "Validation" do
 # 名前がなければ無効な状態であること
 it "is invalid without a name" do
   user.name = nil
   user.valid?
-expect(user.errors[:name]).to include("を入力してください")
+expect(user.name).to be_falsely
 end
 # メールアドレスがなければ無効な状態であること
 it "is invalid without an email address" do
 user.email = nil
 user.valid?
-expect(user.errors[:email]).to include("を入力してください")
+expect(user.email).to be_falsely
 end
 
 # パスワードがなければ無効な状態であること
 it "is invalid without a password" do
 user.password = nil
 user.valid?
-expect(user.errors[:password]).to include("を入力してください")
+expect(user.password).to be_falsely
 end
 end
 
+#先にuserの重複が引っかからないのか?
 # 重複したメールアドレスなら無効な状態であること
 it "is invalid with a duplicate email address" do
 user.save
-dupulicate_user = build(:testuser, email: user.email)
+dupulicate_user =  FactoryBot.build(:user, email: user.email)
 dupulicate_user.valid?
 expect(dupulicate_user.errors[:email]).to include("はすでに存在します")
 end
@@ -86,8 +95,10 @@ end
     # ドメインのないメールアドレスは無効なこと
     it "is invalid with no domain" do
       user.email = "test"
-      user.valid?
-      expect(user.errors[:email]).to include("は不正な値です")
+      user.valid?    
+      expect(user.email).to be_falsely
+      #Error文の指定はしていない
+      # expect(user.errors[:email]).to include("は不正な値です")
     end
 
     # ドメインのあるメールアドレスは有効なこと
@@ -109,24 +120,26 @@ end
 it "is valid with a password which does not contain capital letter" do
 user.password = "password12"
 user.valid?
-expect(user.errors[:password]).to include("は半角10~20文字英大文字・小文字・数字をそれぞれ１文字以上含む必要があります")
+expect(user.password).to be_falsely
+# expect(user.errors[:password]).to include("は半角10~20文字英大文字・小文字・数字をそれぞれ１文字以上含む必要があります")
 end
 
 # 小文字を含まないパスワードは無効であること
 it "is valid with a password which does not contain small letter" do
 user.password = "PASSWORD12"
 user.valid?
-expect(user.errors[:password]).to include("は半角10~20文字英大文字・小文字・数字をそれぞれ１文字以上含む必要があります")
+expect(user.password).to be_falsely
+# expect(user.errors[:password]).to include("は半角10~20文字英大文字・小文字・数字をそれぞれ１文字以上含む必要があります")
 end
 
 # 数字を含まないパスワードは無効であること
 it "is valid with a password which does not contain number" do
 user.password = "PASSWORDfail"
 user.valid?
-expect(user.errors[:password]).to include("は半角10~20文字英大文字・小文字・数字をそれぞれ１文字以上含む必要があります")
+expect(user.password).to be_falsely
+# expect(user.errors[:password]).to include("は半角10~20文字英大文字・小文字・数字をそれぞれ１文字以上含む必要があります")
 end
 end
-
 
   # 名前の長さ
   describe "length of name" do
@@ -134,7 +147,8 @@ end
     it "is invalid with a name which has over 21 characters" do
       user.name = "あ" * 21
       user.valid?
-      expect(user.errors[:name]).to include("は20文字以内で入力してください")
+      expect(user.name).to be_falsely
+      # expect(user.errors[:name]).to include("は20文字以内で入力してください")
     end
 
     # 20文字の名前は有効であること
@@ -150,7 +164,8 @@ end
     it "is invalid with a email which has over 256 characters" do
       user.email = "あ" * 256
       user.valid?
-      expect(user.errors[:email]).to include("は255文字以内で入力してください")
+      expect(user.email).to be_falsely
+      # expect(user.errors[:email]).to include("は255文字以内で入力してください")
     end
 
     # 255文字の名前は有効であること
@@ -165,20 +180,22 @@ end
   describe "check image upload" do
     # 画像なしでも有効であること
     it "is valid with no image" do
-      user = FactoryBot.build(:testuser, picture: nil)
+      user.picture = nil
       expect(user).to be_valid
     end
 
     # 画像なしの場合、デフォルト画像が設定されること
-    it "has a default image with no image" do
-      user = FactoryBot.build(:testuser, picture: nil)
+    it "has a default image with no image" do      
+      user.picture = nil
+      # user = FactoryBot.build(:testuser, picture: nil)
       expect(user.picture.url).to eq "/default/default_user.png"
     end
 
     # デフォルト画像以外の画像を設定できること
     it "can set an image except default image" do
       image_path = Rails.root.join("public/default/guy2.png")
-      user = FactoryBot.build(:testuser, picture: File.open(picture_path))
+      user.picture = File.open(picture_path)
+      # user = FactoryBot.build(:testuser, picture: File.open(picture_path))
       user.save
       expect(user.image.url).to eq "/uploads/user/image/#{user.id}/guy2.png"
     end
@@ -186,7 +203,8 @@ end
     # 5MBを超える画像はアップロードできないこと
     it "can not upload an image over 5MB" do
       image_path = Rails.root.join("public/default/over_5MB.png")
-      user = FactoryBot.build(:testuser, image: File.open(image_path))
+      user.picture = File.open(image_path)
+      # user = FactoryBot.build(:testuser, image: File.open(image_path))
       user.valid?
       expect(user.errors[:image]).to include "は5MB以下にする必要があります"
     end
@@ -197,20 +215,35 @@ end
     # 削除すると、紐づくフォローも全て削除されること
     it "destroys all follows when deleted" do
       user.follow(admin)
-      user.follow(other)
+      user.follow(blockuser)
       expect { user.destroy }.to change(user.following, :count).by(-2)
     end
 
     # 削除すると、紐づくフォロワーも全て削除されること
     it "destroys all followers when deleted" do
       user.follow(admin)
-      user.follow(other)
-      expect { user.destroy }.to change(admin.followers, :count).by(-1).and change(other.followers, :count).by(-1)
+      user.follow(blockuser)
+      expect { user.destroy }.to change(admin.followers, :count).by(-1).and change(blockuser.followers, :count).by(-1)
     end
 
+      # 削除すると、紐づくアイテムも全て削除されること
+      it "destroys all items when deleted" do    
+        expect { user.destroy }.to change(user.items, :count).by(-2)
+      end
+
     # 削除すると、紐づくコーディネートも全て削除されること
-    it "destroys all cordinates when deleted" do
+    it "destroys all cordinates when deleted" do    
       expect { user.destroy }.to change(user.cordinates, :count).by(-2)
+    end
+
+     # 削除すると、紐づくコメントも全て削除されること
+     it "destroys all comments when deleted" do    
+      expect { user.destroy }.to change(user.comments, :count).by(-2)
+    end
+
+     # 削除すると、紐づくlikecordinateも全て削除されること
+     it "destroys all likecordinates when deleted" do    
+      expect { user.destroy }.to change(user.likecordinates, :count).by(-2)
     end
 
     #ここから、他のテストと併用して記述する
@@ -224,8 +257,8 @@ end
 
     # 削除すると、紐づくブロックも全て削除されること
     it "destroys all blocks when deleted" do
-      user.block(user1)
-      user.block(user2)
+      user.block(admin)
+      user.block(blockuser)
       expect { user.destroy }.to change(user.blocking, :count).by(-2)
     end
   end
@@ -302,21 +335,21 @@ end
   # フォロー
   describe "follow" do
     # うまくフォローできること
-    it "can follow successfully" do
-      expect { user.follow(user1) }.to change(user1.followers, :count).by(1)
+    it "can follow successfully" do      
+      expect { user.follow(admin) }.to change(admin.followers, :count).by(1)
     end
 
     # うまくアンフォローできること
-    it "can unfollow successfully" do
-      user.follow(user1)
-      expect { user.unfollow(user1) }.to change(user1.followers, :count).by(-1)
+    it "can unfollow successfully" do      
+      user.follow(admin) 
+      expect { user.unfollow(admin) }.to change(admin.followers, :count).by(-1)
     end
 
     # フォローしていたらtrue、フォローしていないときはfalseを返すこと
     it "returns true if he is follower, not if false" do
-      user.follow(user1)
-      expect(user.following?(user1)).to be_truthy
-      expect(user.following?(user2)).to be_falsy
+      user.follow(admin)
+      expect(user.following?(admin)).to be_truthy
+      expect(user.following?(blockuser)).to be_falsy
     end
   end
 
@@ -324,20 +357,20 @@ end
   describe "block" do
     # うまくブロックできること
     it "can block successfully" do
-      expect { user.block(user1) }.to change(user.blocking, :count).by(1)
+      expect { user.block(blockuser) }.to change(user.blocking, :count).by(1)
     end
 
     # うまくアンブロックできること
     it "can unblock successfully" do
-      user.block(user1)
-      expect { user.unblock(user1) }.to change(user.blocking, :count).by(-1)
+      user.block(blockuser)
+      expect { user.unblock(blockuser) }.to change(user.blocking, :count).by(-1)
     end
 
     # ブロックしていたらtrue、ブロックしていないときはfalseを返すこと
     it "returns true if he is blocked, not if false" do
-      user.block(user1)
-      expect(user.blocking?(user1)).to be_truthy
-      expect(user.blocking?(user2)).to be_falsy
+      user.block(blockuser)        
+      expect(user.blocking?(blockuser)).to be_truthy
+      expect(user.blocking?(admin)).to be_falsy
     end
   end
 
@@ -382,7 +415,7 @@ end
 
     # 一般ユーザの作成時は、初期メッセージが2件送信されること
     it "can create messages if user is not an admin" do
-      expect { FactoryBot.create(:user) }.to change(admin.messages, :count).by(2)
+      expect { FactoryBot.create(:user) }.to change(user.messages, :count).by(2)
     end
   end
 end
