@@ -56,6 +56,18 @@ FactoryBot.define do
     activated { true }
     activated_at { Time.zone.now }
   end
+
+  factory :user, class: User do
+    id { 6 }
+    name { 'User1' }
+    email { 'user1@example.com' }
+    password { 'user1_pass' }
+    admin { false }
+    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/fox.jpg')) }
+    activated { true }
+    activated_at { Time.zone.now }
+  end
+
 end
 
 #   create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

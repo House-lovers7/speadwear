@@ -23,10 +23,6 @@ class SessionsController < ApplicationController
     end
   end
 
-  # ログインメソッド
-  # def log_in(user)
-  #   session[:user_id] = user.id
-  # end
 
   def destroy
     log_out if logged_in?
