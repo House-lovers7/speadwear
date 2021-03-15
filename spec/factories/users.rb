@@ -67,7 +67,6 @@ FactoryBot.define do
     activated { true }
     activated_at { Time.zone.now }
   end
-
 end
 
 #   create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
