@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+
 FactoryBot.define do
   factory :cordinate1, class: Cordinate do
     user_id { admin.id }

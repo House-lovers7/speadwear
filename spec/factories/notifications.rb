@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 FactoryBot.define do
   factory :notification1, class: Notification do
     sender_id { other.id }

@@ -63,11 +63,7 @@ class User < ApplicationRecord
   # liked_commentsによってuserがどのコメントをいいねしているのかを簡単に取得できるようになります。
   # likeされているコメントを取得するから、likedcomment
 
-  # 永続セッションのためにユーザーをデータベースに記憶する
-  def remember
-    self.remember_token = User.new_token
-    update_attribute(:remember_digest, User.digest(remember_token))
-  end
+ 
 
   # ユーザをブロックする
   def block(user)
@@ -127,10 +123,11 @@ class User < ApplicationRecord
     SecureRandom.urlsafe_base64
   end
 
-  def remember
-    self.remember_token = User.new_token
-    update_attribute(:remember_digest, User.digest(remember_token))
-  end
+ # 永続セッションのためにユーザーをデータベースに記憶する
+ def remember
+  self.remember_token = User.new_token
+  update_attribute(:remember_digest, User.digest(remember_token))
+end
 
   # 渡されたトークンがダイジェストと一致したらtrueを返す
   def authenticated?(remember_token)
@@ -171,12 +168,6 @@ class User < ApplicationRecord
 
   # アカウントを有効にする
   def activate
-    update_attribute(:activated, true)
-    update_attribute(:activated_at, Time.zone.now)
-  end
-
-  # アカウントを有効にする
-  def activate
     update_columns(activated: true, activated_at: Time.zone.now)
   end
 
@@ -192,12 +183,7 @@ class User < ApplicationRecord
     update_attribute(:reset_sent_at, Time.zone.now)
   end
 
-  # パスワード再設定の属性を設定する
-  def create_reset_digest
-    self.reset_token = User.new_token
-    update_columns(reset_digest: FILL_IN, reset_sent_at: FILL_IN)
-  end
-
+  
   # パスワード再設定のメールを送信する
   def send_password_reset_email
     UserMailer.password_reset(self).deliver_now

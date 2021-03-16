@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-FactoryBot.find_definitions
+
+
 
 FactoryBot.define do
   # factory :block do
