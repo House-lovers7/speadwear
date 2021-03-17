@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-FactoryBot.find_definitions
+
 
 FactoryBot.define do
   factory :admin, class: User do
@@ -69,9 +69,6 @@ FactoryBot.define do
     activated { true }
     activated_at { Time.zone.now }
   end
-
-  FactoryBot.find_definitions
-
 
 end
 
