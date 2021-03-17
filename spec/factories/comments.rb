@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-
 FactoryBot.define do
   factory :comment1, class: Comment do
     user_id { other.id }
