@@ -2,9 +2,8 @@
 
 class User < ApplicationRecord
   # validation
-require 'factory_bot'
-FactoryBot.find_definitions
 
+  
   validates :name, presence: true, length: { maximum: 20 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
   validates :email, presence: true, length: { maximum: 255 },
