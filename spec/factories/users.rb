@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+FactoryBot.find_definitions
 
 FactoryBot.define do
   factory :admin, class: User do
@@ -57,6 +58,7 @@ FactoryBot.define do
     activated_at { Time.zone.now }
   end
 
+
   factory :user, class: User do
     id { 6 }
     name { 'User1' }
@@ -67,6 +69,10 @@ FactoryBot.define do
     activated { true }
     activated_at { Time.zone.now }
   end
+
+  FactoryBot.find_definitions
+
+
 end
 
 #   create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
