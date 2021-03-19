@@ -30,13 +30,15 @@ class SessionsController < ApplicationController
 
   # かんたんログインの実装
   def guest_login
-    user = User.find_or_create_by(name: 'Guest', email: 'guest@example.com') do |user|
+    user = User.find_or_create_by(name: 'Guest',
+                                  email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
     end
 
     session[:user_id] = user.id
 
     log_in user
-    redirect_to all_item_show_path(user_id: session[:user_id]), notice: 'ゲストユーザーとしてログインしました。'
+    redirect_to all_item_show_path(user_id: session[:user_id]),
+                notice: 'ゲストユーザーとしてログインしました。'
   end
 end

@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: %i[edit update destroy following followers]
+  before_action :logged_in_user,
+                only: %i[edit update destroy following followers]
   before_action :correct_user, only: %i[edit update]
   before_action :check_guest, only:  %i[destroy update]
 
@@ -102,7 +103,8 @@ class UsersController < ApplicationController
   end
 
   def cordinate_season_ransack
-    p_cordinate_season = Cordinate.ransack(params[:p_season], search_key: :p_season)
+    p_cordinate_season = Cordinate.ransack(params[:p_season],
+                                           search_key: :p_season)
     @p_cordinate_season = p_cordinate_season.result
     @cordinate = Cordinate.where(user_id: current_user.id) if params[:p_season].blank?
   end
@@ -114,7 +116,8 @@ class UsersController < ApplicationController
   end
 
   def cordinate_rating_ransack
-    p_cordinate_rating = Cordinate.ransack(params[:p_rating], search_key: :p_rating)
+    p_cordinate_rating = Cordinate.ransack(params[:p_rating],
+                                           search_key: :p_rating)
     @p_cordinate_rating = p_cordinate_rating.result
     @cordinate = Cordinate.where(user_id: current_user.id) if params[:p_rating].blank?
   end
@@ -176,7 +179,8 @@ class UsersController < ApplicationController
   end
 
   def item_super_item_ransack
-    q_item_super_item = Item.ransack(params[:q_super_item], search_key: :q_super_item)
+    q_item_super_item = Item.ransack(params[:q_super_item],
+                                     search_key: :q_super_item)
     @q_item_super_item = q_item_super_item.result
     @item = Item.where(user_id: current_user.id) if params[:q_super_item].blank?
   end
@@ -184,7 +188,8 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password, :password_confirmation, :picture)
+    params.require(:user).permit(:name, :email, :password,
+                                 :password_confirmation, :picture)
   end
 
   def sign_in(_user)
@@ -218,7 +223,10 @@ class UsersController < ApplicationController
   end
 
   def check_guest
-    redirect_to root_path, alert: 'ゲストユーザーは削除・編集できません。' if current_user.email == 'guest@example.com'
+    if current_user.email == 'guest@example.com'
+      redirect_to root_path,
+                  alert: 'ゲストユーザーは削除・編集できません。'
+    end
   end
 
   def user_paginate

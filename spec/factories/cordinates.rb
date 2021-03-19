@@ -13,7 +13,10 @@ FactoryBot.define do
     # comment_id { 1 }
     sequence(:memo) { |n| "これは#{n}個目のコーディネートです" }
     association :user
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate1.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate1.JPG'))
+    end
     # userならできるのにownerはできないのはどうしてか？
     # association :owner
     # picture
@@ -31,7 +34,10 @@ FactoryBot.define do
     # si_outer {  }
     sequence(:memo) { |n| "これは#{n}個目のコーディネートです" }
     association :user
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate2.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate2.JPG'))
+    end
   end
 
   factory :cordinate3, class: Cordinate do
@@ -45,7 +51,10 @@ FactoryBot.define do
     si_shoes { 10 }
     sequence(:memo) { |n| "これは#{n}個目のコーディネートです" }
     association :user
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate3.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate3.JPG'))
+    end
   end
 
   factory :cordinate4, class: Cordinate do
@@ -59,7 +68,10 @@ FactoryBot.define do
     si_shoes { 14 }
     sequence(:memo) { |n| "これは#{n}個目のコーディネートです" }
     association :user
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate4.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate4.JPG'))
+    end
   end
 
   factory :cordinate5, class: Cordinate do
@@ -73,7 +85,10 @@ FactoryBot.define do
     si_shoes { 18 }
     sequence(:memo) { |n| "これは#{n}個目のコーディネートです" }
     association :user
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate5.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate5.JPG'))
+    end
   end
 
   factory :cordinate6, class: Cordinate do
@@ -87,7 +102,10 @@ FactoryBot.define do
     si_shoes { 22 }
     sequence(:memo) { |n| "これは#{n}個目のコーディネートです" }
     association :user
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate6.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate6.JPG'))
+    end
   end
 
   factory :cordinate7, class: Cordinate do
@@ -101,7 +119,10 @@ FactoryBot.define do
     si_shoes { 26 }
     sequence(:memo) { |n| "これは#{n}個目のコーディネートです" }
     association :user
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate7.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate7.JPG'))
+    end
   end
 
   factory :cordinate8, class: Cordinate do
@@ -115,7 +136,10 @@ FactoryBot.define do
     si_shoes { 10 }
     sequence(:memo) { |n| "これは#{n}個目のコーディネートです" }
     association :user
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate8.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate8.JPG'))
+    end
   end
 
   # testuser用
@@ -132,7 +156,10 @@ FactoryBot.define do
     # comment_id { 1 }
     sequence(:memo) { |n| "これは#{n}個目のコーディネートです" }
     association :user
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate1.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate1.JPG'))
+    end
     # userならできるのにownerはできないのはどうしてか？
     # association :owner
     # picture
@@ -151,7 +178,10 @@ FactoryBot.define do
     # comment_id { 1 }
     sequence(:memo) { |n| "これは#{n}個目のコーディネートです" }
     association :user
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate1.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate1.JPG'))
+    end
     # userならできるのにownerはできないのはどうしてか？
     # association :owner
     # picture

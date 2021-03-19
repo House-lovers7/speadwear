@@ -13,14 +13,16 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20_210_306_052_747) do
-  create_table 'blocks', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+  create_table 'blocks', force: :cascade,
+                         options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.integer 'blocker_id'
     t.integer 'blocked_id'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
   end
 
-  create_table 'comments', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+  create_table 'comments', force: :cascade,
+                           options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.integer 'user_id'
     t.integer 'cordinate_id'
     t.string 'comment'
@@ -28,7 +30,8 @@ ActiveRecord::Schema.define(version: 20_210_306_052_747) do
     t.datetime 'updated_at', null: false
   end
 
-  create_table 'cordinates', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+  create_table 'cordinates', force: :cascade,
+                             options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.integer 'user_id'
     t.integer 'item_id'
     t.integer 'comment_id'
@@ -46,7 +49,8 @@ ActiveRecord::Schema.define(version: 20_210_306_052_747) do
     t.datetime 'updated_at', null: false
   end
 
-  create_table 'items', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+  create_table 'items', force: :cascade,
+                        options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.integer 'user_id'
     t.integer 'cordinate_id'
     t.integer 'super_item'
@@ -61,14 +65,16 @@ ActiveRecord::Schema.define(version: 20_210_306_052_747) do
     t.datetime 'updated_at', null: false
   end
 
-  create_table 'likecordinates', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+  create_table 'likecordinates', force: :cascade,
+                                 options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.integer 'user_id'
     t.integer 'cordinate_id'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
   end
 
-  create_table 'notifications', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+  create_table 'notifications', force: :cascade,
+                                options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.integer 'sender_id'
     t.integer 'receiver_id'
     t.integer 'cordinate_id'
@@ -80,14 +86,16 @@ ActiveRecord::Schema.define(version: 20_210_306_052_747) do
     t.datetime 'updated_at', null: false
   end
 
-  create_table 'relationships', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+  create_table 'relationships', force: :cascade,
+                                options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.integer 'follower_id'
     t.integer 'followed_id'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
   end
 
-  create_table 'users', force: :cascade, options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+  create_table 'users', force: :cascade,
+                        options: 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
     t.string 'name'
     t.string 'email'
     t.string 'picture'

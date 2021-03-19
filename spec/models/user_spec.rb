@@ -13,15 +13,31 @@ RSpec.describe User, type: :model do
   let(:cordinate4) { FactoryBot.create(:cordinate4, user_id: user.id) }
   let(:cordinate5) { FactoryBot.create(:cordinate5, user_id: user.id) }
 
-  let(:item11) { FactoryBot.create(:item11, user_id: user.id, cordinate_id: cordinate4.id) }
-  let(:item12) { FactoryBot.create(:item12, user_id: user.id, cordinate_id: cordinate4.id) }
+  let(:item11) do
+    FactoryBot.create(:item11, user_id: user.id, cordinate_id: cordinate4.id)
+  end
+  let(:item12) do
+    FactoryBot.create(:item12, user_id: user.id, cordinate_id: cordinate4.id)
+  end
 
-  let(:comment1) { FactoryBot.create(:comment1, user_id: user.id, cordinate_id: cordinate1.id) }
-  let(:comment2) { FactoryBot.create(:comment2, user_id: user.id, cordinate_id: cordinate2.id) }
-  let(:likecordiante1) { FactoryBot.create(:likecordinate1, user_id: user.id, cordinate_id: cordinate1.id) }
-  let(:likecordiante2) { FactoryBot.create(:likecordinate2, user_id: user.id, cordinate_id: cordinate2.id) }
+  let(:comment1) do
+    FactoryBot.create(:comment1, user_id: user.id, cordinate_id: cordinate1.id)
+  end
+  let(:comment2) do
+    FactoryBot.create(:comment2, user_id: user.id, cordinate_id: cordinate2.id)
+  end
+  let(:likecordiante1) do
+    FactoryBot.create(:likecordinate1, user_id: user.id,
+                                       cordinate_id: cordinate1.id)
+  end
+  let(:likecordiante2) do
+    FactoryBot.create(:likecordinate2, user_id: user.id,
+                                       cordinate_id: cordinate2.id)
+  end
 
-  let(:bloc1) { FactoryBot.create(:block1, blocker_id: admin.id, blocked_id: blockuser.id) }
+  let(:bloc1) do
+    FactoryBot.create(:block1, blocker_id: admin.id, blocked_id: blockuser.id)
+  end
 
   # 通知機能の実装
 
@@ -222,7 +238,10 @@ RSpec.describe User, type: :model do
     it 'destroys all followers when deleted' do
       user.follow(admin)
       user.follow(blockuser)
-      expect { user.destroy }.to change(admin.followers, :count).by(-1).and change(blockuser.followers, :count).by(-1)
+      expect do
+        user.destroy
+      end.to change(admin.followers,
+                    :count).by(-1).and change(blockuser.followers, :count).by(-1)
     end
 
     # 削除すると、紐づくアイテムも全て削除されること
@@ -376,12 +395,16 @@ RSpec.describe User, type: :model do
     context 'action: follow' do
       # 初回フォローで通知が作成されること
       it 'can create notice if you have been followed first time' do
-        expect { user.create_notice_follow(user1) }.to change(user.passive_notices, :count).by(1)
+        expect do
+          user.create_notice_follow(user1)
+        end.to change(user.passive_notices, :count).by(1)
       end
 
       # 過去にフォローしたことがある場合、通知は作成されずnilを返すこと
       it 'can not create notice if you have been already followed' do
-        expect { user.create_notice_follow(user1) }.to change(user.passive_notices, :count).by(1)
+        expect do
+          user.create_notice_follow(user1)
+        end.to change(user.passive_notices, :count).by(1)
         expect(user.create_notice_follow(user1)).to eq nil
       end
     end

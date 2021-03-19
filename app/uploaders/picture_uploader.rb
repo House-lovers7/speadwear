@@ -21,9 +21,18 @@ class PictureUploader < CarrierWave::Uploader::Base
 
   def default_url(*)
     model_name = model.class.name
-    return "/default/#{[version_name, 'default_user.png'].compact.join('_')}" if model_name == 'User'
-    return "/default/#{[version_name, 'default_item.png'].compact.join('_')}" if model_name == 'Item'
-    return "/default/#{[version_name, 'default_cordinate.png'].compact.join('_')}" if model_name == 'Cordinate'
+    if model_name == 'User'
+      return "/default/#{[version_name,
+                          'default_user.png'].compact.join('_')}"
+    end
+    if model_name == 'Item'
+      return "/default/#{[version_name,
+                          'default_item.png'].compact.join('_')}"
+    end
+    if model_name == 'Cordinate'
+      return "/default/#{[version_name,
+                          'default_cordinate.png'].compact.join('_')}"
+    end
 
     # クラスがユーザ以外の場合は、no_imageの画像を使用する
     "/default/#{[version_name, 'no_image.png'].compact.join('_')}"

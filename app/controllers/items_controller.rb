@@ -146,7 +146,8 @@ class ItemsController < ApplicationController
   end
 
   def cordinate_season_ransack
-    p_cordinate_season = Cordinate.ransack(params[:p_season], search_key: :p_season)
+    p_cordinate_season = Cordinate.ransack(params[:p_season],
+                                           search_key: :p_season)
     @p_cordinate_season = p_cordinate_season.result
     @cordinate = Cordinate.where(user_id: params[:user_id]) if params[:p_season].blank?
   end
@@ -158,7 +159,8 @@ class ItemsController < ApplicationController
   end
 
   def cordinate_rating_ransack
-    p_cordinate_rating = Cordinate.ransack(params[:p_rating], search_key: :p_rating)
+    p_cordinate_rating = Cordinate.ransack(params[:p_rating],
+                                           search_key: :p_rating)
     @p_cordinate_rating = p_cordinate_rating.result
     @cordinate = Cordinate.where(user_id: params[:user_id]) if params[:p_rating].blank?
   end
@@ -215,7 +217,8 @@ class ItemsController < ApplicationController
   end
 
   def item_super_item_ransack
-    q_item_super_item = Item.ransack(params[:q_super_item], search_key: :q_super_item)
+    q_item_super_item = Item.ransack(params[:q_super_item],
+                                     search_key: :q_super_item)
     @q_item_super_item = q_item_super_item.result
     @item = Item.where(user_id: params[:user_id]) if params[:q_super_item].blank?
   end

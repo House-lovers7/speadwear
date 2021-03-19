@@ -8,7 +8,8 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-  validates :password_digest, presence: true, length: { minimum: 6 }, allow_nil: true
+  validates :password_digest, presence: true, length: { minimum: 6 },
+                              allow_nil: true
   validates :password, presence: true
   attr_accessor :remember_token, :activation_token, :reset_token
 
@@ -27,11 +28,15 @@ class User < ApplicationRecord
 
   # 通知機能の実装
   has_many :notificatons, dependent: :destroy
-  has_many :active_notifications, class_name: 'Notification', foreign_key: 'sender_id', dependent: :destroy
-  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'receiver_id', dependent: :destroy
+  has_many :active_notifications, class_name: 'Notification',
+                                  foreign_key: 'sender_id', dependent: :destroy
+  has_many :passive_notifications, class_name: 'Notification',
+                                   foreign_key: 'receiver_id', dependent: :destroy
   # ブロック機能の実装
-  has_many :active_blocks, class_name:  'Block', foreign_key: 'blocker_id', dependent: :destroy
-  has_many :passive_blocks, class_name: 'Block', foreign_key: 'blocked_id', dependent: :destroy
+  has_many :active_blocks, class_name: 'Block', foreign_key: 'blocker_id',
+                           dependent: :destroy
+  has_many :passive_blocks, class_name: 'Block', foreign_key: 'blocked_id',
+                            dependent: :destroy
   has_many :blocking, through: :active_blocks, source: :blocked
 
   def already_liked?(_cordinate)
@@ -75,7 +80,10 @@ class User < ApplicationRecord
 
   # ユーザをブロック解除する
   def unblock(user)
-    blocks.find_by(blocker_id: current_user.id, blocked_id: user.id).destroy if blocking?(user)
+    if blocking?(user)
+      blocks.find_by(blocker_id: current_user.id,
+                     blocked_id: user.id).destroy
+    end
   end
 
   # def unfollow(other_userの模倣
@@ -193,7 +201,9 @@ class User < ApplicationRecord
 
   # フォロー通知機能
   def create_notification_follow!(current_user)
-    temp = Notification.where(['sender_id = ? and receiver_id = ? and action = ? ', current_user.id, id, 'follow'])
+    temp = Notification.where([
+                                'sender_id = ? and receiver_id = ? and action = ? ', current_user.id, id, 'follow'
+                              ])
     if temp.blank?
       notification = current_user.active_notifications.new(
         receiver_id: id,

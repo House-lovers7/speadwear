@@ -1,0 +1,39 @@
+Style/AsciiComments:
+  Enabled: false
+
+Metrics/BlockLength:
+  Max: 100
+  Exclude:
+    - 'spec/**/*'
+
+  Metrics/MethodLength:
+  Max: 50
+  Exclude:
+    - 'spec/**/*'
+
+  Metrics/MethodLength:
+  Max: 50
+  Exclude:
+    - 'spec/**/*'
+
+  Metrics/MethodLength:
+  CountComments: false
+  Max: 50
+  Exclude:
+    - 'lib/tasks/dev.rake'
+    
+
+  #追加
+Documentation:
+  Enabled: false
+
+# Use only ascii symbols in comments. 
+ # 日本語のコメントを許可する
+Style/AsciiComments:
+  Enabled: false
+
+ #Line is too long.
+LineLength:
+  Max: 200
+
+# bundle exec rspec spec/requests/users_request_spec.rb 

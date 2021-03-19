@@ -18,7 +18,8 @@ class CommentsController < ApplicationController
 
       if @comment.save!
         # 通知機能の実装
-        create_notification_comment(current_user, @comment.user_id, @cordinate.id)
+        create_notification_comment(current_user, @comment.user_id,
+                                    @cordinate.id)
         redirect_back(fallback_location: cordinate_show_path)
       else
         flash[:danger] = 'Errorです!!'
@@ -53,7 +54,8 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find_by(cordinate_id: params[:id], user_id: current_user.id)
+    @comment = Comment.find_by(cordinate_id: params[:id],
+                               user_id: current_user.id)
     redirect_to request.referer if cannot? :destroy, @comment
     @comment.destroy
     redirect_back(fallback_location: cordinate_show_path)

@@ -8,7 +8,10 @@ FactoryBot.define do
     password { 'admin_pass' }
     # password_digest {User.digest("admin_pass" )}
     admin { true }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/satan.png')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/satan.png'))
+    end
     activated { true }
     activated_at { Time.zone.now }
   end
@@ -19,7 +22,10 @@ FactoryBot.define do
     email { 'others@example.com' }
     password { 'others_pass' }
     admin { false }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/fox.jpg')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/fox.jpg'))
+    end
     activated { true }
     activated_at { Time.zone.now }
   end
@@ -30,7 +36,10 @@ FactoryBot.define do
     email { 'block@example.com' }
     password { 'SecureRandom.urlsafe_base64' }
     admin { false }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/guy.png')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/guy.png'))
+    end
     activated { true }
     activated_at { Time.zone.now }
   end
@@ -41,7 +50,10 @@ FactoryBot.define do
     email { 'guest@example.com' }
     password { 'SecureRandom.urlsafe_base64' }
     admin { false }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/guest.png')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/guest.png'))
+    end
     activated { true }
     activated_at { Time.zone.now }
   end
@@ -52,18 +64,20 @@ FactoryBot.define do
     email { 'test@example.com' }
     password { 'SecureRandom.urlsafe_base64' }
     admin { false }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/guest.png')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/guest.png'))
+    end
     activated { true }
     activated_at { Time.zone.now }
   end
 
-  factory :user, class: User do
+  factory :user1, class: User do
     id { 6 }
     name { 'User1' }
     email { 'user1@example.com' }
     password { 'user1_pass' }
     admin { false }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/fox.jpg')) }
     activated { true }
     activated_at { Time.zone.now }
   end

@@ -11,7 +11,7 @@ RSpec.describe 'Users', type: :request do
 
   let(:admin) { FactoryBot.create(:admin) }
   # otherをuserに変えて使用している。
-  let(:user) { FactoryBot.create(:user) }
+  let(:user1) { FactoryBot.create(:user1) }
   let(:blockuser) { FactoryBot.create(:blockuser) }
 
   let(:cordinate1) { FactoryBot.create(:cordinate1, user_id: admin.id) }
@@ -19,13 +19,27 @@ RSpec.describe 'Users', type: :request do
   let(:cordinate4) { FactoryBot.create(:cordinate4, user_id: user.id) }
   let(:cordinate5) { FactoryBot.create(:cordinate5, user_id: user.id) }
 
-  let(:item11) { FactoryBot.create(:item11, user_id: user.id, cordinate_id: cordinate4.id) }
-  let(:item12) { FactoryBot.create(:item12, user_id: user.id, cordinate_id: cordinate4.id) }
+  let(:item11) do
+    FactoryBot.create(:item11, user_id: user.id, cordinate_id: cordinate4.id)
+  end
+  let(:item12) do
+    FactoryBot.create(:item12, user_id: user.id, cordinate_id: cordinate4.id)
+  end
 
-  let(:comment1) { FactoryBot.create(:comment1, user_id: user.id, cordinate_id: cordinate1.id) }
-  let(:comment2) { FactoryBot.create(:comment2, user_id: user.id, cordinate_id: cordinate2.id) }
-  let(:likecordiante1) { FactoryBot.create(:likecordinate1, user_id: user.id, cordinate_id: cordinate1.id) }
-  let(:likecordiante2) { FactoryBot.create(:likecordinate2, user_id: user.id, cordinate_id: cordinate2.id) }
+  let(:comment1) do
+    FactoryBot.create(:comment1, user_id: user.id, cordinate_id: cordinate1.id)
+  end
+  let(:comment2) do
+    FactoryBot.create(:comment2, user_id: user.id, cordinate_id: cordinate2.id)
+  end
+  let(:likecordiante1) do
+    FactoryBot.create(:likecordinate1, user_id: user.id,
+                                       cordinate_id: cordinate1.id)
+  end
+  let(:likecordiante2) do
+    FactoryBot.create(:likecordinate2, user_id: user.id,
+                                       cordinate_id: cordinate2.id)
+  end
 
   # ===================INDEX===================
   describe '#index' do
@@ -44,12 +58,12 @@ RSpec.describe 'Users', type: :request do
   describe '#show' do
     # 正常なレスポンスか？
     it 'responds successfully' do
-      get :show, params: { id: user.id }
+      get :show, params: { id: admin.id }
       expect(response).to be_success
     end
     # 200レスポンスが返ってきているか？
     it 'returns a 200 response' do
-      get :show, params: { id: user.id }
+      get :show, params: { id: admin.id }
       expect(response).to have_http_status '200'
     end
   end
@@ -57,21 +71,19 @@ RSpec.describe 'Users', type: :request do
   # ===================SHOW===================
   describe 'GET #show' do
     context 'ユーザーが存在する場合' do
-      let(:user) { FactoryBot.create(:user) }
-
       it 'リクエストが成功すること' do
-        get user_url user.id
+        get user_path admin
         expect(response.status).to eq 200
       end
 
       it 'ユーザー名が表示されていること' do
-        get user_url user.id
-        expect(response.body).to include 'user1'
+        get user_path admin
+        expect(response.body).to include 'admin'
       end
     end
 
     context 'ユーザーが存在しない場合' do
-      subject { -> { get user_url 1 } }
+      subject { -> { get user_path 1 } }
 
       it { is_expected.to raise_error ActiveRecord::RecordNotFound }
     end
@@ -80,28 +92,27 @@ RSpec.describe 'Users', type: :request do
   # ===================NEW===================
   describe 'GET #new' do
     it 'リクエストが成功すること' do
-      get new_user_url
+      get new_user_path
       expect(response.status).to eq 200
     end
   end
 
   # ===================EDIT===================
-  describe 'GET #edit' do
-    let(:user) { FactoryBot.create(:user) }
 
+  describe 'GET #edit' do
     it 'リクエストが成功すること' do
-      get edit_user_url 　user
+      get edit_user_path admin
       expect(response.status).to eq 200
     end
 
     it 'ユーザー名が表示されていること' do
-      get edit_user_url user
-      expect(response.body).to include 'user1'
+      get edit_user_path admin
+      expect(response.body).to include 'admin'
     end
 
     it 'メールアドレスが表示されていること' do
-      get edit_user_url user
-      expect(response.body).to include 'user1@example.com'
+      get edit_user_path admin
+      expect(response.body).to include 'admin@example.com'
     end
   end
 
@@ -109,36 +120,39 @@ RSpec.describe 'Users', type: :request do
   describe 'POST #create' do
     context 'パラメータが妥当な場合' do
       it 'リクエストが成功すること' do
-        post users_url, params: { user: FactoryBot.attributes_for(:user) }
+        post users_path, params: { admin: FactoryBot.attributes_for(:user1) }
         expect(response.status).to eq 302
       end
 
       it 'ユーザーが登録されること' do
         expect do
-          post users_url, params: { user: FactoryBot.attributes_for(:user) }
+          post users_path, params: { admin: FactoryBot.attributes_for(:user1) }
         end.to change(User, :count).by(1)
       end
 
       it 'リダイレクトすること' do
-        post users_url, params: { user: FactoryBot.attributes_for(:user) }
+        post users_path, params: { admin: FactoryBot.attributes_for(:user1) }
         expect(response).to redirect_to User.last
       end
     end
 
     context 'パラメータが不正な場合' do
       it 'リクエストが成功すること' do
-        post users_url, params: { user: FactoryBot.attributes_for(:user, :invalid) }
+        post users_path,
+             params: { admin: FactoryBot.attributes_for(:user1, :invalid) }
         expect(response.status).to eq 200
       end
 
       it 'ユーザーが登録されないこと' do
         expect do
-          post users_url, params: { user: FactoryBot.attributes_for(:user, :invalid) }
+          post users_path,
+               params: { admin: FactoryBot.attributes_for(:user1, :invalid) }
         end.to_not change(User, :count)
       end
 
       it 'エラーが表示されること' do
-        post users_url, params: { user: FactoryBot.attributes_for(:user, :invalid) }
+        post users_path,
+             params: { admin: FactoryBot.attributes_for(:user1, :invalid) }
         expect(response.body).to include 'prohibited this user from being saved'
       end
     end
@@ -146,40 +160,45 @@ RSpec.describe 'Users', type: :request do
 
   # ===================UPDATE===================
   describe 'PUT #update' do
-    let(:user) { FactoryBot.create(:user) }
-
     context 'パラメータが妥当な場合' do
       it 'リクエストが成功すること' do
-        put user_url user, params: { user: FactoryBot.attributes_for(:user2) }
+        put user_path admin, params: { admin: FactoryBot.attributes_for(:user1) }
         expect(response.status).to eq 302
       end
 
       it 'ユーザー名が更新されること' do
         expect do
-          put user_url user, params: { user: FactoryBot.attributes_for(:user2) }
+          put user_path admin,
+                        params: { admin: FactoryBot.attributes_for(:user1) }
         end.to change { User.find(user.id).name }.from('user1').to('user2')
       end
 
       it 'リダイレクトすること' do
-        put user_url user, params: { user: FactoryBot.attributes_for(:user2) }
+        put user_path admin, params: { admin: FactoryBot.attributes_for(:user1) }
         expect(response).to redirect_to User.last
       end
     end
 
     context 'パラメータが不正な場合' do
       it 'リクエストが成功すること' do
-        put user_url user, params: { user: FactoryBot.attributes_for(:user, :invalid) }
+        put user_path admin,
+                      params: { admin: FactoryBot.attributes_for(:user1,
+                                                                 :invalid) }
         expect(response.status).to eq 200
       end
 
       it 'ユーザー名が変更されないこと' do
         expect do
-          put user_url user, params: { user: FactoryBot.attributes_for(:user, :invalid) }
+          put user_path admin,
+                        params: { admin: FactoryBot.attributes_for(:user1,
+                                                                   :invalid) }
         end.to_not change(User.find(user.id), :name)
       end
 
       it 'エラーが表示されること' do
-        put user_url user, params: { user: FactoryBot.attributes_for(:user, :invalid) }
+        put user_path admin,
+                      params: { admin: FactoryBot.attributes_for(:user1,
+                                                                 :invalid) }
         expect(response.body).to include 'prohibited this user from being saved'
       end
     end
@@ -188,22 +207,20 @@ RSpec.describe 'Users', type: :request do
   # ===================DELETE===================
 
   describe 'DELETE #destroy' do
-    let!(:user) { FactoryBot.create(:user) }
-
     it 'リクエストが成功すること' do
-      delete user_url user
+      delete user_path admin
       expect(response.status).to eq 302
     end
 
     it 'ユーザーが削除されること' do
       expect do
-        delete user_url user
+        delete user_path admin
       end.to change(User, :count).by(-1)
     end
 
     it 'ユーザー一覧にリダイレクトすること' do
-      delete user_url user
-      expect(response).to redirect_to(users_url)
+      delete user_path admin
+      expect(response).to redirect_to(users_path)
     end
   end
 end

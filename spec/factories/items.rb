@@ -30,7 +30,10 @@ FactoryBot.define do
     color { 1 }
     content { 3 }
     memo { '差し色グリーンがナイス!' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate1_tops.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate1_tops.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
     # picture { 1 }
@@ -50,7 +53,10 @@ FactoryBot.define do
     content { 6 }
     memo { '着まわしと着心地がGood!' }
     # sequence(:content) { |n| "これは#{n}個目のアイテムです" }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate1_pants.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate1_pants.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
     # picture { 1 }
@@ -68,7 +74,10 @@ FactoryBot.define do
     content { 11 }
     memo { '履くのが超楽ちん♪' }
     # sequence(:content) { |n| "これは#{n}個目のアイテムです" }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate1_shoes.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate1_shoes.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -84,7 +93,10 @@ FactoryBot.define do
     color { 8 }
     content { 4 }
     memo { 'オレンジの差し色スウェット' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate2_tops.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate2_tops.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -100,7 +112,10 @@ FactoryBot.define do
     color { 0 }
     content { 6 }
     memo { 'サイドラインにグリーンのアクセント' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate2_pants.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate2_pants.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -116,7 +131,10 @@ FactoryBot.define do
     color { 2 }
     content { 10 }
     memo { 'コーデを選ばないシューズ' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate2_shoes.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate2_shoes.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -132,7 +150,10 @@ FactoryBot.define do
     color { 2 }
     content { 9 }
     memo { '街になじむグレー' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate3_outer.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate3_outer.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -148,7 +169,10 @@ FactoryBot.define do
     color { 0 }
     content { 0 }
     memo { 'インナー用のブラック' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate3_tops.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate3_tops.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -164,7 +188,10 @@ FactoryBot.define do
     color { 0 }
     content { 6 }
     memo { 'レザーブラックデニム' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate3_pants.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate3_pants.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -180,7 +207,10 @@ FactoryBot.define do
     color { 2 }
     content { 10 }
     memo { 'コーデを選ばないシューズ' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate3_shoes.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate3_shoes.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -196,7 +226,10 @@ FactoryBot.define do
     color { 5 }
     content { 1 }
     memo { '爽やかなライトシャツ' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate4_outer.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate4_outer.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -212,7 +245,10 @@ FactoryBot.define do
     color { 0 }
     content { 2 }
     memo { '鉄板のラルフのブラック' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate4_tops.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate4_tops.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -228,7 +264,10 @@ FactoryBot.define do
     color { 2 }
     content { 7 }
     memo { '都会の味グレー' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate4_pants.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate4_pants.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -244,7 +283,10 @@ FactoryBot.define do
     color { 2 }
     content { 10 }
     memo { 'コーデを選ばないシューズ' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate4_shoes.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate4_shoes.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -260,7 +302,10 @@ FactoryBot.define do
     color { 0 }
     content { 8 }
     memo { 'ベロアのカーディガンスタイル' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate5_outer.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate5_outer.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -276,7 +321,10 @@ FactoryBot.define do
     color { 1 }
     content { 0 }
     memo { 'アニマルワンポイントのロンT' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate5_tops.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate5_tops.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -292,7 +340,10 @@ FactoryBot.define do
     color { 0 }
     content { 10 }
     memo { '着回しGooodな迷彩' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate5_pants.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate5_pants.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -308,7 +359,10 @@ FactoryBot.define do
     color { 2 }
     content { 10 }
     memo { 'コーデを選ばないシューズ' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate5_shoes.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate5_shoes.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -324,7 +378,10 @@ FactoryBot.define do
     color { 1 }
     content { 8 }
     memo { 'ホワイトアクセント' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate6_outer.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate6_outer.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -340,7 +397,10 @@ FactoryBot.define do
     color { 4 }
     content { 0 }
     memo { '大人ネイビー色' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate6_tops.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate6_tops.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -356,7 +416,10 @@ FactoryBot.define do
     color { 1 }
     content { 4 }
     memo { 'ホワイト&ブラックサイドライン' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate6_pants.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate6_pants.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -372,7 +435,10 @@ FactoryBot.define do
     color { 2 }
     content { 10 }
     memo { 'コーデを選ばないシューズ' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate6_shoes.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate6_shoes.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -388,7 +454,10 @@ FactoryBot.define do
     color { 0 }
     content { 8 }
     memo { 'ベロアブラック!!' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate7_outer.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate7_outer.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -404,7 +473,10 @@ FactoryBot.define do
     color { 1 }
     content { 0 }
     memo { 'ワンポイントアニマル♪' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate7_tops.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate7_tops.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -420,7 +492,10 @@ FactoryBot.define do
     color { 0 }
     content { 6 }
     memo { 'コーデに左右されない迷彩♪' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate7_pants.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate7_pants.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -437,7 +512,10 @@ FactoryBot.define do
     content { 11 }
     memo { '履くのが超楽ちん♪' }
     # sequence(:content) { |n| "これは#{n}個目のアイテムです" }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate7_shoes.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate7_shoes.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
   end
@@ -455,7 +533,10 @@ FactoryBot.define do
     color { 1 }
     content { 3 }
     memo { '差し色グリーンがナイス!' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate1_tops.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate1_tops.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
     # picture { 1 }
@@ -472,7 +553,10 @@ FactoryBot.define do
     color { 1 }
     content { 3 }
     memo { '差し色グリーンがナイス!' }
-    picture { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec/fixtures/cordinate1_tops.JPG')) }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/cordinate1_tops.JPG'))
+    end
     association :cordinate
     user { cordinate.user }
     # picture { 1 }

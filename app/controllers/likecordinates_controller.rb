@@ -13,7 +13,8 @@ class LikecordinatesController < ApplicationController
         # いいね通知の
         # @cordinate.create_notification_like_cordinate!(current_user)
         # @cordinate.create_notification_like_cordinate!
-        create_notification_like_cordinate!(current_user, @likecordinate.user_id, @cordinate.id)
+        create_notification_like_cordinate!(current_user,
+                                            @likecordinate.user_id, @cordinate.id)
         redirect_to request.referer
         # redirect_back(fallback_location: cordinate_show_path)
         # 通知機能の実装
@@ -25,7 +26,8 @@ class LikecordinatesController < ApplicationController
   end
 
   def destroy
-    @likecordinate = Likecordinate.find_by(cordinate_id: params[:id], user_id: current_user.id)
+    @likecordinate = Likecordinate.find_by(cordinate_id: params[:id],
+                                           user_id: current_user.id)
     redirect_to request.referer if cannot? :destory, @likecordinate
     if can? :destroy, @likecordinate
       @likecordinate.destroy

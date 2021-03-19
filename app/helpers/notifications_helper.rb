@@ -5,12 +5,14 @@ module NotificationsHelper
     @sender = notification.sender
     @cordinate = notification.cordinate
     @comment = nil
-    your_cordinate = link_to 'あなたの投稿', user_show_path(notification), style: 'font-weight: bold;'
+    your_cordinate = link_to 'あなたの投稿', user_show_path(notification),
+                             style: 'font-weight: bold;'
     @sender_comment = notification.comment_id
     # notification.actionがfollowかlikeかcommentか
     case notification.action
     when 'follow'
-      "#{tag.a(notification.sender.name, href: user_show_path(@sender), style: 'font-weight: bold;')}があなたをフォローしました"
+      "#{tag.a(notification.sender.name, href: user_show_path(@sender),
+                                         style: 'font-weight: bold;')}があなたをフォローしました"
     when 'cordinatelike'
       tag.a(notification.sender.name, href: user_show_path(@sender),
                                       style: 'font-weight: bold;') + 'が' + tag.a('あなたの投稿',

@@ -74,7 +74,8 @@ class CordinatesController < ApplicationController
     if @cordinate.save
       flash[:success] = 'コーデが作成しました!'
       # redirect_to user_cordinate_path( user_id: params[:user_id])
-      redirect_to cordinate_edit_path(user_id: params[:user_id], id: @cordinate.id)
+      redirect_to cordinate_edit_path(user_id: params[:user_id],
+                                      id: @cordinate.id)
     else
 
       redirect_to request.referer
@@ -130,7 +131,8 @@ class CordinatesController < ApplicationController
     @cordinate.update_attributes(cordinate_update_params)
     @cordinate.save
     flash[:success] = 'コーデを作成しました!'
-    redirect_to cordinate_item_edit_path(id: params[:id], item_id: params[:item_id])
+    redirect_to cordinate_item_edit_path(id: params[:id],
+                                         item_id: params[:item_id])
   end
 
   # リファクタリングが必要か？
@@ -183,7 +185,8 @@ class CordinatesController < ApplicationController
   end
 
   def cordinate_season_ransack
-    p_cordinate_season = Cordinate.ransack(params[:p_season], search_key: :p_season)
+    p_cordinate_season = Cordinate.ransack(params[:p_season],
+                                           search_key: :p_season)
     @p_cordinate_season = p_cordinate_season.result
     @cordinate = Cordinate.where(user_id: params[:user_id]) if params[:p_season].blank?
   end
@@ -195,7 +198,8 @@ class CordinatesController < ApplicationController
   end
 
   def cordinate_rating_ransack
-    p_cordinate_rating = Cordinate.ransack(params[:p_rating], search_key: :p_rating)
+    p_cordinate_rating = Cordinate.ransack(params[:p_rating],
+                                           search_key: :p_rating)
     @p_cordinate_rating = p_cordinate_rating.result
     @cordinate = Cordinate.where(user_id: params[:user_id]) if params[:p_rating].blank?
   end
@@ -252,7 +256,8 @@ class CordinatesController < ApplicationController
   end
 
   def item_super_item_ransack
-    q_item_super_item = Item.ransack(params[:q_super_item], search_key: :q_super_item)
+    q_item_super_item = Item.ransack(params[:q_super_item],
+                                     search_key: :q_super_item)
     @q_item_super_item = q_item_super_item.result
     @item = Item.where(user_id: params[:user_id]) if params[:q_super_item].blank?
   end
