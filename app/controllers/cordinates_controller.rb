@@ -72,14 +72,15 @@ class CordinatesController < ApplicationController
     end
 
     if @cordinate.save
-      flash[:success] = 'コーデが作成しました!'
+      flash[:success] = 'コーデを作成しました!'
       # redirect_to user_cordinate_path( user_id: params[:user_id])
       redirect_to cordinate_edit_path(user_id: params[:user_id],
                                       id: @cordinate.id)
     else
-
-      redirect_to request.referer
+      #cordinate_erros = @cordinate.errors.full_messages
+      redirect_to request.referer, notice: "#{@cordinate.errors.full_messages}"
     end
+
   end
 
   def edit
@@ -98,10 +99,10 @@ class CordinatesController < ApplicationController
 
     if @cordinate.update_attributes(cordinate_update_params)
       @cordinate.save
-      flash[:success] = 'コーデを作成しました!'
+      flash[:success] = 'コーデをアプデしました!'
       redirect_to cordinate_item_edit_path(item_id: params[:item_id])
     else
-      redirect_to request.referer
+      redirect_to request.referer, notice: "#{@cordinate.errors.full_messages}"
     end
   end
 
@@ -129,10 +130,18 @@ class CordinatesController < ApplicationController
   def item_update
     @cordinate = Cordinate.find(params[:id]) || Cordinate.new
     @cordinate.update_attributes(cordinate_update_params)
+    
+    if      
     @cordinate.save
-    flash[:success] = 'コーデを作成しました!'
+    flash[:success] = 'コーデのアイテムをアプデしました!'
     redirect_to cordinate_item_edit_path(id: params[:id],
                                          item_id: params[:item_id])
+                                             
+                                        else
+                                          redirect_to request.referer, notice: "#{@cordinate.errors.full_messages}"
+                                        end
+
+
   end
 
   # リファクタリングが必要か？
@@ -142,7 +151,7 @@ class CordinatesController < ApplicationController
     authorize! :delete, @cordinate, message: '他人のコーデを削除する権限がありません。'
     @cordinate.destroy
     # Cordinate.find_by(params[:id]).destroy
-    flash[:success] = 'Cordinate deleted'
+    flash[:success] = 'コーデを削除しました!'
     # redirect_to  all_cordinate_show_path(user_id: current_user.id)
   end
 
