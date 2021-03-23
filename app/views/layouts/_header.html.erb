@@ -1,5 +1,6 @@
 <div class="header-logo">
 <h2><a href="#"><%= image_tag "speadwear.png", size: '80x80', class: "site-logo" %>Spead Wear</a></h2>
+<h2>SendGrid</h2>
 </div>
 
 <%= render "shared/whether_report" %>
@@ -11,11 +12,10 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
- 
-        <% unless logged_in? %>
-       <%= link_to 'Topページ', class: "p-2 text-muted", data: {turbolinks: false} %>
+        <%= link_to 'Topページ', root_path,class: "p-2 text-muted", data: {turbolinks: false} %>
+        <% unless logged_in? %>      
        <%= link_to "Log in", login_path, class: "p-2 text-muted", data: {turbolinks: false} %>       
-       <%= link_to 'ゲストログイン（閲覧用）', guest_login_path, method: :post, class: "p-2 text-muted", data: {turbolinks: false} %>
+       <%= link_to '新規登録', signup_path , class: "p-2 text-muted", data: {turbolinks: false} %>
         <% end %>
  <%# unless request.path.include?("/signup") || request.path.include?("/login")   %>
         <% if logged_in? %>

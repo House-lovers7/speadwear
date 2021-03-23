@@ -41,7 +41,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def new
+  def new  
     @user = User.new
   end
 
@@ -212,6 +212,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
   end
+
+    # 正しいユーザーかどうか確認
+
+    
 
   def check_guest
     if current_user.email == 'guest@example.com'
