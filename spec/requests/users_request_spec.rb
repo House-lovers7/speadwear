@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require "cancan/matchers"
+
+shared_context 'log_in' do    
+  session[:user_id] = user1.id
+end
+
+#include_context 'log_in' 
 
 RSpec.describe 'Users', type: :request do
   # module SessionsHelper
@@ -13,6 +20,7 @@ RSpec.describe 'Users', type: :request do
   # otherをuserに変えて使用している。
   let(:user1) { FactoryBot.create(:user1) }
   let(:blockuser) { FactoryBot.create(:blockuser) }
+
 
   let(:cordinate1) { FactoryBot.create(:cordinate1, user_id: admin.id) }
   let(:cordinate2) { FactoryBot.create(:cordinate2, user_id: admin.id) }
@@ -40,6 +48,52 @@ RSpec.describe 'Users', type: :request do
     FactoryBot.create(:likecordinate2, user_id: user.id,
                                        cordinate_id: cordinate2.id)
   end
+
+
+
+  # ===================ABILITY===================
+
+  test "user can only destroy projects which they own" do
+
+    describe "User" do
+
+    #FactoryBotでいける!!
+    context '自分のモデルデータしか削除できないテスト'
+    user = User.create! 
+    
+    before do
+     ability = Ability.new(user1)
+     admin_ability = Ability.new(admin)
+    end
+
+    it 'adminはすべてのデータを削除できる' do
+      
+      admin_ability.should be_able_to(:destroy, Item.new)
+      admin_ability.should be_able_to(:destroy, Cordinate.new)
+      admin_ability.should be_able_to(:destroy, Comment.new)
+      
+    end
+
+
+    it 'Cordinateは自分の所有するものしか削除できない' do
+      ability.should be_able_to(:destroy, Cordinate.new(user: user1))
+      ability.should_not be_able_to(:destroy, Cordinate.new)
+    end
+
+    it 'Itemは自分の所有するものしか削除できない' do
+      ability.should be_able_to(:destroy, Cordinate.new(user: user1))
+      ability.should_not be_able_to(:destroy, Cordinate.new)
+    end
+
+    it 'Itemは自分の所有するものしか削除できない' do
+      ability.should be_able_to(:destroy, Cordinate.new(user: user1))
+      ability.should_not be_able_to(:destroy, Cordinate.new)
+    end
+    
+    
+
+  end
+
 
   # ===================INDEX===================
   describe '#index' do

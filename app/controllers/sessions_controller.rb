@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
+  
   def new; end
-
+  
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user&.authenticate(params[:session][:password])
@@ -35,9 +36,9 @@ class SessionsController < ApplicationController
       user.password = SecureRandom.urlsafe_base64
     end
 
-    session[:user_id] = user.id
-
+    # session[:user_id] = user.id
     log_in user
+    
     redirect_to all_item_show_path(user_id: session[:user_id]),
                 notice: 'ゲストユーザーとしてログインしました。'
   end

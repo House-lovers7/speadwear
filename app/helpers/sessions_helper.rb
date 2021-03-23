@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+1# frozen_string_literal: true
 
 module SessionsHelper
   # 渡されたユーザーでログインする
@@ -31,11 +31,11 @@ module SessionsHelper
     @current_user = user
   end
 
+ #abilityで代用できるので不要かも？
+ 
   def current_user?(user)
     user && user == current_user
   end
-
-  # paramsのuser_idと一致するuserを選択する
 
   def owner_user?(user)
     user && user == owner_user

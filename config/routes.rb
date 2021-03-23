@@ -1,11 +1,9 @@
 # frozen_string_literal: true
-
 Rails.application.routes.draw do
    root "users#new"
   # root "/LP"
-
   get '/lp', to: redirect('/lp.html')
-
+  
   resources :users
   resources :items
   resources :account_activations, only: [:edit]
@@ -15,8 +13,7 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets, only: %i[new create edit update]
   resources :relationships, only: %i[create destroy]
-  # resources :notifications, only: [:index, :show] #通知機能の実装
-
+ 
   resources :users do
     member do
       get :following, :followers
@@ -30,13 +27,11 @@ Rails.application.routes.draw do
   end
 
   # コメントの実装
-  # resources :cordinates, only: [:index, :show
-  # 上・：item＿idは必要あるのか要検討
+  
   delete '/logout', to: 'sessions#destroy'
   get 'search', to: 'items#search'
   get '/help', to: 'static_pages#help'
   get '/home', to: 'static_pages#home'
-
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'
   get '/login', to: 'sessions#new'
@@ -44,11 +39,13 @@ Rails.application.routes.draw do
 
   # かんたんログインの実装
   post '/sessions/guest_log_in', to: 'sessions#guest_login', as: 'guest_login'
-
+  
   # 全てのUserのItemとCordinateをみる
   get '/:user_id/cordinates/allusers', to: 'cordinates#all_cordinate_show',
                                        as: 'all_cordinate_show'
   get '/:user_id/items/allusers', to: 'items#all_item_show', as: 'all_item_show'
+
+# Rasnsackの設定
 
   # Rasnsackで全てのUserのItemをみる
   get '/:user_id/items/items_search/tpo', to: 'items#all_item_tpo_search',
@@ -61,7 +58,8 @@ Rails.application.routes.draw do
                                             as: 'items_search_color'
   get '/:user_id/items/items_search/super_item',
       to: 'items#all_item_super_item_search', as: 'items_search_super_item'
-  # Rasnsackで全てのUserのCordinateをみる
+  
+      # Rasnsackで全てのUserのCordinateをみる
   get '/:user_id/cordinates/cordinates_search/tpo', to: 'cordinates#all_cordinate_tpo_search',
                                                     as: 'cordinates_tpo_search'
   get '/:user_id/cordinates/cordinates_search/season', to: 'cordinates#all_cordinate_season_search',
@@ -72,25 +70,17 @@ Rails.application.routes.draw do
   get '/:user_id/items/cordinates_search',
       to: 'cordinates#all_cordinate_search', as: 'cordinates_serch'
 
-  # No route matches {:action=>"index", :controller=>"items", :q_tpo=>{:tpo_eq=>"3"}, :user_id=>"4"}
-
-  # userコントローラー
-  # User情報の編集ページは作成してない
+  # userコントローラー  
   get '/users/:user_id/index', to: 'users#index', as: 'allusers_index'
   get '/users/new', to: 'users#new', as: 'user_new'
   get '/users/:id/', to: 'users#show', as: 'user_show'
-  get '/users/:id/edit', to: 'users#edit', as: 'user_edit'
-  post '/users/', to: 'users#create', as: 'user_create'
-  delete '/users/:id/', to: 'users#destroy', as: 'user_delete'
-
-  # itemsコントローラー(個別のUser)
+  
+  # itemsコントローラー(個別User)
   get '/users/:user_id/items/all', to: 'items#user_all_item_show',
                                    as: 'user_item'
   get '/users/:user_id/items/new', to: 'items#new', as: 'item_new'
   get '/users/:user_id/items/:id', to: 'items#show', as: 'item_show'
   patch '/users/:user_id/items/:id/edit', to: 'items#update', as: 'item_update'
-
-  # Errorメッセージの対応をどうするか
   get '/users/:user_id/items/:id/edit', to: 'items#edit', as: 'item_edit'
   get '/users/:user_id/cordinates/:cordinate_id/items',
       to: 'items#cordinate_show', as: 'cordinate_item_show'
@@ -122,7 +112,6 @@ Rails.application.routes.draw do
   patch '/users/:user_id/cordinates/:id/', to: 'cordinates#update',
                                            as: 'cordinate_patch'
 
-  # Routingが混同している、同じモノ2つは使えない!!
   delete '/users/:user_id/cordinates/:id', to: 'cordinates#destroy',
                                            as: 'cordinate_delete'
   patch '/users/:user_id/cordinates/:id/items/:item_id',
@@ -139,11 +128,6 @@ Rails.application.routes.draw do
        to: 'likecordinates#create', as: 'likecordinate_create'
   delete '/users/:user_id/cordinates/:id/likecordinates/:likecordinate_id', to: 'likecordinates#destroy',
                                                                             as: 'likecordinate_delete'
-  # Likecommentシリーズ(個別のUser)
-  # get "/users/:user_id/cordinates/:id/comments/:comments_id", to: "comments#show", as: "comment_show"
-  # get "/users/:user_id/cordinates/:id/comments/:comments_id", to: "comments#show", as: "comment_show"
-  # get "/users/:user_id/cordinates/:id/comments/:comments_id", to: "comments#show", as: "comment_show"
-
   # Notificationsコントローラー(個別のUser)
   get '/users/:user_id/notifications/', to: 'notifications#index',
                                         as: 'notifications'

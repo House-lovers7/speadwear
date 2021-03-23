@@ -13,10 +13,7 @@ class UsersController < ApplicationController
     @users = User.all
     user_paginate
     cordinate_ransack_setup
-    item_ransack_setup
-
-    # cordinate_ransack_setup
-    # item_ransack_setup
+    item_ransack_setup      
   end
 
   def following
@@ -51,8 +48,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     authorize! :create, @user, message: 'ユーザーを作成する権限がありません。'
-    if @user.save
-      # @user.send_activation_email
+    if @user.save      
       UserMailer.account_activation(@user).deliver_now
       flash[:info] = 'Please check your email to activate your account.'
       redirect_to @user
@@ -66,11 +62,6 @@ class UsersController < ApplicationController
     authorize! :delete, @user, message: 'ユーザーを削除する権限がありません。'
     @user.destroy
   end
-
-  # なぜかErrorがでる
-  # def edit
-  #   @user = User.find(params[:id]
-  # end
 
   def update
     @user = User.find(params[:id])

@@ -2,11 +2,9 @@
 
 class Ability
   include CanCan::Ability
-
   def initialize(user)
     can :read, :all # start by defining rules for all users, also not logged ones
     return unless user.present?
-
     can :manage, :all, user_id: user.id # if the user is logged in can manage it's own posts
     cannot :destroy, :all # if the user is logged in cannot destroy all
     can :destroy, :all, user_id: user.id # if the user is logged in can destroy it's own posts
@@ -17,11 +15,9 @@ class Ability
     can :create, Cordinate, user_id: @user_id # like managing all comments in the website
     # return unless user.friend? # if the user is a friend we give additional permissions
     return unless user.friend?
-
     can :create, Cordinate
     # return unless user.admin?
     return unless user.admin?
-
     can :manage, :all # finally we give all remaining permissions only to the admins
   end
 end

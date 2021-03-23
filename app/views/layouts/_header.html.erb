@@ -1,11 +1,8 @@
-
-<%# ハンバーガーメニューにしようか迷っている %>
 <div class="header-logo">
 <h2><a href="#"><%= image_tag "speadwear.png", size: '80x80', class: "site-logo" %>Spead Wear</a></h2>
 </div>
 
 <%= render "shared/whether_report" %>
-
 
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #edfad7;;">
   <a class="navbar-brand" href="#">Navbar</a>
@@ -14,14 +11,13 @@
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <%#= link_to "TOP", root_path, class: "nav-item nav-link active" %>
+ 
         <% unless logged_in? %>
-       <%= link_to "Log in", login_path, class: "p-2 text-muted", data: {turbolinks: false} %>
+       <%= link_to 'Topページ', class: "p-2 text-muted", data: {turbolinks: false} %>
+       <%= link_to "Log in", login_path, class: "p-2 text-muted", data: {turbolinks: false} %>       
        <%= link_to 'ゲストログイン（閲覧用）', guest_login_path, method: :post, class: "p-2 text-muted", data: {turbolinks: false} %>
         <% end %>
  <%# unless request.path.include?("/signup") || request.path.include?("/login")   %>
-      <%# (user_id: params[:user_id])でもいけるのか？？ %>
-      <%# sessionを上手に使いこなす必要がある %>
         <% if logged_in? %>
         <%= link_to "プロフィール編集", edit_user_path(current_user),class: "p-2 text-muted", data: {turbolinks: false} %>
         <%= link_to "Log out", logout_path, method: :delete, class: "p-2 text-muted", data: {turbolinks: false} %>
@@ -31,36 +27,18 @@
         <%= link_to "ユーザー表示", allusers_index_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
         <%= link_to "みんなのアイテム", all_item_show_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false} %>
         <%= link_to "みんなのコーデ", all_cordinate_show_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
-        <%= link_to "Myアイテム", user_item_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
-        <%#= link_to "NOTICE", notifications_path, class: "p-2 text-muted" %>
-
+        <%= link_to "Myアイテム", user_item_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>        
         <%= link_to "NOTICE", notifications_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false} %>
-
-
-
-  <%# get "/users/:user_id/items/all", to: "items#user_all_item_show", as: "user_item"
-
-  get "/:user_id/items/allusers", to: "items#all_item_show", as: "all_item_show"
- %>
-
         <%= link_to "Myコーデ", user_cordinate_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
         <%= link_to "Item作成", item_new_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
         <%= link_to "Cordinate作成", cordinate_new_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false} %>
-
-
          <% end %>
     </div>
   </div>
 </nav>
-
-
 <i class="fas fa-chalkboard-teacher pr-1 fa-1x"></i>
 <i class="far fa-trash-alt fa-1x"></i>
 <i class="fas fa-link fa-1x"></i>
 <i class="fas fa-users fa-1x"></i>
 <i class="fas fa-tshirt fa-1x"></i>
 <i class="fas fa-user-lock fa-1x"></i>
-
-<%#
-Started GET "/users/4/items/all" for ::1 at 2021-01-26 21:44:00 +0900
-Processing by ItemsController#user_all_item_show as HTML %>

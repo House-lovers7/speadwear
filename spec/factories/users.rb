@@ -66,7 +66,7 @@ FactoryBot.define do
     admin { false }
     picture do
       Rack::Test::UploadedFile.new(File.join(Rails.root,
-                                             'spec/fixtures/guest.png'))
+                                             'spec/fixtures/woman.png'))
     end
     activated { true }
     activated_at { Time.zone.now }
@@ -78,9 +78,30 @@ FactoryBot.define do
     email { 'user1@example.com' }
     password { 'user1_pass' }
     admin { false }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/guy2.png'))
+    end
     activated { true }
     activated_at { Time.zone.now }
   end
+
+  factory :friend, class: User do
+    id {  7 }
+    name { 'Friend' }
+    email { 'friend@example.com' }
+    password { 'friend_pass' }
+    # password_digest {User.digest("admin_pass" )}
+    admin { false }
+    friend { true }
+    picture do
+      Rack::Test::UploadedFile.new(File.join(Rails.root,
+                                             'spec/fixtures/fish.png'))
+    end
+    activated { true }
+    activated_at { Time.zone.now }
+  end
+  
 end
 
 #   create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
