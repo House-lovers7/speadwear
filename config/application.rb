@@ -8,13 +8,12 @@ Bundler.require(*Rails.groups)
 
 
 #Action Mailerのdelivery_methodの設定
-
-ActionMailer::Base.add_delivery_method :my_mail_api_delivery, MyMailApiDelivery
-config.action_mailer.delivery_method = :my_mail_api_delivery
-config.action_mailer.my_mail_api_delivery_settings = {
-    reply_to:     'reply_to@example.com',
-    return_path:  'return_path@example.com'
-}
+# ActionMailer::Base.add_delivery_method :my_mail_api_delivery, MyMailApiDelivery
+# config.action_mailer.delivery_method = :my_mail_api_delivery
+# config.action_mailer.my_mail_api_delivery_settings = {
+#     reply_to:     'reply_to@example.com',
+#     return_path:  'return_path@example.com'
+# }
 
 
 module Speadwear_development
