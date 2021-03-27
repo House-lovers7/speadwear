@@ -3,12 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Likecordinates', type: :request do
-  # module SessionsHelper
-  #     # 渡されたユーザーでログインする
-  #     def log_in(user)
-  #       session[:user_id] = user.id
-  #     end
-
   let(:admin) { FactoryBot.create(:admin) }
   # otherをuserに変えて使用している。
   let(:user) { FactoryBot.create(:user) }

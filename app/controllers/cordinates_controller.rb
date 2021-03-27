@@ -3,7 +3,7 @@
 class CordinatesController < ApplicationController
   before_action :blocking?
   # before_action :logged_in_user, only: [:create, :edit, :delete, :update]
-  # なぜか、あると使えない
+  before_action :friend_user, only: %i[edit create]
 
   def index
     @item = Item.where(user_id: params[:user_id])
@@ -26,13 +26,6 @@ class CordinatesController < ApplicationController
     params[:user_id] = @user.id
   end
 
-  # 　destroy_likecordinateパターン
-  # def destroy_likecordinate
-  #   @likecordinate = Likecordinate.find_by(cordinate_id: params[:d], user_id: current_use_id)
-  #   @likecordinate.destroy
-  #   redirect_back(fallback_location: likecordinate_show_path)
-  # end
-
   def all_cordinate_show
     cordinate_paginate
     item_cordinate_ransack_setup
@@ -51,11 +44,6 @@ class CordinatesController < ApplicationController
 
   def create
     @cordinate = Cordinate.new(cordinate_params)
-    # あると作成できないので一時的に退去
-
-    # friend権限の実装
-    # @user = User.find(params[:user_id])
-    # return 'コーデの作成権限がありません。' if @user == current_user || @user.following.include?(current_user)
 
     @comment = Comment.new(comment_params)
     # commentの集合を入れる
@@ -77,10 +65,9 @@ class CordinatesController < ApplicationController
       redirect_to cordinate_edit_path(user_id: params[:user_id],
                                       id: @cordinate.id)
     else
-      #cordinate_erros = @cordinate.errors.full_messages
-      redirect_to request.referer, notice: "#{@cordinate.errors.full_messages}"
+      # cordinate_erros = @cordinate.errors.full_messages
+      redirect_to request.referer, notice: @cordinate.errors.full_messages.to_s
     end
-
   end
 
   def edit
@@ -102,7 +89,7 @@ class CordinatesController < ApplicationController
       flash[:success] = 'コーデをアプデしました!'
       redirect_to cordinate_item_edit_path(item_id: params[:item_id])
     else
-      redirect_to request.referer, notice: "#{@cordinate.errors.full_messages}"
+      redirect_to request.referer, notice: @cordinate.errors.full_messages.to_s
     end
   end
 
@@ -130,18 +117,15 @@ class CordinatesController < ApplicationController
   def item_update
     @cordinate = Cordinate.find(params[:id]) || Cordinate.new
     @cordinate.update_attributes(cordinate_update_params)
-    
-    if      
-    @cordinate.save
-    flash[:success] = 'コーデのアイテムをアプデしました!'
-    redirect_to cordinate_item_edit_path(id: params[:id],
-                                         item_id: params[:item_id])
-                                             
-                                        else
-                                          redirect_to request.referer, notice: "#{@cordinate.errors.full_messages}"
-                                        end
 
+    if @cordinate.save
+      flash[:success] = 'コーデのアイテムをアプデしました!'
+      redirect_to cordinate_item_edit_path(id: params[:id],
+                                           item_id: params[:item_id])
 
+    else
+      redirect_to request.referer, notice: @cordinate.errors.full_messages.to_s
+    end
   end
 
   # リファクタリングが必要か？

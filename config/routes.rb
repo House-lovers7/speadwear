@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+
 Rails.application.routes.draw do
-   root "users#new"
+  root 'users#new'
   # root "/LP"
   get '/lp', to: redirect('/lp.html')
-  
+
   resources :users
   resources :items
   resources :account_activations, only: [:edit]
@@ -13,7 +14,7 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets, only: %i[new create edit update]
   resources :relationships, only: %i[create destroy]
- 
+
   resources :users do
     member do
       get :following, :followers
@@ -27,7 +28,7 @@ Rails.application.routes.draw do
   end
 
   # コメントの実装
-  
+
   delete '/logout', to: 'sessions#destroy'
   get 'search', to: 'items#search'
   get '/help', to: 'static_pages#help'
@@ -39,13 +40,13 @@ Rails.application.routes.draw do
 
   # かんたんログインの実装
   post '/sessions/guest_log_in', to: 'sessions#guest_login', as: 'guest_login'
-  
+
   # 全てのUserのItemとCordinateをみる
   get '/:user_id/cordinates/allusers', to: 'cordinates#all_cordinate_show',
                                        as: 'all_cordinate_show'
   get '/:user_id/items/allusers', to: 'items#all_item_show', as: 'all_item_show'
 
-# Rasnsackの設定
+  # Rasnsackの設定
 
   # Rasnsackで全てのUserのItemをみる
   get '/:user_id/items/items_search/tpo', to: 'items#all_item_tpo_search',
@@ -58,8 +59,8 @@ Rails.application.routes.draw do
                                             as: 'items_search_color'
   get '/:user_id/items/items_search/super_item',
       to: 'items#all_item_super_item_search', as: 'items_search_super_item'
-  
-      # Rasnsackで全てのUserのCordinateをみる
+
+  # Rasnsackで全てのUserのCordinateをみる
   get '/:user_id/cordinates/cordinates_search/tpo', to: 'cordinates#all_cordinate_tpo_search',
                                                     as: 'cordinates_tpo_search'
   get '/:user_id/cordinates/cordinates_search/season', to: 'cordinates#all_cordinate_season_search',
@@ -70,11 +71,11 @@ Rails.application.routes.draw do
   get '/:user_id/items/cordinates_search',
       to: 'cordinates#all_cordinate_search', as: 'cordinates_serch'
 
-  # userコントローラー  
+  # userコントローラー
   get '/users/:user_id/index', to: 'users#index', as: 'allusers_index'
   get '/users/new', to: 'users#new', as: 'user_new'
   get '/users/:id/', to: 'users#show', as: 'user_show'
-  
+
   # itemsコントローラー(個別User)
   get '/users/:user_id/items/all', to: 'items#user_all_item_show',
                                    as: 'user_item'

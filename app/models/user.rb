@@ -99,6 +99,8 @@ class User < ApplicationRecord
   # ユーザーをフォローする
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)
+    @user = User.find(params[:user_id])
+    @user.friend = 1
   end
 
   # ユーザーをフォロー解除する

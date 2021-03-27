@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @users = User.all
     user_paginate
     cordinate_ransack_setup
-    item_ransack_setup      
+    item_ransack_setup
   end
 
   def following
@@ -41,14 +41,14 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def new  
+  def new
     @user = User.new
   end
 
   def create
     @user = User.new(user_params)
-    authorize! :create, @user, message: 'ユーザーを作成する権限がありません。'
-    if @user.save      
+    # authorize! :create, @user, message: 'ユーザーを作成する権限がありません。'
+    if @user.save
       UserMailer.account_activation(@user).deliver_now
       flash[:info] = 'Please check your email to activate your account.'
       redirect_to @user
@@ -213,9 +213,7 @@ class UsersController < ApplicationController
     redirect_to(root_url) unless current_user?(@user)
   end
 
-    # 正しいユーザーかどうか確認
-
-    
+  # 正しいユーザーかどうか確認
 
   def check_guest
     if current_user.email == 'guest@example.com'
@@ -228,17 +226,3 @@ class UsersController < ApplicationController
     @users = User.all.page(params[:page])
   end
 end
-
-# Sessoins_controllerの　current_userメソッド
-# 記憶トークンcookieに対応するユーザーを返す
-# def current_user
-#   if (user_id = session[:user_id])
-#     @current_user ||= User.find_by(id: user_id)
-#   elsif (user_id = cookies.signed[:user_id])
-#     user = User.find_by(id: user_id)
-#     if user && user.authenticated?(cookies[:remember_token])
-#       log_in user
-#       @current_user = user
-#     end
-#   end
-# end

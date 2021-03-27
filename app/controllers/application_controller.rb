@@ -1,7 +1,8 @@
 # frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  include SessionsHelper  
+  include SessionsHelper
 
   rescue_from CanCan::AccessDenied do |exception|
     respond_to do |format|
@@ -10,24 +11,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # @user.following.include?(current_user) == true ? @user.friend = 1 : @user.friend = nil
   # 友達フラグを立てる
   def friend_user
     @user = User.find(params[:user_id])
-
-    # @user.following.include?(current_user) == true ? @user.friend = 1 : @user.friend = nil
-
     if @user.following.include?(current_user) || @user == current_user || user.admin?
-
     else
-
       flash[:success] = '権限がありません!!'
-      # data: { confirm: "変更しますか？" }
       redirect_to request.referer
-
     end
-
-    # params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-    # @user.save
   end
 
   # 管理者かどうか確認

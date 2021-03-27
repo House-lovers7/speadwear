@@ -13,10 +13,6 @@ class Ability
     # 下がなぜか機能する
     can :create, Item, user_id: @user_id # like managing all comments in the website
     can :create, Cordinate, user_id: @user_id # like managing all comments in the website
-    # return unless user.friend? # if the user is a friend we give additional permissions
-    return unless user.friend?
-    can :create, Cordinate
-    # return unless user.admin?
     return unless user.admin?
     can :manage, :all # finally we give all remaining permissions only to the admins
   end

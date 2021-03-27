@@ -13,12 +13,12 @@
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
         <%= link_to 'Topページ', root_path,class: "p-2 text-muted", data: {turbolinks: false} %>
-        <% unless logged_in? %>      
+        <% unless logged_in? %>             
        <%= link_to "Log in", login_path, class: "p-2 text-muted", data: {turbolinks: false} %>       
        <%= link_to '新規登録', signup_path , class: "p-2 text-muted", data: {turbolinks: false} %>
         <% end %>
  <%# unless request.path.include?("/signup") || request.path.include?("/login")   %>
-        <% if logged_in? %>
+        <% if logged_in? %>        
         <%= link_to "プロフィール編集", edit_user_path(current_user),class: "p-2 text-muted", data: {turbolinks: false} %>
         <%= link_to "Log out", logout_path, method: :delete, class: "p-2 text-muted", data: {turbolinks: false} %>
         <% end %>

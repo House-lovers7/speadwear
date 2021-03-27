@@ -2,9 +2,10 @@
 
 FactoryBot.define do
   factory :admin, class: User do
-    id { 1 }
+    # id { 1 }
+    sequence(:email) { |n| "admin#{n}@example.com" } # シーケンスを使う
     name { 'Admin' }
-    email { 'admin@example.com' }
+    # email { 'admin@example.com' }
     password { 'admin_pass' }
     # password_digest {User.digest("admin_pass" )}
     admin { true }
@@ -101,7 +102,6 @@ FactoryBot.define do
     activated { true }
     activated_at { Time.zone.now }
   end
-  
 end
 
 #   create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

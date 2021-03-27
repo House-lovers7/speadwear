@@ -32,14 +32,11 @@ class ItemsController < ApplicationController
     @item.user_id = params[:user_id]
     unless params[:picture].nil?
       img = MiniMagick::Image.read(params[:picture])
-      img.resize_to_fill '169x225'            
+      img.resize_to_fill '169x225'
     end
 
     @item.save
-    # ratingの評価がなければ1をつける
-    # @item.rating= 1 if @item.rating.nil?
-    # @item.save!
-    flash[:success] = 'Itemを作成しました!'    
+    flash[:success] = 'Itemを作成しました!'
     # redirect_to item_show_path( user_id: params[:user_id], id: @item.id)
   end
 
