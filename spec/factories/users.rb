@@ -75,9 +75,10 @@ FactoryBot.define do
 
   factory :user1, class: User do
     id { 6 }
-    name { 'User1' }
-    email { 'user1@example.com' }
-    password { 'user1_pass' }
+    name { 'User1' }    
+    sequence(:name) { |n| "User#{n}" } # シーケンスを使う
+    sequence(:email) { |n| "user#{n}@example.com" } # シーケンスを使う
+    sequence(:password) { |n| "user#{n}_pass" } # シーケンスを使う
     admin { false }
     picture do
       Rack::Test::UploadedFile.new(File.join(Rails.root,

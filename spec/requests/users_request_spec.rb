@@ -5,6 +5,13 @@
 require 'rails_helper'
 require 'cancan/matchers'
 
+
+# Webリクエストが成功したか
+# 正しいページにリダイレクトされたか
+# ユーザー認証が成功したか
+# レスポンスのテンプレートに正しいオブジェクトが保存されたか
+# ビューに表示されたメッセージは適切か
+
 # shared_context 'log_in' do
 #   session[:user_id] = user1.id
 # end
@@ -14,13 +21,39 @@ require 'cancan/matchers'
 # before_action :correct_user, only: %i[edit update]
 # before_action :check_guest, only:  %i[destroy update]
 
-with_session(:admin) do
 
 
-end
+
+#   describe 'A' do
+#     before { get :show, id:@user.id }
+#     it { expect(response.status).to eq(200) }
+#     it { expect(response).to render_template show }
+#     it { expect(assings(:user)).to eq @user }
+# end
+
+
 
 RSpec.describe 'Users', type: :request do
-  let(:admin) { FactoryBot.create(:admin) }
+  let!(:admin) { FactoryBot.create(:admin) }
+  before do
+    with_session(:admin) do
+    get user_path(admin)
+    # get :show,params:{id:admin.id} 
+  end
+end
+  describe "#show" do
+  # 正常なレスポンスか？
+  it "responds successfully" do                 
+    expect(response).to be_success    
+  end
+  # 200レスポンスが返ってきているか？
+  it "returns a 200 response" do
+    expect(response).to have_http_status "200"
+  end
+end
+end
+  
+ #  get :show,params:{id:admin.id}          
   # otherをuserに変えて使用している。
   # let(:user1) { FactoryBot.create(:user1) }
   # let(:blockuser) { FactoryBot.create(:blockuser) }
@@ -54,28 +87,16 @@ RSpec.describe 'Users', type: :request do
 
   # ===================ABILITY===================
 
-  Rspec.describe User do
-    describe 'ability' do
-      context 'friendの場合' do
-        before do
-          @params = {}
 
-          it '友達のコーディネートをつくれる' do
-            it { is_expected.to be_able_to(:create, Cordinate.new) }
-          end
-        end
-      end
-    end
-  end
 
-  describe 'abilities' do
-    # ユーザーを定義
-    let!(:admin) { FactoryBot.create(:admin) }
-    # このスコープ内ではAbilityの生成コードを毎回書かなくても良いようにsubject化
-    subject { Ability.new(admin) }
-    it { is_expected.to be_able_to(:create, Item.new) }
-    it { is_expected.to_not be_able_to(:destroy, Item.new) }
-  end
+  # describe 'abilities' do
+  #   # ユーザーを定義
+  #   let!(:admin) { FactoryBot.create(:admin) }
+  #   # このスコープ内ではAbilityの生成コードを毎回書かなくても良いようにsubject化
+  #   subject { Ability.new(admin) }
+  #   it { is_expected.to be_able_to(:create, Item.new) }
+  #   it { is_expected.to_not be_able_to(:destroy, Item.new) }
+  # end
 
   # describe "abilities" do
   #   # user = User.create!
@@ -84,16 +105,7 @@ RSpec.describe 'Users', type: :request do
   #   expect(ability).to_not be_able_to(:destroy, Post.new)
   # end
 
-  # ユーザーを定義
-  let!(:admin) { FactoryBot.create(:admin) }
-  # このスコープ内ではAbilityの生成コードを毎回書かなくても良いようにsubject化
-  subject { Ability.new(admin) }
-  it 'it true' do
-    expect(ability).to be_able_to(:create, Item.new)
-    expect(ability).to_not be_able_to(:destroy, Item.new)
-  end
-end
-
+ 
 # expect(ability).to_not be_able_to(:destroy, Item.new)
 
 #   test "user can only destroy projects which they own" do
@@ -135,32 +147,41 @@ end
 #   end
 # end
 
-#   # ===================INDEX===================
-#   describe '#index' do
+
+#   describe '#show' do
+  
 #     # 正常なレスポンスか？
 #     it 'responds successfully' do
-#       get :index
+#       get :show, params: { id: admin.id }
 #       expect(response).to be_success
 #     end
 #     # 200レスポンスが返ってきているか？
 #     it 'returns a 200 response' do
-#       get :index
+#       get :show, params: { id: admin.id }
 #       expect(response).to have_http_status '200'
+#     end
+
+#     context "as a guest user" do
+#       with_session(:admin) do
+#       # 正常にレスポンスが返ってきていないか？
+#       it "does not respond successfully" do
+#         get :show, params: {id: @article.id}
+#         expect(response).to_not be_success
+#       end
+#       # 302レスポンスが返ってきているか？
+#       it "returns a 200 response" do
+#         get :show, params: {id: @article.id}
+#         expect(response).to have_http_status "302"
+#       end
+#       # ログイン画面にリダイレクトされているか？
+#       it "redirects the page to /users/sign_in" do
+#         get :show, params: {id: @article.id}
+#         expect(response).to redirect_to "/users/sign_in"
+#       end
 #     end
 #   end
 
-#   describe '#show' do
-#     # 正常なレスポンスか？
-#     it 'responds successfully' do
-#       get :show, params: { id: admin.id }
-#       expect(response).to be_success
-#     end
-#     # 200レスポンスが返ってきているか？
-#     it 'returns a 200 response' do
-#       get :show, params: { id: admin.id }
-#       expect(response).to have_http_status '200'
-#     end
-#   end
+# end
 
 #   # ===================SHOW===================
 #   describe 'GET #show' do
