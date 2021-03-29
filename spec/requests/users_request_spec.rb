@@ -3,7 +3,6 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
-require 'cancan/matchers'
 
 
 # Webリクエストが成功したか
@@ -33,24 +32,52 @@ require 'cancan/matchers'
 
 
 
+# RSpec.describe 'Users', type: :request do
+#   let!(:admin) { FactoryBot.create(:admin) }
+#   before do
+#     with_session(:admin) do
+#     get user_path(admin)
+#     # get :show,params:{id:admin.id} 
+#   end
+# end
+#   describe "#show" do
+#   # 正常なレスポンスか？
+#   it "responds successfully" do                 
+#     expect(response).to be_success    
+#   end
+#   # 200レスポンスが返ってきているか？
+#   it "returns a 200 response" do
+#     expect(response).to have_http_status "200"
+#   end
+# end
+# end
+
 RSpec.describe 'Users', type: :request do
-  let!(:admin) { FactoryBot.create(:admin) }
   before do
-    with_session(:admin) do
-    get user_path(admin)
-    # get :show,params:{id:admin.id} 
+    @user = User.new(    
+      name: "admin",
+      email: "admin@example.com",
+      admin: true,
+      activated_at: Time.zone.now,
+      created_at:   Time.zone.now 
+             )        
+
+             log_in(@user)
+             session[:user_id] = @user.id
+             get login_path
   end
 end
   describe "#show" do
   # 正常なレスポンスか？
   it "responds successfully" do                 
+   get :show,params:{id: @user.id} 
     expect(response).to be_success    
   end
   # 200レスポンスが返ってきているか？
   it "returns a 200 response" do
+    get :show,params:{id: @user.id} 
     expect(response).to have_http_status "200"
   end
-end
 end
   
  #  get :show,params:{id:admin.id}          

@@ -19,24 +19,24 @@ class PictureUploader < CarrierWave::Uploader::Base
     storage :fog
   end
 
-  def default_url(*)
-    model_name = model.class.name
-    if model_name == 'User'
-      return "/default/#{[version_name,
-                          'default_user.png'].compact.join('_')}"
-    end
-    if model_name == 'Item'
-      return "/default/#{[version_name,
-                          'default_item.png'].compact.join('_')}"
-    end
-    if model_name == 'Cordinate'
-      return "/default/#{[version_name,
-                          'default_cordinate.png'].compact.join('_')}"
-    end
+  # def default_url(*)
+  #   model_name = model.class.name
+  #   if model_name == 'User'
+  #     return "/default/#{[version_name,
+  #                         'default_user.png'].compact.join('_')}"
+  #   end
+  #   if model_name == 'Item'
+  #     return "/default/#{[version_name,
+  #                         'default_item.png'].compact.join('_')}"
+  #   end
+  #   if model_name == 'Cordinate'
+  #     return "/default/#{[version_name,
+  #                         'default_cordinate.png'].compact.join('_')}"
+  #   end
 
-    # クラスがユーザ以外の場合は、no_imageの画像を使用する
-    "/default/#{[version_name, 'no_image.png'].compact.join('_')}"
-  end
+  #   # クラスがユーザ以外の場合は、no_imageの画像を使用する
+  #   "/default/#{[version_name, 'no_image.png'].compact.join('_')}"
+  # end
 
   # アップロード可能な拡張子のリスト
   def extension_white_list
@@ -44,6 +44,6 @@ class PictureUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    original_filename
+    original_filename if original_filename
   end
 end
