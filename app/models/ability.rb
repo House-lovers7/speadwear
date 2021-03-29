@@ -30,7 +30,7 @@ end
 # ability.should be_able_to(:destroy, Item.new(user: user))
 # ability.should_not be_able_to（:destroy, Item.new)
 
-# 権限を上にしてドンドン与えていくイメージ　cannnotは :manageや:allで与えたけど、例外を設ける場合につける
+# 
 
 # できる人とできない人がいるアクションに関しては、全て条件分岐を試す。
 #  adminがいるため,read以外は全てという理解でおk？_
