@@ -37,7 +37,8 @@ class ItemsController < ApplicationController
 
     @item.save
     flash[:success] = 'Itemを作成しました!'
-    # redirect_to item_show_path( user_id: params[:user_id], id: @item.id)
+    
+    redirect_to item_show_path( user_id: @item.user.id, id: @item.id)
   end
 
   def show
@@ -69,7 +70,7 @@ class ItemsController < ApplicationController
 
     @item = Item.find(params[:id])
     if @item.update_attributes(item_params)
-      flash[:success] = 'Item Updated'
+      flash[:success] = '更新しました!!'
       redirect_to item_show_path(user_id: params[:user_id], id: @item.id)
 
     else
@@ -79,11 +80,11 @@ class ItemsController < ApplicationController
 
   def destroy
     @item = Item.find(params[:id])
-    authorize! :delete, @item, message: '他人のアイテムを削除する権限がありません。'
-    # 消したら同じ IDはなくなるやん!!!!
+    authorize! :delete, @item, message: '他人のアイテムを削除する権限がありません。' 
     redirect_to request.referer if cannot? :destroy, @item
     @item.destroy
-    flash[:success] = 'Item deleted'
+    flash[:success] = 'アイテムを削除しました!!'
+    redirect_to user_item_path( user_id: @item.user.id)
   end
 
   def cordinate_search_si

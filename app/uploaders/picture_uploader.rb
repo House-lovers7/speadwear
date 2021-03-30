@@ -44,6 +44,6 @@ class PictureUploader < CarrierWave::Uploader::Base
   end
 
   def filename
-    original_filename if original_filename
+    original_filename
   end
 end

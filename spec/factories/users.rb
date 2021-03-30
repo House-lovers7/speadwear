@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :admin, class: User do
-    # id { 1 }
+    sequence(:id) { |n|  n.to_s }
     sequence(:email) { |n| "admin#{n}@example.com" } # シーケンスを使う
     name { 'Admin' }
     # email { 'admin@example.com' }
@@ -75,7 +75,7 @@ FactoryBot.define do
 
   factory :user1, class: User do
     id { 6 }
-    name { 'User1' }    
+    name { 'User1' }
     sequence(:name) { |n| "User#{n}" } # シーケンスを使う
     sequence(:email) { |n| "user#{n}@example.com" } # シーケンスを使う
     sequence(:password) { |n| "user#{n}_pass" } # シーケンスを使う

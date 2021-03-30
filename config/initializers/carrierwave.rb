@@ -7,7 +7,7 @@ require 'carrierwave/storage/fog'
 CarrierWave.configure do |config|
   if Rails.env.production? # 本番環境の場合はS3へアップロード
     config.storage :fog
-    config.fog_provider = 'fog/aws'    
+    config.fog_provider = 'fog/aws'
     config.fog_directory = ENV['S3_BUCKET'] # バケット名
     config.asset_host = 'https://s3-ap-northeast-1.amazonaws.com/speadwear-photo'
     config.fog_public = false

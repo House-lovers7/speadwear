@@ -4,6 +4,25 @@
 
 require 'rails_helper'
 
+RSpec.describe 'Users', type: :request do
+  let!(:admin) { FactoryBot.create(:admin) }
+  before do
+    # with_session(:admin) do
+    get user_path(id: admin.id)
+
+    # end
+  end
+  describe '#show' do
+    # 正常なレスポンスか？
+    it 'responds successfully' do
+      expect(response).to be_success
+    end
+    # 200レスポンスが返ってきているか？
+    it 'returns a 200 response' do
+      expect(response).to have_http_status '200'
+    end
+  end
+end
 
 # Webリクエストが成功したか
 # 正しいページにリダイレクトされたか
@@ -20,9 +39,6 @@ require 'rails_helper'
 # before_action :correct_user, only: %i[edit update]
 # before_action :check_guest, only:  %i[destroy update]
 
-
-
-
 #   describe 'A' do
 #     before { get :show, id:@user.id }
 #     it { expect(response.status).to eq(200) }
@@ -30,109 +46,84 @@ require 'rails_helper'
 #     it { expect(assings(:user)).to eq @user }
 # end
 
-
-
 # RSpec.describe 'Users', type: :request do
-#   let!(:admin) { FactoryBot.create(:admin) }
 #   before do
-#     with_session(:admin) do
-#     get user_path(admin)
-#     # get :show,params:{id:admin.id} 
+#     @user = User.new(
+#       name: "admin",
+#       email: "admin@example.com",
+#       admin: true,
+#       activated_at: Time.zone.now,
+#       created_at:   Time.zone.now
+#              )
+
+#              log_in(@user)
+#              session[:user_id] = @user.id
+#              get login_path
 #   end
 # end
 #   describe "#show" do
 #   # 正常なレスポンスか？
-#   it "responds successfully" do                 
-#     expect(response).to be_success    
+#   it "responds successfully" do
+#    get :show,params:{id: @user.id}
+#     expect(response).to be_success
 #   end
 #   # 200レスポンスが返ってきているか？
 #   it "returns a 200 response" do
+#     get :show,params:{id: @user.id}
 #     expect(response).to have_http_status "200"
 #   end
 # end
+
+#  get :show,params:{id:admin.id}
+# otherをuserに変えて使用している。
+# let(:user1) { FactoryBot.create(:user1) }
+# let(:blockuser) { FactoryBot.create(:blockuser) }
+
+# let(:cordinate1) { FactoryBot.create(:cordinate1, user_id: admin.id) }
+# let(:cordinate2) { FactoryBot.create(:cordinate2, user_id: admin.id) }
+# let(:cordinate4) { FactoryBot.create(:cordinate4, user_id: user.id) }
+# let(:cordinate5) { FactoryBot.create(:cordinate5, user_id: user.id) }
+
+# let(:item11) do
+#   FactoryBot.create(:item11, user_id: user.id, cordinate_id: cordinate4.id)
+# end
+# let(:item12) do
+#   FactoryBot.create(:item12, user_id: user.id, cordinate_id: cordinate4.id)
 # end
 
-RSpec.describe 'Users', type: :request do
-  before do
-    @user = User.new(    
-      name: "admin",
-      email: "admin@example.com",
-      admin: true,
-      activated_at: Time.zone.now,
-      created_at:   Time.zone.now 
-             )        
+# let(:comment1) do
+#   FactoryBot.create(:comment1, user_id: user.id, cordinate_id: cordinate1.id)
+# end
+# let(:comment2) do
+#   FactoryBot.create(:comment2, user_id: user.id, cordinate_id: cordinate2.id)
+# end
+# let(:likecordiante1) do
+#   FactoryBot.create(:likecordinate1, user_id: user.id,
+#                                      cordinate_id: cordinate1.id)
+# end
+# let(:likecordiante2) do
+#   FactoryBot.create(:likecordinate2, user_id: user.id,
+#                                      cordinate_id: cordinate2.id)
+# end
 
-             log_in(@user)
-             session[:user_id] = @user.id
-             get login_path
-  end
-end
-  describe "#show" do
-  # 正常なレスポンスか？
-  it "responds successfully" do                 
-   get :show,params:{id: @user.id} 
-    expect(response).to be_success    
-  end
-  # 200レスポンスが返ってきているか？
-  it "returns a 200 response" do
-    get :show,params:{id: @user.id} 
-    expect(response).to have_http_status "200"
-  end
-end
-  
- #  get :show,params:{id:admin.id}          
-  # otherをuserに変えて使用している。
-  # let(:user1) { FactoryBot.create(:user1) }
-  # let(:blockuser) { FactoryBot.create(:blockuser) }
+# ===================ABILITY===================
 
-  # let(:cordinate1) { FactoryBot.create(:cordinate1, user_id: admin.id) }
-  # let(:cordinate2) { FactoryBot.create(:cordinate2, user_id: admin.id) }
-  # let(:cordinate4) { FactoryBot.create(:cordinate4, user_id: user.id) }
-  # let(:cordinate5) { FactoryBot.create(:cordinate5, user_id: user.id) }
+# describe 'abilities' do
+#   # ユーザーを定義
+#   let!(:admin) { FactoryBot.create(:admin) }
+#   # このスコープ内ではAbilityの生成コードを毎回書かなくても良いようにsubject化
+#   subject { Ability.new(admin) }
+#   it { is_expected.to be_able_to(:create, Item.new) }
+#   it { is_expected.to_not be_able_to(:destroy, Item.new) }
+# end
 
-  # let(:item11) do
-  #   FactoryBot.create(:item11, user_id: user.id, cordinate_id: cordinate4.id)
-  # end
-  # let(:item12) do
-  #   FactoryBot.create(:item12, user_id: user.id, cordinate_id: cordinate4.id)
-  # end
+# describe "abilities" do
+#   # user = User.create!
+#   ability = Ability.new(user)
+#   expect(ability).to be_able_to(:create, Post.new)
+#   expect(ability).to_not be_able_to(:destroy, Post.new)
+# end
 
-  # let(:comment1) do
-  #   FactoryBot.create(:comment1, user_id: user.id, cordinate_id: cordinate1.id)
-  # end
-  # let(:comment2) do
-  #   FactoryBot.create(:comment2, user_id: user.id, cordinate_id: cordinate2.id)
-  # end
-  # let(:likecordiante1) do
-  #   FactoryBot.create(:likecordinate1, user_id: user.id,
-  #                                      cordinate_id: cordinate1.id)
-  # end
-  # let(:likecordiante2) do
-  #   FactoryBot.create(:likecordinate2, user_id: user.id,
-  #                                      cordinate_id: cordinate2.id)
-  # end
-
-  # ===================ABILITY===================
-
-
-
-  # describe 'abilities' do
-  #   # ユーザーを定義
-  #   let!(:admin) { FactoryBot.create(:admin) }
-  #   # このスコープ内ではAbilityの生成コードを毎回書かなくても良いようにsubject化
-  #   subject { Ability.new(admin) }
-  #   it { is_expected.to be_able_to(:create, Item.new) }
-  #   it { is_expected.to_not be_able_to(:destroy, Item.new) }
-  # end
-
-  # describe "abilities" do
-  #   # user = User.create!
-  #   ability = Ability.new(user)
-  #   expect(ability).to be_able_to(:create, Post.new)
-  #   expect(ability).to_not be_able_to(:destroy, Post.new)
-  # end
-
- 
 # expect(ability).to_not be_able_to(:destroy, Item.new)
 
 #   test "user can only destroy projects which they own" do
@@ -174,9 +165,8 @@ end
 #   end
 # end
 
-
 #   describe '#show' do
-  
+
 #     # 正常なレスポンスか？
 #     it 'responds successfully' do
 #       get :show, params: { id: admin.id }
