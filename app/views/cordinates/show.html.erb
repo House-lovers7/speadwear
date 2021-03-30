@@ -1,7 +1,7 @@
       <%# <%= image_tag @cordinate.picture.url, size: '450x580' unless @cordinate.picture.nil?  %>
 
 <div class= "cordinate_image">
-<% unless @cordinate.picture.nil?  %>
+<% unless @cordinate.picture.url.nil?  %>
     <%= image_tag @cordinate.picture.url, size: '450x580' %>
 <% else %>
       <%= image_tag 'default_cordinate.png' %>
