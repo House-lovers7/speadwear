@@ -60,12 +60,11 @@ class CordinatesController < ApplicationController
     end
 
     if @cordinate.save
-      flash[:success] = 'コーデを作成しました!'
-      # redirect_to user_cordinate_path( user_id: params[:user_id])
-      redirect_to cordinate_edit_path(user_id: params[:user_id],
+      flash[:success] = 'コーデを作成しました!'      
+            
+      redirect_to cordinate_edit_path(user_id:  @cordinate.user.id,
                                       id: @cordinate.id)
-    else
-      # cordinate_erros = @cordinate.errors.full_messages
+    else      
       redirect_to request.referer, notice: @cordinate.errors.full_messages.to_s
     end
   end
@@ -122,7 +121,6 @@ class CordinatesController < ApplicationController
       flash[:success] = 'コーデのアイテムをアプデしました!'
       redirect_to cordinate_item_edit_path(id: params[:id],
                                            item_id: params[:item_id])
-
     else
       redirect_to request.referer, notice: @cordinate.errors.full_messages.to_s
     end
@@ -131,12 +129,12 @@ class CordinatesController < ApplicationController
   # リファクタリングが必要か？
 
   def destroy
-    @cordinate = Cordinate.find_by(params[:id])
+    @cordinate = Cordinate.find(params[:id])
     authorize! :delete, @cordinate, message: '他人のコーデを削除する権限がありません。'
-    @cordinate.destroy
-    # Cordinate.find_by(params[:id]).destroy
+    redirect_to request.referer if cannot? :destroy, @cordinate
+    @cordinate.destroy    
     flash[:success] = 'コーデを削除しました!'
-    # redirect_to  all_cordinate_show_path(user_id: current_user.id)
+    redirect_to  all_cordinate_show_path(user_id: @cordinate.user.id)
   end
 
   # ransackの設定------------------------
