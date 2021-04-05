@@ -1,49 +1,51 @@
+# rspec ./spec/models/user_spec.rb
+
 # frozen_string_literal: true
 
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:admin) { FactoryBot.create(:admin) }
+  # let(:admin) { FactoryBot.build(:admin) }
   # otherをuserに変えて使用している。
-  let(:user) { FactoryBot.create(:user) }
-  let(:blockuser) { FactoryBot.create(:blockuser) }
+  let(:user1) { FactoryBot.build(:user1) }
+  # let(:blockuser) { FactoryBot.build(:blockuser) }
 
-  let(:cordinate1) { FactoryBot.create(:cordinate1, user_id: admin.id) }
-  let(:cordinate2) { FactoryBot.create(:cordinate2, user_id: admin.id) }
-  let(:cordinate4) { FactoryBot.create(:cordinate4, user_id: user.id) }
-  let(:cordinate5) { FactoryBot.create(:cordinate5, user_id: user.id) }
+  # let(:cordinate1) { FactoryBot.build(:cordinate1, user_id: admin.id) }
+  # let(:cordinate2) { FactoryBot.build(:cordinate2, user_id: admin.id) }
+  # let(:cordinate4) { FactoryBot.build(:cordinate4, user_id: user.id) }
+  # let(:cordinate5) { FactoryBot.build(:cordinate5, user_id: user.id) }
 
-  let(:item11) do
-    FactoryBot.create(:item11, user_id: user.id, cordinate_id: cordinate4.id)
-  end
-  let(:item12) do
-    FactoryBot.create(:item12, user_id: user.id, cordinate_id: cordinate4.id)
-  end
+  # let(:item11) do
+  #   FactoryBot.build(:item11, user_id: user.id, cordinate_id: cordinate4.id)
+  # end
+  # let(:item12) do
+  #   FactoryBot.build(:item12, user_id: user.id, cordinate_id: cordinate4.id)
+  # end
 
-  let(:comment1) do
-    FactoryBot.create(:comment1, user_id: user.id, cordinate_id: cordinate1.id)
-  end
-  let(:comment2) do
-    FactoryBot.create(:comment2, user_id: user.id, cordinate_id: cordinate2.id)
-  end
-  let(:likecordiante1) do
-    FactoryBot.create(:likecordinate1, user_id: user.id,
-                                       cordinate_id: cordinate1.id)
-  end
-  let(:likecordiante2) do
-    FactoryBot.create(:likecordinate2, user_id: user.id,
-                                       cordinate_id: cordinate2.id)
-  end
+  # let(:comment1) do
+  #   FactoryBot.build(:comment1, user_id: user.id, cordinate_id: cordinate1.id)
+  # end
+  # let(:comment2) do
+  #   FactoryBot.build(:comment2, user_id: user.id, cordinate_id: cordinate2.id)
+  # end
+  # let(:likecordiante1) do
+  #   FactoryBot.build(:likecordinate1, user_id: user.id,
+  #                                      cordinate_id: cordinate1.id)
+  # end
+  # let(:likecordiante2) do
+  #   FactoryBot.build(:likecordinate2, user_id: user.id,
+  #                                      cordinate_id: cordinate2.id)
+  # end
 
-  let(:bloc1) do
-    FactoryBot.create(:block1, blocker_id: admin.id, blocked_id: blockuser.id)
-  end
+  # let(:block1) do
+  #   FactoryBot.build(:block1, blocker_id: admin.id, blocked_id: blockuser.id)
+  # end
 
   # 通知機能の実装
 
   # 名前、メール、パスワードがあり、有効なファクトリを持つこと
   it 'has a valid factory' do
-    expect(user).to be_valid
+    expect(user1).to be_valid
   end
 
   # create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

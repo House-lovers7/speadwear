@@ -8,7 +8,7 @@ RSpec.describe 'Users', type: :request do
   let!(:admin) { FactoryBot.create(:admin) }
   before do
     # with_session(:admin) do
-    get user_path(id: admin.id)
+    get user_path admin
 
     # end
   end
