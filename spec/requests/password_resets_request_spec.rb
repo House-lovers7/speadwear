@@ -1,6 +1,6 @@
-# frozen_string_literal: true
+# # frozen_string_literal: true
 
-require 'rails_helper'
+# require 'rails_helper'
 
-RSpec.describe 'PasswordResets', type: :request do
-end
+# RSpec.describe 'PasswordResets', type: :request do
+# end

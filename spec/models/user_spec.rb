@@ -7,7 +7,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   # let(:admin) { FactoryBot.build(:admin) }
   # otherをuserに変えて使用している。
-  let(:user1) { FactoryBot.build(:user1) }
+   let(:user) { FactoryBot.build(:user) }
   # let(:blockuser) { FactoryBot.build(:blockuser) }
 
   # let(:cordinate1) { FactoryBot.build(:cordinate1, user_id: admin.id) }
@@ -43,9 +43,10 @@ RSpec.describe User, type: :model do
 
   # 通知機能の実装
 
-  # 名前、メール、パスワードがあり、有効なファクトリを持つこと
-  it 'has a valid factory' do
-    expect(user1).to be_valid
+   
+  fit '名前、メール、パスワードがあり、有効なファクトリを持つこと' do
+    # user = build(:user)
+    expect(user).to be_valid
   end
 
   # create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
