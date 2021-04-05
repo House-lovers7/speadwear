@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
+  
   factory :admin, class: User do
     sequence(:id) { |n|  n.to_s }
     sequence(:email) { |n| "admin#{n}@example.com" } # シーケンスを使う

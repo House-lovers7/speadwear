@@ -10,6 +10,7 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   validates :password_digest, presence: true, length: { minimum: 6 },
                               allow_nil: true
+      
   validates :password, presence: true
   attr_accessor :remember_token, :activation_token, :reset_token
 
