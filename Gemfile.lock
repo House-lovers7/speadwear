@@ -258,6 +258,8 @@ GEM
       rubyzip (>= 1.2.2)
     sendgrid-ruby (6.4.0)
       ruby_http_client (~> 3.4)
+    shoulda-matchers (4.5.1)
+      activesupport (>= 4.2.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -325,6 +327,7 @@ DEPENDENCIES
   sass-rails (= 5.0.6)
   selenium-webdriver
   sendgrid-ruby
+  shoulda-matchers
   spring (= 2.0.2)
   spring-watcher-listen (= 2.0.1)
   turbolinks (= 5.0.1)

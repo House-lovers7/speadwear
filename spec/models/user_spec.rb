@@ -10,6 +10,8 @@ RSpec.describe User, type: :model do
    let!(:admin) { build(:admin) }
    let!(:other) { build(:other) }
    let!(:blockuser) { build(:blockuser) }   
+
+   let(:relationship) { user.active_relationships.build(id: 1, follower_id: admin.id, followed_id: other.id) }
    
   #  let!(:relationship1) { user.active_relationships.build(followed_id: other.id) }
    
@@ -150,49 +152,58 @@ RSpec.describe User, type: :model do
       expect(user).to be_valid
     end
      
-    # fit '画像なしの場合、デフォルト画像が設定されること' do
-    #   user.picture = nil      
-    #   expect(user.picture.url).to eq '/default_user.png'
-    # end
+    it '画像なしの場合、デフォルト画像が設定されること' do
+      user.picture = nil      
+      expect(user.picture.url).to eq '/default_user.png'
+    end
     
-    # fit 'デフォルト画像以外の画像を設定できること' do
-    #   image_path = Rails.root.join('public/default/guy2.png')
-    #   user.picture = File.open(fixture_path)   
-    #   user.save
-    #   expect(user.image.url).to eq "/uploads/user/image/#{user.id}/guy2.png"
-    # end
+    it 'デフォルト画像以外の画像を設定できること' do
+      image_path = Rails.root.join('public/default/guy2.png')
+      user.picture = File.open(fixture_path)   
+      user.save
+      expect(user.image.url).to eq "/uploads/user/image/#{user.id}/guy2.png"
+    end
      
-    # fit '5MBを超える画像はアップロードできないこと' do
-    #   image_path = Rails.root.join('public/default/over_5MB.png')
-    #   user.picture = File.open(image_path)      
-    #   user.valid?
-    #   expect(user.errors[:image]).to include 'は5MB以下にする必要があります'
-    # end
+    it '5MBを超える画像はアップロードできないこと' do
+      image_path = Rails.root.join('public/default/over_5MB.png')
+      user.picture = File.open(image_path)      
+      user.valid?
+      expect(user.errors[:image]).to include 'は5MB以下にする必要があります'
+    end
   end
 
    
   describe '削除の依存関係' do
 
+    before do
+      
+      admin = User.create
+      other = User.create
+      blockuser = User.create
+
+    end
+
+    
     it '削除すると、紐づくフォローも全て削除されること' do
-        
-      relationship1 = Relationship.create(:relationship1, follower_id: admin.id, followed_id: other.id)
+             
+      relationship1 = create(:relationship1, follower_id: admin.id, followed_id: other.id)
       relationship2 = create(:relationship2, follower_id: admin.id, followed_id: blockuser.id)
       relationship3 = create(:relationship3, follower_id: other.id, followed_id: blockuser.id)
       
       user.follow(admin)
       user.follow(blockuser)
       
-      expect { user.destroy }.to change(user.following, :count).by(-2)
+      expect {user.destroy }.to change(user.following, :count).by(-2)
     end
     
-  #   fit '削除すると、紐づくフォロワーも全て削除されること' do
-  #     user.follow(admin)
-  #     user.follow(blockuser)
-  #     expect do
-  #       user.destroy
-  #     end.to change(admin.followers,
-  #                   :count).by(-1).and change(blockuser.followers, :count).by(-1)
-  #   end
+    it '削除すると、紐づくフォロワーも全て削除されること' do
+      user.follow(admin)
+      user.follow(blockuser)
+      expect do
+        user.destroy
+      end.to change(admin.followers,
+                    :count).by(-1).and change(blockuser.followers, :count).by(-1)
+    end
      
   #   it '削除すると、紐づくアイテムも全て削除されること' do
   #     expect { user.destroy }.to change(user.items, :count).by(-2)
@@ -246,27 +257,27 @@ RSpec.describe User, type: :model do
   end
 
    
-  # fit 'autenticated?メソッドでダイジェストと適切に照合ができること' do
-  #   expect(user.authenticated?(:password, 'Password12')).to be_truthy
-  # end
+  it 'autenticated?メソッドでダイジェストと適切に照合ができること' do
+    expect(user.authenticated?(:password, 'Password12')).to be_truthy
+  end
 
-  # it 'パスワード再設定のダイジェストを設定できること' do
-  #   expect(user.reset_digest).to eq nil
-  #   user.create_reset_digest
-  #   expect(user.reset_digest).to include('$2a')
-  #   # 複数回のリセットも問題ないこと
-  #   user.create_reset_digest
-  #   expect(user.reset_digest).to include('$2a')
-  # end
+  it 'パスワード再設定のダイジェストを設定できること' do
+    expect(user.reset_digest).to eq nil
+    user.create_reset_digest
+    expect(user.reset_digest).to include('$2a')
+    # 複数回のリセットも問題ないこと
+    user.create_reset_digest
+    expect(user.reset_digest).to include('$2a')
+  end
 
    
-  # fit 'パスワード再設定の設定時に時刻が設定できること' do
-  #   expect(user.reset_sent_at).to eq nil
-  #   current_time = Time.zone.now
-  #   sleep(1)
-  #   user.create_reset_digest
-  #   expect(user.reset_sent_at >= current_time).to be_truthy
-  # end
+  it 'パスワード再設定の設定時に時刻が設定できること' do
+    expect(user.reset_sent_at).to eq nil
+    current_time = Time.zone.now
+    sleep(1)
+    user.create_reset_digest
+    expect(user.reset_sent_at >= current_time).to be_truthy
+  end
 
   # パスワードの再設定期限
   describe 'time limit of password reset' do
@@ -295,6 +306,10 @@ RSpec.describe User, type: :model do
 
   # フォロー
   describe 'follow' do
+
+    it "is valid with test data" do
+      expect(relationship).to be_valid
+    end
 
     it 'フォローできること' do
       expect { user.follow(admin) }.to change(admin.followers, :count).by(1)

@@ -42,7 +42,13 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request # sign_inヘルパーを提供してくれる
   config.include FactoryBot::Syntax::Methods 
   config.filter_run_when_matching :focus
-  
+
+  config.after(:all) do
+    if Rails.env.test?
+      FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads_#{Rails.env}/"])
+    end
+  end
+
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
