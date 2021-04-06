@@ -59,6 +59,9 @@ RSpec.describe User, type: :model do
   
   describe 'Validation' do
      
+
+    fit { is_expected.to validate_presence_of :name }
+
     it '名前がなければ無効な状態であること' do      
        user.name = nil
       user.valid?      
