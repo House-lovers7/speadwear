@@ -4,6 +4,7 @@
 
 require 'rails_helper'
 
+
 RSpec.describe User, type: :model do
   # let(:admin) { FactoryBot.build(:admin) }
   # otherをuserに変えて使用している。

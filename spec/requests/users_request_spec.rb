@@ -1,17 +1,57 @@
+# http://localhost:3000/rails/info/routes
+
 # rspec ./spec/requests/users_request_spec.rb
-
 # frozen_string_literal: true
-
 require 'rails_helper'
-
 RSpec.describe 'Users', type: :request do
-  let!(:admin) { FactoryBot.create(:admin) }
-  before do
+
+let!(:user) { create(:user) }
+let!(:admin) { build(:admin) }
+let!(:other) { build(:other) }
+let!(:blockuser) { build(:blockuser) }   
+
+
+
+#   describe "GET #new" do  
+#   let!(:user) { create(:user) }
+#   it "正常なレスポンスを返すこと" do
+#     # @user = user
+#     # get signup_path
+#     get :signup, {id: @user.id}
+#     expect(response).to be_success
+#     expect(response).to have_http_status "200"
+#   end
+# end
+
+
+
+it "assigns the requested user to @user" do
+  user = build(:user)
+  get user_path(user)
+  #  expect(assigns(:user)).to eq user
+   expect(response).to be_successful
+end
+
+fit 'リクエストが成功すること' do    
+  get user_show_path(id: user.id)
+  expect(response).to have_http_status(200) 
+end
+
+
+# it "@chat_groupが期待される値を持つ" do
+#   chat_group = create(:chat_group)
+#   get :index, chat_group_id: chat_group
+# end
+
+
+  
+  # before do
     # with_session(:admin) do
-    get user_path admin
+    # get user_path admin
 
     # end
-  end
+  # end
+
   describe '#show' do
     # 正常なレスポンスか？
     it 'responds successfully' do

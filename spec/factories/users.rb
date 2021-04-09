@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
+  
   factory :admin, class: User do
     sequence(:id) { |n|  n.to_s }
     sequence(:email) { |n| "admin#{n}@example.com" } # シーケンスを使う
@@ -74,10 +75,9 @@ FactoryBot.define do
     activated_at { Time.zone.now }
   end
 
-  factory :user1, class: User do
+  factory :user, class: User do
     id { 6 }
-    name { 'User1' }
-    sequence(:name) { |n| "User#{n}" } # シーケンスを使う
+    name { 'user' }    
     sequence(:email) { |n| "user#{n}@example.com" } # シーケンスを使う
     sequence(:password) { |n| "user#{n}_pass" } # シーケンスを使う
     admin { false }
