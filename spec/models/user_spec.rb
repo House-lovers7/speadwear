@@ -60,8 +60,6 @@ RSpec.describe User, type: :model do
   describe 'Validation' do
      
 
-    fit { is_expected.to validate_presence_of :name }
-
     it '名前がなければ無効な状態であること' do      
        user.name = nil
       user.valid?      
@@ -187,7 +185,7 @@ RSpec.describe User, type: :model do
     end
 
     
-    it '削除すると、紐づくフォローも全て削除されること' do
+    fit '削除すると、紐づくフォローも全て削除されること' do
              
       relationship1 = create(:relationship1, follower_id: admin.id, followed_id: other.id)
       relationship2 = create(:relationship2, follower_id: admin.id, followed_id: blockuser.id)
@@ -201,7 +199,7 @@ RSpec.describe User, type: :model do
     
     it '削除すると、紐づくフォロワーも全て削除されること' do
       user.follow(admin)
-      user.follow(blockuser)
+      # user.follow(blockuser)
       expect do
         user.destroy
       end.to change(admin.followers,

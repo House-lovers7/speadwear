@@ -8,13 +8,13 @@ RSpec.describe 'Users', type: :request do
   let!(:admin) { FactoryBot.create(:admin) }
   before do
     # with_session(:admin) do
-    get user_path admin
-
+    get user_path(admin)
     # end
   end
   describe '#show' do
     # 正常なレスポンスか？
-    it 'responds successfully' do
+    fit 'responds successfully' do      
+      binding.pry      
       expect(response).to be_success
     end
     # 200レスポンスが返ってきているか？
