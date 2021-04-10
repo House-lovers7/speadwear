@@ -4,12 +4,20 @@
 
 require 'rails_helper'
 
-
 RSpec.describe User, type: :model do
-  # let(:admin) { FactoryBot.build(:admin) }
   # otherをuserに変えて使用している。
-  let(:user1) { FactoryBot.build(:user1) }
-  # let(:blockuser) { FactoryBot.build(:blockuser) }
+   let!(:user) { build(:user) }
+   let!(:admin) { build(:admin) }
+   let!(:other) { build(:other) }
+   let!(:blockuser) { build(:blockuser) }   
+
+   let(:relationship) { user.active_relationships.build(id: 1, follower_id: admin.id, followed_id: other.id) }
+   
+  #  let!(:relationship1) { user.active_relationships.build(followed_id: other.id) }
+   
+  #  let!(:relationship1) { build(:relationship1, follower_id: admin.id, followed_id: other.id)}
+  #  let!(:relationship2) { build(:relationship2, follower_id: other.id, followed_id: blockuser.id)}
+  #  let!(:relationship3) { build(:relationship3, follower_id: other.id, followed_id: blockuser.id)}
 
   # let(:cordinate1) { FactoryBot.build(:cordinate1, user_id: admin.id) }
   # let(:cordinate2) { FactoryBot.build(:cordinate2, user_id: admin.id) }
@@ -44,201 +52,154 @@ RSpec.describe User, type: :model do
 
   # 通知機能の実装
 
-  # 名前、メール、パスワードがあり、有効なファクトリを持つこと
-  it 'has a valid factory' do
-    expect(user1).to be_valid
+   
+  it '名前、メール、パスワードがあり、有効なファクトリを持つこと' do    
+    expect(user).to be_valid
   end
-
-  # create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-  #   t.string "name"
-  #   t.string "email"
-  #   t.string "password_digest"
-  #   t.string "picture"
-  #   t.integer "cordinate_id"
-  #   t.integer "item_id"
-  #   t.datetime "created_at", null: false
-  #   t.datetime "updated_at", null: false
-  #   t.boolean "admin", default: false
-  #   t.string "activation_digest"
-  #   t.boolean "activated", default: false
-  #   t.datetime "activated_at"
-  #   t.string "remember_digest"
-  #   t.string "reset_digest"
-  #   t.datetime "reset_sent_at"
-  #   t.integer "comment_id"
-  #   t.index ["email"], name: "index_users_on_email", unique: true
-  # end
-
-  # Validationチェック
+  
   describe 'Validation' do
-    # 名前がなければ無効な状態であること
-    it 'is invalid without a name' do
-      user.name = nil
-      user.valid?
-      expect(user.name).to be_falsely
+     
+
+    fit { is_expected.to validate_presence_of :name }
+
+    it '名前がなければ無効な状態であること' do      
+       user.name = nil
+      user.valid?      
+      expect(user.errors[:name]).to include("を入力してください")
     end
-    # メールアドレスがなければ無効な状態であること
-    it 'is invalid without an email address' do
+     
+    it 'メールアドレスがなければ無効な状態であること' do
       user.email = nil
-      user.valid?
-      expect(user.email).to be_falsely
+      user.valid?      
+      expect(user.errors[:email]).to include("を入力してください")
     end
 
-    # パスワードがなければ無効な状態であること
-    it 'is invalid without a password' do
+     
+    it 'パスワードがなければ無効な状態であること' do
       user.password = nil
       user.valid?
-      expect(user.password).to be_falsely
+      expect(user.errors[:password]).to include("を入力してください")
     end
   end
-
-  # 先にuserの重複が引っかからないのか?
-  # 重複したメールアドレスなら無効な状態であること
-  it 'is invalid with a duplicate email address' do
+  
+  it '重複したメールアドレスなら無効な状態であること' do
     user.save
     dupulicate_user = FactoryBot.build(:user, email: user.email)
     dupulicate_user.valid?
     expect(dupulicate_user.errors[:email]).to include('はすでに存在します')
   end
 
-  # メールアドレスは保存前に小文字変換されること
-  it 'convert capital letters into email into small' do
+   
+  it 'メールアドレスは保存前に小文字変換されること' do
     user.email = 'TEST@GMAIL.COM'
     user.save
     expect(user.email).to eq 'test@gmail.com'
   end
 
-  # メールアドレスは規定の正規表現に従うこと
-  describe 'email obeys VALID_EMAIL_REGEX' do
-    # ドメインのないメールアドレスは無効なこと
-    it 'is invalid with no domain' do
+  describe 'メールアドレスは規定の正規表現に従うこと' do
+    
+    it 'ドメインのないメールアドレスは無効なこと' do
       user.email = 'test'
-      user.valid?
-      expect(user.email).to be_falsely
-      # Error文の指定はしていない
-      # expect(user.errors[:email]).to include("は不正な値です")
+      user.valid?      
+      expect(user.errors[:email]).to include("は不正な値です")
     end
-
-    # ドメインのあるメールアドレスは有効なこと
-    it 'is valid with a domain' do
+     
+    it 'ドメインのあるメールアドレスは有効なこと' do
       user.email = 'test@ruby.org'
       expect(user).to be_valid
     end
   end
 
-  # パスワードの正規表現
-  describe 'regex of password' do
-    # 10文字以上20文字以下で、大文字・小文字・数字を最低1文字含むパスワードは有効であること
-    it 'is valid with a password which contains captal and small letters and number' do
+   
+  describe 'パスワードの正規表現' do     
+    it '10文字以上20文字以下で、大文字・小文字・数字を最低1文字含むパスワードは有効であること' do
       user.password = 'Password12'
       expect(user).to be_valid
     end
 
-    # 大文字を含まないパスワードは無効であること
-    it 'is valid with a password which does not contain capital letter' do
-      user.password = 'password12'
-      user.valid?
-      expect(user.password).to be_falsely
-      # expect(user.errors[:password]).to include("は半角10~20文字英大文字・小文字・数字をそれぞれ１文字以上含む必要があります")
-    end
-
-    # 小文字を含まないパスワードは無効であること
-    it 'is valid with a password which does not contain small letter' do
-      user.password = 'PASSWORD12'
-      user.valid?
-      expect(user.password).to be_falsely
-      # expect(user.errors[:password]).to include("は半角10~20文字英大文字・小文字・数字をそれぞれ１文字以上含む必要があります")
-    end
-
-    # 数字を含まないパスワードは無効であること
-    it 'is valid with a password which does not contain number' do
-      user.password = 'PASSWORDfail'
-      user.valid?
-      expect(user.password).to be_falsely
-      # expect(user.errors[:password]).to include("は半角10~20文字英大文字・小文字・数字をそれぞれ１文字以上含む必要があります")
-    end
   end
-
-  # 名前の長さ
-  describe 'length of name' do
-    # 21文字の名前は無効であること
-    it 'is invalid with a name which has over 21 characters' do
+  
+  describe '名前の長さ' do
+     
+    it '21文字の名前は無効であること' do
       user.name = 'あ' * 21
-      user.valid?
-      expect(user.name).to be_falsely
-      # expect(user.errors[:name]).to include("は20文字以内で入力してください")
-    end
-
-    # 20文字の名前は有効であること
-    it 'is valid with a name which has 300 characters' do
+      user.valid?      
+      expect(user.errors[:name]).to include("は20文字以内で入力してください")
+    end     
+    
+    it '20文字の名前は有効であること' do
       user.name = 'あ' * 20
       expect(user).to be_valid
     end
   end
 
-  # メールアドレスの長さ
-  describe 'length of email' do
-    # 256文字の名前は無効であること
-    it 'is invalid with a email which has over 256 characters' do
+  
+  describe 'メールアドレスの長さ' do    
+    it '256文字の名前は無効であること' do
       user.email = 'あ' * 256
-      user.valid?
-      expect(user.email).to be_falsely
-      # expect(user.errors[:email]).to include("は255文字以内で入力してください")
+      user.valid?      
+      expect(user.errors[:email]).to include("は255文字以内で入力してください")
     end
-
-    # 255文字の名前は有効であること
-    it 'is valid with a email which has 255 characters' do
+     
+    it '255文字の名前は有効であること' do
       domain = '@a.com'
       user.email = 'a' * (255 - domain.length) + domain
       expect(user).to be_valid
     end
   end
+  
+  describe ' 画像のアップロード' do
 
-  # 画像のアップロード
-  describe 'check image upload' do
-    # 画像なしでも有効であること
-    it 'is valid with no image' do
+    it '画像なしでも有効であること' do
       user.picture = nil
       expect(user).to be_valid
     end
-
-    # 画像なしの場合、デフォルト画像が設定されること
-    it 'has a default image with no image' do
-      user.picture = nil
-      # user = FactoryBot.build(:testuser, picture: nil)
-      expect(user.picture.url).to eq '/default/default_user.png'
+     
+    it '画像なしの場合、デフォルト画像が設定されること' do
+      user.picture = nil      
+      expect(user.picture.url).to eq '/default_user.png'
     end
-
-    # デフォルト画像以外の画像を設定できること
-    it 'can set an image except default image' do
+    
+    it 'デフォルト画像以外の画像を設定できること' do
       image_path = Rails.root.join('public/default/guy2.png')
-      user.picture = File.open(picture_path)
-      # user = FactoryBot.build(:testuser, picture: File.open(picture_path))
+      user.picture = File.open(fixture_path)   
       user.save
       expect(user.image.url).to eq "/uploads/user/image/#{user.id}/guy2.png"
     end
-
-    # 5MBを超える画像はアップロードできないこと
-    it 'can not upload an image over 5MB' do
+     
+    it '5MBを超える画像はアップロードできないこと' do
       image_path = Rails.root.join('public/default/over_5MB.png')
-      user.picture = File.open(image_path)
-      # user = FactoryBot.build(:testuser, image: File.open(image_path))
+      user.picture = File.open(image_path)      
       user.valid?
       expect(user.errors[:image]).to include 'は5MB以下にする必要があります'
     end
   end
 
-  # 削除の依存関係
-  describe 'dependent: destoy' do
-    # 削除すると、紐づくフォローも全て削除されること
-    it 'destroys all follows when deleted' do
-      user.follow(admin)
-      user.follow(blockuser)
-      expect { user.destroy }.to change(user.following, :count).by(-2)
+   
+  describe '削除の依存関係' do
+
+    before do
+      
+      admin = User.create
+      other = User.create
+      blockuser = User.create
+
     end
 
-    # 削除すると、紐づくフォロワーも全て削除されること
-    it 'destroys all followers when deleted' do
+    
+    it '削除すると、紐づくフォローも全て削除されること' do
+             
+      relationship1 = create(:relationship1, follower_id: admin.id, followed_id: other.id)
+      relationship2 = create(:relationship2, follower_id: admin.id, followed_id: blockuser.id)
+      relationship3 = create(:relationship3, follower_id: other.id, followed_id: blockuser.id)
+      
+      user.follow(admin)
+      user.follow(blockuser)
+      
+      expect {user.destroy }.to change(user.following, :count).by(-2)
+    end
+    
+    it '削除すると、紐づくフォロワーも全て削除されること' do
       user.follow(admin)
       user.follow(blockuser)
       expect do
@@ -246,26 +207,23 @@ RSpec.describe User, type: :model do
       end.to change(admin.followers,
                     :count).by(-1).and change(blockuser.followers, :count).by(-1)
     end
+     
+  #   it '削除すると、紐づくアイテムも全て削除されること' do
+  #     expect { user.destroy }.to change(user.items, :count).by(-2)
+  #   end
+    
+  #   it '削除すると、紐づくコーディネートも全て削除されること' do
+  #     expect { user.destroy }.to change(user.cordinates, :count).by(-2)
+  #   end
 
-    # 削除すると、紐づくアイテムも全て削除されること
-    it 'destroys all items when deleted' do
-      expect { user.destroy }.to change(user.items, :count).by(-2)
-    end
-
-    # 削除すると、紐づくコーディネートも全て削除されること
-    it 'destroys all cordinates when deleted' do
-      expect { user.destroy }.to change(user.cordinates, :count).by(-2)
-    end
-
-    # 削除すると、紐づくコメントも全て削除されること
-    it 'destroys all comments when deleted' do
-      expect { user.destroy }.to change(user.comments, :count).by(-2)
-    end
-
-    # 削除すると、紐づくlikecordinateも全て削除されること
-    it 'destroys all likecordinates when deleted' do
-      expect { user.destroy }.to change(user.likecordinates, :count).by(-2)
-    end
+    
+  #   it '削除すると、紐づくコメントも全て削除されること' do
+  #     expect { user.destroy }.to change(user.comments, :count).by(-2)
+  #   end
+     
+  #   it '削除すると、紐づくlikecordinateも全て削除されること' do
+  #     expect { user.destroy }.to change(user.likecordinates, :count).by(-2)
+  #   end
 
     # ここから、他のテストと併用して記述する
 
@@ -284,30 +242,29 @@ RSpec.describe User, type: :model do
     end
   end
 
-  # bcryptによるダイジェスト生成がうまくいくこと
-  it 'can generate digest successfully by bcrypt' do
+   
+  it 'bcryptによるダイジェスト生成がうまくいくこと' do
     expect(User.digest('test')).to include('$2a')
   end
 
-  # base64によるトークン生成がうまくいくこと
-  it 'can generate a token successfully by base64' do
+   
+  it 'base64によるトークン生成がうまくいくこと' do
     expect(User.new_token.length).to eq 22
   end
 
-  # remember_digestにトークンが保存されること
-  it 'saves remember digest successfully' do
+   
+  it 'remember_digestにトークンが保存されること' do
     expect(user.remember_digest).to eq nil
     user.remember
     expect(user.remember_digest).to include('$2a')
   end
 
-  # autenticated?メソッドでダイジェストと適切に照合ができること
-  it 'can match with the result of authenticated?' do
+   
+  it 'autenticated?メソッドでダイジェストと適切に照合ができること' do
     expect(user.authenticated?(:password, 'Password12')).to be_truthy
   end
 
-  # パスワード再設定のダイジェストを設定できること,reset_digestはちゃんとコマンドは定義されてるのか？
-  it 'can set password reset digest successfully' do
+  it 'パスワード再設定のダイジェストを設定できること' do
     expect(user.reset_digest).to eq nil
     user.create_reset_digest
     expect(user.reset_digest).to include('$2a')
@@ -316,20 +273,19 @@ RSpec.describe User, type: :model do
     expect(user.reset_digest).to include('$2a')
   end
 
-  # パスワード再設定の設定時に時刻が設定できること
-  it 'can set password reset digest sent time successfully' do
+   
+  it 'パスワード再設定の設定時に時刻が設定できること' do
     expect(user.reset_sent_at).to eq nil
     current_time = Time.zone.now
     sleep(1)
     user.create_reset_digest
-
     expect(user.reset_sent_at >= current_time).to be_truthy
   end
 
   # パスワードの再設定期限
   describe 'time limit of password reset' do
-    # 2時間以内ならfalseとなること
-    it 'returns false password within 2 hours' do
+     
+    it '2時間以内ならfalseとなること' do
       user.reset_sent_at = Time.zone.now - 2.hours + 1.second
       expect(user.password_reset_expired?).to be_falsy
     end
@@ -353,8 +309,12 @@ RSpec.describe User, type: :model do
 
   # フォロー
   describe 'follow' do
-    # うまくフォローできること
-    it 'can follow successfully' do
+
+    it "is valid with test data" do
+      expect(relationship).to be_valid
+    end
+
+    it 'フォローできること' do
       expect { user.follow(admin) }.to change(admin.followers, :count).by(1)
     end
 
@@ -413,13 +373,13 @@ RSpec.describe User, type: :model do
     end
   end
 
-  # アカウント有効化ダイジェストが作成されること
-  it 'generates digest of account activation' do
+  
+  it 'アカウント有効化ダイジェストが作成されること' do
     expect(user.activation_digest).to include('$2a$')
   end
 
-  # ブロックまたはブロックされているユーザのidを返す
-  it 'returns blocked or blocking user-ids' do
+
+  it 'ブロックまたはブロックされているユーザのidを返す' do
     user.block user1
     user1.block user2
     expect(user1.block_ids.count).to eq 2
@@ -427,17 +387,16 @@ RSpec.describe User, type: :model do
     expect(user1.block_ids.include?(user2.id)).to eq true
   end
 
-  # 作成のコールバック
-  describe 'after_create' do
-    # 管理者ユーザの作成時は、メッセージが作成されないこと
-    it "doesn't create messages if user is an admin" do
+  # 
+  describe '作成のコールバック' do    
+    it "管理者ユーザの作成時は、メッセージが作成されないこと" do
       a = FactoryBot.create(:admin)
       expect(a.messages.count).to eq 0
     end
 
     # 一般ユーザの作成時は、初期メッセージが2件送信されること
     it 'can create messages if user is not an admin' do
-      expect { FactoryBot.create(:user) }.to change(user.messages, :count).by(2)
+      expect(user).to change(user.messages, :count).by(2)
     end
   end
 end
