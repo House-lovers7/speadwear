@@ -5,11 +5,14 @@ class PictureUploader < CarrierWave::Uploader::Base
   process resize_to_limit: [225, 300]
   storage :file
 
-  # アップロードファイルの保存先ディレクトリは上書き可能
-  # 下記はデフォルトの保存先
+  # storage :file の時の画像の保存場所を指定
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  end
+    if Rails.env.test? #テスト画像は一括削除できるようにフォルダを別にする
+     "uploads_#{Rails.env}/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    else
+     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    end
+   end
 
   if Rails.env.development?
     storage :file
