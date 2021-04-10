@@ -22,7 +22,7 @@ class PictureUploader < CarrierWave::Uploader::Base
     storage :fog
   end
 
-  デフォルト画像の設定
+  # デフォルト画像の設定
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url(*args)
     #   For Rails 3.1+ asset pipeline compatibility:
