@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :logged_in_user,
-                only: %i[edit update destroy following followers]
-  before_action :correct_user, only: %i[edit update]
+  # before_action :logged_in_user,
+  #               only: %i[edit update destroy following followers]
+  # before_action :correct_user, only: %i[edit update]
   before_action :check_guest, only:  %i[destroy update]
 
   def index
@@ -61,6 +61,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     authorize! :delete, @user, message: 'ユーザーを削除する権限がありません。'
     @user.destroy
+  end
+
+  def edit
+    @user = User.find(params[:id])
   end
 
   def update
@@ -208,10 +212,10 @@ class UsersController < ApplicationController
   end
 
   # 正しいユーザーかどうか確認
-  def correct_user
-    @user = User.find(params[:id])
-    redirect_to(root_url) unless current_user?(@user)
-  end
+  # def correct_user
+  #   @user = User.find(params[:id])
+  #   redirect_to(root_url) unless current_user?(@user)
+  # end
 
   # 正しいユーザーかどうか確認
 

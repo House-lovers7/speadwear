@@ -5,6 +5,7 @@ Rails.application.configure do
 
   # Code is not reloaded between requests.
   config.cache_classes = true
+  Rails.application.routes.default_url_options[:host] = host
 
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
