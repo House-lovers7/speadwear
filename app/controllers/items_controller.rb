@@ -37,8 +37,8 @@ class ItemsController < ApplicationController
 
     @item.save
     flash[:success] = 'Itemを作成しました!'
-    
-    redirect_to item_show_path( user_id: @item.user.id, id: @item.id)
+
+    redirect_to item_show_path(user_id: @item.user.id, id: @item.id)
   end
 
   def show
@@ -80,11 +80,11 @@ class ItemsController < ApplicationController
 
   def destroy
     @item = Item.find(params[:id])
-    authorize! :delete, @item, message: '他人のアイテムを削除する権限がありません。' 
+    authorize! :delete, @item, message: '他人のアイテムを削除する権限がありません。'
     redirect_to request.referer if cannot? :destroy, @item
     @item.destroy
     flash[:success] = 'アイテムを削除しました!!'
-    redirect_to user_item_path( user_id: @item.user.id)
+    redirect_to user_item_path(user_id: @item.user.id)
   end
 
   def cordinate_search_si

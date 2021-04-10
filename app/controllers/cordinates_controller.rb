@@ -16,10 +16,8 @@ class CordinatesController < ApplicationController
     # @comment = Comment.find_by(user_id: params[:user_id])
     @comment ||= Comment.new(comment_params)
     @cordinate_comments = Comment.where(cordinate_id: params[:id])
-    
-    
+
     binding.pry
-    
 
     # 同じUserが所有するLikecordinateの配列が入る
     @likecordinates = Likecordinate.where(cordinate_id: params[:id])
@@ -64,11 +62,11 @@ class CordinatesController < ApplicationController
     end
 
     if @cordinate.save
-      flash[:success] = 'コーデを作成しました!'      
-            
-      redirect_to cordinate_edit_path(user_id:  @cordinate.user.id,
+      flash[:success] = 'コーデを作成しました!'
+
+      redirect_to cordinate_edit_path(user_id: @cordinate.user.id,
                                       id: @cordinate.id)
-    else      
+    else
       redirect_to request.referer, notice: @cordinate.errors.full_messages.to_s
     end
   end
@@ -136,9 +134,9 @@ class CordinatesController < ApplicationController
     @cordinate = Cordinate.find(params[:id])
     authorize! :delete, @cordinate, message: '他人のコーデを削除する権限がありません。'
     redirect_to request.referer if cannot? :destroy, @cordinate
-    @cordinate.destroy    
+    @cordinate.destroy
     flash[:success] = 'コーデを削除しました!'
-    redirect_to  all_cordinate_show_path(user_id: @cordinate.user.id)
+    redirect_to all_cordinate_show_path(user_id: @cordinate.user.id)
   end
 
   # ransackの設定------------------------
