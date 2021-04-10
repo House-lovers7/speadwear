@@ -6,16 +6,16 @@ require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
   let!(:admin) { FactoryBot.create(:admin) }
-  before do
-    # with_session(:admin) do
-    get user_path(admin)
-    # end
+  before do      
+    login_as admin
   end
   describe '#show' do
     # 正常なレスポンスか？
-    fit 'responds successfully' do      
-      binding.pry      
-      expect(response).to be_success
+    fit 'responds successfully' do            
+   
+      get user_path(admin)      
+      @user = admin
+      expect(response).to be_successful
     end
     # 200レスポンスが返ってきているか？
     it 'returns a 200 response' do

@@ -37,8 +37,7 @@ end
 
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  config.include Rack::Test::Methods, type: :request
+  config.fixture_path = "#{::Rails.root}/spec/fixtures"  
   config.include Devise::Test::IntegrationHelpers, type: :request # sign_inヘルパーを提供してくれる
   config.include FactoryBot::Syntax::Methods 
   config.filter_run_when_matching :focus

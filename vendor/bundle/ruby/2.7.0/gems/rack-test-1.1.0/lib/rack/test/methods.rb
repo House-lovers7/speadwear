@@ -2,20 +2,7 @@ require 'forwardable'
 
 module Rack
   module Test
-    # This module serves as the primary integration point for using Rack::Test
-    # in a testing environment. It depends on an app method being defined in the
-    # same context, and provides the Rack::Test API methods (see Rack::Test::Session
-    # for their documentation).
-    #
-    # Example:
-    #
-    #   class HomepageTest < Test::Unit::TestCase
-    #     include Rack::Test::Methods
-    #
-    #     def app
-    #       MyApp.new
-    #     end
-    #   end
+    
     module Methods
       extend Forwardable
 

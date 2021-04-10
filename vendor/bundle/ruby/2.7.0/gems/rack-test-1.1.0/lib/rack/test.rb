@@ -27,11 +27,6 @@ module Rack
 
       def_delegators :@rack_mock_session, :clear_cookies, :set_cookie, :last_response, :last_request
 
-      # Creates a Rack::Test::Session for a given Rack app or Rack::MockSession.
-      #
-      # Note: Generally, you won't need to initialize a Rack::Test::Session directly.
-      # Instead, you should include Rack::Test::Methods into your testing context.
-      # (See README.rdoc for an example)
       def initialize(mock_session)
         @headers = {}
         @env = {}
