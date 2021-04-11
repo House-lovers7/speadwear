@@ -44,11 +44,8 @@ RSpec.describe Relationship, type: :model do
     expect(relationship.errors[:followed_id]).to include('はすでに存在します')
   end
 
-
-  it '作成と削除ができること' do    
-    
-    relationship1 = Relationship.new(follower_id: admin.id, followed_id: other.id)
-    
+  it '作成と削除ができること' do        
+    relationship1 = Relationship.new(follower_id: admin.id, followed_id: other.id)    
     expect do          
     end.to change(Relationship.all, :count).by(1)
     expect do
