@@ -1,3 +1,5 @@
+# rspec ./spec/requests/cordinates_request_spec.rb
+
 # frozen_string_literal: true
 
 require 'rails_helper'
@@ -38,12 +40,12 @@ RSpec.describe 'Cordinates', type: :request do
   # ===================INDEX===================
   describe '#index' do
     # 正常なレスポンスか？
-    it 'responds successfully' do
+    fit 'responds successfully' do
       get :index
       expect(response).to be_success
     end
     # 200レスポンスが返ってきているか？
-    it 'returns a 200 response' do
+    fit 'returns a 200 response' do
       get :index
       expect(response).to have_http_status '200'
     end

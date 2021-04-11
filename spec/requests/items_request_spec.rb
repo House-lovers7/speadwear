@@ -1,66 +1,76 @@
+# rspec ./spec/requests/items_request_spec.rb
 # frozen_string_literal: true
 
+
 require 'rails_helper'
+require 'cancan/matchers'
 
 RSpec.describe 'Items', type: :request do
-  let(:admin) { FactoryBot.create(:admin) }
-  # otherをuserに変えて使用している。
-  let(:user) { FactoryBot.create(:user) }
-  let(:blockuser) { FactoryBot.create(:blockuser) }
 
-  let(:cordinate1) { FactoryBot.create(:cordinate1, user_id: admin.id) }
-  let(:cordinate2) { FactoryBot.create(:cordinate2, user_id: admin.id) }
-  let(:cordinate4) { FactoryBot.create(:cordinate4, user_id: user.id) }
-  let(:cordinate5) { FactoryBot.create(:cordinate5, user_id: user.id) }
+  let!(:admin) {FactoryBot.create(:admin)}
+  let!(:cordinate1) {FactoryBot.create(:cordinate1, user_id: admin.id)}
+  let!(:item1) {FactoryBot.create(:item1, user_id: admin.id, cordinate_id: cordinate1.id)}
 
-  let(:item11) do
-    FactoryBot.create(:item11, user_id: user.id, cordinate_id: cordinate4.id)
-  end
-  let(:item12) do
-    FactoryBot.create(:item12, user_id: user.id, cordinate_id: cordinate4.id)
-  end
+  # let(:admin) { FactoryBot.create(:admin) }
+  # # otherをuserに変えて使用している。
+  # let(:user) { FactoryBot.create(:user) }
+  # let(:blockuser) { FactoryBot.create(:blockuser) }
 
-  let(:comment1) do
-    FactoryBot.create(:comment1, user_id: user.id, cordinate_id: cordinate1.id)
-  end
-  let(:comment2) do
-    FactoryBot.create(:comment2, user_id: user.id, cordinate_id: cordinate2.id)
-  end
-  let(:likecordiante1) do
-    FactoryBot.create(:likecordinate1, user_id: user.id,
-                                       cordinate_id: cordinate1.id)
-  end
-  let(:likecordiante2) do
-    FactoryBot.create(:likecordinate2, user_id: user.id,
-                                       cordinate_id: cordinate2.id)
-  end
+  # let(:cordinate1) { FactoryBot.create(:cordinate1)}
+  # let(:cordinate2) { FactoryBot.create(:cordinate2, user_id: admin.id) }
+  # let(:cordinate4) { FactoryBot.create(:cordinate4, user_id: user.id) }
+  # let(:cordinate5) { FactoryBot.create(:cordinate5, user_id: user.id) }
 
-  # ===================INDEX===================
-  describe '#index' do
-    # 正常なレスポンスか？
-    it 'responds successfully' do
-      get :index
-      expect(response).to be_success
-    end
-    # 200レスポンスが返ってきているか？
-    it 'returns a 200 response' do
-      get :index
-      expect(response).to have_http_status '200'
-    end
-  end
+  # let(:item11) do
+  #   FactoryBot.create(:item11, user_id: user.id, cordinate_id: cordinate4.id)
+  # end
+
+  # let(:comment1) do
+  #   FactoryBot.create(:comment1, user_id: user.id, cordinate_id: cordinate1.id)
+  # end
+  # let(:comment2) do
+  #   FactoryBot.create(:comment2, user_id: user.id, cordinate_id: cordinate2.id)
+  # end
+  # let(:likecordiante1) do
+  #   FactoryBot.create(:likecordinate1, user_id: user.id,
+  #                                      cordinate_id: cordinate1.id)
+  # end
+  # let(:likecordiante2) do
+  #   FactoryBot.create(:likecordinate2, user_id: user.id,
+  #                                      cordinate_id: cordinate2.id)
+  # end
+
+  # describe '#index' do  
+
+  # before do        
+  #   login_as(admin)
+  #   get items_path(item1)    
+  # end
+  #   fit '正常なレスポンスか' do                       
+  #     expect(response).to be_success
+  #   end     
+  #   fit '200レスポンスが返ってきているか' do
+  #     get :index
+  #     expect(response).to have_http_status '200'
+  #   end
+  # end
 
   describe '#show' do
+
     # 正常なレスポンスか？
-    it 'responds successfully' do
-      get :show, params: { id: user.id }
-      expect(response).to be_success
+    it 'responds successfully' do      
+      get item_path(user_id: admin.id, id: item1.id) 
+      expect(response).to be_success      
     end
     # 200レスポンスが返ってきているか？
     it 'returns a 200 response' do
-      get :show, params: { id: user.id }
+      get item_path(user_id: admin.id, id: item1.id) 
+      # get item_path(item1)            
       expect(response).to have_http_status '200'
     end
   end
+
+  # get '/users/:user_id/items/:id', to: 'items#show', as: 'item_show'
 
   # ===================SHOW===================
   describe 'GET #show' do
@@ -69,7 +79,7 @@ RSpec.describe 'Items', type: :request do
 
       it 'リクエストが成功すること' do
         get user_url user.id
-        expect(response.status).to eq 200
+        expect(response.status).to eq 200        
       end
 
       it 'ユーザー名が表示されていること' do
@@ -86,34 +96,35 @@ RSpec.describe 'Items', type: :request do
   end
 
   # ===================NEW===================
+  
   describe 'GET #new' do
     it 'リクエストが成功すること' do
-      get new_user_url
+      get new_item_path(item1)
       expect(response.status).to eq 200
     end
   end
 
   # ===================EDIT===================
   describe 'GET #edit' do
-    let(:user) { FactoryBot.create(:user) }
-
-    it 'リクエストが成功すること' do
-      get edit_user_url 　user
+    
+    fit 'リクエストが成功すること' do
+      get new_item_path(item1)
       expect(response.status).to eq 200
     end
 
-    it 'ユーザー名が表示されていること' do
-      get edit_user_url user
+    fit 'ユーザー名が表示されていること' do
+      get new_item_path(item1)
       expect(response.body).to include 'user1'
     end
 
-    it 'メールアドレスが表示されていること' do
-      get edit_user_url user
+    fit 'メールアドレスが表示されていること' do
+      get new_item_path(item1)
       expect(response.body).to include 'user1@example.com'
     end
   end
 
   # ===================CREATE===================
+  
   describe 'POST #create' do
     context 'パラメータが妥当な場合' do
       it 'リクエストが成功すること' do
@@ -132,6 +143,8 @@ RSpec.describe 'Items', type: :request do
         expect(response).to redirect_to User.last
       end
     end
+
+  
 
     context 'パラメータが不正な場合' do
       it 'リクエストが成功すること' do

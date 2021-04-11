@@ -11,7 +11,7 @@ RSpec.describe User, type: :model do
   let!(:other) { build(:other) }
   let!(:blockuser) { build(:blockuser) }
 
-  let(:relationship) { user.active_relationships.build(id: 1, follower_id: admin.id, followed_id: other.id) }
+  # let(:relationship) { user.active_relationships.build(id: 1, follower_id: admin.id, followed_id: other.id) }
 
   #  let!(:relationship1) { user.active_relationships.build(followed_id: other.id) }
 
@@ -163,17 +163,36 @@ RSpec.describe User, type: :model do
   end
 
   describe '削除の依存関係' do
-    before do
-      admin = User.create
-      other = User.create
-      blockuser = User.create
-    end
+
+    #  let!(:user) { create(:user) }
+    #  let!(:admin) { create(:admin) }
+    #  let!(:other) { create(:other) }
+    #  let!(:blockuser) { create(:blockuser) }
+
+    let!(:relationship1) {create(:relationship1) }
+    let!(:relationship2) {build(:relationship2) }
+    let!(:relationship3) {build(:relationship3) }
+      
+
+    # before do
+    #   admin = User.create
+    #   other = User.create
+    #   blockuser = User.create
+    # end
 
     fit '削除すると、紐づくフォローも全て削除されること' do
-      relationship1 = create(:relationship1, follower_id: admin.id, followed_id: other.id)
-      relationship2 = create(:relationship2, follower_id: admin.id, followed_id: blockuser.id)
-      relationship3 = create(:relationship3, follower_id: other.id, followed_id: blockuser.id)
 
+            
+      # binding.pry
+      
+      # relationship1 = create(:relationship1)
+      # relationship2 = create(:relationship2)
+      # relationship3 = create(:relationship3)
+
+      # relationship1 = create(:relationship1, follower_id: admin.id, followed_id: other.id)
+      # relationship2 = create(:relationship2, follower_id: admin.id, followed_id: blockuser.id)
+      # relationship3 = create(:relationship3, follower_id: other.id, followed_id: blockuser.id)
+                
       user.follow(admin)
       user.follow(blockuser)
 
@@ -208,7 +227,7 @@ RSpec.describe User, type: :model do
     # ここから、他のテストと併用して記述する
 
     # 削除すると、紐づく通知も全て削除されること
-    it 'destroys all follows when deleted' do
+    fit 'destroys all follows when deleted' do
       comment.create_notice_comment_like(user1)
       comment.create_notice_comment_like(user2)
       expect { user.destroy }.to change(user.passive_notices, :count).by(-2)
