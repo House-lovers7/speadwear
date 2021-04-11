@@ -1,19 +1,28 @@
+
+# rspec ./spec/models/cordinate_spec.rb
+
 require 'rails_helper'
 
 RSpec.describe Cordinate, type: :model do
 
-  let(:user) { FactoryBot.create(:testuser) }
-  let(:cordinate9) {FactoryBot.create(:cordinate9, user_id: user.id)}
-  let(:cordinate10) {FactoryBot.create(:cordinate10, user_id: user.id)}
+  let!(:user) { build(:user) }
+  let!(:admin) { build(:admin) }
+  let!(:other) { build(:other) }
+  let!(:blockuser) { build(:blockuser) }
+  
+  let!(:cordinate1) {build(:cordinate1, user_id: admin.id)}
+  let!(:cordinate2) {build(:cordinate2, user_id: admin.id)}
+  let!(:cordinate4) {build(:cordinate4, user_id: user.id)}
+  let!(:cordinate5) {build(:cordinate5, user_id: user.id)}
 
-  let(:comment9) = {FactoryBot.create(:comment1, user_id: other.id, cordinate_id: cordinate9.id)}
-  let(:comment10) = {FactoryBot.create(:comment2, user_id: other.id, cordinate_id: cordinate9.id)}
+  let!(:item1) {build(:item1, user_id: admin.id, cordinate_id: cordinate4.id)}
+  let!(:item2) {build(:item2, user_id: admin.id, cordinate_id: cordinate4.id)}
 
-  # 有効なファクトリを持つこと
-  it "has a valid factory" do
-    expect { FactoryBot.create(:cordinate9) }.to change(Cordinate.all, :count).by(1)
-  end
-
+  let!(:comment1)  {build(:comment1, user_id: user.id, cordinate_id: cordinate1.id)}
+  let!(:comment2)  {build(:comment2, user_id: user.id, cordinate_id: cordinate2.id)}
+  let!(:likecordiante1) {build(:likecordinate1, user_id: user.id, cordinate_id: cordinate1.id)}
+  let!(:likecordiante2) {build(:likecordinate2, user_id: user.id, cordinate_id: cordinate2.id)}
+  
   # 存在性チェック
   describe "test of presence" do
     before do
