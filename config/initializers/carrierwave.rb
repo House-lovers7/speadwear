@@ -12,7 +12,7 @@ CarrierWave.configure do |config|
     config.fog_directory = ENV['S3_BUCKET_NAME']
     config.fog_attributes = { cache_control: "public, max-age=#{365.days.to_i}" } 
     # config.asset_host = 'https://s3.amazonaws.com/speadwear-images'
-    # config.asset_host = 'https://speadwear-images.s3.amazonaws.com'
+    config.asset_host = 'https://speadwear-images.s3.amazonaws.com'
     config.fog_public = false
 
     config.fog_credentials = {
