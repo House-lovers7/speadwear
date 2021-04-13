@@ -1,3 +1,4 @@
+# rspec ./spec/requests/comments_request_spec.rb
 # frozen_string_literal: true
 
 require 'rails_helper'
@@ -97,7 +98,7 @@ RSpec.describe 'Comments', type: :request do
   describe 'GET #edit' do
     let(:user) { FactoryBot.create(:user) }
 
-    it 'リクエストが成功すること' do
+    fit 'リクエストが成功すること' do
       get edit_user_url 　user
       expect(response.status).to eq 200
     end

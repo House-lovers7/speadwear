@@ -6,21 +6,19 @@ require 'rails_helper'
 require 'cancan/matchers'
 
 RSpec.describe Item, type: :model do
-
-
-  let!(:admin) { FactoryBot.create(:admin) }  
-
-  #otherをuserに変えて使用している。
-  let!(:user) { FactoryBot.build(:user) }
+  
+  let!(:admin) { FactoryBot.create(:admin) }    
   let!(:blockuser) { FactoryBot.build(:blockuser) }
+  
+  let!(:item1) {FactoryBot.build(:item1, user_id: admin.id, cordinate_id: cordinate4.id)}
+  let!(:item2) {FactoryBot.build(:item2, user_id: admin.id, cordinate_id: cordinate4.id)}
   
   let!(:cordinate1) {FactoryBot.build(:cordinate1, user_id: admin.id)}
   let!(:cordinate2) {FactoryBot.build(:cordinate2, user_id: admin.id)}
   let!(:cordinate4) {FactoryBot.build(:cordinate4, user_id: user.id)}
   let!(:cordinate5) {FactoryBot.build(:cordinate5, user_id: user.id)}
 
-  let!(:item1) {FactoryBot.build(:item1, user_id: admin.id, cordinate_id: cordinate4.id)}
-  let!(:item2) {FactoryBot.build(:item2, user_id: admin.id, cordinate_id: cordinate4.id)}
+ 
 
   let!(:comment1) { FactoryBot.build(:comment1, user_id: user.id, cordinate_id: cordinate1.id)}
   let!(:comment2) { FactoryBot.build(:comment2, user_id: user.id, cordinate_id: cordinate2.id)}
