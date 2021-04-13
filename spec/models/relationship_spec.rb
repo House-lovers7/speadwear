@@ -6,6 +6,7 @@ require 'rails_helper'
 
 RSpec.describe Relationship, type: :model do
   
+  let!(:user) { build(:user) }
   let!(:admin) { build(:admin) }
   let!(:other) { build(:other) }
   let!(:blockuser) { build(:blockuser) }

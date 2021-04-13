@@ -1,31 +1,23 @@
 # rspec ./spec/models/item_spec.rb
 
 # frozen_string_literal: true
+#rspec ./spec/models/item_spec.rb
 
 require 'rails_helper'
 require 'cancan/matchers'
 
 RSpec.describe Item, type: :model do
   
-  let!(:admin) { FactoryBot.create(:admin) }    
-  let!(:blockuser) { FactoryBot.build(:blockuser) }
+  let!(:user) { build(:user) }
+  let!(:admin) { build(:admin) }
+  let!(:other) { build(:other) }
+  let!(:blockuser) { build(:blockuser) }
   
-  let!(:item1) {FactoryBot.build(:item1, user_id: admin.id, cordinate_id: cordinate4.id)}
-  let!(:item2) {FactoryBot.build(:item2, user_id: admin.id, cordinate_id: cordinate4.id)}
-  
-  let!(:cordinate1) {FactoryBot.build(:cordinate1, user_id: admin.id)}
-  let!(:cordinate2) {FactoryBot.build(:cordinate2, user_id: admin.id)}
-  let!(:cordinate4) {FactoryBot.build(:cordinate4, user_id: user.id)}
-  let!(:cordinate5) {FactoryBot.build(:cordinate5, user_id: user.id)}
+  let!(:item1) {create(:item1, user_id: admin.id, cordinate_id: cordinate1.id)}
+  let!(:item2) {create(:item2, user_id: admin.id, cordinate_id: cordinate2.id)}
 
- 
-
-  let!(:comment1) { FactoryBot.build(:comment1, user_id: user.id, cordinate_id: cordinate1.id)}
-  let!(:comment2) { FactoryBot.build(:comment2, user_id: user.id, cordinate_id: cordinate2.id)}
-  let!(:likecordiante1){FactoryBot.build(:likecordinate1, user_id: user.id, cordinate_id: cordinate1.id)}
-  let!(:likecordiante2){FactoryBot.build(:likecordinate2, user_id: user.id, cordinate_id: cordinate2.id)}
-  
-  let!(:bloc1){FactoryBot.create(:block1, blocker_id: admin.id, blocked_id: blockuser.id)}
+  let(:cordinate1) { build(:cordinate1, user_id: admin.id) }
+  let(:cordinate2) { build(:cordinate2, user_id: admin.id) }
 
 # describe '存在性チェック' do
 

@@ -1,8 +1,16 @@
 # frozen_string_literal: true
-
+#rspec ./spec/models/block_spec.rb
 require 'rails_helper'
-
 RSpec.describe Block, type: :model do
+
+  let!(:user) { build(:user) }
+  let!(:admin) { build(:admin) }
+  let!(:other) { build(:other) }
+  let!(:blockuser) { build(:blockuser) }
+
+  let(:block1){FactoryBot.build(:block1, blocker_id: admin.id, blocked_id: blockuser.id)}
+
+
   before do
     2.times { FactoryBot.create(:user) }
   end

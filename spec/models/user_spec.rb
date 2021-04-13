@@ -1,54 +1,29 @@
 # rspec ./spec/models/user_spec.rb
-
 # frozen_string_literal: true
 
 require 'rails_helper'
-
 RSpec.describe User, type: :model do
-  # otherをuserに変えて使用している。
+  
   let!(:user) { build(:user) }
   let!(:admin) { build(:admin) }
   let!(:other) { build(:other) }
   let!(:blockuser) { build(:blockuser) }
 
-  # let(:relationship) { user.active_relationships.build(id: 1, follower_id: admin.id, followed_id: other.id) }
+  let(:relationship) { user.active_relationships.build(id: 1, follower_id: admin.id, followed_id: other.id) }
+  let!(:relationship1) { build(:relationship1, follower_id: admin.id, followed_id: other.id)}
+  let!(:relationship2) { build(:relationship2, follower_id: other.id, followed_id: blockuser.id)}
+  
+  let!(:item1) {create(:item1, user_id: admin.id, cordinate_id: cordinate1.id)}
+  let!(:item2) {create(:item2, user_id: admin.id, cordinate_id: cordinate2.id)}
 
-  #  let!(:relationship1) { user.active_relationships.build(followed_id: other.id) }
+  let(:cordinate1) { build(:cordinate1, user_id: admin.id) }
+  let(:cordinate2) { build(:cordinate2, user_id: admin.id) }
+  
+  let(:comment1){build(:comment1, user_id: admin.id, cordinate_id: cordinate1.id)}
+  let(:comment2){build(:comment1, user_id: other.id, cordinate_id: cordinate1.id)}
+  
+  let(:block1){FactoryBot.build(:block1, blocker_id: admin.id, blocked_id: blockuser.id)}
 
-  #  let!(:relationship1) { build(:relationship1, follower_id: admin.id, followed_id: other.id)}
-  #  let!(:relationship2) { build(:relationship2, follower_id: other.id, followed_id: blockuser.id)}
-  #  let!(:relationship3) { build(:relationship3, follower_id: other.id, followed_id: blockuser.id)}
-
-  # let(:cordinate1) { FactoryBot.build(:cordinate1, user_id: admin.id) }
-  # let(:cordinate2) { FactoryBot.build(:cordinate2, user_id: admin.id) }
-  # let(:cordinate4) { FactoryBot.build(:cordinate4, user_id: user.id) }
-  # let(:cordinate5) { FactoryBot.build(:cordinate5, user_id: user.id) }
-
-  # let(:item11) do
-  #   FactoryBot.build(:item11, user_id: user.id, cordinate_id: cordinate4.id)
-  # end
-  # let(:item12) do
-  #   FactoryBot.build(:item12, user_id: user.id, cordinate_id: cordinate4.id)
-  # end
-
-  # let(:comment1) do
-  #   FactoryBot.build(:comment1, user_id: user.id, cordinate_id: cordinate1.id)
-  # end
-  # let(:comment2) do
-  #   FactoryBot.build(:comment2, user_id: user.id, cordinate_id: cordinate2.id)
-  # end
-  # let(:likecordiante1) do
-  #   FactoryBot.build(:likecordinate1, user_id: user.id,
-  #                                      cordinate_id: cordinate1.id)
-  # end
-  # let(:likecordiante2) do
-  #   FactoryBot.build(:likecordinate2, user_id: user.id,
-  #                                      cordinate_id: cordinate2.id)
-  # end
-
-  # let(:block1) do
-  #   FactoryBot.build(:block1, blocker_id: admin.id, blocked_id: blockuser.id)
-  # end
 
   # 通知機能の実装
 
@@ -164,35 +139,8 @@ RSpec.describe User, type: :model do
 
   describe '削除の依存関係' do
 
-    #  let!(:user) { create(:user) }
-    #  let!(:admin) { create(:admin) }
-    #  let!(:other) { create(:other) }
-    #  let!(:blockuser) { create(:blockuser) }
-
-    let!(:relationship1) {create(:relationship1) }
-    let!(:relationship2) {build(:relationship2) }
-    let!(:relationship3) {build(:relationship3) }
-      
-
-    # before do
-    #   admin = User.create
-    #   other = User.create
-    #   blockuser = User.create
-    # end
-
-    fit '削除すると、紐づくフォローも全て削除されること' do
-
-            
-      # binding.pry
-      
-      # relationship1 = create(:relationship1)
-      # relationship2 = create(:relationship2)
-      # relationship3 = create(:relationship3)
-
-      # relationship1 = create(:relationship1, follower_id: admin.id, followed_id: other.id)
-      # relationship2 = create(:relationship2, follower_id: admin.id, followed_id: blockuser.id)
-      # relationship3 = create(:relationship3, follower_id: other.id, followed_id: blockuser.id)
-                
+    it '削除すると、紐づくフォローも全て削除されること' do
+           
       user.follow(admin)
       user.follow(blockuser)
 
@@ -208,9 +156,13 @@ RSpec.describe User, type: :model do
                     :count).by(-1).and change(blockuser.followers, :count).by(-1)
     end
 
-    #   it '削除すると、紐づくアイテムも全て削除されること' do
-    #     expect { user.destroy }.to change(user.items, :count).by(-2)
-    #   end
+      fit '削除すると、紐づくアイテムも全て削除されること' do
+
+        admin = create(:admin)
+        item1 = create(:item1, user_id: admin.id, cordinate_id: cordinate1.id)
+        item2 = create(:item2, user_id: admin.id, cordinate_id: cordinate2.id)                
+        expect { admin.destroy }.to change(Items.all, :count).by(-2)
+      end
 
     #   it '削除すると、紐づくコーディネートも全て削除されること' do
     #     expect { user.destroy }.to change(user.cordinates, :count).by(-2)

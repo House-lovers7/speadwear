@@ -1,10 +1,24 @@
+#rspec ./spec/models/comment_spec.rb
+
 require 'rails_helper'
 
+
 RSpec.describe Comment, type: :model do
-  let(:user) { FactoryBot.create(:user) }
-  let(:cordinate) { FactoryBot.create(:cordinate }
-  let(:comment) { FactoryBot.create(:comment) }
-  # let(:comment_like) { FactoryBot.create(:comment_like) }
+
+  let!(:user) { build(:user) }
+  let!(:admin) { build(:admin) }
+  let!(:other) { build(:other) }
+  let!(:blockuser) { build(:blockuser) }
+  
+  let!(:item1) {create(:item1, user_id: admin.id, cordinate_id: cordinate1.id)}
+  let!(:item2) {create(:item2, user_id: admin.id, cordinate_id: cordinate2.id)}
+
+  let(:cordinate1) { build(:cordinate1, user_id: admin.id) }
+  let(:cordinate2) { build(:cordinate2, user_id: admin.id) }
+  
+  let(:comment1){build(:comment1, user_id: admin.id, cordinate_id: cordinate1.id)}
+  let(:comment2){build(:comment1, user_id: other.id, cordinate_id: cordinate1.id)}
+  
 
   # 自分で自分のコーディネートにコメントしているデモデータ
    let(:self_comment) { FactoryBot.create(:comment, : cordinate_id: user.cordinate.id , user_id: user.id) }
