@@ -16,9 +16,6 @@ class CordinatesController < ApplicationController
     # @comment = Comment.find_by(user_id: params[:user_id])
     @comment ||= Comment.new(comment_params)
     @cordinate_comments = Comment.where(cordinate_id: params[:id])
-
-    binding.pry
-
     # 同じUserが所有するLikecordinateの配列が入る
     @likecordinates = Likecordinate.where(cordinate_id: params[:id])
     # 同じCordinateが所有するLikecordinateの配列？が入る

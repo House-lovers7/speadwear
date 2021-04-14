@@ -2,8 +2,36 @@
 
 class PictureUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
+
+# デフォルト画像の設定
+  # Provide a default URL as a default if there hasn't been a file uploaded:
+  def default_url(*_args)
+    
+    ActionController::Base.helpers.asset_path('fallback/' + [version_name, 'default.png'].compact.join('_'))
+    #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
+  end
+
+
+
   process resize_to_limit: [225, 300]
-  storage :file
+  process :convert => 'jpg' # 保存形式をJPGにする
+  
+  storage :file   
+     
+   # サムネイルを生成する設定
+
+  version :thumb do
+    process :resize_to_limit => [300, 300]
+  end
+
+  version :thumb100 do
+    process :resize_to_limit => [100, 100]
+  end
+
+  version :thumb30 do
+    process :resize_to_limit => [30, 30]
+  end
+ 
 
   # storage :file の時の画像の保存場所を指定
   def store_dir
@@ -22,14 +50,7 @@ class PictureUploader < CarrierWave::Uploader::Base
     storage :fog
   end
 
-  # デフォルト画像の設定
-  # Provide a default URL as a default if there hasn't been a file uploaded:
-  def default_url(*_args)
-    #   For Rails 3.1+ asset pipeline compatibility:
-    ActionController::Base.helpers.asset_path('fallback/' + [version_name, 'default_user.png'].compact.join('_'))
-    #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-  end
-
+  
   # アップロード可能な拡張子のリスト
   def extension_white_list
     %w[jpg jpeg gif png]

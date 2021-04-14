@@ -119,7 +119,7 @@ RSpec.describe User, type: :model do
 
     it '画像なしの場合、デフォルト画像が設定されること' do
       user.picture = nil
-      expect(user.picture.url).to eq '/default_user.png'
+      expect(user.picture.url).to eq '/default.png'
     end
 
     it 'デフォルト画像以外の画像を設定できること' do

@@ -105,7 +105,7 @@ describe '画像のアップロード' do
     # image_path = Rails.root.join("public/default/default_user.png")
     # item = FactoryBot.build(:item, manufacturer: manufacturer, category: category, image: File.open(image_path))
     # item.save
-    expect(item.image.url).to eq "/uploads/item/image/#{item.id}/default_user.png"
+    expect(item.image.url).to eq "/uploads/item/image/#{item.id}/default.png"
   end
 end
 end
