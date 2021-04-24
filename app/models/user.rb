@@ -20,14 +20,14 @@ class User < ApplicationRecord
   before_create :create_activation_digest
 
   has_secure_password
-  has_many :cordinates, dependent: :destroy
-  has_many :comments, dependent: :destroy
+  # has_many :cordinates, dependent: :destroy
+  # has_many :comments, dependent: :destroy
   has_many :items, dependent: :destroy
-  has_many :likecordinates, dependent: :destroy
-  has_many :blocks, dependent: :destroy
+  # has_many :likecordinates, dependent: :destroy
+  # has_many :blocks, dependent: :destroy
 
   # 通知機能の実装
-  has_many :notificatons, dependent: :destroy
+  # has_many :notificatons, dependent: :destroy
   has_many :active_notifications, class_name: 'Notification',
                                   foreign_key: 'sender_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification',
@@ -99,8 +99,6 @@ class User < ApplicationRecord
   # ユーザーをフォローする
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)
-    @user = User.find(params[:user_id])
-    @user.friend = 1
   end
 
   # ユーザーをフォロー解除する

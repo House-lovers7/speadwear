@@ -3,11 +3,10 @@
 class PictureUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
+  
 # デフォルト画像の設定  
   def default_url(*_args)
-    
     ActionController::Base.helpers.asset_path('fallback/' + [version_name, 'default.png'].compact.join('_'))
-
   end
 
 

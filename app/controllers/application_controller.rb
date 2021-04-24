@@ -11,7 +11,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # @user.following.include?(current_user) == true ? @user.friend = 1 : @user.friend = nil
   # 友達フラグを立てる
   def friend_user
     @user = User.find(params[:user_id])

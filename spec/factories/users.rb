@@ -79,10 +79,10 @@ FactoryBot.define do
     sequence(:email) { |n| "user#{n}@example.com" } # シーケンスを使う
     sequence(:password) { |n| "user#{n}_pass" } # シーケンスを使う
     admin { false }
-    picture do
-      Rack::Test::UploadedFile.new(File.join(Rails.root,
-                                             'spec/fixtures/guy2.png'))
-    end
+    # picture do
+    #   Rack::Test::UploadedFile.new(File.join(Rails.root,
+    #                                          'spec/fixtures/guy2.png'))
+    # end
     activated { true }
     activated_at { Time.zone.now }
   end

@@ -12,7 +12,6 @@ class Block < ApplicationRecord
   # 自分自身をブロックしていないか検証する
   def self_block
     return unless blocker_id && blocked_id
-
     errors.add(:blocked_id, '自分自身をブロックすることはできません') if blocker_id == blocked_id
   end
 end
@@ -27,7 +26,6 @@ end
 #   t.index ["blocker_id"], name: "index_blocks_on_blocker_id"
 # end
 
-# ActiveRecord::StatementInvalid (Mysql2::Error: Unknown column 'blocks.user_id' in 'where clause': SELECT `blocks`.* FROM `blocks` WHERE `blocks`.`user_id` = 19)
 
 # belongs_to :from, class_name: "User", optional: true
 # belongs_to :blocked, class_name: "User", optional: true
