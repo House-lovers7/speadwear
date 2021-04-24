@@ -20,4 +20,4 @@
 .byebug_history
 
 /config/initializers/secret_token.rb
-
+.env
