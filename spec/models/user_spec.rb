@@ -197,7 +197,7 @@ describe 'GET #show' do
 end
 
 describe 'GET #new' do
-#SUCCES!!
+  # SUCCES!!
   it 'リクエストが成功すること' do
     get new_user_path
     expect(response.status).to eq 200
@@ -211,17 +211,17 @@ describe 'GET #edit' do
     login_as(admin)
     @user = admin
   end
-#SUCCES!!
+  # SUCCES!!
   it 'リクエストが成功すること' do
     get edit_user_path(admin)
     expect(response.status).to eq 200
   end
-#SUCCES!!
+  # SUCCES!!
   it 'ユーザー名が表示されていること' do
     get edit_user_path(admin)
     expect(response.body).to include 'Admin'
   end
-#SUCCES!!
+  # SUCCES!!
   it 'メールアドレスが表示されていること' do
     get edit_user_path(admin)
     expect(response.body).to include 'admin', '@example.com'
@@ -331,7 +331,7 @@ describe 'DELETE #destroy' do
     before do
       login_as(admin)
     end
-#SUCCES!!
+    # SUCCES!!
     it 'リクエストが成功すること' do
       delete user_path(admin)
       expect(response.status).to eq 302

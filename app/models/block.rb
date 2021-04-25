@@ -12,6 +12,7 @@ class Block < ApplicationRecord
   # 自分自身をブロックしていないか検証する
   def self_block
     return unless blocker_id && blocked_id
+
     errors.add(:blocked_id, '自分自身をブロックすることはできません') if blocker_id == blocked_id
   end
 end
@@ -25,7 +26,6 @@ end
 #   t.index ["blocker_id", "blocked_id"], name: "index_blocks_on_blocker_id_and_blocked_id", unique: true
 #   t.index ["blocker_id"], name: "index_blocks_on_blocker_id"
 # end
-
 
 # belongs_to :from, class_name: "User", optional: true
 # belongs_to :blocked, class_name: "User", optional: true

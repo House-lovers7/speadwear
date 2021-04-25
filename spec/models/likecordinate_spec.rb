@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-#rspec ./spec/models/likecordinate_spec.rb
+
+# rspec ./spec/models/likecordinate_spec.rb
 
 require 'rails_helper'
 

@@ -18,7 +18,7 @@ FactoryBot.define do
 
   # item = FactoryBot.create(:item1)
   # cordinate = FactoryBot.create(:cordinate, user_id: user.id, item_id: item1.id)
-  
+
   factory :item1, class: Item do
     id      { 1 }
     user_id { admin.id }
@@ -34,7 +34,7 @@ FactoryBot.define do
       Rack::Test::UploadedFile.new(File.join(Rails.root,
                                              'spec/fixtures/cordinate1_tops.JPG'))
     end
-    association :cordinate    
+    association :cordinate
     user { cordinate1.user }
   end
 

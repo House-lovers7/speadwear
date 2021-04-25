@@ -36,10 +36,7 @@ rescue ActiveRecord::PendingMigrationError => e
 end
 
 RSpec.configure do |config|
-
-  if Rails.env.test?
-    FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads_#{Rails.env}/"])
-  end
+  FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads_#{Rails.env}/"]) if Rails.env.test?
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.include Devise::Test::IntegrationHelpers, type: :request # sign_inヘルパーを提供してくれる
