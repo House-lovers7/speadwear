@@ -1,358 +1,367 @@
-# rspec ./spec/models/user_spec.rb
+# rspec ./spec/requests/users_request_spec.rb
 # frozen_string_literal: true
 
 require 'rails_helper'
-RSpec.describe User, type: :model do
 
-  let!(:user) { create(:user) }
-  let!(:admin) { build(:admin) }
-  let!(:other) { build(:other) }
-  let!(:testuser) { build(:testuser) }
-  let!(:blockuser) { build(:blockuser) }
-
-  let(:relationship) { user.active_relationships.build(id: 1, follower_id: admin.id, followed_id: other.id) }
-  let!(:relationship1) { build(:relationship1, follower_id: admin.id, followed_id: other.id)}
-  let!(:relationship2) { build(:relationship2, follower_id: other.id, followed_id: blockuser.id)}
-
-  let!(:item1) {build(:item1, user_id: admin.id, cordinate_id: cordinate1.id)}
-  let!(:item2) {build(:item2, user_id: admin.id, cordinate_id: cordinate2.id)}
-
-  let(:cordinate1) { build(:cordinate1, user_id: admin.id) }
-  let(:cordinate2) { build(:cordinate2, user_id: admin.id) }
-
-  let(:comment1){build(:comment1, user_id: admin.id, cordinate_id: cordinate1.id)}
-  let(:comment2){build(:comment1, user_id: other.id, cordinate_id: cordinate1.id)}
-  
-  let(:block1){FactoryBot.build(:block1, blocker_id: admin.id, blocked_id: blockuser.id)}
-
-
-  # 通知機能の実装
-
-#SUCCESS!!
-  it '名前、メール、パスワードがあり、有効なファクトリを持つこと' do
-    expect(user).to be_valid
+RSpec.describe 'Users', type: :request do
+  let!(:admin) { FactoryBot.create(:admin) }
+  before do
+    get user_path(admin)
   end
-
-  #SUCCESS!!
-  describe 'Validation' do
-    it '名前がなければ無効な状態であること' do
-      user.name = nil
-      user.valid?
-      expect(user.errors[:name]).to include('を入力してください')
+  describe '#show' do
+    # 正常なレスポンスか？
+    it 'responds successfully' do
+      expect(response).to be_successful
     end
-
-    #SUCCESS!!
-    it 'メールアドレスがなければ無効な状態であること' do
-      user.email = nil
-      user.valid?
-      expect(user.errors[:email]).to include('を入力してください')
-    end
-
-    #SUCCESS!!
-    it 'パスワードがなければ無効な状態であること' do
-      user.password = nil
-      user.valid?
-      expect(user.errors[:password]).to include('を入力してください')
+    # 200レスポンスが返ってきているか？
+    it 'returns a 200 response' do
+      expect(response).to have_http_status '200'
     end
   end
-#SUCCESS!!
-  it '重複したメールアドレスなら無効な状態であること' do
-    user.save
-    dupulicate_user = FactoryBot.build(:user, email: user.email)
-    dupulicate_user.valid?
-    expect(dupulicate_user.errors[:email]).to include('はすでに存在します')
+end
+
+# Webリクエストが成功したか
+# 正しいページにリダイレクトされたか
+# ユーザー認証が成功したか
+# レスポンスのテンプレートに正しいオブジェクトが保存されたか
+# ビューに表示されたメッセージは適切か
+
+# shared_context 'log_in' do
+#   session[:user_id] = user1.id
+# end
+
+# before_action :logged_in_user,
+# only: %i[edit update destroy following followers]
+# before_action :correct_user, only: %i[edit update]
+# before_action :check_guest, only:  %i[destroy update]
+
+#   describe 'A' do
+#     before { get :show, id:@user.id }
+#     it { expect(response.status).to eq(200) }
+#     it { expect(response).to render_template show }
+#     it { expect(assings(:user)).to eq @user }
+# end
+
+# RSpec.describe 'Users', type: :request do
+#   before do
+#     @user = User.new(
+#       name: "admin",
+#       email: "admin@example.com",
+#       admin: true,
+#       activated_at: Time.zone.now,
+#       created_at:   Time.zone.now
+#              )
+
+#              log_in(@user)
+#              session[:user_id] = @user.id
+#              get login_path
+#   end
+# end
+#   describe "#show" do
+#   # 正常なレスポンスか？
+#   it "responds successfully" do
+#    get :show,params:{id: @user.id}
+#     expect(response).to be_success
+#   end
+#   # 200レスポンスが返ってきているか？
+#   it "returns a 200 response" do
+#     get :show,params:{id: @user.id}
+#     expect(response).to have_http_status "200"
+#   end
+# end
+
+#  get :show,params:{id:admin.id}
+# otherをuserに変えて使用している。
+# let(:user1) { FactoryBot.create(:user1) }
+# let(:blockuser) { FactoryBot.create(:blockuser) }
+
+# let(:cordinate1) { FactoryBot.create(:cordinate1, user_id: admin.id) }
+# let(:cordinate2) { FactoryBot.create(:cordinate2, user_id: admin.id) }
+# let(:cordinate4) { FactoryBot.create(:cordinate4, user_id: user.id) }
+# let(:cordinate5) { FactoryBot.create(:cordinate5, user_id: user.id) }
+
+# let(:item11) do
+#   FactoryBot.create(:item11, user_id: user.id, cordinate_id: cordinate4.id)
+# end
+# let(:item12) do
+#   FactoryBot.create(:item12, user_id: user.id, cordinate_id: cordinate4.id)
+# end
+
+# let(:comment1) do
+#   FactoryBot.create(:comment1, user_id: user.id, cordinate_id: cordinate1.id)
+# end
+# let(:comment2) do
+#   FactoryBot.create(:comment2, user_id: user.id, cordinate_id: cordinate2.id)
+# end
+# let(:likecordiante1) do
+#   FactoryBot.create(:likecordinate1, user_id: user.id,
+#                                      cordinate_id: cordinate1.id)
+# end
+# let(:likecordiante2) do
+#   FactoryBot.create(:likecordinate2, user_id: user.id,
+#                                      cordinate_id: cordinate2.id)
+# end
+
+# ===================ABILITY===================
+
+# describe 'abilities' do
+#   # ユーザーを定義
+#   let!(:admin) { FactoryBot.create(:admin) }
+#   # このスコープ内ではAbilityの生成コードを毎回書かなくても良いようにsubject化
+#   subject { Ability.new(admin) }
+#   it { is_expected.to be_able_to(:create, Item.new) }
+#   it { is_expected.to_not be_able_to(:destroy, Item.new) }
+# end
+
+# describe "abilities" do
+#   # user = User.create!
+#   ability = Ability.new(user)
+#   expect(ability).to be_able_to(:create, Post.new)
+#   expect(ability).to_not be_able_to(:destroy, Post.new)
+# end
+
+# expect(ability).to_not be_able_to(:destroy, Item.new)
+
+#   test "user can only destroy projects which they own" do
+
+#     describe "User" do
+
+#     #FactoryBotでいける!!
+#     context '自分のモデルデータしか削除できないテスト'
+#     user = User.create!
+
+#     before do
+#      ability = Ability.new(user1)
+#      admin_ability = Ability.new(admin)
+#     end
+
+#     it 'adminはすべてのデータを削除できる' do
+
+#       admin_ability.should be_able_to(:destroy, Item.new)
+#       admin_ability.should be_able_to(:destroy, Cordinate.new)
+#       admin_ability.should be_able_to(:destroy, Comment.new)
+
+#     end
+
+#     it 'Cordinateは自分の所有するものしか削除できない' do
+#       ability.should be_able_to(:destroy, Cordinate.new(user: user1))
+#       ability.should_not be_able_to(:destroy, Cordinate.new)
+#     end
+
+#     it 'Itemは自分の所有するものしか削除できない' do
+#       ability.should be_able_to(:destroy, Cordinate.new(user: user1))
+#       ability.should_not be_able_to(:destroy, Cordinate.new)
+#     end
+
+#     it 'Itemは自分の所有するものしか削除できない' do
+#       ability.should be_able_to(:destroy, Cordinate.new(user: user1))
+#       ability.should_not be_able_to(:destroy, Cordinate.new)
+#     end
+
+#   end
+# end
+
+describe '#show' do
+  let!(:admin) { FactoryBot.create(:admin) }
+  # 正常なレスポンスか？
+  it 'responds successfully' do
+    get user_path(admin)
+    expect(response).to be_success
+  end
+  # 200レスポンスが返ってきているか？
+  it 'returns a 200 response' do
+    get user_path(admin)
+    expect(response).to have_http_status '200'
+  end
+end
+
+describe 'GET #show' do
+  let!(:admin) { FactoryBot.create(:admin) }
+
+  context 'ユーザーが存在する場合' do
+    it 'リクエストが成功すること' do
+      get user_path(admin)
+      expect(response.status).to eq 200
+    end
+
+    it 'ユーザー名が表示されていること' do
+      get user_path(admin)
+      expect(response.body).to include 'Admin'
+    end
   end
 
-  #SUCCESS!!
-  it 'メールアドレスは保存前に小文字変換されること' do
-    user.email = 'TEST@GMAIL.COM'
-    user.save
-    expect(user.email).to eq 'test@gmail.com'
+  context 'ユーザーが存在しない場合' do
+    subject { -> { get user_path 1 } }
+    it { is_expected.to raise_error ActiveRecord::RecordNotFound }
   end
+end
 
-  describe 'メールアドレスは規定の正規表現に従うこと' do
-    #SUCCESS!!
-    it 'ドメインのないメールアドレスは無効なこと' do
-      user.email = 'test'
-      user.valid?
-      expect(user.errors[:email]).to include('は不正な値です')
-    end
-    #SUCCESS!!
-    it 'ドメインのあるメールアドレスは有効なこと' do
-      user.email = 'test@ruby.org'
-      expect(user).to be_valid
-    end
+describe 'GET #new' do
+#SUCCES!!
+  it 'リクエストが成功すること' do
+    get new_user_path
+    expect(response.status).to eq 200
   end
+end
 
-  describe 'パスワードの正規表現' do
-    #SUCCESS!!
-    it '10文字以上20文字以下で、大文字・小文字・数字を最低1文字含むパスワードは有効であること' do
-      user.password = 'Password12'
-      expect(user).to be_valid
-    end
+describe 'GET #edit' do
+  let!(:admin) { FactoryBot.create(:admin) }
+
+  before do
+    login_as(admin)
+    @user = admin
   end
-
-  describe '名前の長さ' do
-    #SUCCESS!!
-    it '21文字の名前は無効であること' do
-      user.name = 'あ' * 21
-      user.valid?
-      expect(user.errors[:name]).to include('は20文字以内で入力してください')
-    end
-#SUCCESS!!
-    it '20文字の名前は有効であること' do
-      user.name = 'あ' * 20
-      expect(user).to be_valid
-    end
+#SUCCES!!
+  it 'リクエストが成功すること' do
+    get edit_user_path(admin)
+    expect(response.status).to eq 200
   end
-#SUCCESS!!
-  describe 'メールアドレスの長さ' do
-    it '256文字の名前は無効であること' do
-      user.email = 'あ' * 256
-      user.valid?
-      expect(user.errors[:email]).to include('は255文字以内で入力してください')
-    end
-#SUCCESS!!
-    it '255文字の名前は有効であること' do
-      domain = '@a.com'
-      user.email = 'a' * (255 - domain.length) + domain
-      expect(user).to be_valid
-    end
+#SUCCES!!
+  it 'ユーザー名が表示されていること' do
+    get edit_user_path(admin)
+    expect(response.body).to include 'Admin'
   end
-#SUCCESS!!
-  describe ' 画像のアップロード' do
-    it '画像なしでも有効であること' do      
-    no_image_user = FactoryBot.build(:user, email: user.email, picture: nil)      
-      expect(user).to be_valid
-    end
+#SUCCES!!
+  it 'メールアドレスが表示されていること' do
+    get edit_user_path(admin)
+    expect(response.body).to include 'admin', '@example.com'
+  end
+end
 
-    #FAILER!!
-    it '画像なしの場合、デフォルト画像が設定されること' do
-      no_image_user = FactoryBot.build(:user, email: user.email)                                
-      binding.pry      
-      expect(user.picture.url).to eq '/default.png'
-    end
+# describe 'POST #create' do
 
-     #FAILER!!
-    it 'デフォルト画像以外の画像を設定できること' do
-      image_user = FactoryBot.create(:admin)              
-      image_path = Rails.root.join('public/default/guy2.png')
-      user.picture = File.open(fixture_path)
-      user.save
-      expect(admin.picture.url).to eq "/uploads/user/image/#{user.id}/satan.png"      
-    end
+#     context 'パラメータが妥当な場合' do
+#       fit 'リクエストが成功すること' do
+#         post users_path, params: { user: FactoryBot.attributes_for(:admin) }
+#         expect(response.status).to eq 302
+#       end
 
-    # FAILER!!
-    it '5MBを超える画像はアップロードできないこと' do
-      image_path = Rails.root.join('public/default/over_5MB.png')
-      user.picture = File.open(image_path)
-      user.valid?
-      expect(user.errors[:image]).to include 'は5MB以下にする必要があります'
-    end
-   end
+#       fit 'ユーザーが登録されること' do
+#         expect do
+#           post users_path, params: { user: FactoryBot.attributes_for(:admin) }
+#         end.to change(User, :count).by(1)
+#       end
 
-   #SUCCESS!!　ただし、dependent: :destroyが邪魔になる。
-  describe '削除の依存関係' do
-    it '削除すると、紐づくフォローも全て削除されること' do
-      testuser.save
-      other.save            
-      user.follow(testuser)
-      user.follow(other)                   
-      expect {user.destroy }.to change(user.following, :count).by(-2)                        
-    end
+#       fit 'リダイレクトすること' do
+#         post users_path, params: { user: FactoryBot.attributes_for(:admin) }
+#         expect(response).to redirect_to User.last
+#       end
+#     end
 
-    #SUCCESS!!　ただし、dependent: :destroyが邪魔になる。
-    it '削除すると、紐づくフォロワーも全て削除されること' do
-      testuser.save      
-      user.follow(testuser)                                      
+#     context 'パラメータが不正な場合' do
+#       it 'リクエストが成功すること' do
+#         post users_path,
+#              params: { admin: FactoryBot.attributes_for(:user, :invalid) }
+#         expect(response.status).to eq 200
+#       end
+
+#       it 'ユーザーが登録されないこと' do
+#         expect do
+#           post users_path,
+#                params: { admin: FactoryBot.attributes_for(:user, :invalid) }
+#         end.to_not change(User, :count)
+#       end
+
+#       it 'エラーが表示されること' do
+#         post users_path,
+#              params: { admin: FactoryBot.attributes_for(:user, :invalid) }
+#         expect(response.body).to include 'prohibited this user from being saved'
+#       end
+#     end
+#   end
+
+# describe 'PUT #update' do
+# let!(:admin) { FactoryBot.create(:admin) }
+# let!(:user) { FactoryBot.create(:user) }
+
+# before do
+# login_as(admin)
+# @user = admin
+# end
+
+#   context 'パラメータが妥当な場合' do
+#     fit 'リクエストが成功すること' do
+#       put user_path admin, params: { admin: FactoryBot.attributes_for(:user) }
+#       expect(response.status).to eq 302
+#     end
+
+#     fit 'ユーザー名が更新されること' do
+#       expect do
+#         put user_path admin,
+#                       params: { admin: FactoryBot.attributes_for(:user) }
+#       end.to change { User.find(user.id).name }.from('user1').to('user2')
+#     end
+
+#     fit 'リダイレクトすること' do
+#       put user_path admin, params: { admin: FactoryBot.attributes_for(:user) }
+#       expect(response).to redirect_to User.last
+#     end
+#   end
+
+#   context 'パラメータが不正な場合' do
+#     it 'リクエストが成功すること' do
+#       put user_path admin,
+#                     params: { admin: FactoryBot.attributes_for(:user1,
+#                                                                :invalid) }
+#       expect(response.status).to eq 200
+#     end
+
+#     it 'ユーザー名が変更されないこと' do
+#       expect do
+#         put user_path admin,
+#                       params: { admin: FactoryBot.attributes_for(:user1,
+#                                                                  :invalid) }
+#       end.to_not change(User.find(user.id), :name)
+#     end
+
+#     it 'エラーが表示されること' do
+#       put user_path admin,
+#                     params: { admin: FactoryBot.attributes_for(:user1,
+#                                                                :invalid) }
+#       expect(response.body).to include 'prohibited this user from being saved'
+#     end
+#   end
+# end
+
+describe 'DELETE #destroy' do
+  let!(:admin) { FactoryBot.create(:admin) }
+  let!(:guestuser) { FactoryBot.create(:guestuser) }
+
+  context 'as a admin' do
+    before do
+      login_as(admin)
+    end
+#SUCCES!!
+    it 'リクエストが成功すること' do
+      delete user_path(admin)
+      expect(response.status).to eq 302
+    end
+    it 'ユーザーが削除されること' do
       expect do
-        user.destroy
-      end.to change(testuser.followers,:count).by(-1)                               
+        delete user_path(admin)
+      end.to change(User, :count).by(-1)
     end
 
-     #SUCCESS!!　ただし、dependent: :destroyが邪魔になる。      
-    it '削除すると、紐づくアイテムも全て削除されること' do  
-        admin.save                      
-        item1 = create(:item1, user_id: admin.id, cordinate_id: cordinate1.id)
-        item2 = create(:item2, user_id: admin.id, cordinate_id: cordinate2.id)                
-        expect { admin.destroy }.to change(Item.all, :count).by(-2)
-      end
-
-      it '削除すると、紐づくコーディネートも全て削除されること' do
-        expect { user.destroy }.to change(user.cordinates, :count).by(-2)
-      end
-
-    #   it '削除すると、紐づくコメントも全て削除されること' do
-    #     expect { user.destroy }.to change(user.comments, :count).by(-2)
-    #   end
-
-    #   it '削除すると、紐づくlikecordinateも全て削除されること' do
-    #     expect { user.destroy }.to change(user.likecordinates, :count).by(-2)
-    #   end
-
-    # ここから、他のテストと併用して記述する
-
-    # 削除すると、紐づく通知も全て削除されること
-    it 'destroys all follows when deleted' do
-      comment.create_notice_comment_like(user1)
-      comment.create_notice_comment_like(user2)
-      expect { user.destroy }.to change(user.passive_notices, :count).by(-2)
-    end
-
-    # 削除すると、紐づくブロックも全て削除されること
-    it 'destroys all blocks when deleted' do
-      user.block(admin)
-      user.block(blockuser)
-      expect { user.destroy }.to change(user.blocking, :count).by(-2)
+    it 'ユーザー一覧にリダイレクトすること' do
+      delete user_path(admin)
+      expect(response).to redirect_to(users_path)
     end
   end
-
-  #SUCCESS!!
-  it 'bcryptによるダイジェスト生成がうまくいくこと' do
-    expect(User.digest('test')).to include('$2a')
-  end
-#SUCCESS!!
-  it 'base64によるトークン生成がうまくいくこと' do
-    expect(User.new_token.length).to eq 22
-  end
-#SUCCESS!!
-  it 'remember_digestにトークンが保存されること' do
-    expect(user.remember_digest).to eq nil
-    user.remember
-    expect(user.remember_digest).to include('$2a')
-  end
-
-  it 'autenticated?メソッドでダイジェストと適切に照合ができること' do
-    expect(user.authenticated?(:password, 'Password12')).to be_truthy
-  end
-
-  it 'パスワード再設定のダイジェストを設定できること' do
-    expect(user.reset_digest).to eq nil
-    user.create_reset_digest
-    expect(user.reset_digest).to include('$2a')
-    # 複数回のリセットも問題ないこと
-    user.create_reset_digest
-    expect(user.reset_digest).to include('$2a')
-  end
-
-  it 'パスワード再設定の設定時に時刻が設定できること' do
-    expect(user.reset_sent_at).to eq nil
-    current_time = Time.zone.now
-    sleep(1)
-    user.create_reset_digest
-    expect(user.reset_sent_at >= current_time).to be_truthy
-  end
-
-  # パスワードの再設定期限
-  describe 'time limit of password reset' do
-    it '2時間以内ならfalseとなること' do
-      user.reset_sent_at = Time.zone.now - 2.hours + 1.second
-      expect(user.password_reset_expired?).to be_falsy
+  context 'as a guestuser' do
+    before do
+      login_as(guestuser)
     end
 
-    # 2時間を超えるならtrueできること
-    it 'returns true password within 2 hours' do
-      user.reset_sent_at = Time.zone.now - 2.hours
-      expect(user.password_reset_expired?).to be_truthy
+    it ' 正常にレスポンスが返ってきているか' do
+      delete user_path(admin)
+      expect(response).to_not be_success
     end
-  end
-
-  #SUCCESS!!
-  it 'ユーザーのremember digestを破棄できること' do
-    user.remember_digest = 'test'
-    user.save
-    user.forget
-    expect(User.find(user.id).remember_digest).to eq nil
-  end
-
-  # ここから
-
-  # フォロー
-  describe 'follow' do
-    it 'is valid with test data' do
-      expect(relationship).to be_valid
+    it '302レスポンスが返ってきているか' do
+      delete user_path(admin)
     end
-
-    it 'フォローできること' do
-      expect { user.follow(admin) }.to change(admin.followers, :count).by(1)
-    end
-
-    # うまくアンフォローできること
-    it 'can unfollow successfully' do
-      user.follow(admin)
-      expect { user.unfollow(admin) }.to change(admin.followers, :count).by(-1)
-    end
-
-    # フォローしていたらtrue、フォローしていないときはfalseを返すこと
-    it 'returns true if he is follower, not if false' do
-      user.follow(admin)
-      expect(user.following?(admin)).to be_truthy
-      expect(user.following?(blockuser)).to be_falsy
-    end
-  end
-
-  # ブロック
-  describe 'block' do    
-    fit 'うまくブロックできること' do
-      expect { user.block(blockuser) }.to change(user.blocking, :count).by(1)
-    end
-
-    # うまくアンブロックできること
-    it 'can unblock successfully' do
-      user.block(blockuser)
-      expect { user.unblock(blockuser) }.to change(user.blocking, :count).by(-1)
-    end
-
-    # ブロックしていたらtrue、ブロックしていないときはfalseを返すこと
-    it 'returns true if he is blocked, not if false' do
-      user.block(blockuser)
-      expect(user.blocking?(blockuser)).to be_truthy
-      expect(user.blocking?(admin)).to be_falsy
-    end
-  end
-
-  # 通知
-  describe 'notice' do
-    context 'action: follow' do
-      # 初回フォローで通知が作成されること
-      it 'can create notice if you have been followed first time' do
-        expect do
-          user.create_notice_follow(user1)
-        end.to change(user.passive_notices, :count).by(1)
-      end
-
-      # 過去にフォローしたことがある場合、通知は作成されずnilを返すこと
-      it 'can not create notice if you have been already followed' do
-        expect do
-          user.create_notice_follow(user1)
-        end.to change(user.passive_notices, :count).by(1)
-        expect(user.create_notice_follow(user1)).to eq nil
-      end
-    end
-  end
-
-  #SUCCESS!!
-  it 'アカウント有効化ダイジェストが作成されること' do
-    expect(user.activation_digest).to include('$2a$')
-  end
-
-  it 'ブロックまたはブロックされているユーザのidを返す' do
-    user.block user1
-    user1.block user2
-    expect(user1.block_ids.count).to eq 2
-    expect(user1.block_ids.include?(user.id)).to eq true
-    expect(user1.block_ids.include?(user2.id)).to eq true
-  end
-
-  describe '作成のコールバック' do
-    it '管理者ユーザの作成時は、メッセージが作成されないこと' do
-      a = FactoryBot.create(:admin)
-      expect(a.messages.count).to eq 0
-    end
-
-    # 一般ユーザの作成時は、初期メッセージが2件送信されること
-    it 'can create messages if user is not an admin' do
-      expect(user).to change(user.messages, :count).by(2)
+    it 'ログイン画面にリダイレクトされているか' do
+      delete user_path(admin)
+      expect(response).to redirect_to '/users/sign_in'
     end
   end
 end
