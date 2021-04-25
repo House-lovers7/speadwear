@@ -9,7 +9,6 @@ RSpec.describe Block, type: :model do
   let!(:blockuser) { build(:blockuser) }
   let(:block1){FactoryBot.build(:block1, blocker_id: admin.id, blocked_id: blockuser.id)}
 
-
   #SUCCESS!!
   it '有効なファクトリを持つこと' do    
     expect(block1).to be_valid
