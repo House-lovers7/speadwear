@@ -15,7 +15,7 @@ FactoryBot.define do
     association :user
     picture do
       Rack::Test::UploadedFile.new(File.join(Rails.root,
-                                             'spec/fixtures/cordinate1.JPG'))
+                                             'spec/fixtures/cordinate1.jpg'))
     end
     # userならできるのにownerはできないのはどうしてか？
     # association :owner
@@ -36,7 +36,7 @@ FactoryBot.define do
     association :user
     picture do
       Rack::Test::UploadedFile.new(File.join(Rails.root,
-                                             'spec/fixtures/cordinate2.JPG'))
+                                             'spec/fixtures/cordinate2.jpg'))
     end
   end
 
@@ -53,7 +53,7 @@ FactoryBot.define do
     association :user
     picture do
       Rack::Test::UploadedFile.new(File.join(Rails.root,
-                                             'spec/fixtures/cordinate3.JPG'))
+                                             'spec/fixtures/cordinate3.jpg'))
     end
   end
 
@@ -70,7 +70,7 @@ FactoryBot.define do
     association :user
     picture do
       Rack::Test::UploadedFile.new(File.join(Rails.root,
-                                             'spec/fixtures/cordinate4.JPG'))
+                                             'spec/fixtures/cordinate4.jpg'))
     end
   end
 
@@ -87,7 +87,7 @@ FactoryBot.define do
     association :user
     picture do
       Rack::Test::UploadedFile.new(File.join(Rails.root,
-                                             'spec/fixtures/cordinate5.JPG'))
+                                             'spec/fixtures/cordinate5.jpg'))
     end
   end
 
@@ -104,7 +104,7 @@ FactoryBot.define do
     association :user
     picture do
       Rack::Test::UploadedFile.new(File.join(Rails.root,
-                                             'spec/fixtures/cordinate6.JPG'))
+                                             'spec/fixtures/cordinate6.jpg'))
     end
   end
 
@@ -121,7 +121,7 @@ FactoryBot.define do
     association :user
     picture do
       Rack::Test::UploadedFile.new(File.join(Rails.root,
-                                             'spec/fixtures/cordinate7.JPG'))
+                                             'spec/fixtures/cordinate7.jpg'))
     end
   end
 
@@ -138,7 +138,7 @@ FactoryBot.define do
     association :user
     picture do
       Rack::Test::UploadedFile.new(File.join(Rails.root,
-                                             'spec/fixtures/cordinate8.JPG'))
+                                             'spec/fixtures/cordinate8.jpg'))
     end
   end
 
@@ -158,7 +158,7 @@ FactoryBot.define do
     association :user
     picture do
       Rack::Test::UploadedFile.new(File.join(Rails.root,
-                                             'spec/fixtures/cordinate1.JPG'))
+                                             'spec/fixtures/cordinate1.jpg'))
     end
     # userならできるのにownerはできないのはどうしてか？
     # association :owner
@@ -180,7 +180,7 @@ FactoryBot.define do
     association :user
     picture do
       Rack::Test::UploadedFile.new(File.join(Rails.root,
-                                             'spec/fixtures/cordinate1.JPG'))
+                                             'spec/fixtures/cordinate1.jpg'))
     end
     # userならできるのにownerはできないのはどうしてか？
     # association :owner

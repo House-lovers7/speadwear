@@ -27,11 +27,9 @@ end
       # expect(response.status).to eq 302
     end
 
-    fit 'ユーザー名が更新されること' do
+    it 'ユーザー名が更新されること' do
       user_params = FactoryBot.attributes_for(:admin,
-      name: "admin_update")
-      
-      binding.pry
+      name: "admin_update")            
       
       patch user_path admin, params: { id:@admin.id, name: user_params}
       expect(@admin.reload.name).to eq "admin_update"
