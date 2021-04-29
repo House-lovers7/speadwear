@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   # root "/LP"
   get '/lp', to: redirect('/lp.html')
 
-  resources :users
   resources :items
   resources :account_activations, only: [:edit]
   resources :password_resets, only: %i[new create edit update]
@@ -29,6 +28,7 @@ Rails.application.routes.draw do
 
   # コメントの実装
 
+
   delete '/logout', to: 'sessions#destroy'
   get 'search', to: 'items#search'
   get '/help', to: 'static_pages#help'
@@ -40,13 +40,11 @@ Rails.application.routes.draw do
 
   # かんたんログインの実装
   post '/sessions/guest_log_in', to: 'sessions#guest_login', as: 'guest_login'
-
   # 全てのUserのItemとCordinateをみる
   get '/:user_id/cordinates/allusers', to: 'cordinates#all_cordinate_show',
                                        as: 'all_cordinate_show'
   get '/:user_id/items/allusers', to: 'items#all_item_show', as: 'all_item_show'
 
-  # Rasnsackの設定
 
   # Rasnsackで全てのUserのItemをみる
   get '/:user_id/items/items_search/tpo', to: 'items#all_item_tpo_search',
@@ -104,6 +102,7 @@ Rails.application.routes.draw do
   # saveに関してリファクタリングの可能性を検討する
   get '/users/:user_id/cordinates/:id/items/:item_id/edit',
       to: 'cordinates#item_edit', as: 'cordinate_item_edit'
+
   get '/users/:user_id/cordinates/:id/save', to: 'cordinates#cordinate_save',
                                              as: 'cordinate_edit_save'
   post '/users/:user_id/cordinates/:id/edit', to: 'cordinates#cordinate_save',
@@ -112,7 +111,6 @@ Rails.application.routes.draw do
   # controllerを変える必要はあるのか？
   patch '/users/:user_id/cordinates/:id/', to: 'cordinates#update',
                                            as: 'cordinate_patch'
-
   delete '/users/:user_id/cordinates/:id', to: 'cordinates#destroy',
                                            as: 'cordinate_delete'
   patch '/users/:user_id/cordinates/:id/items/:item_id',

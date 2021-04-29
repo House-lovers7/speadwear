@@ -23,6 +23,9 @@ class CordinatesController < ApplicationController
 
     @user = User.find_by(id: @cordinate.user.id)
     params[:user_id] = @user.id
+    
+    cordinate_si_picture_set
+
   end
 
   def all_cordinate_show
