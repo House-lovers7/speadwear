@@ -15,7 +15,9 @@ set :rbenv_type, :user
 set :rbenv_ruby, '2.7.2p137' 
 
 # どの公開鍵を利用してデプロイするか
+
 set :ssh_options, auth_methods: ['publickey'],
+                  user: "ec2-user",
                   keys: ['~/.ssh/speadwear-keypair.pem'] 
 
 # プロセス番号を記載したファイルの場所
