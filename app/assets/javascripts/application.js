@@ -27,9 +27,6 @@
 //= require_tree .
 
 
-
-
-
 /*!
  * Raty - A Star Rating Plugin
  *
@@ -41,7 +38,7 @@
  *
  */
 
-(function(root, factory) {
+(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define(['jquery'], factory);
   } else if (typeof module === 'object' && module.exports) {
@@ -49,63 +46,63 @@
   } else {
     factory(root.jQuery);
   }
-}(this, function($) {
+}(this, function ($) {
   'use strict';
 
   $.raty = {
     cancelButton: false,
-    cancelClass:  'raty-cancel',
-    cancelHint:   'Cancel this rating!',
-    cancelOff:    'cancel-off.png',
-    cancelOn:     'cancel-on.png',
-    cancelPlace:  'left',
-    click:        undefined,
-    half:         false,
-    halfShow:     true,
-    hints:        ['bad', 'poor', 'regular', 'good', 'gorgeous'],
-    iconRange:    undefined,
-    mouseout:     undefined,
-    mouseover:    undefined,
-    noRatedMsg:   'Not rated yet!',
-    number:       5,
-    numberMax:    20,
-    path:         undefined,
-    precision:    false,
-    readOnly:     false,
-    round:        { down: 0.25, full: 0.6, up: 0.76 },
-    score:        undefined,
-    scoreName:    'score',
-    single:       false,
-    space:        true,
-    starHalf:     'star-half.png',
-    starOff:      'star-off.png',
-    starOn:       'star-on.png',
-    starType:     'img',
-    target:       undefined,
+    cancelClass: 'raty-cancel',
+    cancelHint: 'Cancel this rating!',
+    cancelOff: 'cancel-off.png',
+    cancelOn: 'cancel-on.png',
+    cancelPlace: 'left',
+    click: undefined,
+    half: false,
+    halfShow: true,
+    hints: ['bad', 'poor', 'regular', 'good', 'gorgeous'],
+    iconRange: undefined,
+    mouseout: undefined,
+    mouseover: undefined,
+    noRatedMsg: 'Not rated yet!',
+    number: 5,
+    numberMax: 20,
+    path: undefined,
+    precision: false,
+    readOnly: false,
+    round: { down: 0.25, full: 0.6, up: 0.76 },
+    score: undefined,
+    scoreName: 'score',
+    single: false,
+    space: true,
+    starHalf: 'star-half.png',
+    starOff: 'star-off.png',
+    starOn: 'star-on.png',
+    starType: 'img',
+    target: undefined,
     targetFormat: '{score}',
-    targetKeep:   false,
-    targetScore:  undefined,
-    targetText:   '',
-    targetType:   'hint'
+    targetKeep: false,
+    targetScore: undefined,
+    targetText: '',
+    targetType: 'hint'
   };
 
-  $.fn.raty = function(options) {
-    return this.each(function() {
+  $.fn.raty = function (options) {
+    return this.each(function () {
       var instance = new $.raty.Raty(this, options);
 
       return instance._create();
     });
   };
 
-  $.raty.Raty = (function() {
-    var Raty = function(element, options) {
+  $.raty.Raty = (function () {
+    var Raty = function (element, options) {
       this.element = element;
-      this.self    = $(element);
-      this.opt     = $.extend(true, {}, $.raty, options, this.self.data());
+      this.self = $(element);
+      this.opt = $.extend(true, {}, $.raty, options, this.self.data());
     };
 
     Raty.prototype = {
-      _create: function() {
+      _create: function () {
         this._executeCallbacks();
         this._adjustNumber();
         this._adjustHints();
@@ -145,13 +142,13 @@
       },
 
       // TODO: model spec
-      _adjustedScore: function(score) {
+      _adjustedScore: function (score) {
         if (score || score === 0) {
           return this._between(score, 0, this.opt.number);
         }
       },
 
-      _adjustHints: function() {
+      _adjustHints: function () {
         if (!this.opt.hints) {
           this.opt.hints = [];
         }
@@ -184,15 +181,15 @@
         }
       },
 
-      _adjustNumber: function() {
+      _adjustNumber: function () {
         this.opt.number = this._between(this.opt.number, 1, this.opt.numberMax);
       },
 
-      _adjustPrecision: function() {
+      _adjustPrecision: function () {
         this.opt.half = true;
       },
 
-      _adjustStarName: function() {
+      _adjustStarName: function () {
         var replaces = ['cancelOff', 'cancelOn', 'starHalf', 'starOff', 'starOn'];
 
         this.opt.path = '';
@@ -203,7 +200,7 @@
       },
 
       // TODO: model spec
-      _apply: function(score) {
+      _apply: function (score) {
         this._fill(score);
 
         if (score) {
@@ -215,8 +212,8 @@
         }
       },
 
-      _attributesForIndex: function(i) {
-        var name       = this._nameForIndex(i);
+      _attributesForIndex: function (i) {
+        var name = this._nameForIndex(i);
         var attributes = { alt: i, src: this.opt.path + this.opt[name] };
 
         if (this.opt.starType !== 'img') {
@@ -228,12 +225,12 @@
         return attributes;
       },
 
-      _between: function(value, min, max) {
+      _between: function (value, min, max) {
         return Math.min(Math.max(parseFloat(value), min), max);
       },
 
       // TODO: model spec
-      _binds: function() {
+      _binds: function () {
         if (this.cancelButton) {
           this._bindOverCancel();
           this._bindClickCancel();
@@ -246,16 +243,16 @@
       },
 
       // TODO: model spec
-      _bindClick: function() {
+      _bindClick: function () {
         var that = this;
 
-        this.stars.on('click.raty', function(evt) {
+        this.stars.on('click.raty', function (evt) {
           if (that.self.data('readonly')) {
             return;
           }
 
           var execute = true;
-          var score   = (that.opt.half || that.opt.precision) ? that.self.data('score') : (this.alt || $(this).data('alt'));
+          var score = (that.opt.half || that.opt.precision) ? that.self.data('score') : (this.alt || $(this).data('alt'));
 
           if (that.opt.half && !that.opt.precision) {
             score = that._roundHalfScore(score);
@@ -272,8 +269,8 @@
       },
 
       // TODO: model spec
-      _bindClickCancel: function() {
-        this.cancelButton.on('click.raty', function(evt) {
+      _bindClickCancel: function () {
+        this.cancelButton.on('click.raty', function (evt) {
           this.scoreField.removeAttr('value');
 
           if (this.opt.click) {
@@ -283,8 +280,8 @@
       },
 
       // TODO: model spec
-      _bindOut: function() {
-        this.self.on('mouseleave.raty', function(evt) {
+      _bindOut: function () {
+        this.self.on('mouseleave.raty', function (evt) {
           var score = +this.scoreField.val() || undefined;
 
           this._apply(score);
@@ -298,10 +295,10 @@
       },
 
       // TODO: model spec
-      _bindOutCancel: function() {
+      _bindOutCancel: function () {
         var that = this;
 
-        this.cancelButton.on('mouseleave.raty', function(evt) {
+        this.cancelButton.on('mouseleave.raty', function (evt) {
           var icon = that.opt.cancelOff;
 
           if (that.opt.starType !== 'img') {
@@ -319,11 +316,11 @@
       },
 
       // TODO: model spec
-      _bindOver: function() {
-        var that   = this;
+      _bindOver: function () {
+        var that = this;
         var action = that.opt.half ? 'mousemove.raty' : 'mouseover.raty';
 
-        this.stars.on(action, function(evt) {
+        this.stars.on(action, function (evt) {
           var score = that._getScoreByPosition(evt, this);
 
           that._fill(score);
@@ -344,16 +341,16 @@
       },
 
       // TODO: model spec
-      _bindOverCancel: function() {
+      _bindOverCancel: function () {
         var that = this;
 
-        this.cancelButton.on('mouseover.raty', function(evt) {
+        this.cancelButton.on('mouseover.raty', function (evt) {
           if (that.self.data('readonly')) {
             return;
           }
 
           var starOff = that.opt.path + that.opt.starOff;
-          var icon    = that.opt.cancelOn;
+          var icon = that.opt.cancelOn;
 
           if (that.opt.starType === 'img') {
             that.stars.attr('src', starOff);
@@ -373,13 +370,13 @@
       },
 
       // TODO: model spec
-      _buildScoreField: function() {
+      _buildScoreField: function () {
         return $('<input />', { name: this.opt.scoreName, type: 'hidden' }).appendTo(this.self);
       },
 
       // TODO: model spec
-      _createCancel: function() {
-        var icon   = this.opt.path + this.opt.cancelOff;
+      _createCancel: function () {
+        var icon = this.opt.path + this.opt.cancelOff;
         var button = $('<' + this.opt.starType + ' />', { title: this.opt.cancelHint, 'class': this.opt.cancelClass });
 
         if (this.opt.starType === 'img') {
@@ -399,13 +396,13 @@
       },
 
       // TODO: model spec
-      _createScore: function() {
+      _createScore: function () {
         var score = $(this.opt.targetScore);
 
         this.scoreField = score.length ? score : this._buildScoreField();
       },
 
-      _createStars: function() {
+      _createStars: function () {
         for (var i = 1; i <= this.opt.number; i++) {
           var attributes = this._attributesForIndex(i);
 
@@ -420,13 +417,13 @@
       },
 
       // TODO: model spec
-      _error: function(message) {
+      _error: function (message) {
         $(this).text(message);
 
         $.error(message);
       },
 
-      _executeCallbacks: function() {
+      _executeCallbacks: function () {
         var options = ['number', 'readOnly', 'score', 'scoreName', 'target', 'path'];
 
         for (var i = 0; i < options.length; i++) {
@@ -443,12 +440,12 @@
       },
 
       // TODO: model spec
-      _fill: function(score) {
+      _fill: function (score) {
         var hash = 0;
 
         for (var i = 1; i <= this.stars.length; i++) {
           var icon;
-          var star   = this.stars[i - 1];
+          var star = this.stars[i - 1];
           var turnOn = this._turnOn(i, score);
 
           if (this.opt.iconRange && this.opt.iconRange.length > hash) {
@@ -471,9 +468,9 @@
         }
       },
 
-      _getDecimal: function(number, fractions) {
+      _getDecimal: function (number, fractions) {
         var decimal = number.toString().split('.')[1];
-        var result  = 0;
+        var result = 0;
 
         if (decimal) {
           result = parseInt(decimal.slice(0, fractions), 10);
@@ -487,16 +484,16 @@
       },
 
       // TODO: model spec
-      _getRangeIcon: function(irange, turnOn) {
+      _getRangeIcon: function (irange, turnOn) {
         return turnOn ? irange.on || this.opt.starOn : irange.off || this.opt.starOff;
       },
 
       // TODO: model spec
-      _getScoreByPosition: function(evt, icon) {
+      _getScoreByPosition: function (evt, icon) {
         var score = parseInt(icon.alt || icon.getAttribute('data-alt'), 10);
 
         if (this.opt.half) {
-          var size    = this._getWidth();
+          var size = this._getWidth();
           var percent = parseFloat((evt.pageX - $(icon).offset().left) / size);
 
           score = score - 1 + percent;
@@ -506,16 +503,16 @@
       },
 
       // TODO: model spec
-      _getHint: function(score, evt) {
+      _getHint: function (score, evt) {
         if (score !== 0 && !score) {
           return this.opt.noRatedMsg;
         }
 
         var decimal = this._getDecimal(score, 1);
         var integer = Math.ceil(score);
-        var group   = this.opt.hints[(integer || 1) - 1];
-        var hint    = group;
-        var set     = !evt || this.isMove;
+        var group = this.opt.hints[(integer || 1) - 1];
+        var hint = group;
+        var set = !evt || this.isMove;
 
         if (this.opt.precision) {
           if (set) {
@@ -533,7 +530,7 @@
       },
 
       // TODO: model spec
-      _getWidth: function() {
+      _getWidth: function () {
         var width = this.stars[0].width || parseFloat(this.stars.eq(0).css('font-size'));
 
         if (!width) {
@@ -544,11 +541,11 @@
       },
 
       // TODO: model spec
-      _lock: function() {
+      _lock: function () {
         var hint = this._getHint(this.scoreField.val());
 
         this.element.style.cursor = '';
-        this.element.title        = hint;
+        this.element.title = hint;
 
         this.scoreField.prop('readonly', true);
         this.stars.prop('title', hint);
@@ -560,19 +557,19 @@
         this.self.data('readonly', true);
       },
 
-      _nameForIndex: function(i) {
+      _nameForIndex: function (i) {
         return this.opt.score && this.opt.score >= i ? 'starOn' : 'starOff';
       },
 
       // TODO: model spec
-      _resetTitle: function() {
+      _resetTitle: function () {
         for (var i = 0; i < this.opt.number; i++) {
           this.stars[i].title = this._getHint(i + 1);
         }
       },
 
       // TODO: model spec
-      _roundHalfScore: function(score) {
+      _roundHalfScore: function (score) {
         var integer = parseInt(score, 10);
         var decimal = this._getDecimal(score, 1);
 
@@ -584,7 +581,7 @@
       },
 
       // TODO: model spec
-      _roundStars: function(score, evt) {
+      _roundStars: function (score, evt) {
         var name = this._starName(score, evt);
 
         if (name) {
@@ -596,11 +593,11 @@
       },
 
       // TODO: model spec
-      _setIcon: function(star, icon) {
+      _setIcon: function (star, icon) {
         star[this.opt.starType === 'img' ? 'src' : 'className'] = this.opt.path + icon;
       },
 
-      _setPath: function() {
+      _setPath: function () {
         this.opt.path = this.opt.path || '';
 
         if (this.opt.path && this.opt.path.slice(-1)[0] !== '/') {
@@ -609,7 +606,7 @@
       },
 
       // TODO: model spec
-      _setTarget: function(target, score) {
+      _setTarget: function (target, score) {
         if (score) {
           score = this.opt.targetFormat.toString().replace('{score}', score);
         }
@@ -622,16 +619,16 @@
       },
 
       // TODO: model spec
-      _setTitle: function(score, evt) {
+      _setTitle: function (score, evt) {
         if (score) {
           var integer = parseInt(Math.ceil(score), 10);
-          var star    = this.stars[integer - 1];
+          var star = this.stars[integer - 1];
 
           star.title = this._getHint(score, evt);
         }
       },
 
-      _starName: function(score, evt) {
+      _starName: function (score, evt) {
         var decimal = +(score % 1).toFixed(2);
 
         if (evt || this.isMove) {
@@ -654,7 +651,7 @@
       },
 
       // TODO: model spec
-      _target: function(score, evt) {
+      _target: function (score, evt) {
         if (this.opt.target) {
           var target = $(this.opt.target);
 
@@ -687,12 +684,12 @@
       },
 
       // TODO: model spec
-      _turnOn: function(i, score) {
+      _turnOn: function (i, score) {
         return this.opt.single ? (i === score) : (i <= score);
       },
 
       // TODO: model spec
-      _unlock: function() {
+      _unlock: function () {
         this.element.style.cursor = 'pointer';
         this.element.removeAttribute('title');
 
@@ -708,7 +705,7 @@
       },
 
       // TODO: model spec
-      cancel: function(click) {
+      cancel: function (click) {
         if (this.self.data('readonly') !== true) {
           this[click ? 'click' : 'score'].call(this, null);
 
@@ -717,7 +714,7 @@
       },
 
       // TODO: model spec
-      click: function(score) {
+      click: function (score) {
         if (this.self.data('readonly') !== true) {
           score = this._adjustedScore(score);
 
@@ -732,9 +729,9 @@
       },
 
       // TODO: model spec
-      getScore: function() {
+      getScore: function () {
         var score = [];
-        var value ;
+        var value;
 
         value = this.scoreField.val();
 
@@ -744,20 +741,20 @@
       },
 
       // TODO: model spec
-      move: function(score) {
-        var integer  = parseInt(score, 10);
-        var decimal  = this._getDecimal(score, 1);
+      move: function (score) {
+        var integer = parseInt(score, 10);
+        var decimal = this._getDecimal(score, 1);
 
         if (integer >= this.opt.number) {
           integer = this.opt.number - 1;
           decimal = 10;
         }
 
-        var width   = this._getWidth();
-        var steps   = width / 10;
-        var star    = $(this.stars[integer]);
+        var width = this._getWidth();
+        var steps = width / 10;
+        var star = $(this.stars[integer]);
         var percent = star.offset().left + steps * decimal;
-        var evt     = $.Event('mousemove', { pageX: percent });
+        var evt = $.Event('mousemove', { pageX: percent });
 
         this.isMove = true;
 
@@ -767,7 +764,7 @@
       },
 
       // TODO: model spec
-      readOnly: function(readonly) {
+      readOnly: function (readonly) {
         if (this.self.data('readonly') !== readonly) {
           if (readonly) {
             this.self.off('.raty').children(this.opt.starType).off('.raty');
@@ -783,11 +780,11 @@
       },
 
       // TODO: model spec
-      score: function() {
+      score: function () {
         return arguments.length ? this.setScore.apply(this, arguments) : this.getScore();
       },
 
-      setScore: function(score) {
+      setScore: function (score) {
         if (this.self.data('readonly') !== true) {
           score = this._adjustedScore(score);
 

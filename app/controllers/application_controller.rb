@@ -13,7 +13,9 @@ class ApplicationController < ActionController::Base
 
   # 友達フラグを立てる
   def friend_user
-    @user = User.find(params[:user_id])
+    
+    @user = @current_user || User.find_by(id: session[:user_id])
+    
     if @user.following.include?(current_user) || @user == current_user || user.admin?
     else
       flash[:success] = '権限がありません!!'

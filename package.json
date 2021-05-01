@@ -1,4 +1,5 @@
 {
   "name": "speadwear",
-  "private": true
+  "private": true,
+  "dependencies": {}
 }
