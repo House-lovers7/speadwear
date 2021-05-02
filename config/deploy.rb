@@ -16,9 +16,14 @@ set :rbenv_ruby, '2.7.2'
 
 # どの公開鍵を利用してデプロイするか
 
-set :ssh_options, auth_methods: ['publickey'],
-                  user: "ec2-user",
-                  keys: ['~/.ssh/speadwear-keypair.pem'] 
+set :ssh_options, { 
+  auth_methods: ['publickey'],
+  user: "ec2-user",
+  # keys: ['~/.ssh/speadwear-keypair.pem'] 
+  keys: %w(/home/runner/.ssh/github),
+  forward_agent: false, 
+  # port: 10024    
+}             
 
 # プロセス番号を記載したファイルの場所
 set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
@@ -42,4 +47,3 @@ namespace :deploy do
     invoke 'unicorn:restart'
   end
 end
-
