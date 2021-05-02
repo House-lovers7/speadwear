@@ -7,6 +7,7 @@
         <%= image_tag 'default_cordinate.png' %>
         <% end %>
 
+
         <div class="item-button flex-colum justify-content-center"> <%# 縦ならびflex-colum 中央揃え justify-content-center  %>
           <div class="text-center">
             <% unless @likecordinates.find_by(user_id: current_user.id) %>
@@ -25,6 +26,3 @@
         <%= render 'shared/cordinate_comment' %>
         <%= render 'shared/cordinate_like' %>
       </div>
-
-      <%#= link_to image_tag( item.picture.url), item_show_path( user_id: item.user_id, id: item.id) unless
-                  item.picture.blank? %>

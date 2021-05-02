@@ -27,6 +27,12 @@ set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
 set :unicorn_config_path, -> { "#{current_path}/config/unicorn.rb" }
 set :keep_releases, 5
 
+set :default_env, {
+  aws_access_key_id: ENV['S3_ACCESS_KEY_ID'],
+  aws_secret_access_key: ENV['S3_SECRET_ACCESS_KEY'],
+  region: ENV['S3_REGION']
+}
+
 set :rbenv_path, '/home/ec2-user/.rbenv/'
 
 # デプロイ処理が終わった後、Unicornを再起動するための記述
@@ -36,3 +42,4 @@ namespace :deploy do
     invoke 'unicorn:restart'
   end
 end
+

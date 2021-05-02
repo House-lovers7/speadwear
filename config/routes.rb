@@ -73,6 +73,7 @@ Rails.application.routes.draw do
   get '/users/:user_id/index', to: 'users#index', as: 'allusers_index'
   get '/users/new', to: 'users#new', as: 'user_new'
   get '/users/:id/', to: 'users#show', as: 'user_show'
+  # get '/users/:id/ranking', to: 'users#ranking', as: 'user_ranking'
 
   # itemsコントローラー(個別User)
   get '/users/:user_id/items/all', to: 'items#user_all_item_show',
@@ -98,7 +99,10 @@ Rails.application.routes.draw do
                                              as: 'cordinate_edit'
   post '/users/:user_id/cordinates', to: 'cordinates#create',
                                      as: 'cordinate_create'
+  
+  # get '/users/:user_id/cordinates/:id/modal', to: 'cordinates#cordinate_modal',
 
+                                   
   # saveに関してリファクタリングの可能性を検討する
   get '/users/:user_id/cordinates/:id/items/:item_id/edit',
       to: 'cordinates#item_edit', as: 'cordinate_item_edit'
