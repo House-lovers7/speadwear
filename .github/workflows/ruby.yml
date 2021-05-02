@@ -1,31 +1,17 @@
 name: Ruby-Deploy-to-Production
-on: 
-  release:
-    types: [published]
-  repository_dispatch:
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout Repo
-      uses: actions/checkout@master
+on:
+  push:
+    branches: [ main ]    
+  workflow_dispatch:
+jobs:  
+  deploy:   
+    runs-on: ubuntu-latest    
+    steps:    
+    - uses: actions/checkout@v2
+    - uses: ruby/setup-ruby@v1
+      with:        
+        bundler-cache: true 
+    - uses: miloserdow/capistrano-deploy@master
       with:
-        ref: master
-    - name: Set up Ruby 2.7
-      uses: actions/setup-ruby@v1
-      with:
-        ruby-version: 2.7.2
-    - name: Install SSH key
-      uses: webfactory/ssh-agent@v0.1.1
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    - name: Install Libmysqlclient-dev
-      run: |
-        sudo apt-get install libmysqlclient-dev
-    - name: Bundle install
-      run: |
-        bundle install
-    - name: Deploy Production
-      run: |
-        bundle exec cap production deploy
+        target: production 
+        deploy_key: ${{ secrets.SSH_PRIVATE_KEY }}
