@@ -9,6 +9,7 @@
 - HTML
 - CSS
 - Javascript 
+- Capistrano 
 
 ## アプリケーションの概要
 
