@@ -10,20 +10,15 @@ class CordinatesController < ApplicationController
     item_cordinate_ransack_setup
   end
 
-  def show
-    # 複数のUserが存在して、異なるUserの同じCordinateIDがあると思うけど、それはどうなるん？？
-    @cordinate = Cordinate.find(params[:id])
-    # @comment = Comment.find_by(user_id: params[:user_id])
+  def show    
+    @cordinate = Cordinate.find(params[:id])    
     @comment ||= Comment.new(comment_params)
-    @cordinate_comments = Comment.where(cordinate_id: params[:id])
-    # 同じUserが所有するLikecordinateの配列が入る
+    @cordinate_comments = Comment.where(cordinate_id: params[:id])    
     @likecordinates = Likecordinate.where(cordinate_id: params[:id])
-    # 同じCordinateが所有するLikecordinateの配列？が入る
     @likecordinates_count = Likecordinate.where(cordinate_id: params[:id]).count
-
+    
     @user = User.find_by(id: @cordinate.user.id)
     params[:user_id] = @user.id
-
     cordinate_si_picture_set
   end
 
@@ -45,12 +40,10 @@ class CordinatesController < ApplicationController
 
   def create
     @cordinate = Cordinate.new(cordinate_params)
-
     @comment = Comment.new(comment_params)
-    # commentの集合を入れる
+    
     @comments = @cordinate.comments
     @comment.user_id = current_user.id
-
     @item = Item.where(super_item: params[:super_item])
     @cordinate.user_id = params[:user_id]
     cordinate_si_params_set
@@ -62,7 +55,6 @@ class CordinatesController < ApplicationController
 
     if @cordinate.save
       flash[:success] = 'コーデを作成しました!'
-
       redirect_to cordinate_edit_path(user_id: @cordinate.user.id,
                                       id: @cordinate.id)
     else
@@ -127,7 +119,6 @@ class CordinatesController < ApplicationController
     end
   end
 
-  # リファクタリングが必要か？
 
   def destroy
     @cordinate = Cordinate.find(params[:id])

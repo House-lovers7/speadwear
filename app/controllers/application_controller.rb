@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
       format.html { redirect_to main_app.root_url, alert: exception.message }
     end
   end
-
+  
   # 友達フラグを立てる
   def friend_user
     @user = @current_user || User.find_by(id: session[:user_id])
