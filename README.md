@@ -41,43 +41,43 @@
 ## アプリケーショの機能一覧
 
 :large_orange_diamond: ユーザー  
-  &emsp;&nbsp;メール認証  
-  &emsp;&nbsp;新規作成/表示/編集/削除
+  &emsp;&ensp;メール認証  
+  &emsp;&ensp;新規作成/表示/編集/削除
 
 :large_orange_diamond: フォロー&アンフォロー(Relationモデル)  
-  &emsp;&nbsp;新規作成(フォロー)/削除（アンフォロー)  
-  &emsp;&nbsp;権限管理(フォローしているユーザーのみ相手のコーディネートが提案できる)
+  &emsp;&ensp;新規作成(フォロー)/削除（アンフォロー)  
+  &emsp;&ensp;権限管理(フォローしているユーザーのみ相手のコーディネートが提案できる)
 
 :large_orange_diamond: ブロック  
-  &emsp;&nbsp;新規作成(ブロック)/削除（ブロック解除)  
-  &emsp;&nbsp;ブロックされたユーザーはブロックしたユーザーのページ閲覧と機能実行ができない。
+  &emsp;&ensp;新規作成(ブロック)/削除（ブロック解除)  
+  &emsp;&ensp;ブロックされたユーザーはブロックしたユーザーのページ閲覧と機能実行ができない。
 
 :large_orange_diamond: アイテム  
   &emsp;&nbsp;新規作成/表示/編集/削除
 
 :large_orange_diamond: アイテムの絞り込み検索機能（Ransack)  
-  &emsp;&nbsp;TPO（どんな気分の時に着るのか） ⇨ デート・リラックス・スポーツ・おでかけ・仕事 から選択  
-  &emsp;&nbsp;Season（どの季節で着るのか) ⇨　春・夏・秋・冬　から選択  
-  &emsp;&nbsp;Rating（どの評価の服を選ぶのか)　⇨　1〜５の5段階から選択  
-  &emsp;&nbsp;Color（何色の服を着るのか） ⇨　14色対応  
-  &emsp;&nbsp;カテゴリー（どのカテゴリーの着るのか)　⇨　アウター・トップス・ボトムス・シューズ の4つから選択
+  &emsp;&ensp;TPO（どんな気分の時に着るのか） ⇨ デート・リラックス・スポーツ・おでかけ・仕事 から選択  
+  &emsp;&ensp;Season（どの季節で着るのか) ⇨　春・夏・秋・冬　から選択  
+  &emsp;&ensp;Rating（どの評価の服を選ぶのか)　⇨　1〜５の5段階から選択  
+  &emsp;&ensp;Color（何色の服を着るのか） ⇨　14色対応  
+  &emsp;&ensp;カテゴリー（どのカテゴリーの着るのか)　⇨　アウター・トップス・ボトムス・シューズ の4つから選択
 
 :large_orange_diamond: コーディネート  
-&emsp;&nbsp;新規作成/表示/編集/削除
+&emsp;&ensp;新規作成/表示/編集/削除
 
 :large_orange_diamond: コーディネートの絞り込み検索機能（Ransack)  
-  &emsp;&nbsp;TPO（どんな気分の時に着るのか） ⇨ デート・リラックス・スポーツ・おでかけ・仕事 から選択  
-  &emsp;&nbsp;Season（どの季節で着るのか) ⇨　春・夏・秋・冬　から選択  
-  &emsp;&nbsp;Rating（どの評価の服を選ぶのか)　⇨　1〜５の5段階から選択
+  &emsp;&ensp;TPO（どんな気分の時に着るのか） ⇨ デート・リラックス・スポーツ・おでかけ・仕事 から選択  
+  &emsp;&ensp;Season（どの季節で着るのか) ⇨　春・夏・秋・冬　から選択  
+  &emsp;&ensp;Rating（どの評価の服を選ぶのか)　⇨　1〜５の5段階から選択
 
 :large_orange_diamond: コーディネートいいね(Ajax) いいねボタン   
- &emsp;&nbsp;新規作成/表示(コメントといいねしたユーザー表示)/削除
+ &emsp;&ensp;新規作成/表示(コメントといいねしたユーザー表示)/削除
 
 :large_orange_diamond: コメント（コーディネートへ)  
- &emsp;&nbsp;新規作成/表示/削除
+ &emsp;&ensp;新規作成/表示/削除
 
 :large_orange_diamond: 通知(コメント・コーデへのいいね)  
-&emsp;&nbsp;新規作成/表示/削除
+&emsp;&ensp;新規作成/表示/削除
 
 
 
