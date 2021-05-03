@@ -26,9 +26,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # コメントの実装
-
-
   delete '/logout', to: 'sessions#destroy'
   get 'search', to: 'items#search'
   get '/help', to: 'static_pages#help'
@@ -37,14 +34,12 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
-
   # かんたんログインの実装
   post '/sessions/guest_log_in', to: 'sessions#guest_login', as: 'guest_login'
   # 全てのUserのItemとCordinateをみる
   get '/:user_id/cordinates/allusers', to: 'cordinates#all_cordinate_show',
                                        as: 'all_cordinate_show'
   get '/:user_id/items/allusers', to: 'items#all_item_show', as: 'all_item_show'
-
 
   # Rasnsackで全てのUserのItemをみる
   get '/:user_id/items/items_search/tpo', to: 'items#all_item_tpo_search',
@@ -99,10 +94,9 @@ Rails.application.routes.draw do
                                              as: 'cordinate_edit'
   post '/users/:user_id/cordinates', to: 'cordinates#create',
                                      as: 'cordinate_create'
-  
+
   # get '/users/:user_id/cordinates/:id/modal', to: 'cordinates#cordinate_modal',
 
-                                   
   # saveに関してリファクタリングの可能性を検討する
   get '/users/:user_id/cordinates/:id/items/:item_id/edit',
       to: 'cordinates#item_edit', as: 'cordinate_item_edit'

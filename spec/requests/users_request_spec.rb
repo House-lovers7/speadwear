@@ -1,44 +1,39 @@
 # rspec ./spec/requests/users_request_spec.rb
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
-  
   let!(:admin) { FactoryBot.create(:admin) }
   let!(:guestuser) { FactoryBot.create(:guestuser) }
 
+  describe 'PUT #update' do
+    context 'パラメータが妥当な場合' do
+      before do
+        @admin = FactoryBot.create(:admin)
+      end
 
-describe 'PUT #update' do
+      it 'リクエストが成功すること' do
+        update_params = FactoryBot.attributes_for(:admin,
+                                                  name: 'update_admin')
+        patch :update, id: admin.id, admin: attributes_for(:admin)
+        expect(assigns(:admin)).to eq admin
+        # put user_path admin, params: { admin: FactoryBot.attributes_for(:admin) }
+        # expect(response.status).to eq 302
+      end
 
-context 'パラメータが妥当な場合' do
-  
-  before do
-    @admin = FactoryBot.create(:admin)    
-end
+      it 'ユーザー名が更新されること' do
+        user_params = FactoryBot.attributes_for(:admin,
+                                                name: 'admin_update')
 
-    
-  it 'リクエストが成功すること' do
-      
-    update_params = FactoryBot.attributes_for(:admin,
-    name: "update_admin")
-     patch :update, id: admin.id , admin: attributes_for(:admin)
-     expect(assigns(:admin)).to eq admin     
-      # put user_path admin, params: { admin: FactoryBot.attributes_for(:admin) }
-      # expect(response.status).to eq 302
+        patch user_path admin, params: { id: @admin.id, name: user_params }
+        expect(@admin.reload.name).to eq 'admin_update'
+        # expect do
+        #   put user_path admin,
+        #                 params: { admin: FactoryBot.attributes_for(:admin) }
+        # end.to change { User.find(user.id).name }.from('user1').to('user2')
+      end
     end
-
-    it 'ユーザー名が更新されること' do
-      user_params = FactoryBot.attributes_for(:admin,
-      name: "admin_update")            
-      
-      patch user_path admin, params: { id:@admin.id, name: user_params}
-      expect(@admin.reload.name).to eq "admin_update"
-      # expect do
-      #   put user_path admin,
-      #                 params: { admin: FactoryBot.attributes_for(:admin) }
-      # end.to change { User.find(user.id).name }.from('user1').to('user2')
-    end
-  end
 
     it 'リダイレクトすること' do
       put user_path admin, params: { admin: FactoryBot.attributes_for(:admin) }
@@ -71,14 +66,13 @@ end
   end
 end
 
-
 # Webリクエストが成功したか
 # 正しいページにリダイレクトされたか
 # ユーザー認証が成功したか
 # レスポンスのテンプレートに正しいオブジェクトが保存されたか
 # ビューに表示されたメッセージは適切か
 
-#FAILER!!
+# FAILER!!
 # shared_context 'log_in' do
 #   session[:user_id] = user1.id
 # end
@@ -110,9 +104,6 @@ end
 #              get login_path
 #   end
 # end
-
-
-
 
 # ===================ABILITY===================
 

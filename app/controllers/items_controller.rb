@@ -19,8 +19,6 @@ class ItemsController < ApplicationController
     item_cordinate_ransack_setup
   end
 
-  # item_color_ransack
-
   def new
     @item = Item.new
     authorize! :create, @item, message: '他人のアイテムを作成する権限がありません。'
@@ -37,7 +35,6 @@ class ItemsController < ApplicationController
 
     @item.save
     flash[:success] = 'Itemを作成しました!'
-
     redirect_to item_show_path(user_id: @item.user.id, id: @item.id)
   end
 

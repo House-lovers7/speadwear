@@ -5,7 +5,6 @@ class CommentsController < ApplicationController
     @cordinate = Cordinate.find(params[:id])
     @comment = Comment.new(comment_params)
     # 自分にはコメントできないようにする。
-
     if current_user == @cordinate.user
       flash[:danger] = '自分のコーデにはコメントはできません。'
       redirect_back(fallback_location: cordinate_show_path)
@@ -36,7 +35,6 @@ class CommentsController < ApplicationController
       save_notification_comment(current_user, user_id, temp_id['user_id'])
     end
     # まだ誰もコメントしていない場合は、投稿者に通知を送る
-
     save_notification_comment(current_user, user_id, id) if temp_ids.blank?
   end
 

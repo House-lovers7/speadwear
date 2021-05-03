@@ -12,7 +12,7 @@ class Item < ApplicationRecord
   validate :picture_size
 
   mount_uploader :picture, PictureUploader
-  
+
   enum super_item: %w[アウター トップス ボトムス シューズ]
   enum season: %w[春 夏 秋 冬]
   enum tpo: %w[デート リラックス♪ スポーツ おでかけ 仕事]
@@ -74,6 +74,7 @@ class Item < ApplicationRecord
   end
 
   private
+
   # アップロードされた画像のサイズをバリデーションする
   def picture_size
     errors.add(:picture, 'should be less than 5MB') if picture.size > 5.megabytes

@@ -7,7 +7,7 @@ class Cordinate < ApplicationRecord
   has_many :notifications, dependent: :destroy
   has_many :likecordinates, dependent: :destroy
   has_many :users, through: :likecordinates
-  
+
   validates :season, presence: true
   validates :tpo, presence: true
   validates :memo, length: { maximum: 140 }

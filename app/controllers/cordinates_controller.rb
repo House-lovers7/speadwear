@@ -23,9 +23,8 @@ class CordinatesController < ApplicationController
 
     @user = User.find_by(id: @cordinate.user.id)
     params[:user_id] = @user.id
-    
-    cordinate_si_picture_set
 
+    cordinate_si_picture_set
   end
 
   def all_cordinate_show
@@ -311,12 +310,4 @@ class CordinatesController < ApplicationController
       @si_shoes = @item.picture.url
     end
   end
-
-  # def item_ransack_set_up
-  #   q_item = Item.ransack(params[:q])
-  #   @item = q_item.result
-  #  if params[:q].blank?
-  #   @item = Item.where(user_id: params[:user_id])
-  # end
-  # end
 end

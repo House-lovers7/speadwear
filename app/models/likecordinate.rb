@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Likecordinate < ApplicationRecord  
+class Likecordinate < ApplicationRecord
   validates :user_id, presence: true
   validates :cordinate_id, presence: true
   has_many :notifications, dependent: :destroy

@@ -5,7 +5,7 @@ class PictureUploader < CarrierWave::Uploader::Base
 
   # デフォルト画像の設定
   def default_url(*_args)
-    ActionController::Base.helpers.asset_path('fallback/' + [version_name, 'default.png'].compact.join('_'))
+    ActionController::Base.helpers.asset_path("fallback/#{[version_name, 'default.png'].compact.join('_')}")
   end
 
   process resize_to_limit: [225, 300]

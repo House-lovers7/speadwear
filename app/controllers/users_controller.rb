@@ -40,14 +40,14 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
-  
+
   def new
     @user = User.new
   end
 
   def create
     @user = User.new(user_params)
-    # authorize! :create, @user, message: 'ユーザーを作成する権限がありません。'
+    authorize! :create, @user, message: 'ユーザーを作成する権限がありません。'
     if @user.save
       UserMailer.account_activation(@user).deliver_now
       flash[:info] = 'Please check your email to activate your account.'
@@ -117,7 +117,6 @@ class UsersController < ApplicationController
     @cordinate = Cordinate.where(user_id: current_user.id) if params[:p_rating].blank?
   end
 
-  # ransackの設定------------
 
   # Itemのransack設定------------
 
@@ -210,14 +209,6 @@ class UsersController < ApplicationController
   def admin_user
     redirect_to(root_url) unless current_user.admin?
   end
-
-  # 正しいユーザーかどうか確認
-  # def correct_user
-  #   @user = User.find(params[:id])
-  #   redirect_to(root_url) unless current_user?(@user)
-  # end
-
-  # 正しいユーザーかどうか確認
 
   def check_guest
     if current_user.email == 'guest@example.com'

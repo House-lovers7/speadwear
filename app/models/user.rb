@@ -34,7 +34,6 @@ class User < ApplicationRecord
                             dependent: :destroy
   has_many :blocking, through: :active_blocks, source: :blocked
 
-
   def already_liked?(_cordinate)
     cordinate = @cordinate
     likecordinates.exists?(cordinate_id: cordinate_id)
@@ -55,7 +54,7 @@ class User < ApplicationRecord
   has_many :active_likecordinates, class_name: 'Likecordinate',
                                    foreign_key: 'user_id',
                                    dependent: :destroy
-  
+
   has_many :liked_cordinates, through: :likecordinates, source: :cordinate
 
   # ユーザをブロックする
@@ -68,7 +67,6 @@ class User < ApplicationRecord
   #   active_blocks.create(blocked_id: other_user.id)
   # end
 
-
   def unblock(user)
     if blocking?(user)
       blocks.find_by(blocker_id: current_user.id,
@@ -80,7 +78,6 @@ class User < ApplicationRecord
   # def unblock(other_user)
   #   active_blocks.find_by(blocked_id: other_user.id).destroy
   # end
-
 
   def blocking?(user)
     blocking.include?(user)

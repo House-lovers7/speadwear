@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # config valid only for current version of Capistrano
 lock '3.16.0'
 
@@ -12,18 +14,18 @@ set :repo_url,  'git@github.com:House-lovers7/speadwear.git'
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
 set :rbenv_type, :user
-set :rbenv_ruby, '2.7.2' 
+set :rbenv_ruby, '2.7.2'
 
 # どの公開鍵を利用してデプロイするか
 
-set :ssh_options, { 
+set :ssh_options, {
   auth_methods: ['publickey'],
-  user: "ec2-user",
-  # keys: ['~/.ssh/speadwear-keypair.pem'] 
-  keys: %w(/home/runner/.ssh/github),
-  forward_agent: false, 
-  # port: 10024    
-}             
+  user: 'ec2-user',
+  # keys: ['~/.ssh/speadwear-keypair.pem']
+  keys: %w[/home/runner/.ssh/github],
+  forward_agent: false
+  # port: 10024
+}
 
 # プロセス番号を記載したファイルの場所
 set :unicorn_pid, -> { "#{shared_path}/tmp/pids/unicorn.pid" }
