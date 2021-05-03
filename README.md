@@ -32,10 +32,6 @@
 :small_red_triangle_down:
 
 
-## 作戦1
-
-
-
 ## アプリケーショの機能一覧
 
 :large_orange_diamond: ユーザー  
@@ -99,6 +95,9 @@ Usearの登録分析
 1番おおく、使用している服は何のか？
 
 どんな服が多いのか、季節、TPOが多いのか、
+
+<img width="637" alt="スクリーンショット 2021-05-03 10 39 10" src="https://user-images.githubusercontent.com/50302869/116835079-dabea400-abfb-11eb-8f8c-3112b56de004.png">
+
 
 
 ## Usersテーブル
