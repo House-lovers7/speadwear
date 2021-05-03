@@ -5,7 +5,7 @@
 :keyboard: DB: Mysql 8.0.23  
 :keyboard: AWS(EC2, Elastic IP, RDS, Route53, VPC, IAM )  
 :keyboard: API:[OpenWeather](https://openweathermap.org/api)  
-:keyboard: Docker（Dockerfile, docker-compose.yml   
+:keyboard: Docker（Dockerfile, docker-compose.yml)  
 :keyboard: HTML  
 :keyboard: CSS  
 :keyboard: Javascript  
@@ -28,7 +28,6 @@
 :heavy_check_mark:
 :link:
 :large_blue_diamond:
-:black_circle:
 :large_orange_diamond:
 :small_red_triangle_down:
 
@@ -40,12 +39,12 @@
 ## アプリケーショの機能一覧
 
 :large_orange_diamond: ユーザー  
-  &emsp;&ensp;メール認証  
-  &emsp;&ensp;新規作成/表示/編集/削除
+  &emsp;&ensp;:octocat:メール認証  
+  &emsp;&ensp;:octocat:新規作成/表示/編集/削除
 
 :large_orange_diamond: フォロー&アンフォロー(Relationモデル)  
-  &emsp;&ensp;新規作成(フォロー)/削除（アンフォロー)  
-  &emsp;&ensp;権限管理(フォローしているユーザーのみ相手のコーディネートが提案できる)
+  &emsp;&ensp;:octocat:新規作成(フォロー)/削除（アンフォロー)  
+  &emsp;&ensp;:octocat:権限管理(フォローしているユーザーのみ相手のコーディネートが提案できる)
 
 :large_orange_diamond: ブロック  
   &emsp;&ensp;新規作成(ブロック)/削除（ブロック解除)  
