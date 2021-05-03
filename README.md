@@ -96,8 +96,10 @@ Usearの登録分析
 
 どんな服が多いのか、季節、TPOが多いのか、
 
-<img width="637" alt="スクリーンショット 2021-05-03 10 39 10" src="https://user-images.githubusercontent.com/50302869/116835079-dabea400-abfb-11eb-8f8c-3112b56de004.png">
 
+## ER図
+
+<img width="977" alt="スクリーンショット 2021-05-03 11 15 29" src="https://user-images.githubusercontent.com/50302869/116836440-6b4bb300-ac01-11eb-8867-ab0a2085054f.png">
 
 
 ## Usersテーブル
