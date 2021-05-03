@@ -99,7 +99,8 @@ Usearの登録分析
 
 ## ER図
 
-<img width="977" alt="スクリーンショット 2021-05-03 11 15 29" src="https://user-images.githubusercontent.com/50302869/116836440-6b4bb300-ac01-11eb-8867-ab0a2085054f.png">
+
+![Uploading スクリーンショット 2021-05-03 11.40.39.png…]()
 
 
 ## Usersテーブル
