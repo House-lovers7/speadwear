@@ -13,6 +13,24 @@
 
 ## アプリケーションの概要
 
+:herb:
+:octocat:
+:four_leaf_clover:
+:bell:
+:key:
+:memo:
+:black_nib:
+:paperclip:
+:pushpin:
+:coffee:
+:tea:
+:information_source:
+:heavy_check_mark:
+:link:
+:large_blue_diamond:
+:black_circle:
+:large_orange_diamond:
+:small_red_triangle_down:
 
 ## 凡例
 - :warning: 注意事項です
