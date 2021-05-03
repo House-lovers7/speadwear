@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 class User < ApplicationRecord
-  # validation
+  before_save :downcase_email
+  before_create :create_activation_digest
+  mount_uploader :picture, PictureUploader
 
   validates :name, presence: true, length: { maximum: 20 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i.freeze
@@ -13,12 +15,6 @@ class User < ApplicationRecord
   validates :password, presence: true
   attr_accessor :remember_token, :activation_token, :reset_token
 
-  mount_uploader :picture, PictureUploader
-
-  # before アクション
-  before_save :downcase_email
-  before_create :create_activation_digest
-
   has_secure_password
   has_many :cordinates, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -27,7 +23,6 @@ class User < ApplicationRecord
   has_many :blocks, dependent: :destroy
 
   # 通知機能の実装
-  # has_many :notificatons, dependent: :destroy
   has_many :active_notifications, class_name: 'Notification',
                                   foreign_key: 'sender_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification',
@@ -38,6 +33,7 @@ class User < ApplicationRecord
   has_many :passive_blocks, class_name: 'Block', foreign_key: 'blocked_id',
                             dependent: :destroy
   has_many :blocking, through: :active_blocks, source: :blocked
+
 
   def already_liked?(_cordinate)
     cordinate = @cordinate
@@ -51,7 +47,6 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: 'Relationship',
                                    foreign_key: 'followed_id',
                                    dependent: :destroy
-
   # :sourceパラメーター を使って、following配列の元はfolledのidの集合体であることを明示する
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
@@ -60,13 +55,8 @@ class User < ApplicationRecord
   has_many :active_likecordinates, class_name: 'Likecordinate',
                                    foreign_key: 'user_id',
                                    dependent: :destroy
-  # liked_cordinatesによってuserがどのコーデをいいねしているのかを簡単に取得できるようになります。
-
-  # likeされているcordinateを取得するから、likedcordinate
+  
   has_many :liked_cordinates, through: :likecordinates, source: :cordinate
-
-  # liked_commentsによってuserがどのコメントをいいねしているのかを簡単に取得できるようになります。
-  # likeされているコメントを取得するから、likedcomment
 
   # ユーザをブロックする
   def block(user)
@@ -78,7 +68,7 @@ class User < ApplicationRecord
   #   active_blocks.create(blocked_id: other_user.id)
   # end
 
-  # ユーザをブロック解除する
+
   def unblock(user)
     if blocking?(user)
       blocks.find_by(blocker_id: current_user.id,
@@ -87,16 +77,15 @@ class User < ApplicationRecord
   end
 
   # def unfollow(other_userの模倣
-  # def block(other_user)
+  # def unblock(other_user)
   #   active_blocks.find_by(blocked_id: other_user.id).destroy
   # end
 
-  # ユーザをブロックしていたらtrueを返す
+
   def blocking?(user)
     blocking.include?(user)
   end
 
-  # ユーザーをフォローする
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)
   end

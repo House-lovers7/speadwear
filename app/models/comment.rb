@@ -4,9 +4,7 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :cordinate
   has_many :notifications, dependent: :destroy
-  # liked_usersによってがcommentが誰にいいねされているのかを簡単に取得できるようにする
-
-  # Validationの設定
+  
   validates :user_id, presence: true
   validates :cordinate_id, presence: true
   validates :comment, presence: true,

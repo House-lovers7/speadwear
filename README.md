@@ -1,15 +1,15 @@
 
 ## 使用技術
 
-:keyboard: Rails 5.1.6  
-:keyboard: DB: Mysql 8.0.23  
-:keyboard: AWS(EC2, Elastic IP, RDS, Route53, VPC, IAM )  
-:keyboard: API:[OpenWeather](https://openweathermap.org/api)  
-:keyboard: Docker（Dockerfile, docker-compose.yml)  
-:keyboard: HTML  
-:keyboard: CSS  
-:keyboard: Javascript  
-:keyboard: Capistrano 
+:keyboard:  Rails 5.1.6  
+:keyboard:  DB: Mysql 8.0.23  
+:keyboard:  AWS(EC2, Elastic IP, RDS, Route53, VPC, IAM )  
+:keyboard:  API:[OpenWeather](https://openweathermap.org/api)  
+:keyboard:  Docker（Dockerfile, docker-compose.yml)  
+:keyboard:  HTML  
+:keyboard:  CSS  
+:keyboard:  Javascript  
+:keyboard:  Capistrano 
 
 ## アプリケーションの概要
 

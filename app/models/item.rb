@@ -1,22 +1,18 @@
 # frozen_string_literal: true
 
 class Item < ApplicationRecord
-  # ,optional: trueをつける方法もある
   belongs_to :user
   belongs_to :cordinate, optional: true
-
-  # Validationの設定
   validates :super_item, presence: true
   validates :season, presence: true
   validates :tpo, presence: true
-
   validates :color, presence: true
   validates :content, presence: true
   validates :memo, length: { maximum: 140 }
-
-  mount_uploader :picture, PictureUploader
   validate :picture_size
 
+  mount_uploader :picture, PictureUploader
+  
   enum super_item: %w[アウター トップス ボトムス シューズ]
   enum season: %w[春 夏 秋 冬]
   enum tpo: %w[デート リラックス♪ スポーツ おでかけ 仕事]
@@ -78,7 +74,6 @@ class Item < ApplicationRecord
   end
 
   private
-
   # アップロードされた画像のサイズをバリデーションする
   def picture_size
     errors.add(:picture, 'should be less than 5MB') if picture.size > 5.megabytes
