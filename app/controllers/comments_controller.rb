@@ -6,8 +6,8 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     # 自分にはコメントできないようにする。
     if current_user == @cordinate.user
-      flash[:danger] = '自分のコーデにはコメントはできません。'
-      redirect_back(fallback_location: cordinate_show_path)
+      flash[:danger] = '自分のコーデにはコメントはできません。'      
+      redirect_back(fallback_location: cordinate_show_path(user_id: current_user.id))
       return
     end
 
@@ -18,12 +18,12 @@ class CommentsController < ApplicationController
       if @comment.save!
         # 通知機能の実装
         create_notification_comment(current_user, @comment.user_id,
-                                    @cordinate.id)
-        redirect_back(fallback_location: cordinate_show_path)
+                                    @cordinate.id)        
+        redirect_back(fallback_location: cordinate_show_path(user_id: current_user.id))
       else
         flash[:danger] = 'Errorです!!'
-      end
-      # redirect_back(fallback_location: cordinate_show_path) unless @comment.save!
+      end      
+      redirect_back(fallback_location: cordinate_show_path(user_id: current_user.id)) unless @comment.save!
     end
   end
 
@@ -51,16 +51,16 @@ class CommentsController < ApplicationController
     notification.save if notification.valid?
   end
 
+
   def destroy
     @comment = Comment.find_by(cordinate_id: params[:id],
                                user_id: current_user.id)
     redirect_to request.referer if cannot? :destroy, @comment
     @comment.destroy
-    redirect_back(fallback_location: cordinate_show_path)
+    redirect_back(fallback_location: cordinate_show_path(user_id: current_user.id))
   end
 
   private
-
   def comment_params
     params.require(:comment).permit(:comment, :user_id, :cordinate_id)
   end

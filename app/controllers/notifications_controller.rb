@@ -146,8 +146,4 @@ class NotificationsController < ApplicationController
     @q_item_super_item = q_item_super_item.result
     @item = Item.where(user_id: params[:user_id]) if params[:q_super_item].blank?
   end
-
-  # Itemのransack設定------------
 end
-
-# has_many :passive_notifications, class_name: "Notification", foreign_key: "receiver_id", dependent: :destroy

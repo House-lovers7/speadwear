@@ -16,7 +16,6 @@ class CreateCordinates < ActiveRecord::Migration[5.1]
       t.integer :si_outer
       t.text :memo
       t.float :rating
-
       t.timestamps
     end
   end

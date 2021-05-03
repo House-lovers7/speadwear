@@ -1,13 +1,12 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  # before_action :logged_in_user,
-  #               only: %i[edit update destroy following followers]
-  # before_action :correct_user, only: %i[edit update]
-  # before_action :check_guest, only:  %i[destroy update]
+  before_action :logged_in_user,
+                 only: %i[edit update destroy following followers]
+  before_action :correct_user, only: %i[edit update]
+  before_action :check_guest, only:  %i[destroy update]
 
-  def index
-    # @users = User.where(activated: true)
+  def index    
     @cordinate = Cordinate.where(user_id: params[:user_id])
     @item = Item.where(user_id: params[:user_id])
     @users = User.all
@@ -116,7 +115,6 @@ class UsersController < ApplicationController
     @p_cordinate_rating = p_cordinate_rating.result
     @cordinate = Cordinate.where(user_id: current_user.id) if params[:p_rating].blank?
   end
-
 
   # Itemのransack設定------------
 

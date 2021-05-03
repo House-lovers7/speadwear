@@ -8,16 +8,11 @@ class LikecordinatesController < ApplicationController
       @likecordinate.user_id = current_user.id
       @likecordinate.cordinate_id = @cordinate.id
 
-      if @likecordinate.save
-
-        # いいね通知の
-        # @cordinate.create_notification_like_cordinate!(current_user)
-        # @cordinate.create_notification_like_cordinate!
+      if @likecordinate.save                
         create_notification_like_cordinate!(current_user,
                                             @likecordinate.user_id, @cordinate.id)
         redirect_to request.referer
-        # redirect_back(fallback_location: cordinate_show_path)
-        # 通知機能の実装
+        redirect_back(fallback_location: cordinate_show_path)        
       else
         flash[:danger] = 'Errorです!!'
         redirect_to request.referer
@@ -58,8 +53,7 @@ class LikecordinatesController < ApplicationController
 
   private
 
-  def likecordinate_params
-    # params.require(:likecordinate).permit(:user_id, :cordinate_id)
+  def likecordinate_params    
     params.permit(:user_id, :cordinate_id)
   end
 end

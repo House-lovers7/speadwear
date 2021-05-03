@@ -2,7 +2,7 @@
 
 class CordinatesController < ApplicationController
   before_action :blocking?
-  # before_action :logged_in_user, only: [:create, :edit, :delete, :update]
+  before_action :logged_in_user, only: [:create, :edit, :delete, :update]
   before_action :friend_user, only: %i[edit create]
 
   def index
@@ -15,8 +15,7 @@ class CordinatesController < ApplicationController
     @comment ||= Comment.new(comment_params)
     @cordinate_comments = Comment.where(cordinate_id: params[:id])    
     @likecordinates = Likecordinate.where(cordinate_id: params[:id])
-    @likecordinates_count = Likecordinate.where(cordinate_id: params[:id]).count
-    
+    @likecordinates_count = Likecordinate.where(cordinate_id: params[:id]).count    
     @user = User.find_by(id: @cordinate.user.id)
     params[:user_id] = @user.id
     cordinate_si_picture_set
@@ -40,8 +39,7 @@ class CordinatesController < ApplicationController
 
   def create
     @cordinate = Cordinate.new(cordinate_params)
-    @comment = Comment.new(comment_params)
-    
+    @comment = Comment.new(comment_params)  
     @comments = @cordinate.comments
     @comment.user_id = current_user.id
     @item = Item.where(super_item: params[:super_item])
@@ -65,17 +63,15 @@ class CordinatesController < ApplicationController
   def edit
     @cordinate = Cordinate.find(params[:id])
     friend_user
-    #  authorize! :update, @cordinate, :message => "他人のコーデを更新する権限がありません."
-    #  redirect_to request.referer if cannot? :update, @cordinate
+    authorize! :update, @cordinate, :message => "他人のコーデを更新する権限がありません."
+    redirect_to request.referer if cannot? :update, @cordinate
     cordinate_si_picture_set
   end
 
   def update
-    @cordinate = Cordinate.find(params[:id])
-    # @cordinate = Cordinate.find(params[:id]) || Cordinate.new
+    @cordinate = Cordinate.find(params[:id])    
     cordinate_si_params_set
     @cordinate.save
-
     if @cordinate.update_attributes(cordinate_update_params)
       @cordinate.save
       flash[:success] = 'コーデをアプデしました!'
@@ -126,7 +122,8 @@ class CordinatesController < ApplicationController
     redirect_to request.referer if cannot? :destroy, @cordinate
     @cordinate.destroy
     flash[:success] = 'コーデを削除しました!'
-    redirect_to all_cordinate_show_path(user_id: @cordinate.user.id)
+    redirect_to all_cordinate_show_path(user_id: current_user.id)
+    
   end
 
   # ransackの設定------------------------

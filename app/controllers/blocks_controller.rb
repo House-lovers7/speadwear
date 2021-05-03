@@ -8,7 +8,7 @@ class BlocksController < ApplicationController
     if can? :create, @user
       @current_user.block(@user)
       @current_user.unfollow(@user)
-      # redirect_to "/users/#{@user.id}"
+      edirect_to "/users/#{@user.id}"
       flash[:notice] = 'ブロックしました'
     end
   end
@@ -18,7 +18,7 @@ class BlocksController < ApplicationController
     if can? :destroy, @user
       @current_user.unblock(@user)
       flash[:notice] = 'ブロックを解除しました'
-      # redirect_to "/users/#{@user.id}"
+      redirect_to "/users/#{@user.id}"
     end
   end
 end
