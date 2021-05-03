@@ -10,7 +10,6 @@ class CreateNotifications < ActiveRecord::Migration[5.1]
       t.integer :likecordinate_id
       t.string :action
       t.boolean :checked
-
       t.timestamps
     end
   end

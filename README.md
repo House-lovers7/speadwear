@@ -35,12 +35,12 @@
 ## アプリケーショの機能一覧
 
 :large_orange_diamond: ユーザー  
-  &emsp;&ensp;:octocat:メール認証  
-  &emsp;&ensp;:octocat:新規作成/表示/編集/削除
+  &emsp;&ensp;メール認証  
+  &emsp;&ensp;新規作成/表示/編集/削除
 
 :large_orange_diamond: フォロー&アンフォロー(Relationモデル)  
-  &emsp;&ensp;:octocat:新規作成(フォロー)/削除（アンフォロー)  
-  &emsp;&ensp;:octocat:権限管理(フォローしているユーザーのみ相手のコーディネートが提案できる)
+  &emsp;&ensp;新規作成(フォロー)/削除（アンフォロー)  
+  &emsp;&ensp;権限管理(フォローしているユーザーのみ相手のコーディネートが提案できる)
 
 :large_orange_diamond: ブロック  
   &emsp;&ensp;新規作成(ブロック)/削除（ブロック解除)  
@@ -96,7 +96,6 @@ Usearの登録分析
 
 どんな服が多いのか、季節、TPOが多いのか、
 
-<img width="637" alt="スクリーンショット 2021-05-03 10 39 10" src="https://user-images.githubusercontent.com/50302869/116835079-dabea400-abfb-11eb-8f8c-3112b56de004.png">
 
 
 
@@ -106,6 +105,7 @@ Usearの登録分析
 | ---- | ---- | ---- |
 |   item_id |  integer  |    |
 |  cordinate_id  |  integer   |    |
+|  name  |  string   |  null: false  |
 |  email  |  string   |  null: false  |
 |  password_digest  |  integer   |
 |  picture  |  integer   |     |
@@ -126,7 +126,7 @@ Usearの登録分析
 |  si_shoes  |  integer   |    |
 |  season  |  integer   |    |
 |  tpo  |  integer   |    |
-|  rating  |  integer   |    |
+|  rating  |  float   |    |
 |  picture  |  integer   |    |
 |  memo  |  integer   |    |
 
@@ -140,7 +140,7 @@ Usearの登録分析
 |  season  |  integer   |  null: false  |
 |  tpo  |  integer   |  null: false  |
 |  color  |  integer   |  null: false  |
-|  rating  |  integer   |  null: false  |
+|  rating  |  float   |  null: false  |
 |  content  |  integer   |  null: false |  
 |  memo  |  text   |    |
 |  picture  |  integer   |    |
@@ -166,7 +166,7 @@ Usearの登録分析
 | ---- | ---- | ---- |
 |  user_id |  integer  |  null: false  |
 |  cordinate_id |  integer  | null: false   |
-|  comment |  text  | null: false   |
+|  comment |  string  | null: false   |
 
 
 ## Like＿Cordinatesテーブル
@@ -185,7 +185,6 @@ Usearの登録分析
 |  cordinate_id |  integer  |    |
 |  comment_id  |  integer   |    |
 |  like_cordinate_id |  integer  |    |
-|  blocker_id  |  integer   |    |
 |  action |  string  |    |
 |  cordinate_id  |  integer   |    |
 |  action  |  string   |    |
