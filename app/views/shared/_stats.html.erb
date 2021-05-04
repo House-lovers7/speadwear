@@ -14,11 +14,11 @@
   </a>
 
   <% if @user == current_user %>
-   <a href="<%= blocking_user_path(@user) %>">
+  <a href="<%= blocking_user_path(@user) %>">
     <strong id="blocking" class="stat">
       <%= @user.blocking.count unless @user %>
     </strong>
-   blocks
+    blocks
   </a>
 </div>
 <% end %>

@@ -59,7 +59,6 @@ class ItemsController < ApplicationController
     authorize! :update, @item, message: '他人のアイテムを編集する権限がありません。'   
     @item.picture.cache! unless @item.picture.blank?
   end
-end
 
   def update    
     @item = Item.find(params[:id])

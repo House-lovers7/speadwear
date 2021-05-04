@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def index    
     @cordinate = Cordinate.where(user_id: params[:user_id])
-    @item = Item.where(user_id: params[:user_id])
+    @item = Item.where(user_id: params[:user_id])        
     @users = User.all
     user_paginate
     cordinate_ransack_setup
@@ -196,6 +196,12 @@ class UsersController < ApplicationController
       redirect_to login_url
     end
   end
+
+      # 正しいユーザーかどうか確認
+      def correct_user
+        @user = User.find(params[:id])
+        redirect_to(root_url) unless @user == current_user
+      end
 
   def owner_user
     @user = User.find(params[:id])

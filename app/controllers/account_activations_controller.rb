@@ -16,3 +16,4 @@ class AccountActivationsController < ApplicationController
     end
   end
 end
+rails a
