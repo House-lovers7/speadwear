@@ -40,8 +40,7 @@
         font-size: 1.3em;
         line-height: 1.7em;
       }
-  
-  
+    
       /* universal */
   
       body {
@@ -76,12 +75,10 @@
     text-align: center;
           }
   
-  
       .profile-items {
   
   margin: 40px 80px;
       }
-  
   
       .profile-cordinates {
   
@@ -110,8 +107,7 @@
     list-style: none;
   }
   
-  
-  
+    
   // Cordinateのedit関連
   
   .cordinate_edit_picture {
@@ -119,12 +115,10 @@
   }
   
   .images {
-  
     margin-top: 50px;
   }
   
-  .image-text {
-  
+  .image-text { 
   padding-left: 55px;
   
   }
@@ -132,11 +126,7 @@
   .item-pictures {
   margin-top: 50px;
   }
-  
-  // p {
-  //   font-family: 'Yu Gothic';
-  // }
-  
+
   .users_profile {
     margin-bottom: 70px;
   }
@@ -186,14 +176,12 @@
   
   #クロス枠線
   /* ダブル囲み枠 */
-  // .item_each_imagesが2つある謎??
   .item_each_images,.cordinate_each_images,.item_each_images,.item_make,.cordinate_make {
     float: left;
     padding: 0.5em 1em;
     border: double 5px #4ec4d3;
     max-width: 342px;
   }
-  
   
   .item_show_lists, .cordinate_show_lists, .item_make, .cordinate_make   {
     float: left;
@@ -228,7 +216,7 @@
     border-color: #ffdb88 #fff #ffdb88;
     box-shadow: -1px 1px 1px rgba(0, 0, 0, 0.15);
   }
-  
+
   /* メモ　クリップ　Ａ */
   .clip-box {
     position: relative;
@@ -284,7 +272,6 @@
     float: left;
   }
   
-  
   .header-logo {
       padding: 20px;
     }
@@ -328,18 +315,6 @@
   }
   
   
-    /* mixins, variables, etc. */
-  
-    // li {
-    //   list-style: none;
-    //   display: inline;
-    //   width:200px;
-    //   height:100px;
-    //   }
-  
-  
-  
-  
       $gray-medium-light: #eaeaea;
   
       @mixin box_sizing {
@@ -366,6 +341,7 @@
        // テキストボックス幅の調整
       input[type="text"] {
         margin-top: 13px;
+  
       }
       /* forms */
       textarea, select, a.uneditable-input  {
@@ -382,7 +358,6 @@
           margin: 0 0 30px 0;
         }
       }
-  
   
       #error_explanation {
         color: red;
@@ -493,24 +468,14 @@
         margin-left: 0;
       }
   
-  
-  
-    @import "bootstrap";
-  
-  
-    /* mixins, variables, etc. */
-  
+    @import "bootstrap";  
+    /* mixins, variables, etc. */  
     $grayMediumLight: #eaeaea;
-  
-    /* miscellaneous */
-  
-  
+    /* miscellaneous */  
     .wheather_container {
-      float: left;
-  
+      float: left;  
     }
   
-
 // モーダルの実装
 
     /* hiddenクラスがないとマスクとモーダルが表示される（JavaScriptでhiddenクラスを消したとき）*/
@@ -548,3 +513,44 @@
   visibility: hidden;
   transform: translate(0, 0) scale(0.8);   /* 大きさ0.8倍から等倍にモーダルが拡大される */
 }
+
+
+
+ .alert {
+  background-color: lightcoral;  
+  color: white;
+  text-align: center;
+}
+
+
+.notice {
+  background-color: lightgreen;  
+  color: white;
+  text-align: center;
+}
+
+
+@media (min-width: 992px) {
+  .title {
+    font-size: 7.0rem;
+  }
+ }
+ // 中デバイス（タブレット, 992px 未満）
+ @media (max-width: 991.98px) {
+  .title {
+    font-size: 4.0rem;
+  }
+ }
+ // 小デバイス（横向きモバイル, 768px 未満）
+ @media (max-width: 767.98px) {
+  .title {
+    font-size: 2.0rem;
+  }
+ }
+ // @include media-breakpoint-up(sm) {
+ // 極小デバイス（縦向きモバイル, 576px 未満）
+ @media (max-width: 575.98px) {
+  .title {
+    font-size: 1.0rem;
+  }
+ }
