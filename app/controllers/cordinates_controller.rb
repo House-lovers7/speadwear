@@ -3,7 +3,7 @@
 class CordinatesController < ApplicationController
   before_action :blocking?
   before_action :logged_in_user, only: [:create, :edit, :delete, :update]
-  before_action :friend_user, only: %i[edit create]
+  before_action :friend_user, only: %i[new edit create]
 
   def index
     @item = Item.where(user_id: params[:user_id])
@@ -33,7 +33,6 @@ class CordinatesController < ApplicationController
 
   def new
     @cordinate = Cordinate.new
-    friend_user
     authorize! :create, @cordinate, message: '他人のコーデを作成する権限がありません.'
   end
 
@@ -61,8 +60,7 @@ class CordinatesController < ApplicationController
   end
 
   def edit
-    @cordinate = Cordinate.find(params[:id])
-    friend_user
+    @cordinate = Cordinate.find(params[:id])    
     authorize! :update, @cordinate, :message => "他人のコーデを更新する権限がありません."
     redirect_to request.referer if cannot? :update, @cordinate
     cordinate_si_picture_set
