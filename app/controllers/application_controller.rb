@@ -11,6 +11,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # ログイン済みユーザーかどうか確認
+  def logged_in_user
+    unless logged_in?
+      store_location
+      flash[:danger] = 'Please log in.'
+      redirect_to login_url
+    end
+  end
+
   # 友達フラグを立てる
   def friend_user
     @user = @current_user || User.find_by(id: session[:user_id])
@@ -36,4 +45,7 @@ class ApplicationController < ActionController::Base
       redirect_to request.referer
     end
   end
+
+
+
 end
