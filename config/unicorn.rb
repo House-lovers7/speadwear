@@ -12,7 +12,7 @@ working_directory "#{app_path}/speadwear"
 pid "#{app_path}/speadwear/tmp/pids/unicorn.pid"
 
 # ポート番号を指定
-listen "#{app_path}/speadwear/tmp/tmp/sockets/unicorn.sock"
+listen "#{app_path}/speadwear/tmp/sockets/unicorn.sock"
 
 # エラーのログを記録するファイルを指定
 stderr_path "#{app_path}/speadwear/log/unicorn.stderr.log"
