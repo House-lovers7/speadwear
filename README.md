@@ -86,29 +86,6 @@
 &emsp;&ensp;新規作成/表示/削除
 
 
-
-controllerにpostとstaticpagesを入れてないけど大丈夫なのか？
-
-
-Itemモデルの中で表示する(showアクションかな？)
- Cordinate.where(si_tops: @item.id).count + Cordinate.where(si_bottoms: @item.id).count + Cordinate.where(si_shoes: @item.id).count + Cordinate.where(si_outer: @item.id).count 
-
-
-Itemモデル内の該当ユーザーのデータを集合をつくる。
-集合の全てに対して、条件に該当するものをカウントして並びかえる
-並び替えたものを1~3までを表示する。
-
-
-傾向分析もできる
-Top３分析
-Usearの登録分析
-
-
-1番おおく、使用している服は何のか？
-
-どんな服が多いのか、季節、TPOが多いのか、
-
-
 ## ER図
 
 <img width="980" alt="スクリーンショット 2021-05-03 11 43 39" src="https://user-images.githubusercontent.com/50302869/116837312-db0f6d00-ac04-11eb-8b45-cb922278510a.png">
