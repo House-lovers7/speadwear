@@ -1,44 +1,36 @@
 <div class="header-logo">
-<h2><a href="#"><%= image_tag "speadwear.png", size: '80x80', class: "site-logo" %>Spead Wear</a></h2>
-<h2>SendGrid</h2>
+  <h2><a href="#"><%= image_tag "speadwear.png", size: '80x80', class: "site-logo" %>Spead Wear</a></h2>
 </div>
 
 <%= render "shared/whether_report" %>
 
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #edfad7;;">
-  <a class="navbar-brand" href="#">Navbar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-        <%= link_to 'Topページ', root_path,class: "p-2 text-muted", data: {turbolinks: false} %>
-        <% unless logged_in? %>             
-       <%= link_to "Log in", login_path, class: "p-2 text-muted", data: {turbolinks: false} %>       
-       <%= link_to '新規登録', signup_path , class: "p-2 text-muted", data: {turbolinks: false} %>
-        <% end %>
- <%# unless request.path.include?("/signup") || request.path.include?("/login")   %>
-        <% if logged_in? %>        
-        <%= link_to "プロフィール編集", edit_user_path(current_user),class: "p-2 text-muted", data: {turbolinks: false} %>
-        <%= link_to "Log out", logout_path, method: :delete, class: "p-2 text-muted", data: {turbolinks: false} %>
-        <% end %>
+      <%= link_to 'Topページ', root_path,class: "p-2 text-muted", data: {turbolinks: false} %>
+      <% unless logged_in? %>
+      <%= link_to "Log in", login_path, class: "p-2 text-muted", data: {turbolinks: false} %>
+      <%= link_to '新規登録', signup_path , class: "p-2 text-muted", data: {turbolinks: false} %>
+      <% end %>
+      <%# unless request.path.include?("/signup") || request.path.include?("/login")   %>
+      <% if logged_in? %>
+      <%= link_to "プロフィール編集", edit_user_path(current_user),class: "p-2 text-muted", data: {turbolinks: false} %>
+      <%= link_to "Log out", logout_path, method: :delete, class: "p-2 text-muted", data: {turbolinks: false} %>
+      <% end %>
       <% unless session[:user_id] == nil %>
 
-        <%= link_to "ユーザー表示", allusers_index_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
-        <%= link_to "みんなのアイテム", all_item_show_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false} %>
-        <%= link_to "みんなのコーデ", all_cordinate_show_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
-        <%= link_to "Myアイテム", user_item_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>        
-        <%= link_to "NOTICE", notifications_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false} %>
-        <%= link_to "Myコーデ", user_cordinate_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
-        <%= link_to "Item作成", item_new_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
-        <%= link_to "Cordinate作成", cordinate_new_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false} %>
-         <% end %>
+      <%= link_to "ユーザー表示", allusers_index_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
+      <%= link_to "みんなのアイテム", all_item_show_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false} %>
+      <%= link_to "みんなのコーデ", all_cordinate_show_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
+      <%= link_to "Myアイテム", user_item_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
+      <%= link_to "NOTICE", notifications_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false} %>
+      <%= link_to "Myコーデ", user_cordinate_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
+      <%= link_to "Item作成", item_new_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
+      <%= link_to "Cordinate作成", cordinate_new_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false} %>
+      <% end %>
     </div>
   </div>
 </nav>
-<i class="fas fa-chalkboard-teacher pr-1 fa-1x"></i>
-<i class="far fa-trash-alt fa-1x"></i>
-<i class="fas fa-link fa-1x"></i>
-<i class="fas fa-users fa-1x"></i>
-<i class="fas fa-tshirt fa-1x"></i>
-<i class="fas fa-user-lock fa-1x"></i>

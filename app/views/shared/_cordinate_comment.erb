@@ -14,8 +14,10 @@
               <%   @cordinate_comments.each do |c| %>
                 <div class= "cordinate_responses">
                   <ul>
-                    <li>
-                      <%= gravatar_for @user, size: 20 %>
+                    <li> 
+                    <div class="comment_image">                      
+                        <%= image_tag @user.picture.url, size: 150 unless @user.picture.blank? %>
+                    </div>
                       <div class = "comment_box">
                          <%= c.user.name + ":" + "#{c.comment}" %>
                       </div>

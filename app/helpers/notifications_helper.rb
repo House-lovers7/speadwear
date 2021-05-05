@@ -3,6 +3,9 @@
 module NotificationsHelper
   def notification_form(notification)
     @sender = notification.sender
+    # @sender = notification.receiver
+    @receiver = notification.receiver
+        
     @cordinate = notification.cordinate
     @comment = nil
     your_cordinate = link_to 'あなたの投稿', user_show_path(notification),
@@ -11,16 +14,16 @@ module NotificationsHelper
     # notification.actionがfollowかlikeかcommentか
     case notification.action
     when 'follow'
-      "#{tag.a(notification.sender.name, href: user_show_path(@sender),
+      "#{tag.a(@sender.name, href: user_show_path(@sender),
                                          style: 'font-weight: bold;')}があなたをフォローしました"
     when 'cordinatelike'
-      tag.a(notification.sender.name, href: user_show_path(@sender),
-                                      style: 'font-weight: bold;') + 'が' + tag.a('あなたの投稿',
+      tag.a(@sender.name, href: user_show_path(@sender),
+                                      style: 'font-weight: bold;') + 'が' + tag.a(@receiver.name,
                                                                                   href: cordinate_show_path(user_id: current_user.id, id: notification.cordinate.id), style: 'font-weight: bold;') + 'にいいねしました'
     when 'comment'
       @comment = Comment.find_by(id: @sender_comment)&.comment
       tag.a(@sender.name, href: user_show_path(@sender),
-                          style: 'font-weight: bold;') + 'が' + tag.a('あなたの投稿',
+                          style: 'font-weight: bold;') + 'が' + tag.a(@receiver.name,
                                                                       href: cordinate_show_path(user_id: current_user.id, id: notification.cordinate.id), style: 'font-weight: bold;') + 'にコメントしました'
     end
   end

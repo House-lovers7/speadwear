@@ -190,7 +190,7 @@
     font-size:  1.3rem;
     position: relative;
     padding: 2.5em 1em .5em;
-    width: 35%;
+    width: 50%;
     background-color: #badcad; /* 背景色 */
     color: #555; /* 文字色 */
     box-shadow: 0 0 10px 10px #badcad; /* 影 */
@@ -553,4 +553,20 @@
   .title {
     font-size: 1.0rem;
   }
+ }
+
+ .profile {
+margin: 15px 5px;
+  
+ }
+
+
+ .comment_image {
+
+  float: left;
+ }
+
+ .comment_like_btn {
+
+margin-left: 16px;
  }

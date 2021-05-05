@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     # 自分にはコメントできないようにする。
     if current_user == @cordinate.user
       flash[:danger] = '自分のコーデにはコメントはできません。'      
-      redirect_back(fallback_location: cordinate_show_path(user_id: current_user.id))
+      redirect_back(fallback_location: cordinate_show_path(user_id: params[:user_id]))
       return
     end
 
@@ -19,11 +19,11 @@ class CommentsController < ApplicationController
         # 通知機能の実装
         create_notification_comment(current_user, @comment.user_id,
                                     @cordinate.id)        
-        redirect_back(fallback_location: cordinate_show_path(user_id: current_user.id))
+        redirect_back(fallback_location: cordinate_show_path(user_id: params[:user_id]))
       else
         flash[:danger] = 'Errorです!!'
       end      
-      redirect_back(fallback_location: cordinate_show_path(user_id: current_user.id)) unless @comment.save!
+      redirect_back(fallback_location: cordinate_show_path(user_id: params[:user_id])) unless @comment.save!
     end
   end
 
@@ -52,12 +52,14 @@ class CommentsController < ApplicationController
   end
 
 
-  def destroy
-    @comment = Comment.find_by(cordinate_id: params[:id],
-                               user_id: current_user.id)
-    redirect_to request.referer if cannot? :destroy, @comment
-    @comment.destroy
-    redirect_back(fallback_location: cordinate_show_path(user_id: current_user.id))
+  def destroy        
+    if can? :destroy, @comment
+      @comment.destroy
+      redirect_to request.referer
+    else
+      flash[:danger] = '権限がありません!!'
+      redirect_to request.referer
+    end    
   end
 
   private

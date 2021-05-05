@@ -12,8 +12,8 @@ class CordinatesController < ApplicationController
 
   def show    
     @cordinate = Cordinate.find(params[:id])    
-    @comment ||= Comment.new(comment_params)
-    @cordinate_comments = Comment.where(cordinate_id: params[:id])    
+    @comment ||= Comment.new(comment_params)    
+    @cordinate_comments = Comment.where(cordinate_id: params[:id])        
     @likecordinates = Likecordinate.where(cordinate_id: params[:id])
     @likecordinates_count = Likecordinate.where(cordinate_id: params[:id]).count    
     @user = User.find_by(id: @cordinate.user.id)

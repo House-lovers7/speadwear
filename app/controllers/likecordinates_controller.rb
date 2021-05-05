@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class LikecordinatesController < ApplicationController
+  
   def create
     @cordinate = Cordinate.find(params[:id])
     @likecordinate = Likecordinate.new(likecordinate_params)
@@ -10,8 +11,7 @@ class LikecordinatesController < ApplicationController
 
       if @likecordinate.save                
         create_notification_like_cordinate!(current_user,
-                                            @likecordinate.user_id, @cordinate.id)
-        redirect_to request.referer
+                                            @likecordinate.user_id, @cordinate.id)        
         redirect_back(fallback_location: cordinate_show_path)        
       else
         flash[:danger] = 'Errorです!!'
@@ -22,8 +22,7 @@ class LikecordinatesController < ApplicationController
 
   def destroy
     @likecordinate = Likecordinate.find_by(cordinate_id: params[:id],
-                                           user_id: current_user.id)
-    redirect_to request.referer if cannot? :destory, @likecordinate
+                                           user_id: params[:user_id])
     if can? :destroy, @likecordinate
       @likecordinate.destroy
       redirect_to request.referer
@@ -33,16 +32,17 @@ class LikecordinatesController < ApplicationController
     end
   end
 
+  #cordinate＿idをもっているUserをもってくる
   # いいね通知機能の実装
   def create_notification_like_cordinate!(current_user, user_id, id)
     # すでに「いいね」されているか検索
     temp = Notification.where(['sender_id = ? and receiver_id = ? and cordinate_id = ? and action = ? ',
-                               current_user.id, user_id, id, 'likecordinate'])
+                               current_user.id, @cordinate.user_id, id, 'likecordinate'])
     # いいねされていない場合のみ、通知レコードを作成
     if temp.blank?
       notification = current_user.active_notifications.new(
         cordinate_id: id,
-        receiver_id: user_id,
+        receiver_id: @cordinate.user_id,
         action: 'cordinatelike'
       )
       # 自分の投稿に対するいいねの場合は、通知済みとする
