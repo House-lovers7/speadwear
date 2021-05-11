@@ -27,6 +27,8 @@
       h1 {
         font-size: 3em;
         letter-spacing: -2px;
+        padding-top: 60px;
+        text-align: center;
       }
   
       h2 {
@@ -575,16 +577,11 @@ margin-left: 16px;
 //  ハンバーガーメニュー
 
 body {
-  font-size: 14px;
-  font-family: 'Roboto',serif;
+  font-size: 16px;
+  font-family: 'Roboto',serif ;
   // background:#f8f8ff;
   background:#fffff0;
   
-}
-
-h1 {
-  text-align: center;
-  padding-top: 60px;
 }
 
 #nav-toggle {
@@ -759,3 +756,16 @@ h1 {
   visibility: visible;
   opacity: 1;
 }
+
+  // @media (max-width: 576px) {
+  //   .is-hidden {
+  //     visibility: hidden;
+  //   }
+  // }
+
+
+  @media (max-width: 992px) {
+    .is-hidden {
+      visibility: hidden;
+    }
+  }
