@@ -21,6 +21,7 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    @item.user_id = current_user.id
     authorize! :create, @item, message: '他人のアイテムを作成する権限がありません。'
     @item.user_id = params[:user_id]
   end

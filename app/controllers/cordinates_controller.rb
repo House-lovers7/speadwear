@@ -33,6 +33,7 @@ class CordinatesController < ApplicationController
 
   def new
     @cordinate = Cordinate.new
+    @cordinate.user_id = current_user.id
     authorize! :create, @cordinate, message: '他人のコーデを作成する権限がありません.'
   end
 
