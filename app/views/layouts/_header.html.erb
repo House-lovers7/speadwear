@@ -4,10 +4,13 @@
 
 <%= render "shared/whether_report" %>
 
+
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #edfad7;;">
+
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
       <%= link_to 'Topページ', root_path,class: "p-2 text-muted", data: {turbolinks: false} %>
@@ -34,3 +37,42 @@
     </div>
   </div>
 </nav>
+
+<div id="nav-toggle">
+  <div>
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+
+
+
+<div id="gloval-nav">
+  <nav>
+    <ul>
+      <li><%= link_to "ユーザー表示", allusers_index_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
+      <li><%= link_to "みんなのアイテム", all_item_show_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
+      <li><%= link_to "Myアイテム", user_item_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
+      <li><%= link_to "NOTICE", notifications_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
+      <li><%= link_to "Myコーデ", user_cordinate_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
+      <li><%= link_to "Item作成", item_new_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
+      <li><%= link_to "Cordinate作成", cordinate_new_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
+    </ul>
+  </nav>
+</div><!-- /#gloval-nav -->
+
+<div id="container">
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
+<script type="text/javascript">
+  (function($) {
+    $(function() {
+      $('#nav-toggle').on('click', function() {
+        $('body').toggleClass('open');
+      });
+    });
+  })(jQuery);
+</script>
