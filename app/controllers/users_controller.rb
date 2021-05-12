@@ -2,13 +2,13 @@
 
 class UsersController < ApplicationController
   before_action :logged_in_user,
-                 only: %i[edit update destroy following followers]
+                only: %i[edit update destroy following followers]
   before_action :correct_user, only: %i[edit update]
   before_action :check_guest, only:  %i[destroy update]
 
-  def index    
+  def index
     @cordinate = Cordinate.where(user_id: params[:user_id])
-    @item = Item.where(user_id: params[:user_id])        
+    @item = Item.where(user_id: params[:user_id])
     @users = User.all
     user_paginate
     cordinate_ransack_setup
@@ -188,11 +188,11 @@ class UsersController < ApplicationController
     redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
   end
 
-      # 正しいユーザーかどうか確認
-      def correct_user
-        @user = User.find(params[:id])
-        redirect_to(root_url) unless @user == current_user
-      end
+  # 正しいユーザーかどうか確認
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless @user == current_user
+  end
 
   def owner_user
     @user = User.find(params[:id])

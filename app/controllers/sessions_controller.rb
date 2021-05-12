@@ -33,7 +33,7 @@ class SessionsController < ApplicationController
                                   email: 'guest@example.com') do |user|
       user.password = SecureRandom.urlsafe_base64
     end
-    
+
     log_in user
     redirect_to all_item_show_path(user_id: session[:user_id]),
                 notice: 'ゲストユーザーとしてログインしました。'

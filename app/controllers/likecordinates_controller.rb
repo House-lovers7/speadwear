@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class LikecordinatesController < ApplicationController
-  
   def create
     @cordinate = Cordinate.find(params[:id])
     @likecordinate = Likecordinate.new(likecordinate_params)
@@ -9,10 +8,10 @@ class LikecordinatesController < ApplicationController
       @likecordinate.user_id = current_user.id
       @likecordinate.cordinate_id = @cordinate.id
 
-      if @likecordinate.save                
+      if @likecordinate.save
         create_notification_like_cordinate!(current_user,
-                                            @likecordinate.user_id, @cordinate.id)        
-        redirect_back(fallback_location: cordinate_show_path)        
+                                            @likecordinate.user_id, @cordinate.id)
+        redirect_back(fallback_location: cordinate_show_path)
       else
         flash[:danger] = 'Errorです!!'
         redirect_to request.referer
@@ -32,9 +31,9 @@ class LikecordinatesController < ApplicationController
     end
   end
 
-  #cordinate＿idをもっているUserをもってくる
+  # cordinate＿idをもっているUserをもってくる
   # いいね通知機能の実装
-  def create_notification_like_cordinate!(current_user, user_id, id)
+  def create_notification_like_cordinate!(current_user, _user_id, id)
     # すでに「いいね」されているか検索
     temp = Notification.where(['sender_id = ? and receiver_id = ? and cordinate_id = ? and action = ? ',
                                current_user.id, @cordinate.user_id, id, 'likecordinate'])
@@ -53,7 +52,7 @@ class LikecordinatesController < ApplicationController
 
   private
 
-  def likecordinate_params    
+  def likecordinate_params
     params.permit(:user_id, :cordinate_id)
   end
 end

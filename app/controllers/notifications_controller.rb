@@ -9,7 +9,7 @@ class NotificationsController < ApplicationController
     @notifications.where(checked: false).each do |notification|
       notification.update_attributes(checked: true)
       cordinate_id = notification.cordinate_id
-    end    
+    end
     item_cordinate_ransack_setup
   end
 

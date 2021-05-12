@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ItemsController < ApplicationController
-  before_action :logged_in_user, only: [:create, :edit, :delete, :update]
+  before_action :logged_in_user, only: %i[create edit delete update]
 
   def index
     item_paginate
@@ -57,11 +57,11 @@ class ItemsController < ApplicationController
 
   def edit
     @item = Item.find(params[:id])
-    authorize! :update, @item, message: '他人のアイテムを編集する権限がありません。'   
+    authorize! :update, @item, message: '他人のアイテムを編集する権限がありません。'
     @item.picture.cache! unless @item.picture.blank?
   end
 
-  def update    
+  def update
     @item = Item.find(params[:id])
     if @item.update_attributes(item_params)
       flash[:success] = '更新しました!!'
