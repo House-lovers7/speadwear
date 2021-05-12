@@ -1,8 +1,11 @@
 <div class="header-logo">
-  <h2><a href="#"><%= image_tag "speadwear.png", size: '80x80', class: "site-logo" %>Spead Wear</a></h2>
+  <%= image_tag "speadwear.png", size: '80x80', class: "site-logo" %>
+  <h2>Spead Wear</h2>
+  <div class="whether_position">
+    <%= render "shared/whether_report" %>
+  </div>
 </div>
 
-<%= render "shared/whether_report" %>
 
 
 <nav class="navbar navbar-expand-lg navbar-light is-hidden" style="background-color: #edfad7;;">
