@@ -21,7 +21,8 @@
 
 
     .modal-images {
-      float: left;      
+      float: left;
+      
     }
 
     h1, h2, h3, h4, h5, h6 {
@@ -792,14 +793,12 @@ ul li a img {
     display: none;
   }
 
-.bigimg {
-    position: absolute;    
-    width: 300%;
+  .bigimg {
+    position: absolute;
     text-align: center;
-    max-width:  300%;
-    max-width: 100% !important;
-    height: 100%;
-    top: 200px;
+    width: 300%;
+    max-width: 800px;
+    top: 80px;
     left: 0;
     right: 0;
     margin-right: auto;

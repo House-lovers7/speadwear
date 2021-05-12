@@ -1,14 +1,12 @@
 <% if controller.action_name == "show" %>
 
-<div class="cordinate_show_lists  ">
-  <ul>
-    <li>ユーザー: <%=link_to @cordinate.user.name, user_show_path(id: params[:user_id])%></li>
-    <li>ID： <%= @cordinate.id %></li>
-    <li><i class="fa fa-leaf" aria-hidden="true"></i>季節： <%= @cordinate.season %></li>
-    <li>TPO: <%= @cordinate.tpo %></li>
-    <li>
-    <li><i class="fa fa-trophy" aria-hidden="true"></i>評価:<span class="star5_rating" data-rate=<%= @cordinate.rating %>></span></li>
-  </ul>
+<div class="cordinate_show_lists">
+  <li>ユーザー: <%=link_to @cordinate.user.name, user_show_path(id: params[:user_id])%></li>
+  <li>ID： <%= @cordinate.id %></li>
+  <li><i class="fa fa-leaf" aria-hidden="true"></i>季節： <%= @cordinate.season %></li>
+  <li>TPO: <%= @cordinate.tpo %></li>
+  <li>
+  <li><i class="fa fa-trophy" aria-hidden="true"></i>評価:<span class="star5_rating" data-rate=<%= @cordinate.rating %>></span></li>
 </div>
 
 
@@ -21,7 +19,6 @@
     <li><a href=""><%= image_tag "logo-tops.png", size: "215x257" %></a></li>
     <% end %>
     </li>
-
     <% if @si_bottoms %>
     <li><a href=""><%= image_tag @si_bottoms, data:{ image: 'img2'}, size: "250x257", class: "pic"  %></a></li>
     <% else %>
