@@ -11,6 +11,60 @@
   </ul>
 </div>
 
+
+
+<div class="modal-images">
+  <ul>
+    <% if @si_tops %>
+    <li><a href=""><%= image_tag @si_tops, data:{ image: 'img1'}, size: "250x250", class: "pic" %></a></li>
+    <% else %>
+    <li><a href=""><%= image_tag "logo-tops.png", size: "215x257" %></a></li>
+    <% end %>
+    </li>
+
+    <% if @si_bottoms %>
+    <li><a href=""><%= image_tag @si_bottoms, data:{ image: 'img2'}, size: "250x257", class: "pic"  %></a></li>
+    <% else %>
+    <li><a href=""><%= image_tag "logo-pants.png", size: "215x257" %></a></li>
+    <% end %>
+    </li>
+    <li>
+      <% if @si_shoes %>
+    <li><a href=""><%= image_tag @si_shoes, data:{ image: 'img3'}, size: "250x240", class: "pic"  %></a></li>
+    <% else %>
+    <li><a href=""><%= image_tag "logo-shoes.png", size: "215x257" %></a></li>
+    <% end %>
+    </li>
+  </ul>
+</div>
+
+
+
+<div class="modal">
+  　　<div class="bigimg"><img src="" alt=""></div>
+  　　<p class="close-btn"><a href="">✖</a></p>
+</div>
+
+
+
+<script>
+  $('ul li a').click(function() {
+    var imgSrc = $(this).children().attr('src');
+    $('.bigimg').children().attr('src', imgSrc);
+    $('.modal').fadeIn();
+    $('body,html').css('overflow-y', 'hidden');
+    return false
+  });
+
+  $('.close-btn').click(function() {
+    $('.modal').fadeOut();
+    $('body,html').css('overflow-y', 'visible');
+    return false
+  });
+</script>
+
+
+
 <% elsif controller.action_name == "user_all_cordinate_show" ||  controller.action_name == "all_cordinate_show"  %>
 <% @cordinates.each do |cordinate| %>
 
@@ -40,52 +94,3 @@
 
 <% end %>
 <% end %>
-
-<div class=" d-flex images float-left col-sm-12 flex-grow row">
-  <ul>
-    <% if @si_tops %>
-    <li><a href=""><%= image_tag @si_tops, data:{ image: 'img1'}, size: "250x250", class: "pic" %></a></li>
-    <% else %>
-    <li><a href=""><%= image_tag "logo-tops.png", size: "215x257" %></a></li>
-    <% end %>
-    </li>
-
-    <% if @si_bottoms %>
-    <li><a href=""><%= image_tag @si_bottoms, data:{ image: 'img2'}, size: "250x257", class: "pic"  %></a></li>
-    <% else %>
-    <li><a href=""><%= image_tag "logo-pants.png", size: "215x257" %></a></li>
-    <% end %>
-    </li>
-    <li>
-      <% if @si_shoes %>
-    <li><a href=""><%= image_tag @si_shoes, data:{ image: 'img3'}, size: "250x240", class: "pic"  %></a></li>
-    <% else %>
-    <li><a href=""><%= image_tag "logo-shoes.png", size: "215x257" %></a></li>
-    <% end %>
-    </li>
-  </ul>
-</div>
-
-
-<div class="modal">
-  　　<div class="bigimg"><img src="" alt=""></div>
-  　　<p class="close-btn"><a href="">✖</a></p>
-</div>
-
-
-
-<script>
-  $('ul li a').click(function() {
-    var imgSrc = $(this).children().attr('src');
-    $('.bigimg').children().attr('src', imgSrc);
-    $('.modal').fadeIn();
-    $('body,html').css('overflow-y', 'hidden');
-    return false
-  });
-
-  $('.close-btn').click(function() {
-    $('.modal').fadeOut();
-    $('body,html').css('overflow-y', 'visible');
-    return false
-  });
-</script>
