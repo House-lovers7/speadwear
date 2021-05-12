@@ -52,29 +52,25 @@
 
 <div id="gloval-nav">
   <nav>
-    <ul>
-
-
-      <div class="navbar-nav ">
-        <li><%= link_to 'Topページ', root_path, data: {turbolinks: false} %></li>
-        <% unless logged_in? %>
-        <li><%= link_to "Log in", login_path, data: {turbolinks: false} %></li>
-        <li><%= link_to '新規登録', signup_path , data: {turbolinks: false} %></li>
-        <% end %>
-        <% if logged_in? %>
-        <%= link_to "プロフィール編集", edit_user_path(current_user), data: {turbolinks: false} %></li>
-        <li><%= link_to "Log out", logout_path, method: :delete, data: {turbolinks: false} %></li>
-        <% end %>
-        <% unless session[:user_id] == nil %>
-        <li><%= link_to "ユーザー表示", allusers_index_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
-        <li><%= link_to "みんなのアイテム", all_item_show_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
-        <li><%= link_to "Myアイテム", user_item_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
-        <li><%= link_to "NOTICE", notifications_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
-        <li><%= link_to "Myコーデ", user_cordinate_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
-        <li><%= link_to "Item作成", item_new_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
-        <li><%= link_to "Cordinate作成", cordinate_new_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
-        <% end %>
-    </ul>
+    <div class="navbar-nav ">
+      <li><%= link_to 'Topページ', root_path, data: {turbolinks: false} %></li>
+      <% unless logged_in? %>
+      <li><%= link_to "Log in", login_path, data: {turbolinks: false} %></li>
+      <li><%= link_to '新規登録', signup_path , data: {turbolinks: false} %></li>
+      <% end %>
+      <% if logged_in? %>
+      <%= link_to "プロフィール編集", edit_user_path(current_user), data: {turbolinks: false} %></li>
+      <li><%= link_to "Log out", logout_path, method: :delete, data: {turbolinks: false} %></li>
+      <% end %>
+      <% unless session[:user_id] == nil %>
+      <li><%= link_to "ユーザー表示", allusers_index_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
+      <li><%= link_to "みんなのアイテム", all_item_show_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
+      <li><%= link_to "Myアイテム", user_item_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
+      <li><%= link_to "NOTICE", notifications_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
+      <li><%= link_to "Myコーデ", user_cordinate_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
+      <li><%= link_to "Item作成", item_new_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
+      <li><%= link_to "Cordinate作成", cordinate_new_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
+      <% end %>
   </nav>
 </div><!-- /#gloval-nav -->
 
