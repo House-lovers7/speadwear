@@ -65,6 +65,7 @@
       <% unless session[:user_id] == nil %>
       <li><%= link_to "ユーザー表示", allusers_index_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
       <li><%= link_to "みんなのアイテム", all_item_show_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
+      <li><%= link_to "みんなのコーデ", all_cordinate_show_path(user_id: session[:user_id]), data: {turbolinks: false}%></li>
       <li><%= link_to "Myアイテム", user_item_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
       <li><%= link_to "NOTICE", notifications_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
       <li><%= link_to "Myコーデ", user_cordinate_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>

@@ -4,7 +4,7 @@
 テンションがアガル服に袖を通して1日を過ごしたい。
 いまあるクローゼットの中から季節・気分・TPOに合わせたコーディネートを選んでファッションを楽しみたい。
 でも、服選びに時間をかけたくない。そんなワガママを叶えるためにアプリを作成しました。
-100人いたら、100通りの個性と好きなファッションがある、そんな個性を尊重したい。
+100人いたら、100通りの個性と好きなファッションがある、そんな個性を尊重していきたい。
 
 
 ## 使用技術
@@ -21,23 +21,7 @@
 
 ## アプリケーションの概要
 
-:herb:
-:octocat:
-:four_leaf_clover:
-:bell:
-:key:
-:memo:
-:black_nib:
-:paperclip:
-:pushpin:
-:coffee:
-:tea:
-:information_source:
-:heavy_check_mark:
-:link:
-:large_blue_diamond:
-:large_orange_diamond:
-:small_red_triangle_down:
+
 
 
 ## アプリケーショの機能一覧
@@ -186,3 +170,20 @@
 
 
 
+:herb:
+:octocat:
+:four_leaf_clover:
+:bell:
+:key:
+:memo:
+:black_nib:
+:paperclip:
+:pushpin:
+:coffee:
+:tea:
+:information_source:
+:heavy_check_mark:
+:link:
+:large_blue_diamond:
+:large_orange_diamond:
+:small_red_triangle_down:
