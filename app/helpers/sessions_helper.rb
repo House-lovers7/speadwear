@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-1 # frozen_string_literal: true
-
 module SessionsHelper
   # 渡されたユーザーでログインする
   def log_in(user)

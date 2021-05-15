@@ -171,7 +171,7 @@ class ItemsController < ApplicationController
 
   def all_item_rating_search
     item_rating_ransack
-    item_cordinate_ransack_setup
+    item_cordinate_ransack_setup    
   end
 
   def all_item_super_item_search
