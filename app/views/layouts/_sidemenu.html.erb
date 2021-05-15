@@ -213,9 +213,9 @@
 <% unless @p_cordinate_season.nil?  %>
         <nav class=" nav flex-column card-body">
         <%= link_to '春',{:controller=>"cordinates",:action=>"all_cordinate_season_search", :p_season=>{:season_eq=>'0'}}%>
-        <%= link_to '夏',{:controller=>"cordinates",:action=>"all_cordinate_season_search", :p_season==>{:season_eq=>'1'}}%>
-        <%= link_to '秋',{:controller=>"cordinates",:action=>"all_cordinate_season_search", :p_season==>{:season_eq=>'2'}}%>
-        <%= link_to '冬',{:controller=>"cordinates",:action=>"all_cordinate_season_search", :p_season==>{:season_eq=>'3'}}%>
+        <%= link_to '夏',{:controller=>"cordinates",:action=>"all_cordinate_season_search", :p_season=>{:season_eq=>'1'}}%>
+        <%= link_to '秋',{:controller=>"cordinates",:action=>"all_cordinate_season_search", :p_season=>{:season_eq=>'2'}}%>
+        <%= link_to '冬',{:controller=>"cordinates",:action=>"all_cordinate_season_search", :p_season=>{:season_eq=>'3'}}%>
         </nav>
         <% end %>
       </div>
@@ -236,7 +236,7 @@
     <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
       <div class="card-body">
         <nav class="nav flex-column">
-          <%= link_to 'デート',    {:controller=>"cordinates",:action=>"all_cordinate_tpo_search",:p_tpo==>{:tpo_eq=>'0'}}%>
+          <%= link_to 'デート',    {:controller=>"cordinates",:action=>"all_cordinate_tpo_search",:p_tpo=>{:tpo_eq=>'0'}}%>
           <%= link_to 'リラックス',  {:controller=>"cordinates",:action=>"all_cordinate_tpo_search",:p_tpo=>{:tpo_eq=>'1'}}%>
           <%= link_to 'スポーツ'  ,{:controller=>"cordinates",:action=>"all_cordinate_tpo_search",:p_tpo=>{:tpo_eq=>'2'}}%>
           <%= link_to 'おでかけ',      {:controller=>"cordinates",:action=>"all_cordinate_tpo_search",:p_tpo=>{:tpo_eq=>'3'}}%>
