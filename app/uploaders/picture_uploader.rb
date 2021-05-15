@@ -4,9 +4,9 @@ class PictureUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # デフォルト画像の設定
-  def default_url(*_args)
-    ActionController::Base.helpers.asset_path("fallback/#{[version_name, 'default_cordinate.png'].compact.join('_')}")
-  end
+  # def default_url(*_args)
+  #   ActionController::Base.helpers.asset_path("fallback/#{[version_name, 'default_cordinate.png'].compact.join('_')}")
+  # end
 
   process resize_to_limit: [225, 300]
   process convert: 'jpg' # 保存形式をJPGにする

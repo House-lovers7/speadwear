@@ -1,6 +1,11 @@
 <% if controller.action_name == "show" %>
 <div class= "item_image">
-<%= image_tag @item.picture.url, size: '450x580' unless @item.picture.nil?  %>
+<% unless @item.picture.url.nil?  %>
+<%= image_tag @item.picture.url, size: '450x580' %>
+<% else %>
+<%= image_tag 'default_cordinate.png' %>
+<% end %>
+
 <%#= link_to image_tag(@item.picture.url), item_show_path( user_id: @item.user_d, id: @item.id), size: "374.14x250" unless @item.picture.blank? %>
       <div class= "item-button flex-colum justify-content-center">  <%# 縦ならびflex-colum　中央揃え justify-content-center  %>
     <%= link_to "削除" , item_delete_path, class: "btn btn-outline-danger btn-block", data: {turbolinks: false} , method: :delete, data: {
