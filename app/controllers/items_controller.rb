@@ -129,7 +129,7 @@ class ItemsController < ApplicationController
   end
 
   def all_cordinate_rating_search
-    cordinate_rating_ransack
+    cordinate_rating_ransack    
   end
 
   def cordinate_season_ransack
@@ -150,6 +150,7 @@ class ItemsController < ApplicationController
                                            search_key: :p_rating)
     @p_cordinate_rating = p_cordinate_rating.result
     @cordinate = Cordinate.where(user_id: params[:user_id]) if params[:p_rating].blank?
+    binding.pry
   end
 
   # Itemのransack設定--------------
@@ -171,8 +172,9 @@ class ItemsController < ApplicationController
 
   def all_item_rating_search
     item_rating_ransack
-    item_cordinate_ransack_setup    
+    item_cordinate_ransack_setup               
   end
+
 
   def all_item_super_item_search
     item_super_item_ransack
@@ -196,6 +198,7 @@ class ItemsController < ApplicationController
     @q_item_rating = q_item_rating.result
     @item = Item.where(user_id: params[:user_id]) if params[:q_rating].blank?
   end
+
 
   def item_color_ransack
     q_item_color = Item.ransack(params[:q_color], search_key: :q_color)
