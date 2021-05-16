@@ -2,10 +2,9 @@
     <div class="cordinate_edit_picture">
       <%= image_tag @cordinate.picture.url, id: "bigimg", size: '400x400' unless @cordinate.picture.blank? %>
     </div>
-
     <%# cordinateの編集フォームj %>
     <div class="cordinate_edit_form, cordinate_make">
-      <%= form_for(cordinate_patch_url) do |i| %>
+      <%= form_for(cordinate_patch_path) do |i| %>
       <ul>
         <li>
           <%= i.label :season, "評価:" %><i class="fa fa-trophy" aria-hidden="true"></i>
@@ -17,8 +16,6 @@
         <li>
           <%= i.label :tpo, "TPO:" %>
           <%= i.select :tpo, Cordinate.tpos.keys %>
-        </li>
-
         <li>
           <%= i.label :picture, "写真" %><i class="far fa-image fa-1x"></i>
           <%= i.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>

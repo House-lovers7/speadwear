@@ -4,7 +4,7 @@ class CordinatesController < ApplicationController
   before_action :blocking?
   before_action :logged_in_user, only: %i[create edit delete update]
   # before_action :friend_user, only: %i[new edit create]
-  
+
   def index
     @item = Item.where(user_id: params[:user_id])
     item_cordinate_ransack_setup
@@ -53,8 +53,7 @@ class CordinatesController < ApplicationController
 
     if @cordinate.save
       flash[:success] = 'コーデを作成しました!'
-      redirect_to cordinate_edit_path(user_id: @cordinate.user.id,
-                                      id: @cordinate.id)
+      redirect_to cordinate_show_path(user_id: @cordinate.user.id, id: @cordinate.id)
     else
       redirect_to request.referer, notice: @cordinate.errors.full_messages.to_s
     end
@@ -70,11 +69,12 @@ class CordinatesController < ApplicationController
   def update
     @cordinate = Cordinate.find(params[:id])
     cordinate_si_params_set
-    @cordinate.save
-    if @cordinate.update_attributes(cordinate_update_params)
+    # @cordinate.save
+    # if @cordinate.update_attributes(cordinate_update_params)
+    if @cordinate.update_attributes(cordinate_params)
       @cordinate.save
       flash[:success] = 'コーデをアプデしました!'
-      redirect_to cordinate_item_edit_path(item_id: params[:item_id])
+      redirect_to cordinate_show_path(user_id: @cordinate.user.id, id: @cordinate.id)
     else
       redirect_to request.referer, notice: @cordinate.errors.full_messages.to_s
     end
@@ -82,9 +82,16 @@ class CordinatesController < ApplicationController
 
   def cordinate_save
     @cordinate = Cordinate.find(params[:id])
+    cordinate_si_params_set
     @cordinate.save
-    reset_si_items
-    redirect_to user_cordinate_path(user_id: params[:user_id])
+    if @cordinate.update_attributes(cordinate_update_params)
+    # if @cordinate.update_attributes(cordinate_params)
+      @cordinate.save
+      flash[:success] = 'コーデをアプデしました!'
+      redirect_to cordinate_show_path(user_id: @cordinate.user.id, id: @cordinate.id)
+    else
+      redirect_to request.referer, notice: @cordinate.errors.full_messages.to_s
+    end
   end
 
   def reset_si_items
@@ -253,7 +260,7 @@ class CordinatesController < ApplicationController
   end
 
   def cordinate_update_params
-    params.permit(:user_id, :item_id, :season, :tpo, :rating, :memo, :picture, :favorite, :si_outer, :si_shoes,
+    params.permit(:user_id, :item_id, :season, :tpo, :rating, :memo, :picture, :si_outer, :si_shoes,
                   :si_bottoms, :si_tops, items_attributes: [:id])
   end
 
