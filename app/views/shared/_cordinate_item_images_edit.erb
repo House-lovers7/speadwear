@@ -5,11 +5,12 @@
                             <%= image_tag @si_tops, data:{ image: 'img1'}, size: "250x250", class: "pic" %>
                             <div class=" image-text">
                                    トップス登録済
+                                     <%= link_to '選びなおす',"/users/#{params[:user_id]}/cordinates/#{params[:id]}/items/search?q[super_item_eq]=1", class: "images", data: {turbolinks: false} %>
                             </div>
                             <% else %>
                             <%= image_tag "logo-tops.png", size: "215x257" %>
                             <div class="image-text">
-                                   <%= link_to 'トップス選ぶ', "/users/#{params[:user_id]}/cordinates/#{params[:id]}/items/search?q[super_item_eq]=1", data: {turbolinks: false} ,class: "images", data: {turbolinks: false} %>
+                                   <%= link_to 'トップス選ぶ', "/users/#{params[:user_id]}/cordinates/#{params[:id]}/items/search?q[super_item_eq]=1",class: "images", data: {turbolinks: false} %>
                             </div>
                             <% end %>
                      </div>
@@ -18,7 +19,7 @@
                             <%= image_tag @si_bottoms, data:{ image: 'img2'}, size: "250x257", class: "pic"  %>
                             <div class="image-text">
                                    ボトムス登録済
-                                   <%= link_to 'もう一度選ぶ',"/users/#{params[:user_id]}/cordinates/#{params[:id]}/items/search?q[super_item_eq]=2",data: {turbolinks: false} , class: "images", data: {turbolinks: false} %>
+                                   <%= link_to '選びなおす',"/users/#{params[:user_id]}/cordinates/#{params[:id]}/items/search?q[super_item_eq]=2", class: "images", data: {turbolinks: false} %>
                             </div>
                             <% else %>
                             <%= image_tag "logo-pants.png", size: "215x257" %>
@@ -32,11 +33,12 @@
                             <%= image_tag @si_shoes, data:{ image: 'img3'}, size: "250x240", class: "pic"  %>
                             <div class="image-text align-items-center">
                                    シューズ登録済
+                                     <%= link_to '選びなおす',"/users/#{params[:user_id]}/cordinates/#{params[:id]}/items/search?q[super_item_eq]=3", class: "images", data: {turbolinks: false} %>
                             </div>
                             <% else %>
                             <%= image_tag "logo-shoes.png", size: "215x257" %>
                             <div class="image-text ">
-                                   <%= link_to 'シューズを選ぶ',  "/users/#{params[:user_id]}/cordinates/#{params[:id]}/items/search?q[super_item_eq]=3", data: {turbolinks: false} , class: "images", data: {turbolinks: false} %>
+                                   <%= link_to 'シューズを選ぶ',  "/users/#{params[:user_id]}/cordinates/#{params[:id]}/items/search?q[super_item_eq]=3", data: {turbolinks: false} , class: "images" %>
                             </div>
                             <% end %>
                      </div>
@@ -45,11 +47,12 @@
                             <%= image_tag @si_outer, data:{ image: 'img4'}, size: "250x240", class: "pic"  %>
                             <div class="image-text">
                             アウター登録済
+                              <%= link_to '選びなおす',"/users/#{params[:user_id]}/cordinates/#{params[:id]}/items/search?q[super_item_eq]=0", class: "images", data: {turbolinks: false} %>
                             </div>
                             <% else %>
                             <%= image_tag "outer.png", size: "215x257" %>
                             <div class="image-text">
-                                   <%= link_to 'アウターを選ぶ',  "/users/#{params[:user_id]}/cordinates/#{params[:id]}/items/search?q[super_item_eq]=0", data: {turbolinks: false} , class: "images", data: {turbolinks: false} %>
+                                   <%= link_to 'アウターを選ぶ',  "/users/#{params[:user_id]}/cordinates/#{params[:id]}/items/search?q[super_item_eq]=0", data: {turbolinks: false} , class: "images"%>
                             </div>
                             <% end %>
                      </div>
