@@ -4,11 +4,11 @@
     </div>
     <%# cordinateの編集フォームj %>
     <div class="cordinate_edit_form, cordinate_make">
-      <%= form_for(cordinate_patch_path) do |i| %>
+      <%= form_for(@cordinate) do |i| %>
       <ul>
         <li>
-          <%= i.label :season, "評価:" %><i class="fa fa-trophy" aria-hidden="true"></i>
-          <%= i.select :season, Cordinate.ratings.keys %>
+          <%= i.label :rating, "評価:" %><i class="fa fa-trophy" aria-hidden="true"></i>
+          <%= i.select :rating, Cordinate.ratings.keys %>
         </li>
         <%= i.label :season, "季節:" %><i class="fa fa-leaf" aria-hidden="true"></i>
         <%= i.select :season, Cordinate.seasons.keys %>

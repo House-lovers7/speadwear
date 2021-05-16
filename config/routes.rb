@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/lp', to: redirect('/lp.html')
 
   resources :items
+  resources :cordinates
   resources :account_activations, only: [:edit]
   resources :password_resets, only: %i[new create edit update]
   resources :microposts, only: %i[create destroy]
