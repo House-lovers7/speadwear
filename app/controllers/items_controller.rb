@@ -149,8 +149,7 @@ class ItemsController < ApplicationController
     p_cordinate_rating = Cordinate.ransack(params[:p_rating],
                                            search_key: :p_rating)
     @p_cordinate_rating = p_cordinate_rating.result
-    @cordinate = Cordinate.where(user_id: params[:user_id]) if params[:p_rating].blank?
-    binding.pry
+    @cordinate = Cordinate.where(user_id: params[:user_id]) if params[:p_rating].blank?    
   end
 
   # Itemのransack設定--------------
