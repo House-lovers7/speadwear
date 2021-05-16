@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class CommentsController < ApplicationController
+  before_action :friend_user, only: %i[new create]
+
   def create
     @cordinate = Cordinate.find(params[:id])
     @comment = Comment.new(comment_params)
