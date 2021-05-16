@@ -40,6 +40,12 @@
 
 
 
+https://twitter.com/i/status/1393862119037169670
+
+
+https://twitter.com/i/status/1393849677297065985
+
+
 
 ## アプリケーショの機能一覧
 
