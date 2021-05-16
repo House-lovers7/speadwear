@@ -2,7 +2,7 @@
 
 class PictureUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  
+
   include CarrierWave::RMagick
 
   # デフォルト画像の設定

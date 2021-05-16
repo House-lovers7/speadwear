@@ -12,6 +12,7 @@ class Ability
     can :create, :Likecordinate # if the user is logged in can create likecordinate
     can :create, Comment # like managing all comments in the website
     return unless user.admin?
+
     can :manage, :all # finally we give all remaining permissions only to the admins
   end
 end

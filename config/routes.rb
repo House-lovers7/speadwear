@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 Rails.application.routes.draw do
   root 'users#new'
   # root "/LP"
@@ -12,7 +13,7 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets, only: %i[new create edit update]
   resources :relationships, only: %i[create destroy]
-  
+
   resources :users do
     member do
       get :following, :followers
