@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets, only: %i[new create edit update]
   resources :relationships, only: %i[create destroy]
-
+  
   resources :users do
     member do
       get :following, :followers
@@ -105,8 +105,6 @@ Rails.application.routes.draw do
 
   get '/users/:user_id/cordinates/:id/save', to: 'cordinates#cordinate_save',
                                              as: 'cordinate_edit_save'
-  post '/users/:user_id/cordinates/:id/edit', to: 'cordinates#cordinate_save',
-                                              as: 'cordinate_save'
 
   # controllerを変える必要はあるのか？
   patch '/users/:user_id/cordinates/:id/', to: 'cordinates#update',
