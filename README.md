@@ -18,7 +18,7 @@
 [マインド・マップを使い、アイディアの展開・深堀・整理しました。](https://www.mindmeister.com/ja/1401463492/_ )
 
 やりたいことを発散させた後は、技術的にできるできない問題があり、(未経験の初学者であるため）、現実と折り合いをつけて、
-[ブラッシュアップした結果がです。](https://www.mindmeister.com/ja/1405225759/brush-up)
+[ブラッシュアップした結果です。](https://www.mindmeister.com/ja/1405225759/brush-up)
 
 学習しながら、データベースの設計を考えて行き着いた
 [最終結果です。](https://www.mindmeister.com/ja/1515140019/model-2021)
