@@ -17,9 +17,14 @@ port        ENV.fetch('PORT', 3000)
 #
 environment ENV.fetch('RAILS_ENV', 'development')
 
-cert = "localhost2.pem"
-key = "localhost2-key.pem"
-ssl_bind "0.0.0.0", 9292, cert: cert, key: key
+# cert = "localhost2.pem"
+# key = "localhost2-key.pem"
+# ssl_bind "0.0.0.0", 9292, cert: cert, key: key
+
+#  cert: ENV['CERT_KEY'],
+#  key:  ENV['PUMA_KEY'],
+#  ssl_bind "0.0.0.0", 9292, cert: cert, key: key
+
 
 
 # Specifies the number of `workers` to boot in clustered mode.

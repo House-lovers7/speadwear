@@ -1,2 +1,162 @@
 <h3>アイテム<%= @item.user_id %>を登録する</h3>
- <%= render 'shared/item_label_select' %>
+<div class="image-size">
+  <%= form_for(@item, url: item_create_path) do |i| %>
+  <%= image_tag @item.picture.url,size: '215x257' unless @item.picture %>
+</div>
+<div class="label-form">
+  <i class="fa fa-leaf" aria-hidden="true"></i><%= i.label :season, "季節:" %>
+  <%= i.select :season, Item.seasons.keys %>
+</div>
+<div class="label-form">
+  <%= i.label :tpo, "TPO：" %>
+  <%= i.select :tpo, Item.tpos.keys %>
+</div>
+<div class="label-form">
+  <%= i.label :super_item, "カテゴリー：" %>
+  <%= i.select :super_item, Item.super_items.keys %>
+</div>
+<div class="label-form">
+  <%= i.label :content, "内容:" , class: "col-form-label" %>
+  <%= i.select :content, Item.contents.keys %>
+</div>
+
+<div class="label-form">
+  <%= i.label :rating, "評価:" , class: "col-form-label" %>
+  <%= i.select :rating, Item.ratings.keys %>
+</div>
+
+<div class="field">
+  <span class="color_select">カラー選択</span><br>
+
+  <div class="radio-inline">
+    <div class="color_list">
+      <li>
+        <div class="color-black">
+          <%= i.radio_button :color, :ブラック, checked: "checked" %>
+          <%= i.label :ブラック, class: "color_label" %>
+          <a></a>
+        </div>
+      </li>
+      <li>
+        <div class="color-white">
+          <%= i.radio_button :color, :ホワイト, checked: "checked" %>
+          <%= i.label :ホワイト, class: "color_label" %>
+          <a></a>
+        </div>
+      </li>
+      <li>
+        <div class="color-gray">
+          <%= i.radio_button :color, :グレー, checked: "checked" %>
+          <%= i.label :グレー, class: "color_label" %>
+          <a></a>
+        </div>
+      </li>
+      <li>
+        <div class="color-red">
+          <%= i.radio_button :color, :レッド, checked: "checked" %>
+          <%= i.label :レッド, class: "color_label" %>
+          <a></a>
+        </div>
+      </li>
+      <li>
+        <div class="color-navy">
+          <%= i.radio_button :color, :ネイビー, checked: "checked" %>
+          <%= i.label :ネイビー, class: "color_label" %>
+          <a></a>
+        </div>
+      </li>
+      <li>
+        <div class="color-lightblue">
+          <%= i.radio_button :color, :ライトブルー, checked: "checked" %>
+          <%= i.label :ライトブルー, class: "color_label" %>
+          <a></a>
+        </div>
+      </li>
+      <li>
+        <div class="color-yellow">
+          <%= i.radio_button :color, :イエロー, checked: "checked" %>
+          <%= i.label :イエロー, class: "color_label" %>
+          <a></a>
+        </div>
+      </li>
+      <li>
+        <div class="color-green">
+          <%= i.radio_button :color, :グリーン, checked: "checked" %>
+          <%= i.label :グリーン, class: "color_label" %>
+          <a></a>
+        </div>
+      </li>
+
+
+
+      <li>
+        <div class="color-orenge">
+          <%= i.radio_button :color, :オレンジ, checked: "checked" %>
+          <%= i.label :オレンジ, class: "color_label" %>
+          <a></a>
+        </div>
+      </li>
+      <li>
+        <div class="color-olive">
+          <%= i.radio_button :color, :オリーブ, checked: "checked" %>
+          <%= i.label :オリーブ, class: "color_label" %>
+          <a></a>
+        </div>
+      </li>
+      <li>
+        <div class="color-neon">
+          <%= i.radio_button :color, :ネオン, checked: "neon" %>
+          <%= i.label :ネオン, class: "color_label" %>
+          <a></a>
+        </div>
+      </li>
+      <li>
+        <div class="color-border">
+          <%= i.radio_button :color, :ボーダー, checked: "checked" %>
+          <%= i.label :ボーダー, class: "color_label" %>
+          <a></a>
+        </div>
+      </li>
+      <li>
+        <div class="color-patternned">
+          <%= i.radio_button :color, :水たま, checked: "checked" %>
+          <%= i.label :水たま, class: "color_label" %>
+          <a></a>
+        </div>
+      </li>
+      <li>
+        <div class="color-denim">
+          <%= i.radio_button :color, :デニム, checked: "checked" %>
+          <%= i.label :デニム, class: "color_label" %>
+          <a></a>
+        </div>
+      </li>
+      <li>
+        <div class="color-others">
+          <%= i.radio_button :color, :他のカラー, checked: "checked" %>
+          <%= i.label :他のカラー, class: "color_label" %>
+          <a></a>
+        </div>
+      </li>
+    </div>
+  </div>
+  <%= i.label :picture, "写真" %><i class="far fa-image fa-1x"></i>
+  <%= i.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+  <script type="text/javascript">
+    $('#micropost_picture').bind('change', function() {
+      var size_in_megabytes = this.files[0].size / 196 / 257;
+      if (size_in_megabytes > 5) {
+        alert('Maximum file size is 5MB. Please choose a smaller file.');
+      }
+    });
+  </script>
+  <br>
+  <div class="form-group">
+    <%= i.label :memo, "メモ" %><i class="far fa-edit fa-1x"></i>
+    <%= i.text_field :memo %>
+  </div>
+  <!--後々書き換える必要性あり -->
+  <%= hidden_field_tag :user_id, params[:user_id] %>
+  <%= i.submit "送信" ,class: "nav-link btn btn-info  btn-block " %>
+  <% end %>
+</div>

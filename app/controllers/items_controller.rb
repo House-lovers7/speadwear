@@ -62,14 +62,13 @@ class ItemsController < ApplicationController
   end
 
   def update
-    @item = Item.find(params[:id])
-    if @item.update_attributes(item_params)
+    @item = Item.find(params[:id])         
+    if @item.update_attributes(item_params)    
       flash[:success] = '更新しました!!'
       redirect_to item_show_path(user_id: params[:user_id], id: @item.id)
-
-    else
-      redirect_to request.referer
-    end
+     else
+       redirect_to request.referer
+     end
   end
 
   def destroy

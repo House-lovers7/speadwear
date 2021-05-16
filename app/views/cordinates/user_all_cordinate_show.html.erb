@@ -1,1 +1,24 @@
-  <%= render "shared/cordinate_show" %>
+<% @cordinates.each do |cordinate| %>
+
+<div class="cordinate_each_images kakomi-double  ">
+
+  <div class="img_fit">
+    <% if cordinate.picture?  %>
+    <%= link_to image_tag( cordinate.picture.url), cordinate_show_path( user_id: cordinate.user_id, id: cordinate.id), size: "225x300"%>
+    <% else %>
+    <%= link_to image_tag('default_cordinate.png'), cordinate_show_path( user_id: cordinate.user_id, id: cordinate.id), size: "225x300" %>
+    <% end %>
+  </div>
+
+  <div class="cordinates_each_lists">
+    <ul>
+      <li>ID:<%= cordinate.id %></li>
+      <li>user_id:<%= cordinate.user_id %></li>
+      <li>ユーザー: <%=link_to cordinate.user.name, cordinate_show_path(user_id: cordinate.user.id, id: cordinate.id )%></li>
+      <li><i class="fa fa-leaf" aria-hidden="true"></i>季節:<%= cordinate.season %></li>
+      <li>TPO:<%= cordinate.tpo %></li>
+      <li><i class="fa fa-trophy" aria-hidden="true"></i>評価:<span class="star5_rating" data-rate=<%= cordinate.rating %>></span></li>
+    </ul>
+  </div>
+</div>
+<% end %>

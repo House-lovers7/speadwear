@@ -1,13 +1,40 @@
- <%= render "shared/item_show" %>
+<div class="item_image">
+  <% unless @item.picture.url.nil?  %>
+  <%= image_tag @item.picture.url, size: '450x580' %>
+  <% else %>
+  <%= image_tag 'default_cordinate.png' %>
+  <% end %>
 
-     <% if @item.super_item == "suits" %>
-       <%= link_to "コーデにスーツとして登録",    cordinate_new_path( cordinate_si_suits:   params[:id], item_id: @item.id), data: {turbolinks: false} %>
+  <div class="item-button flex-colum justify-content-center">
+    <%= link_to "削除" , item_delete_path, class: "btn btn-outline-danger btn-block", data: {turbolinks: false} , method: :delete, data: {
+      confirm: "本当に削除しますか？" } %>
+    <%= link_to "編集する" , item_edit_path, class: "btn btn-outline-warning btn-block" , data: { confirm: "変更しますか？" } %>
+  </div>
+</div>
+<div class="item_show_lists ">
+  <ul>
+    <li>ユーザー: <%=link_to @item.user.name, user_show_path(id: params[:user_id]), data: {turbolinks: false} %></li>
+    <li>カテゴリー ：<%= @item.super_item %></li>
+    <li><i class="fa fa-leaf" aria-hidden="true"></i>季節： <%= @item.season %></li>
+    <li>TPO :<%= @item.tpo %></li>
+    <li>内容： <%= @item.content %></li>
+    <li>カラー： <%= @item.color %></li>
+    <li><i class="far fa-edit fa-1x"></i>メモ： <%= @item.memo %></li>
+    <!--星評価-->
+    <li><i class="fa fa-trophy" aria-hidden="true"></i>評価:<span class="star5_rating" data-rate=<%= @item.rating %>></span></li>
+    <li><%= link_to "アイテムのコーデをみてみる" , cordinate_show_path( user_id: @item.user_id, id: @item.cordinate_id ) , data: {turbolinks: false} unless @item.cordinate_id.blank? %></li>
+  </ul>
+</div>
+</div>
+
+<% if @item.super_item == "suits" %>
+<%= link_to "コーデにスーツとして登録",    cordinate_new_path( cordinate_si_suits:   params[:id], item_id: @item.id), data: {turbolinks: false} %>
 　　　<% elsif @item.super_item == "outer" %>
 　　　 <%= link_to "コーデにアウターとして登録",cordinate_new_path( cordinate_si_outer:   params[:id], item_id: @item.id, data: {turbolinks: false}) %>
 　　　<% elsif @item.super_item == "tops"  %>
 　　　 <%= link_to "コーデにトップスとして登録",  cordinate_new_path( cordinate_si_tops:    params[:id], item_id: @item.id), data: {turbolinks: false} %>
 　　　<% elsif  @item.super_item == "bottoms" %>
-       <%= link_to "コーデにボトムスとして登録",  cordinate_new_path( cordinate_si_bottoms: params[:id], item_id: @item.id), data: {turbolinks: false} %>
-      <% elsif  @item.super_item == "shoes" %>
-       <%= link_to "コーデにシューズとして登録",  cordinate_new_path( cordinate_si_shoes:   params[:id], item_id: @item.id), data: {turbolinks: false} %>
-     <% end %>
+<%= link_to "コーデにボトムスとして登録",  cordinate_new_path( cordinate_si_bottoms: params[:id], item_id: @item.id), data: {turbolinks: false} %>
+<% elsif  @item.super_item == "shoes" %>
+<%= link_to "コーデにシューズとして登録",  cordinate_new_path( cordinate_si_shoes:   params[:id], item_id: @item.id), data: {turbolinks: false} %>
+<% end %>
