@@ -39,10 +39,10 @@
 ## アプリケーションの概要
 
 
-[アイテム機能](https://twitter.com/i/status/1393862119037169670)
-[アイテムとコーデの絞り込み検索機能](https://twitter.com/i/status/1393849677297065985)
-[いいね機能](https://twitter.com/i/status/1393895042486476811)
-[フォロー＆アンフォロー機能](https://twitter.com/i/status/1393895042486476811)
+-  [アイテム機能](https://twitter.com/i/status/1393862119037169670)
+-  [アイテムとコーデの絞り込み検索機能](https://twitter.com/i/status/1393849677297065985)
+-  [いいね機能](https://twitter.com/i/status/1393895042486476811)
+-  [フォロー＆アンフォロー機能](https://twitter.com/i/status/1393895042486476811)
 
 
 
