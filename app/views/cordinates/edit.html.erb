@@ -20,11 +20,6 @@
         </li>
 
         <li>
-          <%= i.label :rating, "評価:" %>
-          <%= i.select :rating, Cordinate.ratings.keys %>
-        </li>
-
-        <li>
           <%= i.label :picture, "写真" %><i class="far fa-image fa-1x"></i>
           <%= i.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
           <script type="text/javascript">

@@ -1,22 +1,26 @@
      <% @q_item_super_item.each do |item| %>
-<div class= "item_each_images ">
-          <%= link_to image_tag( item.picture.url), item_show_path( user_id: item.user_id, id: item.id), size: "374.14x250" unless item.picture.blank? %>
-                  <div class= "items_each_lists">
-                  <ul>
-                     <li>ID: <%= item.id %></li>
-                    <li>ユーザー：<%= link_to item.user.name , user_show_path( id: item.user.id) %></li>
-                    <li>内容: <%= item.content %></li>
-                    <li>TPO: <%= item.tpo %></li>
-                    <li><i class="fa fa-leaf" aria-hidden="true"></i>季節: <%= item.season %></li>
-                     <li><i class="fa fa-trophy" aria-hidden="true"></i>評価:<span class="star5_rating" data-rate= <%= item.rating %> ></span></li>       
-                    
-                    
-                    <% unless item.cordinate_id.blank? %>
-                      <li><%= link_to "アイテムのコーデ" , cordinate_show_path( user_id: item.user_id, id: item.cordinate_id ), data: {turbolinks: false} %></li>
-                    <% else %>
-                     <li>コーデなしです </li>                                          
-                      <% end %>
-                    </uL>
-                  </div>
-                </div>
-      <% end %>
+     <div class="item_each_images ">
+       <% if item.picture?  %>
+       <%= link_to image_tag( item.picture.url), item_show_path( user_id: item.user_id, id: item.id), size: "374.14x250", data: {turbolinks: false} %>
+       <% else %>
+       <%= link_to image_tag('default_cordinate.png'), item_show_path( user_id: item.user_id, id: item.id), size: "374.14x250", data: {turbolinks: false}  %>
+       <% end %>
+       <div class="items_each_lists">
+         <ul>
+           <li>ID: <%= item.id %></li>
+           <li>ユーザー：<%= link_to item.user.name , user_show_path( id: item.user.id) %></li>
+           <li>内容: <%= item.content %></li>
+           <li>TPO: <%= item.tpo %></li>
+           <li><i class="fa fa-leaf" aria-hidden="true"></i>季節: <%= item.season %></li>
+           <li><i class="fa fa-trophy" aria-hidden="true"></i>評価:<span class="star5_rating" data-rate=<%= item.rating %>></span></li>
+
+
+           <% unless item.cordinate_id.blank? %>
+           <li><%= link_to "アイテムのコーデ" , cordinate_show_path( user_id: item.user_id, id: item.cordinate_id ), data: {turbolinks: false} %></li>
+           <% else %>
+           <li>コーデなしです </li>
+           <% end %>
+         </uL>
+       </div>
+     </div>
+     <% end %>
