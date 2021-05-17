@@ -34,13 +34,13 @@ class ApplicationController < ActionController::Base
     redirect_to(root_url) unless current_user.admin?
   end
 
-  def blocking?                        
-    current_user  
-    @user = User.find(session[:user_id])  
+    def blocking?                  
+    current_user      
+    @user = User.find(params[:user_id])
     active_block_ids = @current_user.active_blocks
     passive_blocke_ids = @current_user.passive_blocks
     # 自分 = @current_userが相手　= @userをブロックしている　or 相手が自分をブロックしていたら表示していたら、メソッドを発動
-    if active_block_ids.where(blocked_id: @user.id).exists? || passive_blocke_ids.where(blocker_id: @user.id).exists?
+    if active_block_ids.where(blocked_id: @user.id).exists? || passive_blocke_ids.where(blocker_id: @user.id).exists?    
       flash[:notice] = 'このユーザをブロックしているかブロックされているため、アクションができません。'
       redirect_to request.referer
     end

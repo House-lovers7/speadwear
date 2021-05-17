@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class CordinatesController < ApplicationController
-  before_action :blocking? , only: %i[edit delete update]
+class CordinatesController < ApplicationController  
   before_action :logged_in_user, only: %i[create edit delete update]
   before_action :friend_user, only: %i[new edit create]
+  before_action :blocking?, only:  %i[show ]
 
   def index
     @item = Item.where(user_id: params[:user_id])
