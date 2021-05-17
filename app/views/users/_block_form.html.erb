@@ -1,10 +1,9 @@
-
 <% unless current_user?(@user) %>
-  <div id="block_form">
+<div id="block_form">
   <% if current_user.blocking?(@user) %>
-    <%= render "block" %>
+  <%= render "unblock" %>
   <% else %>
-    <%= render "unblock" %>
+  <%= render "block" %>
   <% end %>
-  </div>
+</div>
 <% end %>

@@ -27,11 +27,14 @@ class User < ApplicationRecord
                                   foreign_key: 'sender_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification',
                                    foreign_key: 'receiver_id', dependent: :destroy
-  # ブロック機能の実装
+  
+  
+                                   # ブロック機能の実装
   has_many :active_blocks, class_name: 'Block', foreign_key: 'blocker_id',
                            dependent: :destroy
   has_many :passive_blocks, class_name: 'Block', foreign_key: 'blocked_id',
                             dependent: :destroy
+
   has_many :blocking, through: :active_blocks, source: :blocked
 
   def already_liked?(_cordinate)
@@ -46,6 +49,8 @@ class User < ApplicationRecord
   has_many :passive_relationships, class_name: 'Relationship',
                                    foreign_key: 'followed_id',
                                    dependent: :destroy
+
+
   # :sourceパラメーター を使って、following配列の元はfolledのidの集合体であることを明示する
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
@@ -57,32 +62,19 @@ class User < ApplicationRecord
 
   has_many :liked_cordinates, through: :likecordinates, source: :cordinate
 
-  # ユーザをブロックする
-  def block(user)
-    blocks.create(blocker_id: current_user.id, blocked_id: user.id)
+
+  def block(other_user)
+    active_blocks.create(blocked_id: other_user.id)
   end
 
-  # def follow(other_userの模倣
-  # def block(other_user)
-  #   active_blocks.create(blocked_id: other_user.id)
-  # end
-
-  def unblock(user)
-    if blocking?(user)
-      blocks.find_by(blocker_id: current_user.id,
-                     blocked_id: user.id).destroy
-    end
+  def unblock(other_user)
+    active_blocks.find_by(blocked_id: other_user.id).destroy
   end
-
-  # def unfollow(other_userの模倣
-  # def unblock(other_user)
-  #   active_blocks.find_by(blocked_id: other_user.id).destroy
-  # end
-
+   
   def blocking?(user)
     blocking.include?(user)
   end
-
+  
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)
   end
