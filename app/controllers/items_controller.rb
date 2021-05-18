@@ -2,7 +2,7 @@
 
 class ItemsController < ApplicationController  
   before_action :logged_in_user, only: %i[create edit delete update]
-  before_action :blocking?, only:  %i[show ]
+    before_action :blocking?, only:  %i[show ]
 
   def index
     item_paginate
