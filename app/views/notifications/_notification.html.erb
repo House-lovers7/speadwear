@@ -3,7 +3,7 @@
 
 <div class="user-view clearfix ">
   <%= link_to user_show_path(notification.sender) do %>
-  <%= image_tag @user.picture.url, size: 200 unless @user.picture.blank? %>
+  <%= image_tag sender.picture.url, size: 200 unless @user.picture.blank? %>
   <%= notification_form(notification) %><span class="moderate-font"><%=" (#{time_ago_in_words(notification.created_at)} 前)" %></span>
   <br>
   <% if !@comment.nil? %>
