@@ -13,12 +13,13 @@ module NotificationsHelper
     @sender_comment = notification.comment_id
     # notification.actionがfollowかlikeかcommentか
     
-    case notification.action
-          
-    when 'follow'
-      "#{tag.a(@sender.name, href: user_show_path(@sender),
-                             style: 'font-weight: bold;')}があなたをフォローしました"
-
+    case notification.action    
+    
+    when 'follow'                                                                   
+                             tag.a(@sender.name, href: user_show_path(@sender),
+                             style: 'font-weight: bold;') + 'が' + tag.a(@receiver.name, href: user_show_path(@receiver),
+                             style: 'font-weight: bold;') + 'をフォローしました'
+                                                          
     when 'cordinatelike'
       tag.a(@sender.name, href: user_show_path(@sender),
                           style: 'font-weight: bold;') + 'が' + tag.a(@receiver.name + "のコーディネート",
