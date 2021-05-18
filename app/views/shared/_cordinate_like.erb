@@ -4,7 +4,7 @@
                             <% @cordinate.liked_users.each do |user| %>
                             <div class= "cordinate_responses">
                               <div class= "cordinate_responses">                             
-                              <%= image_tag @user.picture.url, size: 150 unless @user.picture.blank? %>
+                              <%= image_tag user.picture.url, size: 150 unless user.picture.blank? %>
                               <%= @user.name %>へ</li>
                              <br>
                              <div class = "comment_box">
