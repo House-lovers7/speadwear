@@ -1,4 +1,4 @@
-
+<% unless @cordinate.user.id === current_user.id %>
                       <div class = "cordinate_comments">
                       <i class="fas fa-user-edit fa-1x"></i>コーデへのコメント
                       <%= form_for(@comment, url: {controller: 'comments' , action: 'create' }, method: :post) do |i| %>
@@ -6,26 +6,31 @@
                           <br>
                           <%= i.submit 'コメントする' %>
                             <% end %>
+                                 <% end %>
                             
-   　<%# unless @comments.nil? %>
-
   <p>投稿詳細ページ</p>
               <p><i class="far fa-comment fa-1x"></i>コメント一覧</p>
-              <%   @cordinate_comments.each do |c| %>
-                <div class= "cordinate_responses">
-                  <ul>
-                    <li> 
-                    <div class="comment_image">                      
-                        <%= image_tag @user.picture.url, size: 150 unless @user.picture.blank? %>
-                    </div>
-                      <div class = "comment_box">
-                         <%= c.user.name + ":" + "#{c.comment}" %>
-                      </div>
-                    </li>
-                    <%= button_to "コメントを消す" , comment_delete_path( user_id: current_user.id, comment_id: c.id, id: params[:id] ), :controller=>"comments", :action=> "destroy", :method => "delete" %>
-                  </ul>
-                  </div>
-                    <% end %>
+        <% if @cordinate.commented_users && @comment !=nil %>                          
+                          <% unless @cordinate.commented_users.nil? %>
+                            <% @cordinate.commented_users.each do |user| %>
+                            <div class= "cordinate_responses">
+                              <div class= "cordinate_responses">                             
+                              <%= image_tag @user.picture.url, size: 150 unless @user.picture.blank? %>
+                              <%= @user.name %>へ</li>
+                             <br>
+                             <div class = "comment_box">
+                              <li><%= user.name %>さんがコメントしました。</li>
+                              </div>
+                              <br>
+                                <% if user.id === current_user.id %>
+                              <li><%= button_to "コメントを取り消す" , comment_delete_path( user_id: user.id, comment_id: user.comments, id: @cordinate.id ),
+                                :controller=>"comments", :action=> "destroy", :method => "delete", class: "comment_like_btn" %></li>
+                                <% end %>
+                                </div>
+                              <% end %>
+                                <% end %>
+                                  <% end %>
+
 <hr>
 
 </div>

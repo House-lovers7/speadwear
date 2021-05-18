@@ -14,12 +14,19 @@ class Cordinate < ApplicationRecord
   validate :picture_size
 
   has_many :liked_cordinate, through: :likecordinates, source: :cordinate
+  has_many :accepts_comments, through: :comments, source: :cordinate
+
   has_many :active_likecordinates, class_name: 'Likecordinate',
                                    foreign_key: 'cordinate_id',
                                    dependent: :destroy
 
   # liked_usersによってcordinateが誰にいいねされているのかを簡単に取得できるようにする
   has_many :liked_users, through: :likecordinates, source: :user
+  
+  # commented_usersによってcordinateが誰にコメントされているのかを簡単に取得できるようにする
+  has_many :commented_users, through: :comments, source: :user
+
+
   mount_uploader :picture, PictureUploader
 
   accepts_nested_attributes_for :items

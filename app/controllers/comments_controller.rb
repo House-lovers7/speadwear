@@ -41,7 +41,8 @@ class CommentsController < ApplicationController
     save_notification_comment(current_user, user_id, id) if temp_ids.blank?
   end
 
-  def save_notification_comment(current_user, _id, user_id)
+
+  def save_notification_comment(current_user, id, user_id)
     # コメントは複数回することが考えられるため、１つの投稿に複数回通知する
     notification = current_user.active_notifications.new(
       cordinate_id: @cordinate.id,
@@ -54,14 +55,18 @@ class CommentsController < ApplicationController
     notification.save if notification.valid?
   end
 
-  def destroy
+  def destroy            
+
+    @comment = Comment.find_by(cordinate_id: params[:id],
+    user_id: params[:user_id])
+
     if can? :destroy, @comment
       @comment.destroy
       redirect_to request.referer
-    else
+      else
       flash[:danger] = '権限がありません!!'
       redirect_to request.referer
-    end
+      end    
   end
 
   private

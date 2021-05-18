@@ -61,6 +61,7 @@ class User < ApplicationRecord
                                    dependent: :destroy
 
   has_many :liked_cordinates, through: :likecordinates, source: :cordinate
+  has_many :commented_cordinates, through: :comments, source: :cordinate
 
 
   def block(other_user)

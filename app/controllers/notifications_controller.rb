@@ -1,6 +1,8 @@
 # frozen_string_literal: true
-
 class NotificationsController < ApplicationController
+  before_action :correct_user, only: %i[destroy_all ]
+
+
   def index
     @user = User.find_by(id: current_user.id)
     # current_userの投稿に紐づいた通知一覧
@@ -25,8 +27,7 @@ class NotificationsController < ApplicationController
     item_cordinate_ransack_setup
   end
 
-  def destroy_all
-    redirect_to request.referer if cannot? :destroy, @notification
+  def destroy_all    
     # 通知を全削除
     @notifications = current_user.passive_notifications.destroy_all
     redirect_to request.referer

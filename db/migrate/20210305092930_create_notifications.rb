@@ -12,5 +12,11 @@ class CreateNotifications < ActiveRecord::Migration[5.1]
       t.boolean :checked
       t.timestamps
     end
+
+    add_index :notifications, :sender_id
+    add_index :notifications, :receiver_id
+    add_index :notifications, :cordinate_id
+    add_index :notifications, :likecordinate_id
+
   end
 end

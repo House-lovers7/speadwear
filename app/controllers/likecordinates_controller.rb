@@ -51,8 +51,20 @@ class LikecordinatesController < ApplicationController
     end
   end
 
+  def save_notification_like_cordinate!(current_user, id, user_id)
+    # コメントは複数回することが考えられるため、１つの投稿に複数回通知する
+    notification = current_user.active_notifications.new(
+      cordinate_id: @cordinate.id,
+      comment_id: @comment.id,
+      receiver_id: user_id,
+      action: 'cordinatelike'
+    )
+    # 自分の投稿に対するコメントの場合は、通知済みとする
+    notification.checked = true if notification.sender_id == notification.receiver_id
+    notification.save if notification.valid?
+  end
+  
   private
-
   def likecordinate_params
     params.permit(:user_id, :cordinate_id)
   end

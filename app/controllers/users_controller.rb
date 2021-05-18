@@ -188,11 +188,6 @@ class UsersController < ApplicationController
     redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
   end
 
-  # 正しいユーザーかどうか確認
-  def correct_user
-    @user = User.find(params[:id])
-    redirect_to(root_url) unless @user == current_user
-  end
 
   def owner_user
     @user = User.find(params[:id])
