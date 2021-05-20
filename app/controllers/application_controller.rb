@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
     @user = @current_user || User.find_by(id: session[:user_id])
     if @user.following.include?(current_user) || @user == current_user || user.admin?
     else
-      flash[:success] = '権限がありません!!'
+      flash[:success] = 'ユーザーとフォロー関係にありません。'
       redirect_to request.referer
     end
   end

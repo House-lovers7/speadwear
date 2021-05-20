@@ -12,7 +12,6 @@ class Ability
     can :create, Comment # like managing all comments in the website
     can :create, Cordinate # like managing all comments in the website
     return unless user.admin?
-
     can :manage, :all # finally we give all remaining permissions only to the admins
   end
 end

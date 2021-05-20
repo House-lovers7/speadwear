@@ -31,10 +31,10 @@
       <%= link_to "みんなのアイテム", all_item_show_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false} %>
       <%= link_to "みんなのコーデ", all_cordinate_show_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
       <%= link_to "Myアイテム", user_item_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
-      <%= link_to "NOTICE", notifications_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false} %>
       <%= link_to "Myコーデ", user_cordinate_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
       <%= link_to "Item作成", item_new_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
       <%= link_to "Cordinate作成", cordinate_new_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false} %>
+      <%= link_to "通知りれき", notifications_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false} %>
       <% end %>
     </div>
   </div>
@@ -67,10 +67,10 @@
       <li><%= link_to "みんなのアイテム", all_item_show_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
       <li><%= link_to "みんなのコーデ", all_cordinate_show_path(user_id: session[:user_id]), data: {turbolinks: false}%></li>
       <li><%= link_to "Myアイテム", user_item_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
-      <li><%= link_to "NOTICE", notifications_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
       <li><%= link_to "Myコーデ", user_cordinate_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
       <li><%= link_to "Item作成", item_new_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
       <li><%= link_to "Cordinate作成", cordinate_new_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
+      <li><%= link_to "通知りれき", notifications_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
       <% end %>
   </nav>
 </div><!-- /#gloval-nav -->
