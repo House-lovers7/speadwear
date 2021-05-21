@@ -36,7 +36,7 @@
 :keyboard:  Capistrano 
 
 
-## アプリケーションの概要
+## アプリケーション機能の動画説明
 
 
 [アイテム機能](https://twitter.com/i/status/1393862119037169670)
