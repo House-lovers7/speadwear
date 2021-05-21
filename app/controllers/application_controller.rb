@@ -27,9 +27,9 @@ class ApplicationController < ActionController::Base
   end
 
   # 友達フラグを立てる
-  def friend_user
-    @user = @current_user || User.find_by(id: session[:user_id])
-    if @user.following.include?(current_user) || @user == current_user || user.admin?
+  def friend_user    
+    @user = User.find_by(id: params[:user_id])
+    if @user.following.include?(current_user) || @user == current_user || @user.admin?
     else
       flash[:success] = 'ユーザーとフォロー関係にありません。'
       redirect_to request.referer
