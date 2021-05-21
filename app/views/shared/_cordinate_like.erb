@@ -4,11 +4,11 @@
                             <% @cordinate.liked_users.each do |user| %>
                             <div class= "cordinate_responses">
                               <div class= "cordinate_responses">                             
-                              <%= image_tag user.picture.url, size: 150 unless user.picture.blank? %>
+                               <%= link_to image_tag(user.picture.url), user_show_path(id: user.id ), size: 150, data: {turbolinks: false} unless user.picture.blank? %>
                               <%= @user.name %>へ</li>
                              <br>
                              <div class = "comment_box">
-                              <li><%= user.name %>さんがいいねしました。</li>
+                              <li><%=link_to user.name, user_show_path(id: user.id )%>さんがいいねしました!</li>
                               </div>
                               <br>
                                 <% if user.id === current_user.id %>
