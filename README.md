@@ -50,10 +50,12 @@
 
 ![コーデへのいいね機能](https://gyazo.com/ed6e7969c498d4ae9339ce3b2a28cce3/raw)
 <div style="text-align: center;">コーデへのいいね機能</div>
+
 ***
 
 ![ブロック機能](https://gyazo.com/0f6e0ca72797c5a446802e99bfd6ab25/raw)
 <div style="text-align: center;">ブロック機能</div>
+
 ***
 
 [フォロー＆アンフォロー機能](https://twitter.com/i/status/1393895042486476811)
