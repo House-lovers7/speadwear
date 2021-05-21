@@ -40,8 +40,9 @@
 
 
 -  [アイテム機能](https://twitter.com/i/status/1393862119037169670)
--  [アイテムとコーデの絞り込み検索機能](https://twitter.com/i/status/1393849677297065985)
--  [いいね機能](https://twitter.com/i/status/1393895042486476811)
+-  ![アイテムとコーデの絞り込み検索機能](https://gyazo.com/4a4edcf0464530f8e52532e2d68b97cd/raw)
+-  ![コーデへのいいね機能](https://gyazo.com/ed6e7969c498d4ae9339ce3b2a28cce3/raw)
+-  ![ブロック機能](https://gyazo.com/0f6e0ca72797c5a446802e99bfd6ab25/raw)
 -  [フォロー＆アンフォロー機能](https://twitter.com/i/status/1393895042486476811)
 
 

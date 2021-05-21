@@ -19,7 +19,7 @@ module NotificationsHelper
                              tag.a(@sender.name, href: user_show_path(@sender),
                              style: 'font-weight: bold;') + 'が' + tag.a(@receiver.name, href: user_show_path(@receiver),
                              style: 'font-weight: bold;') + 'をフォローしました'
-                                                          
+
     when 'cordinatelike'
       tag.a(@sender.name, href: user_show_path(@sender),
                           style: 'font-weight: bold;') + 'が' + tag.a(@receiver.name + "のコーディネート",
