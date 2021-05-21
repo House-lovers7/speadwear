@@ -10,27 +10,25 @@
                             
   <p>投稿詳細ページ</p>
               <p><i class="far fa-comment fa-1x"></i>コメント一覧</p>
-        <% if @cordinate.commented_users && @comment !=nil %>                          
-                          <% unless @cordinate.commented_users.nil? %>
-                            <% @cordinate.commented_users.each do |user| %>
-                            <div class= "cordinate_responses">
+        <% if @cordinate.commented_users && @comment !=nil %>                                                   
+<% @comments.each do |c| %>
+
+<div class= "cordinate_responses">
                               <div class= "cordinate_responses">                             
-                              <%= image_tag user.picture.url, size: 150 unless user.picture.blank? %>
-                              <%= @user.name %>へ</li>
-                             <br>
-                             <div class = "comment_box">
-                              <li><%= user.name %>さんがコメントしました。</li>                                                                                    
+                              <%= image_tag @comment.user.picture.url, size: 150 unless @comment.user.picture.blank? %>                              
+                              <%=link_to @comment.user.name, user_show_path(id:@comment.user.id )%>から
+                             <br>                                       
+                         <div class = "comment_box">
+ <li><%= c.comment %></li>                                                                                    
+ </div>                                                                               
                               </div>
-                              <br>
-                                <% if user.id === current_user.id %>
-                              <li><%= button_to "コメントを取り消す" , comment_delete_path( user_id: user.id, comment_id: user.comments, id: @cordinate.id ),
+
+  <% if @user.id === current_user.id %>
+                              <li><%= button_to "コメントを取り消す" , comment_delete_path( user_id: user.id, comment_id: c.id, id: @cordinate.id ),
                                 :controller=>"comments", :action=> "destroy", :method => "delete", class: "comment_like_btn" %></li>
                                 <% end %>
-                                </div>
-                              <% end %>
-                                <% end %>
-                                  <% end %>
 
-<hr>
-
-</div>
+  </div>
+                                               
+      <% end %>
+      <% end %>

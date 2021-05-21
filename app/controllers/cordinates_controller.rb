@@ -12,14 +12,19 @@ class CordinatesController < ApplicationController
 
   def show
     @cordinate = Cordinate.find(params[:id])
-    @comment ||= Comment.new(comment_params)
+    # @comment ||= Comment.new(comment_params)
+    @comment = Comment.find_by(cordinate_id:params[:id])
+    @comments = @cordinate.comments
     @cordinate_comments = Comment.where(cordinate_id: params[:id])
     @likecordinates = Likecordinate.where(cordinate_id: params[:id])
     @likecordinates_count = Likecordinate.where(cordinate_id: params[:id]).count
     @user = User.find_by(id: @cordinate.user.id)
     params[:user_id] = @user.id
     cordinate_si_picture_set
-  end
+    comment =  @comments.where(user_id:  @cordinate.commented_users.ids)     
+     
+    
+   end
 
   def all_cordinate_show
     cordinate_paginate
