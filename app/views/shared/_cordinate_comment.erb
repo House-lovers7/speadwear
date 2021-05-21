@@ -15,8 +15,8 @@
 
 <div class= "cordinate_responses">
                               <div class= "cordinate_responses">                                                           
-                                <%= link_to image_tag( @comment.user.picture.url), user_show_path(id:  @comment.user.id ), size: 150, data: {turbolinks: false} unless @comment.user.picture.blank? %>                         
-                              <%=link_to @comment.user.name, user_show_path(id:@comment.user.id )%>から
+                                <%= link_to image_tag( c.user.picture.url), user_show_path(id:  c.user.id ), size: 150, data: {turbolinks: false} unless @comment.user.picture.blank? %>                         
+                              <%=link_to c.user.name, user_show_path(id: c.user.id )%>から
                              <br>                                       
                          <div class = "comment_box">
  <li><%= c.comment %></li>                                                                                    
@@ -32,3 +32,5 @@
                                                
       <% end %>
       <% end %>
+
+

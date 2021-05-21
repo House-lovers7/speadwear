@@ -45,8 +45,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    authorize! :create, @user, message: 'ユーザーを作成する権限がありません。'
+    @user = User.new(user_params)    
     if @user.save
       UserMailer.account_activation(@user).deliver_now
       flash[:info] = 'Please check your email to activate your account.'
