@@ -23,8 +23,8 @@
  </div>                                                                               
                               </div>
 
-  <% if @user.id === current_user.id %>
-                              <li><%= button_to "コメントを取り消す" , comment_delete_path( user_id: user.id, comment_id: c.id, id: @cordinate.id ),
+  <% if  c.user.id  === current_user.id %>
+                              <li><%= button_to "コメントを取り消す" , comment_delete_path( user_id:  c.user.id , comment_id: c.id, id: @cordinate.id ),
                                 :controller=>"comments", :action=> "destroy", :method => "delete", class: "comment_like_btn" %></li>
                                 <% end %>
 
