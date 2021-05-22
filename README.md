@@ -118,7 +118,7 @@
 ## インフラ図
 
 
-<img width="980" alt="スクリーンショット 2021-05-03 11 43 39" src="https://user-images.githubusercontent.com/50302869/116837312-db0f6d00-ac04-11eb-8b45-cb922278510a.png">
+
 
 
 ## Usersテーブル
