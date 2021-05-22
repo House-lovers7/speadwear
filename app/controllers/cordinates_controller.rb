@@ -73,9 +73,7 @@ class CordinatesController < ApplicationController
 
   def update
     @cordinate = Cordinate.find(params[:id])
-    cordinate_si_params_set
-    # @cordinate.save
-    # if @cordinate.update_attributes(cordinate_update_params)
+    cordinate_si_params_set       
     if @cordinate.update_attributes(cordinate_params)
       @cordinate.save
       flash[:success] = 'コーデをアプデしました!'
@@ -86,11 +84,8 @@ class CordinatesController < ApplicationController
   end
 
   def cordinate_save
-    @cordinate = Cordinate.find(params[:id])
-    cordinate_si_params_set
-    @cordinate.save
-    if @cordinate.update_attributes(cordinate_update_params)
-    # if @cordinate.update_attributes(cordinate_params)
+    @cordinate = Cordinate.find(params[:id])            
+    if @cordinate.update_attributes(cordinate_update_params)                      
       @cordinate.save
       flash[:success] = 'コーデをアプデしました!'
       redirect_to cordinate_show_path(user_id: @cordinate.user.id, id: @cordinate.id)
@@ -265,7 +260,9 @@ class CordinatesController < ApplicationController
   end
 
   def cordinate_update_params
-    params.permit(:user_id, :item_id, :season, :tpo, :rating, :memo, :picture, :si_outer, :si_shoes,
+        
+  
+    params.permit(:user_id, :item_id, :season, :tpo, :rating, :meamo, :picture, :si_outer, :si_shoes,
                   :si_bottoms, :si_tops, items_attributes: [:id])
   end
 

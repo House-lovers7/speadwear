@@ -5,7 +5,7 @@
 
 <%# cordinateの編集フォームj %>
 <div class= "cordinate_edit_form, cordinate_make">
-<%= form_for(items_patch_url) do |i| %>
+<%= form_for(@cordinate) do |i| %>
 <ul>
 <li>
 <%= i.label :rating, "評価:" %><li><i class="fa fa-trophy" aria-hidden="true"></i>
@@ -35,11 +35,12 @@
 <%= i.text_field :memo %>
 </li>
 </ul>
+ <%= i.submit "コーデ完成" ,class: "nav-link btn btn-info  btn-block " %>
 <% end %>
 
-<%= link_to "コーデ完成", cordinate_edit_save_path, class: "btn btn-primary btn-lg", data: { confirm: "変更しますか？" } %>
 <%= link_to "アイテムを削除する", cordinate_delete_path,  class: "btn btn-outline-danger btn-block",  method: :delete, data: { confirm: "本当に削除しますか？" } %>
 
 </div>
 </div>
 <%= render "shared/cordinate_item_images_edit" %>
+

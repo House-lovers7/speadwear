@@ -104,9 +104,6 @@ Rails.application.routes.draw do
   get '/users/:user_id/cordinates/:id/items/:item_id/edit',
       to: 'cordinates#item_edit', as: 'cordinate_item_edit'
 
-  get '/users/:user_id/cordinates/:id/save', to: 'cordinates#cordinate_save',
-                                             as: 'cordinate_edit_save'
-
   # controllerを変える必要はあるのか？
   patch '/users/:user_id/cordinates/:id/', to: 'cordinates#update',
                                            as: 'cordinate_patch'
