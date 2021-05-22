@@ -39,8 +39,12 @@
 ## アプリケーション機能の動画説明
 
 
-[アイテム機能](https://twitter.com/i/status/1393862119037169670)
+![アイテム作成・表示](https://gyazo.com/dda1237d317e6712c6772cc005724f78/raw)
+<div style="text-align: center;">アイテム作成・表示機能</div>
+***
 
+![アイテム編集](https://gyazo.com/9cd6d7641f705073b7fb4334659c6901/raw)
+<div style="text-align: center;">アイテム編集機能</div>
 ***
 
 ![アイテムとコーデの絞り込み検索機能](https://gyazo.com/4a4edcf0464530f8e52532e2d68b97cd/raw)
