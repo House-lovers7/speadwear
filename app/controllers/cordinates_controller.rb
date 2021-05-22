@@ -260,8 +260,7 @@ class CordinatesController < ApplicationController
   end
 
   def cordinate_update_params
-        
-  
+    
     params.permit(:user_id, :item_id, :season, :tpo, :rating, :meamo, :picture, :si_outer, :si_shoes,
                   :si_bottoms, :si_tops, items_attributes: [:id])
   end
@@ -277,7 +276,7 @@ class CordinatesController < ApplicationController
       @cordinate.si_tops =  params['cordinate_si_tops']
     elsif params[:cordinate_si_bottoms]
       @cordinate.si_bottoms = params['cordinate_si_bottoms']
-    else
+    elsif 
       params[:cordinate_si_shoes]
       @cordinate.si_shoes = params['cordinate_si_shoes']
     end
