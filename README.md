@@ -52,7 +52,7 @@
 
 ***
 
-![コーディネートの作成](https://gyazo.com/ee7937c1dcd1311757ff9cedafdfa2cb/raw)
+![コーディネートの作成](https://gyazo.com/a6d546ffa1f94c3189603235842d5d2a/raw)
 <div style="text-align: center;">コーディネートの作成機能</div>
 
 ***
