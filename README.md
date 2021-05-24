@@ -72,7 +72,15 @@
 
 ***
 
+
+![通知機能](https://gyazo.com/0d4ff92b11b66a4520b11f961bd774e1/raw)
+<div style="text-align: center;">通知機能</div>
+
+***
+
 [フォロー＆アンフォロー機能](https://twitter.com/i/status/1393895042486476811)
+
+***
 
 
 
