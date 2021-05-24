@@ -78,9 +78,16 @@
 
 ***
 
-[フォロー＆アンフォロー機能](https://twitter.com/i/status/1393895042486476811)
+![Friendメソッドのテスト：前編](https://gyazo.com/5ba9ed0cc381cf638bee948c671e12ed/raw)
+<div style="text-align: center;">コメント機能（フォローされてない）状態の時</div>
 
 ***
+
+![Friendメソッドのテスト：後編](https://gyazo.com/b76beff6a1d56d503868617ad42097c9/raw)
+<div style="text-align: center;">コメント機能（フォローされている）状態の時</div>
+
+***
+
 
 
 
