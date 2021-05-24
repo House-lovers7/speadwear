@@ -2,7 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :logged_in_user,
-                only: %i[edit update destroy following followers]  
+                only: %i[edit update destroy following followers]
   before_action :correct_user, only: %i[edit update]
   before_action :check_guest, only:  %i[destroy update]
 
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)    
+    @user = User.new(user_params)
     if @user.save
       UserMailer.account_activation(@user).deliver_now
       flash[:info] = 'Please check your email to activate your account.'
@@ -186,7 +186,6 @@ class UsersController < ApplicationController
   def sign_in(_user)
     redirect_to root_path, notice: 'ゲストユーザーとしてログインしました。'
   end
-
 
   def owner_user
     @user = User.find(params[:id])

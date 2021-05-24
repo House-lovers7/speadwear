@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :password_resets, only: %i[new create edit update]
   resources :relationships, only: %i[create destroy]
   resources :blocks, only: %i[create destroy]
-  
+
   resources :users do
     member do
       get :following, :followers
@@ -36,7 +36,7 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
-  
+
   # かんたんログインの実装
   post '/sessions/guest_log_in', to: 'sessions#guest_login', as: 'guest_login'
   # 全てのUserのItemとCordinateをみる
@@ -96,7 +96,7 @@ Rails.application.routes.draw do
   get '/users/:user_id/cordinates/:id/edit', to: 'cordinates#edit',
                                              as: 'cordinate_edit'
   post '/users/:user_id/cordinates/', to: 'cordinates#create',
-                                     as: 'cordinate_create'
+                                      as: 'cordinate_create'
 
   # get '/users/:user_id/cordinates/:id/modal', to: 'cordinates#cordinate_modal',
 

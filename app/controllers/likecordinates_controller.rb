@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class LikecordinatesController < ApplicationController
-
   def create
     @cordinate = Cordinate.find(params[:id])
     @likecordinate = Likecordinate.new(likecordinate_params)
@@ -51,7 +50,7 @@ class LikecordinatesController < ApplicationController
     end
   end
 
-  def save_notification_like_cordinate!(current_user, id, user_id)
+  def save_notification_like_cordinate!(current_user, _id, user_id)
     # コメントは複数回することが考えられるため、１つの投稿に複数回通知する
     notification = current_user.active_notifications.new(
       cordinate_id: @cordinate.id,
@@ -63,8 +62,9 @@ class LikecordinatesController < ApplicationController
     notification.checked = true if notification.sender_id == notification.receiver_id
     notification.save if notification.valid?
   end
-  
+
   private
+
   def likecordinate_params
     params.permit(:user_id, :cordinate_id)
   end

@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-class CordinatesController < ApplicationController  
+class CordinatesController < ApplicationController
   before_action :logged_in_user, only: %i[create edit delete update]
   before_action :friend_user, only: %i[new edit create]
-  before_action :blocking?, only:  %i[show ]
+  before_action :blocking?, only: %i[show]
 
   def index
     @item = Item.where(user_id: params[:user_id])
@@ -13,7 +13,7 @@ class CordinatesController < ApplicationController
   def show
     @cordinate = Cordinate.find(params[:id])
     # @comment ||= Comment.new(comment_params)
-    @comment = Comment.find_by(cordinate_id:params[:id])
+    @comment = Comment.find_by(cordinate_id: params[:id])
     @comments = @cordinate.comments
     @cordinate_comments = Comment.where(cordinate_id: params[:id])
     @likecordinates = Likecordinate.where(cordinate_id: params[:id])
@@ -21,10 +21,8 @@ class CordinatesController < ApplicationController
     @user = User.find_by(id: @cordinate.user.id)
     params[:user_id] = @user.id
     cordinate_si_picture_set
-    comment =  @comments.where(user_id:  @cordinate.commented_users.ids)     
-     
-    
-   end
+    comment = @comments.where(user_id: @cordinate.commented_users.ids)
+  end
 
   def all_cordinate_show
     cordinate_paginate
@@ -73,7 +71,7 @@ class CordinatesController < ApplicationController
 
   def update
     @cordinate = Cordinate.find(params[:id])
-    cordinate_si_params_set       
+    cordinate_si_params_set
     if @cordinate.update_attributes(cordinate_params)
       @cordinate.save
       flash[:success] = 'コーデをアプデしました!'
@@ -84,8 +82,8 @@ class CordinatesController < ApplicationController
   end
 
   def cordinate_save
-    @cordinate = Cordinate.find(params[:id])            
-    if @cordinate.update_attributes(cordinate_update_params)                      
+    @cordinate = Cordinate.find(params[:id])
+    if @cordinate.update_attributes(cordinate_update_params)
       @cordinate.save
       flash[:success] = 'コーデをアプデしました!'
       redirect_to cordinate_show_path(user_id: @cordinate.user.id, id: @cordinate.id)
@@ -260,7 +258,6 @@ class CordinatesController < ApplicationController
   end
 
   def cordinate_update_params
-    
     params.permit(:user_id, :item_id, :season, :tpo, :rating, :meamo, :picture, :si_outer, :si_shoes,
                   :si_bottoms, :si_tops, items_attributes: [:id])
   end
@@ -276,8 +273,7 @@ class CordinatesController < ApplicationController
       @cordinate.si_tops =  params['cordinate_si_tops']
     elsif params[:cordinate_si_bottoms]
       @cordinate.si_bottoms = params['cordinate_si_bottoms']
-    elsif 
-      params[:cordinate_si_shoes]
+    elsif params[:cordinate_si_shoes]
       @cordinate.si_shoes = params['cordinate_si_shoes']
     end
   end

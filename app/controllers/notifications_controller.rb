@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class NotificationsController < ApplicationController
   def index
     @user = User.find_by(id: current_user.id)
@@ -24,7 +25,7 @@ class NotificationsController < ApplicationController
     item_cordinate_ransack_setup
   end
 
-  def destroy_all        
+  def destroy_all
     @notifications = current_user.passive_notifications.destroy_all
     redirect_to request.referer
   end

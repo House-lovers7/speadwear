@@ -27,9 +27,8 @@ class User < ApplicationRecord
                                   foreign_key: 'sender_id', dependent: :destroy
   has_many :passive_notifications, class_name: 'Notification',
                                    foreign_key: 'receiver_id', dependent: :destroy
-  
-  
-                                   # ブロック機能の実装
+
+  # ブロック機能の実装
   has_many :active_blocks, class_name: 'Block', foreign_key: 'blocker_id',
                            dependent: :destroy
   has_many :passive_blocks, class_name: 'Block', foreign_key: 'blocked_id',
@@ -50,7 +49,6 @@ class User < ApplicationRecord
                                    foreign_key: 'followed_id',
                                    dependent: :destroy
 
-
   # :sourceパラメーター を使って、following配列の元はfolledのidの集合体であることを明示する
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
@@ -63,7 +61,6 @@ class User < ApplicationRecord
   has_many :liked_cordinates, through: :likecordinates, source: :cordinate
   has_many :commented_cordinates, through: :comments, source: :cordinate
 
-
   def block(other_user)
     active_blocks.create(blocked_id: other_user.id)
   end
@@ -71,11 +68,11 @@ class User < ApplicationRecord
   def unblock(other_user)
     active_blocks.find_by(blocked_id: other_user.id).destroy
   end
-   
+
   def blocking?(user)
     blocking.include?(user)
   end
-  
+
   def follow(other_user)
     active_relationships.create(followed_id: other_user.id)
   end

@@ -17,6 +17,5 @@ class CreateNotifications < ActiveRecord::Migration[5.1]
     add_index :notifications, :receiver_id
     add_index :notifications, :cordinate_id
     add_index :notifications, :likecordinate_id
-
   end
 end

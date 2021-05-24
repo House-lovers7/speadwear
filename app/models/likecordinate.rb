@@ -6,7 +6,7 @@ class Likecordinate < ApplicationRecord
   has_many :notifications, dependent: :destroy
   belongs_to :cordinate
   belongs_to :user, class_name: 'User', foreign_key: 'user_id', optional: true
-  
+
   belongs_to :follower, class_name: 'User', foreign_key: 'user_id',
                         optional: true
   belongs_to :followed, class_name: 'User', foreign_key: 'user_id',

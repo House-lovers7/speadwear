@@ -4,7 +4,7 @@ FactoryBot.define do
   factory :admin, class: User do
     sequence(:id, &:to_s)
     sequence(:email) { |n| "admin#{n}@example.com" } # シーケンスを使う
-    name { 'Admin' }    
+    name { 'Admin' }
     password { 'admin_pass' }
     # password_digest {User.digest("admin_pass" )}
     admin { true }

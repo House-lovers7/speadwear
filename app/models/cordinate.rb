@@ -22,10 +22,9 @@ class Cordinate < ApplicationRecord
 
   # liked_usersによってcordinateが誰にいいねされているのかを簡単に取得できるようにする
   has_many :liked_users, through: :likecordinates, source: :user
-  
+
   # commented_usersによってcordinateが誰にコメントされているのかを簡単に取得できるようにする
   has_many :commented_users, through: :comments, source: :user
-
 
   mount_uploader :picture, PictureUploader
 
