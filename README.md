@@ -26,6 +26,7 @@
 学習しながら、データベースの設計を考えて行き着いた
 [最終結果です。](https://www.mindmeister.com/ja/1515140019/model-2021)
 
+
 ## 使用技術
 
 :keyboard:  Rails 5.1.6  
@@ -39,7 +40,63 @@
 :keyboard:  Capistrano 
 
 
-## アプリケーション機能の動画説明
+## ER図
+
+<img width="980" alt="スクリーンショット 2021-05-03 11 43 39" src="https://user-images.githubusercontent.com/50302869/116837312-db0f6d00-ac04-11eb-8b45-cb922278510a.png">
+
+
+## インフラ図
+
+![スクリーンショット 2021-05-26 11 38 55](https://user-images.githubusercontent.com/50302869/119594735-508ee780-be17-11eb-8d9f-8962890b2e18.png)
+
+
+
+## 機能一覧
+
+:large_orange_diamond: ユーザー  
+  &emsp;&ensp;メール認証  
+  &emsp;&ensp;新規作成/表示/編集/削除
+
+:large_orange_diamond: フォロー&アンフォロー(Relationモデル)  
+  &emsp;&ensp;新規作成(フォロー)/削除（アンフォロー)  
+  &emsp;&ensp;権限管理(フォローしているユーザーのみ相手のコーディネートが提案できる)
+
+:large_orange_diamond: ブロック  
+  &emsp;&ensp;新規作成(ブロック)/削除（ブロック解除)  
+  &emsp;&ensp;ブロックされたユーザーはブロックしたユーザーのページ閲覧と機能実行ができない。
+
+:large_orange_diamond: アイテム  
+  &emsp;&nbsp;新規作成/表示/編集/削除
+
+:large_orange_diamond: アイテムの絞り込み検索機能（Ransack)  
+  &emsp;&ensp;TPO（どんな気分の時に着るのか） ⇨ デート・リラックス・スポーツ・おでかけ・仕事 から選択  
+  &emsp;&ensp;Season（どの季節で着るのか) ⇨　春・夏・秋・冬　から選択  
+  &emsp;&ensp;Rating（どの評価の服を選ぶのか)　⇨　1〜５の5段階から選択  
+  &emsp;&ensp;Color（何色の服を着るのか） ⇨　14色対応  
+  &emsp;&ensp;カテゴリー（どのカテゴリーの着るのか)　⇨　アウター・トップス・ボトムス・シューズ の4つから選択
+
+:large_orange_diamond: コーディネート  
+&emsp;&ensp;新規作成/表示/編集/削除
+
+:large_orange_diamond: コーディネートの絞り込み検索機能（Ransack)  
+  &emsp;&ensp;TPO（どんな気分の時に着るのか） ⇨ デート・リラックス・スポーツ・おでかけ・仕事 から選択  
+  &emsp;&ensp;Season（どの季節で着るのか) ⇨　春・夏・秋・冬　から選択  
+  &emsp;&ensp;Rating（どの評価の服を選ぶのか)　⇨　1〜５の5段階から選択
+
+:large_orange_diamond: コーディネートいいね(Ajax) いいねボタン   
+ &emsp;&ensp;新規作成/表示(コメントといいねしたユーザー表示)/削除
+
+:large_orange_diamond: コメント（コーディネートへ)  
+ &emsp;&ensp;新規作成/表示/削除
+
+:large_orange_diamond: 通知(コメント・コーデへのいいね)  
+&emsp;&ensp;新規作成/表示/削除
+
+
+
+
+
+## 機能の動画説明
 
 
 ![アイテム作成・表示](https://gyazo.com/dda1237d317e6712c6772cc005724f78/raw)
@@ -89,58 +146,7 @@
 ***
 
 
-
-
-## アプリケーショの機能一覧
-
-:large_orange_diamond: ユーザー  
-  &emsp;&ensp;メール認証  
-  &emsp;&ensp;新規作成/表示/編集/削除
-
-:large_orange_diamond: フォロー&アンフォロー(Relationモデル)  
-  &emsp;&ensp;新規作成(フォロー)/削除（アンフォロー)  
-  &emsp;&ensp;権限管理(フォローしているユーザーのみ相手のコーディネートが提案できる)
-
-:large_orange_diamond: ブロック  
-  &emsp;&ensp;新規作成(ブロック)/削除（ブロック解除)  
-  &emsp;&ensp;ブロックされたユーザーはブロックしたユーザーのページ閲覧と機能実行ができない。
-
-:large_orange_diamond: アイテム  
-  &emsp;&nbsp;新規作成/表示/編集/削除
-
-:large_orange_diamond: アイテムの絞り込み検索機能（Ransack)  
-  &emsp;&ensp;TPO（どんな気分の時に着るのか） ⇨ デート・リラックス・スポーツ・おでかけ・仕事 から選択  
-  &emsp;&ensp;Season（どの季節で着るのか) ⇨　春・夏・秋・冬　から選択  
-  &emsp;&ensp;Rating（どの評価の服を選ぶのか)　⇨　1〜５の5段階から選択  
-  &emsp;&ensp;Color（何色の服を着るのか） ⇨　14色対応  
-  &emsp;&ensp;カテゴリー（どのカテゴリーの着るのか)　⇨　アウター・トップス・ボトムス・シューズ の4つから選択
-
-:large_orange_diamond: コーディネート  
-&emsp;&ensp;新規作成/表示/編集/削除
-
-:large_orange_diamond: コーディネートの絞り込み検索機能（Ransack)  
-  &emsp;&ensp;TPO（どんな気分の時に着るのか） ⇨ デート・リラックス・スポーツ・おでかけ・仕事 から選択  
-  &emsp;&ensp;Season（どの季節で着るのか) ⇨　春・夏・秋・冬　から選択  
-  &emsp;&ensp;Rating（どの評価の服を選ぶのか)　⇨　1〜５の5段階から選択
-
-:large_orange_diamond: コーディネートいいね(Ajax) いいねボタン   
- &emsp;&ensp;新規作成/表示(コメントといいねしたユーザー表示)/削除
-
-:large_orange_diamond: コメント（コーディネートへ)  
- &emsp;&ensp;新規作成/表示/削除
-
-:large_orange_diamond: 通知(コメント・コーデへのいいね)  
-&emsp;&ensp;新規作成/表示/削除
-
-
-## ER図
-
-<img width="980" alt="スクリーンショット 2021-05-03 11 43 39" src="https://user-images.githubusercontent.com/50302869/116837312-db0f6d00-ac04-11eb-8b45-cb922278510a.png">
-
-
-## インフラ図
-
-
+## テーブル詳細
 
 
 
