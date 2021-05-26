@@ -23,7 +23,7 @@
       <%# unless request.path.include?("/signup") || request.path.include?("/login")   %>
       <% if logged_in? %>
       <%= link_to "プロフィール編集", edit_user_path(current_user),class: "p-2 text-muted", data: {turbolinks: false} %>
-      <%= link_to "Log out", logout_path, method: :delete, class: "p-2 text-muted", data: {turbolinks: false} %>
+      <%= link_to "ログアウト", logout_path, method: :delete, class: "p-2 text-muted", data: {turbolinks: false} %>
       <% end %>
       <% unless session[:user_id] == nil %>
 
@@ -67,9 +67,9 @@
       <li><%= link_to "みんなのアイテム", all_item_show_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
       <li><%= link_to "みんなのコーデ", all_cordinate_show_path(user_id: session[:user_id]), data: {turbolinks: false}%></li>
       <li><%= link_to "マイアイテム", user_item_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
-      <li><%= link_to "Myコーデ", user_cordinate_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
-      <li><%= link_to "Item作成", item_new_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
-      <li><%= link_to "Cordinate作成", cordinate_new_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
+      <li><%= link_to "マイコーデ", user_cordinate_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
+      <li><%= link_to "アイテム作成", item_new_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
+      <li><%= link_to "コーデ作成", cordinate_new_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
       <li><%= link_to "通知りれき", notifications_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
       <% end %>
   </nav>
