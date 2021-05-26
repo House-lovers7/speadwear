@@ -15,9 +15,9 @@
 
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav ">
-      <%= link_to 'Topページ', root_path,class: "p-2 text-muted", data: {turbolinks: false} %>
+      <%= link_to 'トップページ', root_path,class: "p-2 text-muted", data: {turbolinks: false} %>
       <% unless logged_in? %>
-      <%= link_to "Log in", login_path, class: "p-2 text-muted", data: {turbolinks: false} %>
+      <%= link_to "ログイン", login_path, class: "p-2 text-muted", data: {turbolinks: false} %>
       <%= link_to '新規登録', signup_path , class: "p-2 text-muted", data: {turbolinks: false} %>
       <% end %>
       <%# unless request.path.include?("/signup") || request.path.include?("/login")   %>
@@ -30,10 +30,10 @@
       <%= link_to "ユーザー表示", allusers_index_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
       <%= link_to "みんなのアイテム", all_item_show_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false} %>
       <%= link_to "みんなのコーデ", all_cordinate_show_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
-      <%= link_to "Myアイテム", user_item_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
-      <%= link_to "Myコーデ", user_cordinate_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
-      <%= link_to "Item作成", item_new_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
-      <%= link_to "Cordinate作成", cordinate_new_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false} %>
+      <%= link_to "マイアイテム", user_item_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
+      <%= link_to "マイコーデ", user_cordinate_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
+      <%= link_to "アイテム作成", item_new_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false}  %>
+      <%= link_to "コーデ作成", cordinate_new_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false} %>
       <%= link_to "通知りれき", notifications_path(user_id: session[:user_id]), class: "p-2 text-muted", data: {turbolinks: false} %>
       <% end %>
     </div>
@@ -53,20 +53,20 @@
 <div id="gloval-nav">
   <nav>
     <div class="navbar-nav ">
-      <li><%= link_to 'Topページ', root_path, data: {turbolinks: false} %></li>
+      <li><%= link_to 'トップページ', root_path, data: {turbolinks: false} %></li>
       <% unless logged_in? %>
-      <li><%= link_to "Log in", login_path, data: {turbolinks: false} %></li>
+      <li><%= link_to "ログイン", login_path, data: {turbolinks: false} %></li>
       <li><%= link_to '新規登録', signup_path , data: {turbolinks: false} %></li>
       <% end %>
       <% if logged_in? %>
       <%= link_to "プロフィール編集", edit_user_path(current_user), data: {turbolinks: false} %></li>
-      <li><%= link_to "Log out", logout_path, method: :delete, data: {turbolinks: false} %></li>
+      <li><%= link_to "ログアウト", logout_path, method: :delete, data: {turbolinks: false} %></li>
       <% end %>
       <% unless session[:user_id] == nil %>
       <li><%= link_to "ユーザー表示", allusers_index_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
       <li><%= link_to "みんなのアイテム", all_item_show_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
       <li><%= link_to "みんなのコーデ", all_cordinate_show_path(user_id: session[:user_id]), data: {turbolinks: false}%></li>
-      <li><%= link_to "Myアイテム", user_item_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
+      <li><%= link_to "マイアイテム", user_item_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
       <li><%= link_to "Myコーデ", user_cordinate_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
       <li><%= link_to "Item作成", item_new_path(user_id: session[:user_id]), data: {turbolinks: false}  %></li>
       <li><%= link_to "Cordinate作成", cordinate_new_path(user_id: session[:user_id]), data: {turbolinks: false} %></li>
