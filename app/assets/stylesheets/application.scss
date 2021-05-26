@@ -288,22 +288,22 @@
   }
   
   .header-logo {      
-      padding: 15px;                     
+      padding: 30px;                     
     }
   
     .header-logo h2 {      
       font-size: 20px;                        
       color: #000;
       text-decoration: none;
-      margin: -23px -13px 0px 0px;
-      float: right;             
+      margin: 10px 25px 30px 0px;
+      float: left;             
     }
 
 
     .header-logo .site-logo {      
       border: none;
-      margin: -60px 60px 0px 0px;
-      float: right;             
+      margin: -60px 60px -20px 0px;
+      float: left;             
     }
   
     .header-logo:after {
@@ -607,7 +607,7 @@ body {
   
   > div {
     position: relative;
-    width: 36px;
+    width: 60px;
   }
   span {
     width: 100%;
