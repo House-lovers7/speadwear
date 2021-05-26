@@ -47,8 +47,7 @@
 
 ## インフラ図
 
-![スクリーンショット 2021-05-26 11 38 55](https://user-images.githubusercontent.com/50302869/119594735-508ee780-be17-11eb-8d9f-8962890b2e18.png)
-
+![スクリーンショット 2021-05-26 17 11 02](https://user-images.githubusercontent.com/50302869/119625801-8f3b9680-be45-11eb-94ea-b6db8ab5e588.png)
 
 
 ## 機能一覧
