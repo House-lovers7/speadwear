@@ -50,9 +50,19 @@
     
       /* universal */
   
-      body {
-        padding-top: 60px;
+     
+
+      body {        
+        padding-top: 130px;
+        padding-right: 40px;
+        padding-left: 40px;
+        font-size: 16px;
+        padding-bottom: 130px;
+        font-family: 'Roboto',serif ;        
+        background:#fffff0;        
       }
+
+
   
       section {
         overflow: auto;
@@ -589,13 +599,6 @@ margin-left: 16px;
 
 //  ハンバーガーメニュー
 
-body {
-  font-size: 16px;
-  font-family: 'Roboto',serif ;
-  // background:#f8f8ff;
-  background:#fffff0;
-  
-}
 
 #nav-toggle {
   position: fixed;
