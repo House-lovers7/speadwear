@@ -1,11 +1,10 @@
-<p>アイテムから探す</p>
+<p class=item_heading>アイテムから探す</p>
 
 <div class="accordion" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne">
       <h2 class="mb-0">
-        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne"
-          aria-expanded="true" aria-controls="collapseOne">
+        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
           季節から
         </button>
       </h2>
@@ -19,7 +18,7 @@
           <%= link_to '秋',{:controller=>"items",:action=>"all_item_search", :q_season=>{:season_eq=>'2'}} %>
           <%= link_to '冬',{:controller=>"items",:action=>"all_item_search", :q_season=>{:season_eq=>'3'}} %>
         </nav>
-            <% end %>
+        <% end %>
       </div>
 
     </div>
@@ -28,8 +27,7 @@
   <div class="card">
     <div class="card-header" id="headingTwo">
       <h2 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo"
-          aria-expanded="false" aria-controls="collapseTwo">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
           TPOから
         </button>
       </h2>
@@ -49,7 +47,7 @@
     </div>
   </div>
 
- <%# enum super_item: %w( アウター トップス ボトムス シューズ )
+  <%# enum super_item: %w( アウター トップス ボトムス シューズ )
 enum content: %w(Tシャツ シャツ ポロシャツ パーカー スウェット セーター パンツ デニムパンツ ジャケット コート スニーカー ローファー 革靴 ブーツ ビジネス 他のカラー)
 enum color: %w(ブラック ホワイト グレー レッド ネイビー ライトブルー イエロー グリーン オレンジ  オリーブ ネオン ボーダー 水たま デニム 他のカラー) %>
 
@@ -58,8 +56,7 @@ enum color: %w(ブラック ホワイト グレー レッド ネイビー ライ
   <div class="card">
     <div class="card-header" id="headingThree">
       <h2 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree"
-          aria-expanded="false" aria-controls="collapseThree">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
           評価から
         </button>
       </h2>
@@ -82,8 +79,7 @@ enum color: %w(ブラック ホワイト グレー レッド ネイビー ライ
   <div class="card">
     <div class="card-header" id="headingFive">
       <h2 class="mb-0">
-        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive"
-          aria-expanded="false" aria-controls="collapseFive">
+        <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
           カラー検索
         </button>
       </h2>
@@ -179,8 +175,7 @@ enum color: %w(ブラック ホワイト グレー レッド ネイビー ライ
     <div class="card">
       <div class="card-header" id="headingSix">
         <h2 class="mb-0">
-          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix"
-            aria-expanded="false" aria-controls="collapseSix">
+          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
             カテゴリーから
           </button>
         </h2>
@@ -201,14 +196,13 @@ enum color: %w(ブラック ホワイト グレー レッド ネイビー ライ
 
       <!--Cordinate版-->
 
-      <p>コーデから探す</p>
+      <p class=cordinate_heading>コーデから探す</p>
 
       <div class="accordion" id="accordionExample">
         <div class="card">
           <div class="card-header" id="headingSeven">
             <h2 class="mb-0">
-              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseSeven"
-                aria-expanded="true" aria-controls="collapseSeven">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="true" aria-controls="collapseSeven">
                 季節から
               </button>
             </h2>
@@ -232,8 +226,7 @@ enum color: %w(ブラック ホワイト グレー レッド ネイビー ライ
         <div class="card">
           <div class="card-header" id="headingEight">
             <h2 class="mb-0">
-              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight"
-                aria-expanded="false" aria-controls="collapseEight">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
                 TPOから
               </button>
             </h2>
@@ -255,8 +248,7 @@ enum color: %w(ブラック ホワイト グレー レッド ネイビー ライ
           <div class="card">
             <div class="card-header" id="headingNine">
               <h2 class="mb-0">
-                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseNine"
-                  aria-expanded="false" aria-controls="collapseNine">
+                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
                   評価から
                 </button>
               </h2>
@@ -275,6 +267,6 @@ enum color: %w(ブラック ホワイト グレー レッド ネイビー ライ
                 </nav>
 
 
-        <% end%>
+                <% end%>
 
-      </div>
+              </div>
