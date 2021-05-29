@@ -11,8 +11,9 @@
     </div>
     <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
       <div class="card-body">
-
-        <% unless @q_item_season.nil?  %>
+        <% if @q_item_season.nil?  %>
+        選択できません。
+        <% else %>
         <nav class="nav flex-column">
           <%= link_to '春',{:controller=>"items",:action=>"all_item_season_search", :q_season=>{:season_eq=>'0'}} %>
           <%= link_to '夏',{:controller=>"items",:action=>"all_item_season_search", :q_season=>{:season_eq=>'1'}} %>
@@ -33,7 +34,9 @@
       </div>
       <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
         <div class="card-body">
-          　<% unless @q_item_tpo.nil?  %>
+          　<% if @q_item_tpo.nil?  %>
+          選択できません。
+          <% else %>
           <nav class="nav flex-column">
             <%= link_to 'デート',    {:controller=>"items",:action=>"all_item_tpo_search",:q_tpo=>{:tpo_eq=>'0'}}   %>
             <%= link_to 'リラックス',  {:controller=>"items",:action=>"all_item_tpo_search",:q_tpo=>{:tpo_eq=>'1'}}  %>
@@ -58,7 +61,9 @@
       <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
         <div class="card-body">
 
-          <% unless @q_item_rating.nil?  %>
+          <% if @q_item_rating.nil?  %>
+          選択できません。
+          <% else %>
           <nav class="nav flex-column">
             <%= link_to '☆',    {:controller=>"items",:action=>"all_item_rating_search",:q_rating=>{:rating_eq=>'0'}}%>
             <%= link_to '☆☆',   {:controller=>"items",:action=>"all_item_rating_search",:q_rating=>{:rating_eq=>'1'}}%>
@@ -80,7 +85,9 @@
       </div>
 
 
-      <% unless  @q_item_color.nil?  %>
+      <% if  @q_item_color.nil?  %>
+      選択できません。
+      <% else %>
       <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
         <div class="card-body">
           <nav class="nav flex-column">
@@ -179,7 +186,9 @@
         </button>
       </h2>
     </div>
-    <% unless @q_item_super_item.nil?  %>
+    <% if @q_item_super_item.nil?  %>
+    選択できません。
+    <% else %>
     <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
       <div class="card-body">
         <nav class="nav flex-column">
@@ -210,7 +219,9 @@
     </div>
     <div id="collapseSeven" class="collapse show" aria-labelledby="headingSeven" data-parent="#accordionExample">
       <div class="card-body flex-column"">
-<% unless @p_cordinate_season.nil?  %>
+<% if @p_cordinate_season.nil?  %>
+   選択できません。
+          <% else %>
         <nav class=" nav flex-column card-body">
         <%= link_to '春',{:controller=>"cordinates",:action=>"all_cordinate_season_search", :p_season=>{:season_eq=>'0'}}%>
         <%= link_to '夏',{:controller=>"cordinates",:action=>"all_cordinate_season_search", :p_season=>{:season_eq=>'1'}}%>
@@ -230,7 +241,9 @@
         </button>
       </h2>
     </div>
-    <% unless @p_cordinate_tpo.nil?  %>
+    <% if @p_cordinate_tpo.nil?  %>
+    選択できません。
+    <% else %>
     <div id="collapseEight" class="collapse" aria-labelledby="headingEight" data-parent="#accordionExample">
       <div class="card-body">
         <nav class="nav flex-column">
@@ -254,7 +267,9 @@
       </button>
     </h2>
   </div>
-  <% unless @p_cordinate_rating.nil?  %>
+  <% if @p_cordinate_rating.nil?  %>
+  選択できません。
+  <% else %>
   <div id="collapseNine" class="collapse" aria-labelledby="headingNine" data-parent="#accordionExample">
     <div class="card-body">
       <nav class="nav flex-column">
