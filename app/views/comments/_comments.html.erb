@@ -1,6 +1,5 @@
-
-<li id="comment"-<%= comment.id %>">
-  <%= link_to gravatar_for(comment.user, size: 50), comment.user %>
+<li id="comment" -<%= comment.id %>">
+  <%= link_to gravatar_for(comment.user, size: 50), comment.user, , data: {turbolinks: false} %>
   <span class="user"><%= link_to comment.user.name, comment.user %></span>
   <span class="content"><%= comments.content %></span>
   <span class="timestamp">

@@ -38,7 +38,7 @@
       </ul>
       <% end %>
 
-      <%= link_to "アイテムを削除する", cordinate_delete_path,  class: "btn btn-outline-danger btn-block",  method: :delete, data: { confirm: "本当に削除しますか？" } %>
+      <%= link_to "アイテムを削除する", cordinate_delete_path,  class: "btn btn-outline-danger btn-block",  method: :delete, data: { confirm: "本当に削除しますか？" }, data: {turbolinks: false} %>
     </div>
   </div>
   <%= render "shared/cordinate_item_images_edit" %>
