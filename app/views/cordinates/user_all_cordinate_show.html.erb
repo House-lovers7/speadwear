@@ -6,7 +6,7 @@
     <% if cordinate.picture?  %>
     <%= link_to image_tag( cordinate.picture.url), cordinate_show_path( user_id: cordinate.user_id, id: cordinate.id), size: "225x300", data: {turbolinks: false} %>
     <% else %>
-    <%= link_to image_tag('default_cordinate.png'), cordinate_show_path( user_id: cordinate.user_id, id: cordinate.id), size: "225x300", data: {turbolinks: false} %>
+    <%= link_to image_tag('default_cordinate.png', size: "225x300" ), cordinate_show_path( user_id: cordinate.user_id, id: cordinate.id), data: {turbolinks: false} %>
     <% end %>
   </div>
 
