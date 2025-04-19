@@ -1,0 +1,11 @@
+<div data-controller="confirm-delete" data-confirm-delete-target="modal" class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 hidden">
+  <div class="bg-white rounded-lg shadow-lg p-6 relative">
+    <button data-action="click->confirm-delete#cancel" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700">&times;</button>
+    <h2 class="text-xl font-bold mb-4">Confirm Delete</h2>
+    <p class="mb-4">本当に削除してもよろしいですか？</p>
+    <div class="flex justify-end space-x-2">
+      <button data-action="click->confirm-delete#cancel" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">Cancel</button>
+      <button data-action="click->confirm-delete#proceed" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">OK</button>
+    </div>
+  </div>
+</div> 

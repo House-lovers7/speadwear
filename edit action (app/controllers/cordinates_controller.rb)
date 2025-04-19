@@ -1,0 +1,5 @@
+  def edit
+    authorize! :update, @cordinate, message: '他人のコーデを更新する権限がありません.'
+    redirect_to request.referer if cannot? :update, @cordinate
+    cordinate_si_picture_set
+  end 

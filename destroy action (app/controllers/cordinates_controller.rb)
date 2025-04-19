@@ -1,0 +1,8 @@
+  def destroy
+    # @cordinate is already set by before_action :set_cordinate
+    authorize! :delete, @cordinate, message: '他人のコーデを削除する権限がありません。'
+    redirect_to request.referer if cannot? :destroy, @cordinate
+    @cordinate.destroy
+    flash[:success] = 'コーデを削除しました!'
+    redirect_to all_cordinate_show_path(user_id: current_user.id)
+  end 

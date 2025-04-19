@@ -1,0 +1,11 @@
+  def show
+    # @cordinate is already set by before_action :set_cordinate
+    @comment = Comment.find_by(cordinate_id: params[:id])
+    @comments = @cordinate.comments.includes(:user)
+    @likecordinates = Likecordinate.where(cordinate_id: params[:id])
+    @likecordinates_count = @likecordinates.size
+    @user = @cordinate.user
+    params[:user_id] = @user.id
+    cordinate_si_picture_set
+    comment = @comments.where(user_id: @cordinate.commented_users.ids)
+  end 

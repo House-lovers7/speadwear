@@ -1,0 +1,15 @@
+def cordinate_si_picture_set
+  { si_bottoms: 'si_bottoms', si_tops: 'si_tops', si_outer: 'si_outer', si_shoes: 'si_shoes' }.each do |attr, ivar_name|
+    value = @cordinate.send(attr)
+    if value.present?
+      item = Item.find_by(id: value)
+      instance_variable_set("@#{ivar_name}", item.picture.url) if item && item.picture
+    end
+  end
+end
+
+private
+
+def set_cordinate
+  @cordinate = Cordinate.find(params[:id])
+end 

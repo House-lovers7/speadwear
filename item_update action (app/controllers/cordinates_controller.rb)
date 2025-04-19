@@ -1,0 +1,9 @@
+  def item_update
+    # @cordinate is already set by before_action :set_cordinate
+    if @cordinate.update(cordinate_update_params)
+      flash[:success] = 'コーデのアイテムをアプデしました!'
+      redirect_to cordinate_item_edit_path(id: params[:id], item_id: params[:item_id])
+    else
+      redirect_to request.referer, notice: @cordinate.errors.full_messages.to_s
+    end
+  end 

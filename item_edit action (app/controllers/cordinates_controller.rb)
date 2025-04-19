@@ -1,0 +1,5 @@
+  def item_edit
+    # @cordinate is already set by before_action :set_cordinate
+    authorize! :create, @cordinate, message: '他人のコーデを編集する権限がありません。'
+    cordinate_si_picture_set
+  end 

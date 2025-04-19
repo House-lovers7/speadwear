@@ -1,3 +1,20 @@
+<div class="bg-gray-100 min-h-screen p-4">
+  <ul class="space-y-2">
+    <li>
+      <%= link_to 'ホーム', root_path, class: "block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded" %>
+    </li>
+    <li>
+      <%= link_to 'アイテム一覧', items_path, class: "block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded" %>
+    </li>
+    <li>
+      <%= link_to 'コーデ一覧', cordinates_path, class: "block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded" %>
+    </li>
+    <li>
+      <%= link_to 'ユーザー一覧', users_path, class: "block px-4 py-2 text-gray-700 hover:bg-gray-200 rounded" %>
+    </li>
+  </ul>
+</div>
+
 <p class=item_heading>アイテムから探す</p>
 
 <div class="accordion" id="accordionExample">

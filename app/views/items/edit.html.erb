@@ -1,4 +1,18 @@
-<%= form_for(@item) do |i| %>
+<h1 class="text-2xl font-bold mb-4">アイテム編集</h1>
+
+<turbo-frame id="main">
+  <%= form_with model: @item, local: false, class: "space-y-4" do |f| %>
+    <div>
+      <%= f.label :name, class: "block text-gray-700" %>
+      <%= f.text_field :name, class: "w-full p-2 border rounded" %>
+    </div>
+    <div>
+      <%= f.submit "更新", class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+    </div>
+  <% end %>
+</turbo-frame>
+
+<%= form_for(@item, html: { data: { controller: "unsaved-changes", action: "change->unsaved-changes#markAsUnsaved submit->unsaved-changes#formSubmitted" } } ) do |i| %>
 <div class="image-size">
   <%= image_tag @item.picture.url,size: '215x257' unless @item.picture %>
 </div>
@@ -132,15 +146,8 @@
     </div>
   </div>
   <%= i.label :picture, "写真" %><i class="far fa-image fa-1x"></i>
-  <%= i.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
-  <script type="text/javascript">
-    $('#micropost_picture').bind('change', function() {
-      var size_in_megabytes = this.files[0].size / 196 / 257;
-      if (size_in_megabytes > 5) {
-        alert('Maximum file size is 5MB. Please choose a smaller file.');
-      }
-    });
-  </script>
+  <%= i.file_field :picture, accept: 'image/jpeg,image/gif,image/png', data: { controller: 'file-validation image-preview', action: 'change->file-validation#validate change->image-preview#preview' } %>
+  <img data-image-preview-target="preview" class="mt-2 max-h-64 hidden" alt="Image preview" />
   <br>
   <div class="form-group">
     <%= i.label :memo, "メモ" %><i class="far fa-edit fa-1x"></i>
@@ -148,7 +155,6 @@
   </div>
   <!--後々書き換える必要性あり -->
   <%= hidden_field_tag :user_id, params[:user_id] %>
-  <%= hidden_field_tag :id, params[:id] %>
 
   　　　　　　　　　　　　<%= i.submit "送信" ,class: "nav-link btn btn-info  btn-block " %>
 

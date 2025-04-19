@@ -10,7 +10,6 @@
 
 <h3>アイテム一覧</h3>
 
-
 <% @items.sample(6).each do |item| %>
     <div class="image_box text-center">
       <%= link_to image_tag( item.picture.url), item_show_path( user_id: item.user_id, id: item.id), data: {turbolinks: false} unless item.picture.blank? %>
@@ -25,3 +24,16 @@
 <% end %>
 
 <%= paginate @items %>
+
+<%# Items index view %>
+<h1 class="text-2xl font-bold mb-4">Items List</h1>
+<div class="space-y-4">
+  <% @items.each do |item| %>
+    <div class="flex items-center justify-between border p-2 rounded">
+      <span class="text-gray-800"><%= item.name %></span>
+      <%= link_to "削除", item_path(item), data: { action: "click->confirm-delete#confirm" }, method: :delete, class: "text-red-500 hover:underline" %>
+    </div>
+  <% end %>
+</div>
+
+<%= render 'shared/modal' %>

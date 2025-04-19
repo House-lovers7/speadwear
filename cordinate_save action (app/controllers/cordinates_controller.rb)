@@ -1,0 +1,9 @@
+  def cordinate_save
+    # @cordinate is already set by before_action :set_cordinate
+    if @cordinate.update(cordinate_update_params)
+      flash[:success] = 'コーデをアプデしました!'
+      redirect_to cordinate_show_path(user_id: @cordinate.user.id, id: @cordinate.id)
+    else
+      redirect_to request.referer, notice: @cordinate.errors.full_messages.to_s
+    end
+  end 

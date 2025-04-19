@@ -1,16 +1,24 @@
-<div class="item_image">
-  <% unless @item.picture.url.nil?  %>
-  <%= image_tag @item.picture.url, size: '450x580' %>
-  <% else %>
-  <%= image_tag 'default_cordinate.png' %>
-  <% end %>
+<h1 class="text-2xl font-bold mb-4"><%= @item.name %> の詳細</h1>
 
-  <div class="item-button flex-colum justify-content-center">
-    <%= link_to "削除" , item_delete_path, class: "btn btn-outline-danger btn-block", data: {turbolinks: false} , method: :delete, data: {
-      confirm: "本当に削除しますか？" } %>
-    <%= link_to "編集する" , item_edit_path, class: "btn btn-outline-warning btn-block" , data: { confirm: "変更しますか？" } %>
-  </div>
+<div class="bg-white shadow rounded p-4">
+  <% if @item.picture.present? %>
+    <div class="mb-4">
+      <%= image_tag @item.picture.url, class: "w-full rounded" %>
+    </div>
+  <% end %>
+  <ul class="space-y-2">
+    <li><strong>内容:</strong> <%= @item.content %></li>
+    <li><strong>TPO:</strong> <%= @item.tpo %></li>
+    <li><strong>季節:</strong> <%= @item.season %></li>
+    <li><strong>評価:</strong> <%= @item.rating %></li>
+  </ul>
 </div>
+
+<div class="mt-4 flex space-x-4">
+  <%= link_to "編集", edit_item_path(@item), class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+  <%= link_to "削除", item_path(@item), data: { action: "click->confirm-delete#confirm" }, method: :delete, class: "px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600" %>
+</div>
+
 <div class="item_show_lists ">
   <ul>
     <li>ユーザー: <%=link_to @item.user.name, user_show_path(id: params[:user_id]), data: {turbolinks: false} %></li>

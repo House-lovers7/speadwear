@@ -1,0 +1,25 @@
+  <nav class="bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <div class="flex items-center">
+          <a href="<%= root_path %>" class="text-white text-xl font-bold">スピウェア</a>
+          <div class="hidden md:block">
+            <div class="ml-10 flex items-baseline space-x-4">
+              <%= link_to 'ホーム', root_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+              <%= link_to 'アイテム', items_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+              <%= link_to 'コーデ', cordinates_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+              <%= link_to 'ユーザー', users_path, class: "text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium" %>
+            </div>
+          </div>
+        </div>
+        <div class="flex items-center space-x-4">
+          <% if current_user %>
+            <span class="text-gray-300 text-sm">ようこそ, <%= current_user.name %> さん</span>
+            <%= link_to 'ログアウト', logout_path, method: :delete, class: "bg-red-500 hover:bg-red-700 text-white px-3 py-2 rounded-md text-sm font-medium" %>
+          <% else %>
+            <%= link_to 'ログイン', login_path, class: "bg-blue-500 hover:bg-blue-700 text-white px-3 py-2 rounded-md text-sm font-medium" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </nav> 

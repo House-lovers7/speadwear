@@ -1,27 +1,22 @@
 # frozen_string_literal: true
 
 class CordinatesController < ApplicationController
-  before_action :logged_in_user, only: %i[create edit delete update]
+  before_action :logged_in_user, only: %i[create edit update destroy]
   before_action :friend_user, only: %i[new edit create]
   before_action :blocking?, only: %i[show]
 
   def index
-    @item = Item.where(user_id: params[:user_id])
+    @item = Item.where(user_id: (params[:user_id].presence || current_user.id))
     item_cordinate_ransack_setup
   end
 
   def show
-    @cordinate = Cordinate.find(params[:id])
-    # @comment ||= Comment.new(comment_params)
-    @comment = Comment.find_by(cordinate_id: params[:id])
-    @comments = @cordinate.comments
-    @cordinate_comments = Comment.where(cordinate_id: params[:id])
-    @likecordinates = Likecordinate.where(cordinate_id: params[:id])
-    @likecordinates_count = Likecordinate.where(cordinate_id: params[:id]).count
-    @user = User.find_by(id: @cordinate.user.id)
-    params[:user_id] = @user.id
+    @comments = @cordinate.comments.includes(:user)
+    @comment = @comments.first
+    @likecordinates = Likecordinate.where(cordinate_id: @cordinate.id)
+    @likecordinates_count = @likecordinates.count
+    @user = @cordinate.user
     cordinate_si_picture_set
-    comment = @comments.where(user_id: @cordinate.commented_users.ids)
   end
 
   def all_cordinate_show
@@ -30,7 +25,7 @@ class CordinatesController < ApplicationController
   end
 
   def user_all_cordinate_show
-    @cordinates = Cordinate.where(user_id: params[:user_id]).page(params[:page])
+    @cordinates = Cordinate.where(user_id: (params[:user_id].presence || current_user.id)).page(params[:page])
     item_cordinate_ransack_setup
   end
 
@@ -46,15 +41,13 @@ class CordinatesController < ApplicationController
     @comments = @cordinate.comments
     @comment.user_id = current_user.id
     @item = Item.where(super_item: params[:super_item])
-    @cordinate.user_id = params[:user_id]
+    @cordinate.user_id = current_user.id
     cordinate_si_params_set
 
-    unless params[:picture].nil?
-      img = MiniMagick::Image.read(params[:picture])
-      img.resize_to_fill '169x225'
-    end
-
     if @cordinate.save
+      if @cordinate.picture.present?
+        ImageProcessingJob.perform_async(@cordinate.id)
+      end
       flash[:success] = 'コーデを作成しました!'
       redirect_to cordinate_show_path(user_id: @cordinate.user.id, id: @cordinate.id)
     else
@@ -72,8 +65,7 @@ class CordinatesController < ApplicationController
   def update
     @cordinate = Cordinate.find(params[:id])
     cordinate_si_params_set
-    if @cordinate.update_attributes(cordinate_params)
-      @cordinate.save
+    if @cordinate.update(cordinate_params)
       flash[:success] = 'コーデをアプデしました!'
       redirect_to cordinate_show_path(user_id: @cordinate.user.id, id: @cordinate.id)
     else
@@ -83,8 +75,7 @@ class CordinatesController < ApplicationController
 
   def cordinate_save
     @cordinate = Cordinate.find(params[:id])
-    if @cordinate.update_attributes(cordinate_update_params)
-      @cordinate.save
+    if @cordinate.update(cordinate_update_params)
       flash[:success] = 'コーデをアプデしました!'
       redirect_to cordinate_show_path(user_id: @cordinate.user.id, id: @cordinate.id)
     else
@@ -93,10 +84,9 @@ class CordinatesController < ApplicationController
   end
 
   def reset_si_items
-    @cordinate.si_outer = nil
-    @cordinate.si_tops = nil
-    @cordinate.si_bottoms = nil
-    @cordinate.si_shoes = nil
+    [:si_outer, :si_tops, :si_bottoms, :si_shoes].each do |attr|
+      @cordinate.send("#{attr}=", nil)
+    end
   end
 
   # 作成したコーディネートのitemのpictureを編集する
@@ -107,13 +97,10 @@ class CordinatesController < ApplicationController
   end
 
   def item_update
-    @cordinate = Cordinate.find(params[:id]) || Cordinate.new
-    @cordinate.update_attributes(cordinate_update_params)
-
-    if @cordinate.save
+    @cordinate = Cordinate.find(params[:id])
+    if @cordinate.update(cordinate_update_params)
       flash[:success] = 'コーデのアイテムをアプデしました!'
-      redirect_to cordinate_item_edit_path(id: params[:id],
-                                           item_id: params[:item_id])
+      redirect_to cordinate_item_edit_path(id: params[:id], item_id: params[:item_id])
     else
       redirect_to request.referer, notice: @cordinate.errors.full_messages.to_s
     end
@@ -167,23 +154,15 @@ class CordinatesController < ApplicationController
   end
 
   def cordinate_season_ransack
-    p_cordinate_season = Cordinate.ransack(params[:p_season],
-                                           search_key: :p_season)
-    @p_cordinate_season = p_cordinate_season.result
-    @cordinate = Cordinate.where(user_id: params[:user_id]) if params[:p_season].blank?
+    @p_cordinate_season = perform_ransack(Cordinate, :p_season, :p_season)
   end
 
   def cordinate_tpo_ransack
-    p_cordinate_tpo = Cordinate.ransack(params[:p_tpo], search_key: :p_tpo)
-    @p_cordinate_tpo = p_cordinate_tpo.result
-    @cordinate = Cordinate.where(user_id: params[:user_id]) if params[:p_tpo].blank?
+    @p_cordinate_tpo = perform_ransack(Cordinate, :p_tpo, :p_tpo)
   end
 
   def cordinate_rating_ransack
-    p_cordinate_rating = Cordinate.ransack(params[:p_rating],
-                                           search_key: :p_rating)
-    @p_cordinate_rating = p_cordinate_rating.result
-    @cordinate = Cordinate.where(user_id: params[:user_id]) if params[:p_rating].blank?
+    @p_cordinate_rating = perform_ransack(Cordinate, :p_rating, :p_rating)
   end
 
   # Itemのransack設定--------------
@@ -214,34 +193,23 @@ class CordinatesController < ApplicationController
   end
 
   def item_season_ransack
-    q_item_season = Item.ransack(params[:q_season], search_key: :q_season)
-    @q_item_season = q_item_season.result
-    @item = Item.where(user_id: params[:user_id]) if params[:q_season].blank?
+    @q_item_season = perform_ransack(Item, :q_season, :q_season)
   end
 
   def item_tpo_ransack
-    q_item_tpo = Item.ransack(params[:q_tpo], search_key: :q_tpo)
-    @q_item_tpo = q_item_tpo.result
-    @item = Item.where(user_id: params[:user_id]) if params[:q_tpo].blank?
+    @q_item_tpo = perform_ransack(Item, :q_tpo, :q_tpo)
   end
 
   def item_rating_ransack
-    q_item_rating  = Item.ransack(params[:q_rating], search_key: :q_rating)
-    @q_item_rating = q_item_rating.result
-    @item = Item.where(user_id: params[:user_id]) if params[:q_rating].blank?
+    @q_item_rating = perform_ransack(Item, :q_rating, :q_rating)
   end
 
   def item_color_ransack
-    q_item_color = Item.ransack(params[:q_color], search_key: :q_color)
-    @q_item_color = q_item_color.result
-    @item = Item.where(user_id: params[:user_id]) if params[:q_color].blank?
+    @q_item_color = perform_ransack(Item, :q_color, :q_color)
   end
 
   def item_super_item_ransack
-    q_item_super_item = Item.ransack(params[:q_super_item],
-                                     search_key: :q_super_item)
-    @q_item_super_item = q_item_super_item.result
-    @item = Item.where(user_id: params[:user_id]) if params[:q_super_item].blank?
+    @q_item_super_item = perform_ransack(Item, :q_super_item, :q_super_item)
   end
 
   # Itemのransack設定------------
@@ -253,12 +221,12 @@ class CordinatesController < ApplicationController
   private
 
   def cordinate_params
-    params.require(:cordinate).permit(:user_id, :item_id, :season, :tpo, :rating, :memo, :picture, :favorite,
+    params.require(:cordinate).permit(:item_id, :season, :tpo, :rating, :memo, :picture, :favorite,
                                       :si_outer, :si_shoes, :si_bottoms, :si_tops, items_attributes: [:id])
   end
 
   def cordinate_update_params
-    params.permit(:user_id, :item_id, :season, :tpo, :rating, :meamo, :picture, :si_outer, :si_shoes,
+    params.permit(:item_id, :season, :tpo, :rating, :memo, :picture, :si_outer, :si_shoes,
                   :si_bottoms, :si_tops, items_attributes: [:id])
   end
 
@@ -267,36 +235,32 @@ class CordinatesController < ApplicationController
   end
 
   def cordinate_si_params_set
-    if params[:cordinate_si_outer]
-      @cordinate.si_outer = params['cordinate_si_outer']
-    elsif params[:cordinate_si_tops]
-      @cordinate.si_tops =  params['cordinate_si_tops']
-    elsif params[:cordinate_si_bottoms]
-      @cordinate.si_bottoms = params['cordinate_si_bottoms']
-    elsif params[:cordinate_si_shoes]
-      @cordinate.si_shoes = params['cordinate_si_shoes']
+    { cordinate_si_outer: :si_outer,
+      cordinate_si_tops: :si_tops,
+      cordinate_si_bottoms: :si_bottoms,
+      cordinate_si_shoes: :si_shoes
+    }.each do |param_key, attribute|
+      if params[param_key].present?
+        @cordinate.send("#{attribute}=", params[param_key])
+      end
     end
   end
 
   def cordinate_si_picture_set
-    if @cordinate.si_bottoms
-      @item = Item.find_by(id: @cordinate.si_bottoms)
-      @si_bottoms = @item.picture.url
+    { si_bottoms: 'si_bottoms', si_tops: 'si_tops', si_outer: 'si_outer', si_shoes: 'si_shoes' }.each do |attr, ivar_name|
+      value = @cordinate.send(attr)
+      if value.present?
+        item = Item.find_by(id: value)
+        instance_variable_set("@#{ivar_name}", item.picture.url) if item && item.picture
+      end
     end
+  end
 
-    if @cordinate.si_tops
-      @item = Item.find_by(id: @cordinate.si_tops)
-      @si_tops = @item.picture.url
-    end
-
-    if @cordinate.si_outer
-      @item = Item.find_by(id: @cordinate.si_outer)
-      @si_outer = @item.picture.url
-    end
-
-    if @cordinate.si_shoes
-      @item = Item.find_by(id: @cordinate.si_shoes)
-      @si_shoes = @item.picture.url
+  def perform_ransack(model, param_key, search_key)
+    if params[param_key].present?
+      model.ransack(params[param_key], search_key: search_key).result
+    else
+      model.where(user_id: (params[:user_id].presence || current_user.id))
     end
   end
 end
