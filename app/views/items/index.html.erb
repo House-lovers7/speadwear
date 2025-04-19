@@ -23,17 +23,60 @@
     </ul>
 <% end %>
 
-<%= paginate @items %>
+<%= will_paginate @items, renderer: TailwindLinkRenderer %>
+<div class="mb-4">
+  <%= link_to "新規アイテム作成", new_item_path, class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+</div>
 
-<%# Items index view %>
-<h1 class="text-2xl font-bold mb-4">Items List</h1>
-<div class="space-y-4">
-  <% @items.each do |item| %>
-    <div class="flex items-center justify-between border p-2 rounded">
-      <span class="text-gray-800"><%= item.name %></span>
-      <%= link_to "削除", item_path(item), data: { action: "click->confirm-delete#confirm" }, method: :delete, class: "text-red-500 hover:underline" %>
-    </div>
+<%# Items index view with search %>
+<div class="mb-4">
+  <%= form_with url: items_path, method: :get, local: false, data: { turbo_frame: "itemsList" } do |f| %>
+    <%= f.label :query, "Search Items", class: "block text-gray-700" %>
+    <%= f.text_field :query, class: "w-full p-2 border rounded", placeholder: "Search by name...", data: { controller: "live-search", live_search_target: "input", action: "input->live-search#autoSubmit" } %>
+    <%= f.submit "Search", class: "mt-2 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" %>
   <% end %>
 </div>
 
-<%= render 'shared/modal' %>
+<div class="mb-4">
+  <button data-action="click->filter#toggle" class="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600">
+    フィルター表示 / 非表示
+  </button>
+</div>
+<div data-controller="filter" data-filter-target="panel" class="hidden mb-4">
+  <h2 class="text-lg font-semibold mb-2">フィルターオプション</h2>
+  <%= form_with url: items_path, method: :get, local: false, data: { turbo_frame: "itemsList" } do |f| %>
+    <div class="mb-4">
+      <%= f.label :season, "季節", class: "block text-gray-700" %>
+      <%= f.select :season, options_for_select(Item.seasons.keys), { include_blank: true }, { class: "w-full p-2 border rounded" } %>
+    </div>
+    <div class="mb-4">
+      <%= f.label :super_item, "カテゴリー", class: "block text-gray-700" %>
+      <%= f.select :super_item, options_for_select(Item.super_items.keys), { include_blank: true }, { class: "w-full p-2 border rounded" } %>
+    </div>
+    <div class="mb-4">
+      <%= f.label :sort, "並び替え", class: "block text-gray-700" %>
+      <%= f.select :sort, options_for_select([["名前昇順", "name_asc"], ["名前降順", "name_desc"], ["評価（高→低）", "rating_desc"], ["評価（低→高）", "rating_asc"]]), { include_blank: true }, { class: "w-full p-2 border rounded" } %>
+    </div>
+    <%= f.submit "フィルター適用", class: "px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600" %>
+  <% end %>
+  <div class="mt-2">
+    <%= link_to "フィルターリセット", items_path, class: "px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600", data: { turbo_frame: "itemsList" } %>
+  </div>
+</div>
+
+<div class="mb-4">
+  <p class="text-gray-700">検索結果: <%= @items.total_entries %> 件</p>
+</div>
+
+<turbo-frame id="itemsList">
+  <h1 class="text-2xl font-bold mb-4">Items List</h1>
+  <div class="space-y-4">
+    <% @items.each do |item| %>
+      <div class="flex items-center justify-between border p-2 rounded" data-item-id="<%= item.id %>">
+        <%= link_to item.name, item_path(item), class: "text-gray-800 hover:underline" %>
+        <%= link_to "削除", item_path(item), data: { action: "click->confirm-delete#confirm" }, method: :delete, class: "text-red-500 hover:underline" %>
+      </div>
+    <% end %>
+  </div>
+  <%= render 'shared/modal' %>
+</turbo-frame>
